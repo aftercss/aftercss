@@ -1,0 +1,25 @@
+{
+  "name": "aftercss",
+  "version": "0.1.0",
+  "description": "aftercss",
+  "main": "index.js",
+  "scripts": {
+    "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
+    "lint:ts:fix": "./../../node_modules/.bin/tslint -c ./../../tslint.json --fix -p tsconfig.json",
+    "build": "./../../node_modules/.bin/tsc -p tsconfig.json",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aftercss/after-css.git"
+  },
+  "keywords": [
+    "css"
+  ],
+  "author": "zoolsher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aftercss/after-css/issues"
+  },
+  "homepage": "https://github.com/aftercss/after-css#readme"
+}

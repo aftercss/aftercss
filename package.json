@@ -1,11 +1,19 @@
 {
-  "name": "aftercss",
+  "name": "aftercss-package",
   "version": "0.1.0",
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
+    "build": "lerna run build",
+    "lint": "npm run lint:ts && npm run lint:prettier",
+    "lint:fix": "npm run lint:ts:fix && npm run lint:prettier:fix",
+    "lint:ts": "lerna run lint:ts",
+    "lint:ts:fix": "lerna run lint:ts:fix",
+    "lint:prettier": "prettier --list-different './packages/aftercss-parser/src/**/*.ts'",
+    "lint:prettier:fix": "prettier --write './packages/aftercss-parser/src/**/*.ts'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aftercss/after-css.git"
@@ -20,6 +28,11 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "devDependencies": {
-    "lerna": "^2.11.0"
+    "lerna": "^2.11.0",
+    "prettier": "1.14.2",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.0.3"
   }
 }

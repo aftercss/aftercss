@@ -1,1 +1,1 @@
-class Parser{}
+class Parser {}
