@@ -1,5 +1,5 @@
 {
-  "name": "aftercss-parser",
+  "name": "aftercss-tokenizer",
   "version": "0.1.0",
   "description": "aftercss",
   "main": "index.js",
