@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/aftercss/after-css/issues"
   },
-  "homepage": "https://github.com/aftercss/after-css#readme"
+  "homepage": "https://github.com/aftercss/after-css#readme",
+  "dependencies": {
+    "locate-character": "^2.0.5"
+  }
 }
