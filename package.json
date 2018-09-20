@@ -4,9 +4,11 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
+    "init": "yarn install && lerna bootstrap",
+    "dev": "lerna run dev --parallel",
     "build": "lerna run build",
-    "lint": "npm run lint:ts && npm run lint:prettier",
-    "lint:fix": "npm run lint:ts:fix && npm run lint:prettier:fix",
+    "lint": "npm run lint:prettier && npm run lint:ts",
+    "lint:fix": "npm run lint:prettier:fix && npm run lint:ts:fix",
     "lint:ts": "lerna run lint:ts",
     "lint:ts:fix": "lerna run lint:ts:fix",
     "lint:prettier": "prettier --list-different './packages/aftercss-parser/src/**/*.ts'",

@@ -7,6 +7,7 @@
     "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
     "lint:ts:fix": "./../../node_modules/.bin/tslint -c ./../../tslint.json --fix -p tsconfig.json",
     "build": "./../../node_modules/.bin/tsc -p tsconfig.json",
+    "dev": "./../../node_modules/.bin/tsc -p tsconfig.json --watch",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -21,8 +22,5 @@
   "bugs": {
     "url": "https://github.com/aftercss/after-css/issues"
   },
-  "homepage": "https://github.com/aftercss/after-css#readme",
-  "dependencies": {
-    "locate-character": "^2.0.5"
-  }
+  "homepage": "https://github.com/aftercss/after-css#readme"
 }
