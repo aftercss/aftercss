@@ -19,7 +19,7 @@ export enum TokenType {
   CDO = 'CDO',
   CDC = 'CDC',
   COLON = 'COLON',
-  SEMI = 'SEMI'
+  SEMI = 'SEMI',
 }
 
 export class Token {
@@ -34,6 +34,12 @@ export class Token {
       this.raw = raw;
     }
   }
+  public JSON() {
+    return {
+      raw: this.raw,
+      type: this.type,
+    };
+  }
 }
 /**
  * New Line
@@ -42,7 +48,7 @@ enum NewLineTokenType {
   RN = 'RN',
   R = 'R',
   N = 'N',
-  F = 'F'
+  F = 'F',
 }
 export class NewLineToken extends Token {
   public endType: NewLineTokenType;

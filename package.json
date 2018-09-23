@@ -13,7 +13,7 @@
     "lint:ts:fix": "lerna run lint:ts:fix",
     "lint:prettier": "prettier --list-different './packages/aftercss-parser/src/**/*.ts'",
     "lint:prettier:fix": "prettier --write './packages/aftercss-parser/src/**/*.ts'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lerna run test"
   },
   "private": true,
   "repository": {

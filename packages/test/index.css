@@ -1,6 +1,0 @@
-/*
-*/
-div#class.test::after[less]{
-  color: red;
-  background: url('\'asdfasdf');
-}
