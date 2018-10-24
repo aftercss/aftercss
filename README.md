@@ -17,8 +17,9 @@ class TokenFixture extends BaseFixture{
 }
 describe('test',function(){
   const fixture = new TokenFixture(__dirname);
-  fixture.runTask(item=>{
+  fixture.runTask(async item=>{
     it(item.name,item=>fixture.build(item));
   });
 })
+// 在每个runtask之后要处理一下actualfile和expectfile比较的问题，根据比较结果决定当前用例是否通过。
 ```
