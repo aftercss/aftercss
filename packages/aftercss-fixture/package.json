@@ -1,0 +1,18 @@
+{
+    "name": "aftercss-fixture",
+    "version": "1.0.0",
+    "description": "aftercss",
+    "main": "src/base-fixture.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "test"
+    ],
+    "author": "Spades",
+    "license": "MIT",
+    "dependencies": {
+        "diff": "^3.5.0",
+        "mocha": "^5.2.0"
+    }
+}
