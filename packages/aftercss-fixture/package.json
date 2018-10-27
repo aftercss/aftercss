@@ -1,5 +1,5 @@
 {
-  "name": "aftercss-fixture",
+  "name": "after-test",
   "version": "1.0.0",
   "description": "aftercss",
   "main": "src/base-fixture.js",
