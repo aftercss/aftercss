@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"es2015"
+		],
+		"module": "umd",
+		"noImplicitAny": false,
+		"outDir": "lib",
+		"sourceMap": true,
+		"typeRoots": [
+			"node_modules/@types"
+		]
+	},
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"node_nodules",
+		"**/*.spec.ts"
+	]
+}

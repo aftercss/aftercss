@@ -1,40 +1,42 @@
 {
-  "name": "aftercss-package",
-  "version": "0.1.0",
-  "description": "aftercss",
-  "main": "index.js",
-  "scripts": {
-    "init": "yarn install && lerna bootstrap",
-    "dev": "lerna run dev --parallel",
-    "build": "lerna run build",
-    "lint": "npm run lint:prettier && npm run lint:ts",
-    "lint:fix": "npm run lint:prettier:fix && npm run lint:ts:fix",
-    "lint:ts": "lerna run lint:ts",
-    "lint:ts:fix": "lerna run lint:ts:fix",
-    "lint:prettier": "prettier --list-different './packages/aftercss-parser/src/**/*.ts'",
-    "lint:prettier:fix": "prettier --write './packages/aftercss-parser/src/**/*.ts'",
-    "test": "lerna run test"
-  },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aftercss/after-css.git"
-  },
-  "keywords": [
-    "css"
-  ],
-  "author": "zoolsher",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/aftercss/after-css/issues"
-  },
-  "homepage": "https://github.com/aftercss/after-css#readme",
-  "devDependencies": {
-    "lerna": "^2.11.0",
-    "prettier": "1.14.2",
-    "rimraf": "^2.6.2",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.0.3"
-  }
+    "name": "aftercss-package",
+    "version": "0.1.0",
+    "description": "aftercss",
+    "main": "index.js",
+    "scripts": {
+        "init": "yarn install && lerna bootstrap",
+        "dev": "lerna run dev --parallel",
+        "build": "lerna run build",
+        "lint": "npm run lint:prettier && npm run lint:ts",
+        "lint:fix": "npm run lint:prettier:fix && npm run lint:ts:fix",
+        "lint:ts": "lerna run lint:ts",
+        "lint:ts:fix": "lerna run lint:ts:fix",
+        "lint:prettier": "prettier --list-different './packages/aftercss-parser/src/**/*.ts'",
+        "lint:prettier:fix": "prettier --write './packages/aftercss-parser/src/**/*.ts'",
+        "test": "lerna run test"
+    },
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aftercss/after-css.git"
+    },
+    "keywords": [
+        "css"
+    ],
+    "author": "zoolsher",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/aftercss/after-css/issues"
+    },
+    "homepage": "https://github.com/aftercss/after-css#readme",
+    "devDependencies": {
+        "lerna": "^2.11.0",
+        "pre-commit": "^1.2.2",
+        "prettier": "1.14.2",
+        "rimraf": "^2.6.2",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.15.0",
+        "typescript": "^3.0.3"
+    },
+    "pre-commit": ["lint"]
 }
