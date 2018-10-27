@@ -1,0 +1,29 @@
+{
+    "name": "after-test",
+    "version": "1.0.0",
+    "description": "aftercss",
+    "main": "src/base-fixture.js",
+    "scripts": {
+        "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
+        "lint:ts:fix": "./../../node_modules/.bin/tslint -c ./../../tslint.json --fix -p tsconfig.json",
+        "build": "./../../node_modules/.bin/tsc -p tsconfig.json",
+        "dev": "./../../node_modules/.bin/tsc -p tsconfig.json --watch",
+        "prepublish": "npm run build"
+    },
+    "keywords": [
+        "test"
+    ],
+    "author": "Spades",
+    "license": "MIT",
+    "dependencies": {
+        "@babel/cli": "^7.1.2",
+        "@babel/core": "^7.1.2",
+        "@types/diff": "^3.5.1",
+        "diff": "^3.5.0",
+        "mocha": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.12.0"
+    }
+}
