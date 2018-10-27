@@ -23,8 +23,8 @@ class Tokenizer {
       this.error(
         JSON.stringify({
           code: `unexpected-eof`,
-          message: 'Unexpected end of input'
-        })
+          message: 'Unexpected end of input',
+        }),
       );
     }
     const start = this.current;
@@ -58,8 +58,8 @@ class Tokenizer {
       this.error(
         JSON.stringify({
           code: `unexpected-${this.current === this.content.length ? 'eof' : 'token'}`,
-          message: message || `Expected ${str}`
-        })
+          message: message || `Expected ${str}`,
+        }),
       );
     }
     return false;
