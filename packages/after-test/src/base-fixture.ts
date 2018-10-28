@@ -1,5 +1,4 @@
 import * as assert from 'assert';
-import * as jsDiff from 'diff';
 import * as fs from 'fs';
 import * as path from 'path';
 import { promisify } from 'util';
@@ -66,10 +65,10 @@ export class BaseFixture {
     return dirs;
   }
 
-  public async getFilelist(filePath: string) {
-    const items = await promisify(fs.readdir)(filePath);
-    const files = items.filter(async item => {
-      const stat = await promisify(fs.lstat)(`${filePath}/${item}`);
+  public getFilelist(filePath: string) {
+    const items = fs.readdirSync(filePath);
+    const files = items.filter(item => {
+      const stat = fs.lstatSync(`${filePath}/${item}`);
       return stat.isFile();
     });
     return files;
@@ -121,34 +120,40 @@ export class BaseFixture {
     return output;
   }
 
-  public async makeDiff(fileName: string): Promise<void> {
+  public makeDiff(fileName: string) {
     const expectFilePath = `${this.expectDir}/${fileName}`;
-    const expectFileExists = await fileExistsP(expectFilePath);
-    const actualContent = await this.generateActualFile(fileName);
+    const expectFileExists = fs.existsSync(expectFilePath);
     if (!expectFileExists) {
-      await this.writeFile('expect', actualContent, fileName);
-      it(fileName, () => {
+      it(fileName, async () => {
+        try {
+          const actualContent = await this.generateActualFile(fileName);
+          await this.writeFile('expect', actualContent, fileName);
+        } catch (err) {
+          this.compareError(err);
+        }
         assert.equal(1, 1);
       });
     } else {
-      const expectContent = await this.readFile('expect', fileName);
-
-      it(fileName, () => {
+      it(fileName, async () => {
+        let actualContent = '';
+        let expectContent = '';
+        try {
+          actualContent = await this.generateActualFile(fileName);
+          expectContent = await this.readFile('expect', fileName);
+        } catch (err) {
+          this.compareError(err);
+        }
         assert.equal(actualContent, expectContent);
       });
     }
   }
 
-  public async runTask(taskName: string) {
-    try {
-      const fileList = await this.getFilelist(this.srcDir);
-      describe(taskName, async () => {
-        fileList.forEach(async fileName => {
-          await this.makeDiff(fileName);
-        });
+  public runTask(taskName: string) {
+    describe(taskName, () => {
+      const fileList = this.getFilelist(this.srcDir);
+      fileList.forEach(fileName => {
+        this.makeDiff(fileName);
       });
-    } catch (err) {
-      await this.compareError(err);
-    }
+    });
   }
 }
