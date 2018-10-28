@@ -11,8 +11,8 @@
     "lint:fix": "npm run lint:prettier:fix && npm run lint:ts:fix",
     "lint:ts": "lerna run lint:ts",
     "lint:ts:fix": "lerna run lint:ts:fix",
-    "lint:prettier": "prettier --list-different './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,aftercss-fixture}/src/**/*.ts' '*.json'",
-    "lint:prettier:fix": "prettier --write './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,aftercss-fixture}/src/**/*.ts' 'packages/**/*.json'",
+    "lint:prettier": "prettier --list-different './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json'",
+    "lint:prettier:fix": "prettier --write './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json' ",
     "test": "lerna run test"
   },
   "private": true,

@@ -1,5 +1,6 @@
 import * as assert from 'assert';
 import * as fs from 'fs';
+import * as crypto from 'crypto';
 import * as path from 'path';
 import { promisify } from 'util';
 
@@ -13,6 +14,7 @@ export class BaseFixture {
   private errorDir: string;
   private expectDir: string;
   private srcDir: string;
+
   constructor(currentDir) {
     this.currentDir = currentDir;
     this.actualDir = path.resolve(`${this.currentDir}/actual/`);
@@ -27,10 +29,10 @@ export class BaseFixture {
   public async writeFile(type, content, fileName) {
     const Types = ['actual', 'expect', 'error'];
     if (!(this.isString(fileName) && this.isString(content))) {
-      return Promise.reject('Filename/Content must be a string.');
+      throw new Error('[func writeFile]  Filename/Content must be a string.');
     }
     if (Types.indexOf(type) < 0) {
-      return Promise.reject('Type is wrong.');
+      throw new Error('[func writeFile]  Type is wrong.');
     }
     if (type === 'error') {
       fileName = 'index.json';
@@ -43,7 +45,7 @@ export class BaseFixture {
   public async readFile(type, fileName) {
     const Types = ['actual', 'expect', 'error', 'src'];
     if (Types.indexOf(type) < 0) {
-      return Promise.reject('Type is wrong.');
+      throw new Error('[func readFile]  Type is wrong.');
     }
     type = `${type}Dir`;
     if (type === 'error') {
@@ -74,13 +76,14 @@ export class BaseFixture {
     return files;
   }
 
-  public async build(source: string): Promise<string> {
+  public async build(): Promise<string> {
     throw new Error('error should be emitted');
   }
 
   public async compareError(error) {
     const errorPath = path.resolve(`${this.errorDir}/index.json`);
-    const errorFileExists = await fileExistsP(errorPath);
+		const errorFileExists = await fileExistsP(errorPath);
+		error.message = `${new Date().toUTCString()} - ${error.message}`
     if (!errorFileExists) {
       await this.writeFile(
         'error',
@@ -113,47 +116,34 @@ export class BaseFixture {
     }
   }
 
-  public async generateActualFile(fileName): Promise<string> {
-    const source = await this.readFile('src', fileName);
-    const output = await this.build(source);
+  public async generateActualFile(fileName: string): Promise<string> {
+    const output = await this.build();
     await this.writeFile('actual', output, fileName);
     return output;
   }
 
   public makeDiff(fileName: string) {
-    const expectFilePath = `${this.expectDir}/${fileName}`;
-    const expectFileExists = fs.existsSync(expectFilePath);
-    if (!expectFileExists) {
-      it(fileName, async () => {
-        try {
-          const actualContent = await this.generateActualFile(fileName);
+    it(fileName, async () => {
+      try {
+        const actualContent = await this.generateActualFile(fileName);
+        const expectFileExists = await fileExistsP(`${this.expectDir}/${fileName}`);
+        if (expectFileExists) {
+          const expectContent = await this.readFile('expect', fileName);
+          assert.equal(actualContent, expectContent);
+        } else {
           await this.writeFile('expect', actualContent, fileName);
-        } catch (err) {
-          this.compareError(err);
+          assert.equal(1, 1);
         }
-        assert.equal(1, 1);
-      });
-    } else {
-      it(fileName, async () => {
-        let actualContent = '';
-        let expectContent = '';
-        try {
-          actualContent = await this.generateActualFile(fileName);
-          expectContent = await this.readFile('expect', fileName);
-        } catch (err) {
-          this.compareError(err);
-        }
-        assert.equal(actualContent, expectContent);
-      });
-    }
+      } catch (err) {
+        this.compareError(err);
+        throw err;
+      }
+    });
   }
 
-  public runTask(taskName: string) {
+  public runTask(taskName: string, fileName: string) {
     describe(taskName, () => {
-      const fileList = this.getFilelist(this.srcDir);
-      fileList.forEach(fileName => {
-        this.makeDiff(fileName);
-      });
+      this.makeDiff(fileName);
     });
   }
 }
