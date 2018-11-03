@@ -1,6 +1,5 @@
 import * as assert from 'assert';
 import * as fs from 'fs';
-import * as crypto from 'crypto';
 import * as path from 'path';
 import { promisify } from 'util';
 
@@ -24,6 +23,10 @@ export class BaseFixture {
   }
   public isString(s): boolean {
     return Object.prototype.toString.call(s) === '[object String]';
+  }
+
+  public setCurrentDir(currentDir) {
+    this.currentDir = currentDir;
   }
 
   public async writeFile(type, content, fileName) {
@@ -82,14 +85,14 @@ export class BaseFixture {
 
   public async compareError(error) {
     const errorPath = path.resolve(`${this.errorDir}/index.json`);
-		const errorFileExists = await fileExistsP(errorPath);
-		error.message = `${new Date().toUTCString()} - ${error.message}`
+    const errorFileExists = await fileExistsP(errorPath);
+    const message = `${new Date().toUTCString()} - ${error.message}`;
     if (!errorFileExists) {
       await this.writeFile(
         'error',
         JSON.stringify(
           {
-            message: [error.message],
+            message: [message],
           },
           null,
           2,
@@ -100,7 +103,7 @@ export class BaseFixture {
       const errorJSON = require(errorPath);
       const errorMessage = errorJSON.message;
       if (errorMessage.indexOf(error.message) < 0) {
-        errorMessage.push(error.message);
+        errorMessage.push(message);
         await this.writeFile(
           'error',
           JSON.stringify(
