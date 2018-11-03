@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "aftercss",
   "bin": {
-    "aftertest": "./bin/aftercss"
+    "aftertest": "bin/aftertest"
   },
   "main": "lib/base-fixture.js",
   "scripts": {
