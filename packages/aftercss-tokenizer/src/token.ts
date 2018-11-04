@@ -34,11 +34,8 @@ export class Token {
       this.raw = raw;
     }
   }
-  public JSON() {
-    return {
-      raw: this.raw,
-      type: this.type,
-    };
+  public toString() {
+    return JSON.stringify(this, null, 2);
   }
 }
 /**
@@ -57,12 +54,16 @@ export class NewLineToken extends Token {
     switch (raw) {
       case '\r\n':
         this.endType = NewLineTokenType.RN;
+        break;
       case '\n':
         this.endType = NewLineTokenType.N;
+        break;
       case '\r':
         this.endType = NewLineTokenType.R;
+        break;
       case '\f':
         this.endType = NewLineTokenType.F;
+        break;
       default:
         throw new Error(`unexpect ${raw} for NewLineTokenType`);
     }
@@ -70,7 +71,7 @@ export class NewLineToken extends Token {
 }
 
 function TokenFactory(type: TokenType.EOF): Token;
-function TokenFactory(type: TokenType.COMMENT | TokenType.NEWLINE, content: string): Token;
+function TokenFactory(type: TokenType, content: string): Token;
 function TokenFactory(type: TokenType, content?: string): Token {
   if (type === TokenType.NEWLINE) {
     return new NewLineToken(type, content);

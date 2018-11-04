@@ -12,9 +12,9 @@
 ### 测试流程
 base-fixture规定了测试流程，测试流程如下：
 
-![测试流程](../assets/flow.png)
+![测试流程](./assets/flow.png)
 
-此外，base-fixture还实现了常见工具函数：
+此外，base-fixture还实现了常用工具函数：
 * 字符串检查 - isString(str)  
 	* str < Object >  对象
 	* Returns: 布尔值。str 为字符串时返回 `true`， 否则返回 `false`

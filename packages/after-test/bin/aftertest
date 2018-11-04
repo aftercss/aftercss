@@ -1,0 +1,50 @@
+#! /usr/bin/env node
+
+const chalk = require('chalk');
+const fs = require('fs');
+const Mocha = require('mocha');
+const path = require('path');
+const program = require('commander');
+const version = require('../package.json').version;
+
+program
+  .version(version)
+  .usage('[command]')
+  .command('init [dir]')
+  .description("Init directory structure for aftercss. The default value of dir is '.'")
+  .action(dir => {
+    dir = dir || '.';
+    dir = path.isAbsolute(dir) ? dir : path.resolve(process.cwd(), dir);
+    try {
+      fs.accessSync(dir);
+      fs.mkdirSync(`${dir}/actual`);
+      fs.mkdirSync(`${dir}/expect`);
+      fs.mkdirSync(`${dir}/error`);
+      fs.mkdirSync(`${dir}/src`);
+    } catch (err) {
+      console.log(chalk.red(`[aftertest] ${err.message}`));
+      return;
+    }
+    console.log(chalk.green('[aftertest] Init successfully'));
+  });
+
+program
+  .command('run [filePath]')
+  .description("Run aftertest. The default value of filePath is './index.js'")
+  .action(filePath => {
+    filePath = filePath || './index.js';
+    filePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
+    try {
+      fs.accessSync(filePath);
+      const mocha = new Mocha();
+      mocha.addFile(filePath);
+      mocha.run(failures => {
+        process.exitCode = failures ? 1 : 0;
+      });
+    } catch (err) {
+      console.log(chalk.red(`[aftertest] ${err.message}`));
+      return;
+    }
+  });
+
+program.parse(process.argv);

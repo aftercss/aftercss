@@ -1,8 +1,11 @@
 {
-  "name": "@aftercss/tokenizer",
-  "version": "0.1.0",
+  "name": "after-test",
+  "version": "1.0.0",
   "description": "aftercss",
-  "main": "lib/tokenizer.js",
+  "bin": {
+    "aftertest": "bin/aftertest"
+  },
+  "main": "lib/base-fixture.js",
   "scripts": {
     "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
     "lint:ts:fix": "./../../node_modules/.bin/tslint -c ./../../tslint.json --fix -p tsconfig.json",
@@ -10,17 +13,20 @@
     "dev": "./../../node_modules/.bin/tsc -p tsconfig.json --watch",
     "prepublish": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aftercss/after-css.git"
-  },
   "keywords": [
-    "css"
+    "test"
   ],
-  "author": "zoolsher",
+  "author": "Spades",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/aftercss/after-css/issues"
+  "dependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "mocha": "^5.2.0"
   },
-  "homepage": "https://github.com/aftercss/after-css#readme"
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.0"
+  }
 }

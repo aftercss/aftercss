@@ -76,3 +76,6 @@ typings/
 # project
 lib
 yarn.lock
+
+# vscode
+.DS_Store
