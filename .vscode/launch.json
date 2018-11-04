@@ -8,10 +8,13 @@
 			"type": "node",
 			"request": "launch",
 			"name": "启动程序",
-			"program": "${workspaceFolder}/packages/aftercss-fixture/test/index.js",
+			"program": "${workspaceFolder}/packages/test/node_modules/mocha/bin/_mocha",
 			"outFiles": [
 				"${workspaceFolder}/**/*.js"
-			]
+			],
+		"args": [
+			"${workspaceFolder}/packages/test/fixtures/token/token.fixture.js"
+		]
 		}
 	]
 }
