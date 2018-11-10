@@ -1,190 +1,190 @@
 import { TokenFactory, TokenType } from './token';
 
 const WhiteSpaceRegex = /\s+/;
+const helper: {
+  [index: string]: (tokenizer: Tokenizer) => any;
+} = {
+  consumeBadURL(tokenizer: Tokenizer) {
+    let badurlContent = '';
+    while (!tokenizer.isEof() && !tokenizer.eat(')')) {
+      // consume a valid escape
+      if (tokenizer.eat('\\') && tokenizer.pick() !== '\n') {
+        badurlContent += this.consumeEscaped(tokenizer);
+      } else {
+        badurlContent += tokenizer.pick();
+        tokenizer.step();
+      }
+    }
+    return badurlContent;
+  },
+  consumeEscaped(tokenizer: Tokenizer) {
+    // reverse solidus followed by a non-newline
+    // https://www.w3.org/TR/css-syntax-3/#consume-an-escaped-code-point
+    // assume that the U+005C REVERSE SOLIDUS (\) has already been consumed
+    let escapedContent = '';
+    if (!tokenizer.eat('\n')) {
+      if (tokenizer.isEof()) {
+        escapedContent = '\ufffd';
+      }
+      const hex = tokenizer.matchReg(/[0-9a-fA-F]{1,6}/);
+      if (hex) {
+        const hexToDec = parseInt(hex, 16);
+        if (hexToDec === 0 || hexToDec >= 0x10ffff || (hexToDec >= 0xd800 && hexToDec <= 0xdfff)) {
+          escapedContent += '\ufffd';
+        } else {
+          escapedContent += String.fromCodePoint(hexToDec); // a puzzle here
+        }
+        tokenizer.step(hex.length);
+        tokenizer.eat(' ');
+      } else {
+        escapedContent += tokenizer.pick();
+        tokenizer.step();
+      }
+    }
+    return escapedContent;
+  },
+};
+const generateToken: {
+  [index: string]: (tokenizer: Tokenizer) => any;
+} = {
+  atkeywordToken(tokenizer: Tokenizer) {
+    /**
+     * at-key-word token
+     * https://www.w3.org/TR/css-syntax-3/#at-keyword-token-diagram
+     */
+    if (tokenizer.eat('@')) {
+      return TokenFactory(TokenType.ATKEYWORD, '@');
+    }
+  },
+  commentToken(tokenizer: Tokenizer) {
+    /**
+     * comment token
+     * https://www.w3.org/TR/css-syntax-3/#comment-diagram
+     */
+    if (tokenizer.eat('/*')) {
+      const commentContent = tokenizer.readUntil(/\*\//);
+      return TokenFactory(TokenType.COMMENT, commentContent);
+    }
+  },
+  eofToken(tokenizer: Tokenizer) {
+    if (tokenizer.isEof()) {
+      return TokenFactory(TokenType.EOF);
+    }
+  },
+  newlineToken(tokenizer: Tokenizer) {
+    /**
+     * new line token
+     * https://www.w3.org/TR/css-syntax-3/#newline
+     * transform ['\r\n' | '\r' | '\f'] into '\n' when preprocessing
+     * need to check '\n' only
+     */
+    // const newlineList = ['\r\n', '\n', '\r', '\f'];
+    // for (const item of newlineList) {
+    //   if (this.eat(item)) {
+    //     return TokenFactory(TokenType.NEWLINE, item);
+    //   }
+    // }
+    if (tokenizer.eat('\n')) {
+      return TokenFactory(TokenType.NEWLINE, '\n');
+    }
+  },
+  stringToken(tokenizer: Tokenizer) {
+    /**
+     * string token  || bad string token
+     * https://www.w3.org/TR/css-syntax-3/#string-token-diagram
+     */
+
+    if (tokenizer.eat("'") || tokenizer.eat('"')) {
+      const quote = tokenizer.pick(-1);
+      let stringContent = '';
+      while (!tokenizer.eat(quote)) {
+        if (tokenizer.isEof()) {
+          return TokenFactory(TokenType.STRING, stringContent);
+        } else if (tokenizer.eat('\\')) {
+          stringContent += helper.consumeEscaped(tokenizer);
+        } else if (tokenizer.eat('\n')) {
+          return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
+        } else {
+          stringContent += tokenizer.pick();
+          tokenizer.step();
+        }
+      }
+      return TokenFactory(TokenType.STRING, stringContent);
+    }
+  },
+  urlToken(tokenizer: Tokenizer) {
+    /**
+     * url token
+     * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
+     */
+    if (tokenizer.eat('url(')) {
+      // consume as much whitespace as possible
+      tokenizer.allowWhitespace();
+      let urlContent = '';
+      // string token
+      if (tokenizer.pick() === "'" || tokenizer.pick() === '"') {
+        const stringToken = this.stringToken(tokenizer);
+        if (stringToken) {
+          urlContent = stringToken.raw;
+          // bad url token
+          if (stringToken.type === 'BAD_STRING') {
+            // consume the remnants of a bad url
+            urlContent += helper.consumeBadURL(tokenizer);
+            return TokenFactory(TokenType.BAD_URL, urlContent);
+          }
+          tokenizer.allowWhitespace();
+          if (tokenizer.eat(')') || tokenizer.isEof()) {
+            return TokenFactory(TokenType.URL, urlContent);
+          }
+          urlContent += ' ';
+          urlContent += helper.consumeBadURL(tokenizer);
+          return TokenFactory(TokenType.BAD_URL, urlContent);
+        }
+      }
+      while (!tokenizer.eat(')')) {
+        if (tokenizer.isEof()) {
+          return TokenFactory(TokenType.URL, urlContent);
+        }
+        // non-printalbe code point
+        if (tokenizer.eat('(')) {
+          urlContent += '(';
+          urlContent += helper.consumeBadURL(tokenizer);
+          return TokenFactory(TokenType.BAD_URL, urlContent);
+        }
+        // eacape code point
+        if (tokenizer.eat('\\')) {
+          // invalid escape code point
+          if (tokenizer.eat('\n')) {
+            urlContent += '\n';
+            urlContent += helper.consumeBadURL(tokenizer);
+            return TokenFactory(TokenType.BAD_URL, urlContent);
+          }
+          urlContent += helper.consumeEscaped(tokenizer);
+          continue;
+        }
+        if (tokenizer.eat(' ')) {
+          tokenizer.allowWhitespace();
+          if (tokenizer.eat(')')) {
+            return TokenFactory(TokenType.URL, urlContent);
+          }
+          urlContent += ' ';
+          urlContent += helper.consumeBadURL(tokenizer);
+          return TokenFactory(TokenType.BAD_URL, urlContent);
+        }
+        // anything else
+        urlContent += tokenizer.pick();
+        tokenizer.step();
+      }
+      return TokenFactory(TokenType.URL, urlContent);
+    }
+  },
+};
 
 export class Tokenizer {
   public content: string = '';
   private end: number = this.content.length;
   private start: number = 0;
   private current: number = 0;
-  private helper: {
-    [index: string]: () => any;
-  } = {
-    consumeBadURL() {
-      let badurlContent = '';
-      while (!(this.current >= this.end) && !this.eat(')')) {
-        // consume a valid escape
-        if (this.eat('\\') && this.pick() !== '\n') {
-          badurlContent += this.helper.consumeEscaped.apply(this);
-        } else {
-          badurlContent += this.pick();
-          this.current++;
-        }
-      }
-      return badurlContent;
-    },
-    consumeEscaped() {
-      // reverse solidus followed by a non-newline
-      // https://www.w3.org/TR/css-syntax-3/#consume-an-escaped-code-point
-      // assume that the U+005C REVERSE SOLIDUS (\) has already been consumed
-      let escapedContent = '';
-      if (!this.eat('\n')) {
-        if (this.current >= this.end) {
-          escapedContent = '\ufffd';
-        }
-        const hex = this.matchReg(/[0-9a-fA-F]{1,6}/);
-        if (hex) {
-          const hexToDec = parseInt(hex, 16);
-          if (hexToDec === 0 || hexToDec >= 0x10ffff || (hexToDec >= 0xd800 && hexToDec <= 0xdfff)) {
-            escapedContent += '\ufffd';
-          } else {
-            escapedContent += String.fromCodePoint(hexToDec); // a puzzle here
-          }
-          this.current += hex.length;
-          this.eat(' ');
-        } else {
-          escapedContent += this.pick();
-          this.current++;
-        }
-      }
-      return escapedContent;
-    },
-  };
-  private generateToken: {
-    [index: string]: () => any;
-  } = {
-    atkeywordToken() {
-      /**
-       * at-key-word token
-       * https://www.w3.org/TR/css-syntax-3/#at-keyword-token-diagram
-       */
-      if (this.eat('@')) {
-        return TokenFactory(TokenType.ATKEYWORD, '@');
-      }
-    },
-    commentToken() {
-      /**
-       * comment token
-       * https://www.w3.org/TR/css-syntax-3/#comment-diagram
-       */
-      if (this.eat('/*')) {
-        const commentContent = this.readUntil(/\*\//);
-        return TokenFactory(TokenType.COMMENT, commentContent);
-      }
-    },
-    eofToken() {
-      if (this.current >= this.end) {
-        return TokenFactory(TokenType.EOF);
-      }
-    },
-    newlineToken() {
-      /**
-       * new line token
-       * https://www.w3.org/TR/css-syntax-3/#newline
-       * transform ['\r\n' | '\r' | '\f'] into '\n' when preprocessing
-       * need to check '\n' only
-       */
-      // const newlineList = ['\r\n', '\n', '\r', '\f'];
-      // for (const item of newlineList) {
-      //   if (this.eat(item)) {
-      //     return TokenFactory(TokenType.NEWLINE, item);
-      //   }
-      // }
-      if (this.eat('\n')) {
-        return TokenFactory(TokenType.NEWLINE, '\n');
-      }
-    },
-    stringToken() {
-      /**
-       * string token  || bad string token
-       * https://www.w3.org/TR/css-syntax-3/#string-token-diagram
-       */
-
-      if (this.eat("'") || this.eat('"')) {
-        const quote = this.pick(this.current - 1);
-        let stringContent = '';
-        while (!this.eat(quote)) {
-          if (this.current >= this.end) {
-            return TokenFactory(TokenType.STRING, stringContent);
-          } else if (this.eat('\\')) {
-            stringContent += this.helper.consumeEscaped.apply(this);
-          } else if (this.eat('\n')) {
-            return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
-          } else {
-            stringContent += this.pick();
-            this.current++;
-          }
-        }
-        return TokenFactory(TokenType.STRING, stringContent);
-      }
-    },
-    urlToken() {
-      /**
-       * url token
-       * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
-       */
-      if (this.eat('url(')) {
-        // consume as much whitespace as possible
-        this.allowWhitespace();
-        let urlContent = '';
-        // string token
-        if (this.pick() === "'" || this.pick() === '"') {
-          const stringToken = this.generateToken.stringToken.apply(this);
-          if (stringToken) {
-            urlContent = stringToken.raw;
-            // bad url token
-            if (stringToken.type === 'BAD_STRING') {
-              // consume the remnants of a bad url
-              urlContent += this.helper.consumeBadURL.apply(this);
-              return TokenFactory(TokenType.BAD_URL, urlContent);
-            }
-            this.allowWhitespace();
-            if (this.eat(')') || this.current >= this.end) {
-              return TokenFactory(TokenType.URL, urlContent);
-            }
-            urlContent += ' ';
-            urlContent += this.helper.consumeBadURL.apply(this);
-            return TokenFactory(TokenType.BAD_URL, urlContent);
-          }
-        }
-        while (!this.eat(')')) {
-          if (this.current >= this.end) {
-            return TokenFactory(TokenType.URL, urlContent);
-          }
-          // non-printalbe code point
-          if (this.eat('(')) {
-            urlContent += '(';
-            urlContent += this.helper.consumeBadURL.apply(this);
-            return TokenFactory(TokenType.BAD_URL, urlContent);
-          }
-          // eacape code point
-          if (this.eat('\\')) {
-            // invalid escape code point
-            if (this.eat('\n')) {
-              urlContent += '\n';
-              urlContent += this.helper.consumeBadURL.apply(this);
-              return TokenFactory(TokenType.BAD_URL, urlContent);
-            }
-            urlContent += this.helper.consumeEscaped.apply(this);
-            continue;
-          }
-          if (this.eat(' ')) {
-            this.allowWhitespace();
-            if (this.eat(')')) {
-              return TokenFactory(TokenType.URL, urlContent);
-            }
-            urlContent += ' ';
-            urlContent += this.helper.consumeBadURL.apply(this);
-            return TokenFactory(TokenType.BAD_URL, urlContent);
-          }
-          // anything else
-          urlContent += this.pick();
-          this.current++;
-        }
-        return TokenFactory(TokenType.URL, urlContent);
-      }
-    },
-  };
 
   public constructor(content: string) {
     this.content = content;
@@ -237,6 +237,13 @@ export class Tokenizer {
     }
     return match[0];
   }
+  public isEof() {
+    return this.current >= this.end;
+  }
+
+  public step(num: number = 1) {
+    this.current += num;
+  }
 
   /**
    * eat
@@ -266,8 +273,8 @@ export class Tokenizer {
   /**
    * pick a char
    */
-  public pick(index = this.current) {
-    return this.content.charAt(index);
+  public pick(cnt = 0) {
+    return this.content.charAt(this.current + cnt);
   }
   /**
    * CSS3 defined input process https://www.w3.org/TR/css-syntax-3/#input-preprocessing
@@ -286,9 +293,9 @@ export class Tokenizer {
    * 生成Token用的
    */
   public nextToken() {
-    for (const tokenGenerator in this.generateToken) {
-      if (this.generateToken.hasOwnProperty(tokenGenerator)) {
-        const token = this.generateToken[tokenGenerator].apply(this);
+    for (const tokenGenerator in generateToken) {
+      if (generateToken.hasOwnProperty(tokenGenerator)) {
+        const token = generateToken[tokenGenerator](this);
         if (token) {
           return token;
         }
