@@ -8,13 +8,13 @@ export enum TokenType {
   ATKEYWORD = 'ATKEYWORD',
   STRING = 'STRING',
   BAD_STRING = 'BAD_STRING',
-  BAD_URI = 'BAD_URI',
+  BAD_URL = 'BAD_URL',
   BAD_COMMENT = 'BAD_COMMENT',
   HASH = 'HASH',
   NUMBER = 'NUMBER',
   PERCENTAGE = 'PERCENTAGE',
   DIMENSION = 'DIMENSION',
-  URI = 'URI',
+  URL = 'URL',
   UNICODE_RANGE = 'UNICODE_RANGE',
   CDO = 'CDO',
   CDC = 'CDC',
@@ -30,7 +30,7 @@ export class Token {
   public raw: string = undefined;
   public constructor(type: TokenType, raw?: string) {
     this.type = type;
-    if (raw) {
+    if (raw !== undefined) {
       this.raw = raw;
     }
   }
@@ -41,41 +41,36 @@ export class Token {
 /**
  * New Line
  */
-enum NewLineTokenType {
-  RN = 'RN',
-  R = 'R',
-  N = 'N',
-  F = 'F',
-}
-export class NewLineToken extends Token {
-  public endType: NewLineTokenType;
-  public constructor(type: TokenType, raw?: string) {
-    super(type, raw);
-    switch (raw) {
-      case '\r\n':
-        this.endType = NewLineTokenType.RN;
-        break;
-      case '\n':
-        this.endType = NewLineTokenType.N;
-        break;
-      case '\r':
-        this.endType = NewLineTokenType.R;
-        break;
-      case '\f':
-        this.endType = NewLineTokenType.F;
-        break;
-      default:
-        throw new Error(`unexpect ${raw} for NewLineTokenType`);
-    }
-  }
-}
+// enum NewLineTokenType {
+//   RN = 'RN',
+//   R = 'R',
+//   N = 'N',
+//   F = 'F',
+// }
+// export class NewLineToken extends Token {
+//   public endType: NewLineTokenType;
+//   public constructor(type: TokenType, raw?: string) {
+//     super(type, raw);
+//     switch (raw) {
+//       case '\r\n':
+//         this.endType = NewLineTokenType.RN;
+//         break;
+//       case '\n':
+//         this.endType = NewLineTokenType.N;
+//         break;
+//       case '\r':
+//         this.endType = NewLineTokenType.R;
+//         break;
+//       case '\f':
+//         this.endType = NewLineTokenType.F;
+//         break;
+//       default:
+//         throw new Error(`unexpect ${raw} for NewLineTokenType`);
+//     }
+//   }
+// }
 
-function TokenFactory(type: TokenType.EOF): Token;
-function TokenFactory(type: TokenType, content: string): Token;
 function TokenFactory(type: TokenType, content?: string): Token {
-  if (type === TokenType.NEWLINE) {
-    return new NewLineToken(type, content);
-  }
   return new Token(type, content);
 }
 

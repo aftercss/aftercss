@@ -7,11 +7,13 @@ class TokenFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(content);
+    tokenizer.preprocess();
     const token = tokenizer.nextToken();
     return token.toString();
   }
 }
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './string-token'));
 
-tokenFixture.runTask('Tokenizer', 'stringToken.json');
+const tokenFixture = new TokenFixture(path.resolve(__dirname, './url-token'));
+
+tokenFixture.runTask('Tokenizer', 'url.json');

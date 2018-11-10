@@ -1,8 +1,0 @@
-{
-  "message": [
-    "Fri, 02 Nov 2018 15:05:53 GMT - Cannot read property 'toString' of undefined",
-    "Fri, 02 Nov 2018 15:07:45 GMT - Cannot read property 'toString' of undefined",
-    "Fri, 02 Nov 2018 15:14:31 GMT - Cannot read property 'toString' of undefined",
-    "Fri, 02 Nov 2018 15:16:04 GMT - unexpect \n for NewLineTokenType"
-  ]
-}
