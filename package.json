@@ -4,7 +4,7 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
-    "init": "yarn install && lerna bootstrap",
+    "init": "cnpm install && lerna clean --yes && lerna bootstrap",
     "dev": "lerna run dev --parallel",
     "build": "lerna run build",
     "lint": "npm run lint:prettier && npm run lint:ts",
