@@ -96,16 +96,5 @@ export class BaseTokenizer {
   public pick(cnt = 0) {
     return this.content.charAt(this.current + cnt);
   }
-  /**
-   * CSS3 defined input process https://www.w3.org/TR/css-syntax-3/#input-preprocessing
-   * preprocess CSSChar
-   */
-  public preprocess() {
-    // TODO: bad performance. fixable in stream.
-    // TODO: and this hurts sourcemap.
-    this.content.replace('\u000A\u000D', '\u000A');
-    this.content.replace('\u000C', '\u000A');
-    this.content.replace('\u000D', '\u000A');
-    this.content.replace('\u0000', '\uFFFD');
-  }
+
 }

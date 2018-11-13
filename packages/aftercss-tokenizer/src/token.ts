@@ -20,6 +20,7 @@ export enum TokenType {
   CDC = 'CDC',
   COLON = 'COLON',
   SEMI = 'SEMI',
+  FUNCTION = 'function',
 }
 
 export class Token {

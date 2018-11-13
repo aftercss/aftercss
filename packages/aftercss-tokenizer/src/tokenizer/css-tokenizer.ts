@@ -1,8 +1,21 @@
-import { TokenFactory, TokenType } from '../token';
+import { TokenFactory, TokenType, Token } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper } from './css-tokenizer-helper';
 
 export class CSSTokenizer extends BaseTokenizer {
+  /**
+   * CSS3 defined input process https://www.w3.org/TR/css-syntax-3/#input-preprocessing
+   * preprocess CSSChar
+   */
+  public preprocess() {
+    // TODO: bad performance. fixable in stream.
+    // TODO: and this hurts sourcemap.
+    this.content.replace('\u000A\u000D', '\u000A');
+    this.content.replace('\u000C', '\u000A');
+    this.content.replace('\u000D', '\u000A');
+    this.content.replace('\u0000', '\uFFFD');
+  }
+
   public atkeywordToken() {
     /**
      * at-key-word token
@@ -25,6 +38,38 @@ export class CSSTokenizer extends BaseTokenizer {
   public eofToken() {
     if (this.isEof()) {
       return TokenFactory(TokenType.EOF);
+    }
+  }
+  public identToken() {
+    if (isIndentifierStater) {
+      const name = helper.consumeName(this);
+      if (name.toLowerCase() === 'url' && this.eat('(')) {
+        return this.urlToken();
+      } else if (this.eat('(')) {
+        // function token
+        return TokenFactory(TokenType.FUNCTION, name);
+      }
+      // ident token
+      return TokenFactory(TokenType.IDENT, name);
+    }
+
+    /**
+     * check if three code points would start an indentifier
+     * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
+     */
+    function isIndentifierStater() {
+      const firstCodePoint = this.pick();
+      const secondCodePoint = this.pick(1);
+      const thirdCondePoint = this.pick(2);
+      if (
+        (firstCodePoint === '-' &&
+          (helper.isNameStart(secondCodePoint) || helper.isValidEscape(secondCodePoint, thirdCondePoint))) ||
+        helper.isNameStart(firstCodePoint) ||
+        helper.isValidEscape(firstCodePoint, secondCodePoint)
+      ) {
+        return true;
+      }
+      return false;
     }
   }
   public newlineToken() {
@@ -56,8 +101,11 @@ export class CSSTokenizer extends BaseTokenizer {
       while (!this.eat(quote)) {
         if (this.isEof()) {
           return TokenFactory(TokenType.STRING, stringContent);
-        } else if (this.eat('\\')) {
+        } else if (helper.isValidEscape(this.pick(), this.pick(1))) {
+          this.step(); // consume '\\'
           stringContent += helper.consumeEscaped(this);
+        } else if (this.eat('\\') && this.eat('\n')) {
+          continue;
         } else if (this.eat('\n')) {
           return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
         } else {
@@ -70,69 +118,67 @@ export class CSSTokenizer extends BaseTokenizer {
   }
   public urlToken() {
     /**
-     * url token
+     * url token || bad url token
      * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
      */
-    if (this.eat('url(')) {
-      // consume as much whitespace as possible
-      this.allowWhitespace();
-      let urlContent = '';
-      // string token
-      if (this.pick() === "'" || this.pick() === '"') {
-        const stringToken = this.stringToken();
-        if (stringToken) {
-          urlContent = stringToken.raw;
-          // bad url token
-          if (stringToken.type === 'BAD_STRING') {
-            // consume the remnants of a bad url
-            urlContent += helper.consumeBadURL(this);
-            return TokenFactory(TokenType.BAD_URL, urlContent);
-          }
-          this.allowWhitespace();
-          if (this.eat(')') || this.isEof()) {
-            return TokenFactory(TokenType.URL, urlContent);
-          }
-          urlContent += ' ';
+    // consume as much whitespace as possible
+    this.allowWhitespace();
+    let urlContent = '';
+    // string token
+    if (this.pick() === "'" || this.pick() === '"') {
+      const stringToken = this.stringToken();
+      if (stringToken) {
+        urlContent = stringToken.raw;
+        // bad url token
+        if (stringToken.type === 'BAD_STRING') {
+          // consume the remnants of a bad url
           urlContent += helper.consumeBadURL(this);
           return TokenFactory(TokenType.BAD_URL, urlContent);
         }
-      }
-      while (!this.eat(')')) {
-        if (this.isEof()) {
+        this.allowWhitespace();
+        if (this.eat(')') || this.isEof()) {
           return TokenFactory(TokenType.URL, urlContent);
         }
-        // non-printalbe code point
-        if (this.eat('(')) {
-          urlContent += '(';
-          urlContent += helper.consumeBadURL(this);
-          return TokenFactory(TokenType.BAD_URL, urlContent);
-        }
-        // eacape code point
-        if (this.eat('\\')) {
-          // invalid escape code point
-          if (this.eat('\n')) {
-            urlContent += '\n';
-            urlContent += helper.consumeBadURL(this);
-            return TokenFactory(TokenType.BAD_URL, urlContent);
-          }
-          urlContent += helper.consumeEscaped(this);
-          continue;
-        }
-        if (this.eat(' ')) {
-          this.allowWhitespace();
-          if (this.eat(')')) {
-            return TokenFactory(TokenType.URL, urlContent);
-          }
-          urlContent += ' ';
-          urlContent += helper.consumeBadURL(this);
-          return TokenFactory(TokenType.BAD_URL, urlContent);
-        }
-        // anything else
-        urlContent += this.pick();
-        this.step();
+        urlContent += ' ';
+        urlContent += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlContent);
       }
-      return TokenFactory(TokenType.URL, urlContent);
     }
+    while (!this.eat(')')) {
+      if (this.isEof()) {
+        return TokenFactory(TokenType.URL, urlContent);
+      }
+      // non-printalbe code point
+      if (this.eat('(')) {
+        urlContent += '(';
+        urlContent += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlContent);
+      }
+      // eacape code point
+      if (this.eat('\\')) {
+        // invalid escape code point
+        if (this.eat('\n')) {
+          urlContent += '\n';
+          urlContent += helper.consumeBadURL(this);
+          return TokenFactory(TokenType.BAD_URL, urlContent);
+        }
+        urlContent += helper.consumeEscaped(this);
+        continue;
+      }
+      if (this.eat(' ')) {
+        this.allowWhitespace();
+        if (this.eat(')')) {
+          return TokenFactory(TokenType.URL, urlContent);
+        }
+        urlContent += ' ';
+        urlContent += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlContent);
+      }
+      // anything else
+      urlContent += this.pick();
+      this.step();
+    }
+    return TokenFactory(TokenType.URL, urlContent);
   }
   /**
    * 生成Token用的
@@ -148,10 +194,10 @@ export class CSSTokenizer extends BaseTokenizer {
       this.eofToken,
       this.newlineToken,
       this.stringToken,
-      this.urlToken,
+      this.identToken,
     ];
     for (const i of tokens) {
-      const token = i();
+      const token = i.apply(this);
       if (token) {
         return token;
       }

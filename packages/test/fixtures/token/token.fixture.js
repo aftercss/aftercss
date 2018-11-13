@@ -1,19 +1,18 @@
 const BaseFixture = require('after-test').BaseFixture;
-const Tokenizer = require('@aftercss/tokenizer').Tokenizer;
+const CSSTokenizer = require('@aftercss/tokenizer');
 
 const path = require('path');
 
 class TokenFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
-    const tokenizer = new Tokenizer(content);
+    const tokenizer = new CSSTokenizer(content);
     tokenizer.preprocess();
     const token = tokenizer.nextToken();
     return token.toString();
   }
 }
 
+const tokenFixture = new TokenFixture(path.resolve(__dirname, './ident-token'));
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './url-token'));
-
-tokenFixture.runTask('Tokenizer', 'url.json');
+tokenFixture.runTask('Tokenizer', 'ident.json');
