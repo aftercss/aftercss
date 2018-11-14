@@ -1,4 +1,4 @@
-import { TokenFactory, TokenType, Token } from '../token';
+import { TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper } from './css-tokenizer-helper';
 
@@ -41,7 +41,7 @@ export class CSSTokenizer extends BaseTokenizer {
     }
   }
   public identToken() {
-    if (isIndentifierStater) {
+    if (helper.isIndentifierStarter(this)) {
       const name = helper.consumeName(this);
       if (name.toLowerCase() === 'url' && this.eat('(')) {
         return this.urlToken();
@@ -51,25 +51,6 @@ export class CSSTokenizer extends BaseTokenizer {
       }
       // ident token
       return TokenFactory(TokenType.IDENT, name);
-    }
-
-    /**
-     * check if three code points would start an indentifier
-     * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
-     */
-    function isIndentifierStater() {
-      const firstCodePoint = this.pick();
-      const secondCodePoint = this.pick(1);
-      const thirdCondePoint = this.pick(2);
-      if (
-        (firstCodePoint === '-' &&
-          (helper.isNameStart(secondCodePoint) || helper.isValidEscape(secondCodePoint, thirdCondePoint))) ||
-        helper.isNameStart(firstCodePoint) ||
-        helper.isValidEscape(firstCodePoint, secondCodePoint)
-      ) {
-        return true;
-      }
-      return false;
     }
   }
   public newlineToken() {
@@ -87,6 +68,28 @@ export class CSSTokenizer extends BaseTokenizer {
     // }
     if (this.eat('\n')) {
       return TokenFactory(TokenType.NEWLINE, '\n');
+    }
+  }
+  public numberToken() {
+    /**
+     * consume a numeric token
+     * https://www.w3.org/TR/css-syntax-3/#consume-a-numeric-token
+     */
+    if (helper.isNumberStarter(this)) {
+      const numberContent = helper.consumeNumber(this);
+      if (helper.isIndentifierStarter(this)) {
+        const dimensionContent = JSON.parse(JSON.stringify(numberContent));
+        dimensionContent.unit = helper.consumeName(this);
+        return TokenFactory(TokenType.DIMENSION, dimensionContent);
+      }
+      if (this.eat('%')) {
+        const percentageContent = {
+          repr: numberContent.repr,
+          value: numberContent.value,
+        };
+        return TokenFactory(TokenType.PERCENTAGE, percentageContent);
+      }
+      return TokenFactory(TokenType.NUMBER, numberContent);
     }
   }
   public stringToken() {
@@ -192,6 +195,7 @@ export class CSSTokenizer extends BaseTokenizer {
       this.atkeywordToken,
       this.commentToken,
       this.eofToken,
+      this.numberToken,
       this.newlineToken,
       this.stringToken,
       this.identToken,

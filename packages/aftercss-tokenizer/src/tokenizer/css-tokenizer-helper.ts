@@ -81,23 +81,24 @@ export const helper = {
       tokenizer.step();
     }
     addContinusNumber();
-    if (tokenizer.eat('.') && numberReg.test(tokenizer.pick())) {
-      numberContent.repr += `.${tokenizer.pick()}`;
+    if (tokenizer.pick() === '.' && numberReg.test(tokenizer.pick(1))) {
+      numberContent.repr += `.${tokenizer.pick(1)}`;
       numberContent.type = 'number';
-      tokenizer.step();
+      tokenizer.step(2);
       addContinusNumber();
     }
     if (
-      (tokenizer.eat('e') || this.eat('E')) &&
-      (numberReg.test(tokenizer.pick()) ||
-        ((tokenizer.pick() === '+' || tokenizer.pick() === '-') && numberReg.test(tokenizer.pick(1))))
+      (tokenizer.pick() === 'e' || tokenizer.pick() === 'E') &&
+      (numberReg.test(tokenizer.pick(1)) ||
+        ((tokenizer.pick(1) === '+' || tokenizer.pick(1) === '-') && numberReg.test(tokenizer.pick(2))))
     ) {
-      numberContent.repr += `e${this.pick()}`;
+      numberContent.repr += `e${tokenizer.pick(1)}`;
       numberContent.type = 'number';
+      tokenizer.step(2);
       addContinusNumber();
     }
 
-    numberContent.value = parseInt(numberContent.repr, 10);
+    numberContent.value = Number(numberContent.repr);
     return numberContent;
 
     function addContinusNumber() {
@@ -106,6 +107,38 @@ export const helper = {
         tokenizer.step();
       }
     }
+  },
+  isIndentifierStarter(tokenizer: BaseTokenizer) {
+    /**
+     * check if three code points would start an indentifier
+     * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
+     */
+    const firstCodePoint = tokenizer.pick();
+    const secondCodePoint = tokenizer.pick(1);
+    const thirdCodePoint = tokenizer.pick(2);
+    if (
+      (firstCodePoint === '-' &&
+        (this.isNameStart(secondCodePoint) || this.isValidEscape(secondCodePoint, thirdCodePoint))) ||
+      this.isNameStart(firstCodePoint) ||
+      this.isValidEscape(firstCodePoint, secondCodePoint)
+    ) {
+      return true;
+    }
+    return false;
+  },
+  isNumberStarter(tokenizer: BaseTokenizer) {
+    const firstCodePoint = tokenizer.pick();
+    const secondCodePoint = tokenizer.pick(1);
+    const thirdCodePoint = tokenizer.pick(2);
+    const numberReg = /[0-9]/;
+    if (
+      ((firstCodePoint === '+' || firstCodePoint === '-') &&
+        (numberReg.test(secondCodePoint) || (secondCodePoint === '.' && numberReg.test(thirdCodePoint)))) ||
+      ((firstCodePoint === '.' && numberReg.test(secondCodePoint)) || numberReg.test(firstCodePoint))
+    ) {
+      return true;
+    }
+    return false;
   },
   isNameStart(codePoint: string) {
     return /[a-zA-Z\_]/.test(codePoint) || codePoint >= '\u0080';

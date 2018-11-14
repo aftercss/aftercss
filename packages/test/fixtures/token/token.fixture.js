@@ -13,6 +13,6 @@ class TokenFixture extends BaseFixture {
   }
 }
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './ident-token'));
+const tokenFixture = new TokenFixture(path.resolve(__dirname, './percentage-token'));
 
-tokenFixture.runTask('Tokenizer', 'ident.json');
+tokenFixture.runTask('Tokenizer', 'percentage.json');

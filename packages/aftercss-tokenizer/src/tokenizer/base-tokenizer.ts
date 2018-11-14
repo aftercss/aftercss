@@ -96,5 +96,4 @@ export class BaseTokenizer {
   public pick(cnt = 0) {
     return this.content.charAt(this.current + cnt);
   }
-
 }

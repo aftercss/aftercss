@@ -20,10 +20,10 @@ export enum TokenType {
   CDC = 'CDC',
   COLON = 'COLON',
   SEMI = 'SEMI',
-  FUNCTION = 'function',
+  FUNCTION = 'FUNCTION',
 }
 
-export class Token {
+class Token {
   public type: TokenType = TokenType.ANY;
   /**
    * maybe undefined will save some Memory than ''
@@ -39,39 +39,8 @@ export class Token {
     return JSON.stringify(this, null, 2);
   }
 }
-/**
- * New Line
- */
-// enum NewLineTokenType {
-//   RN = 'RN',
-//   R = 'R',
-//   N = 'N',
-//   F = 'F',
-// }
-// export class NewLineToken extends Token {
-//   public endType: NewLineTokenType;
-//   public constructor(type: TokenType, raw?: string) {
-//     super(type, raw);
-//     switch (raw) {
-//       case '\r\n':
-//         this.endType = NewLineTokenType.RN;
-//         break;
-//       case '\n':
-//         this.endType = NewLineTokenType.N;
-//         break;
-//       case '\r':
-//         this.endType = NewLineTokenType.R;
-//         break;
-//       case '\f':
-//         this.endType = NewLineTokenType.F;
-//         break;
-//       default:
-//         throw new Error(`unexpect ${raw} for NewLineTokenType`);
-//     }
-//   }
-// }
 
-function TokenFactory(type: TokenType, content?: string): Token {
+function TokenFactory(type: TokenType, content?: any): Token {
   return new Token(type, content);
 }
 
