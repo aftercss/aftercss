@@ -1,4 +1,4 @@
-import { TokenFactory, TokenType } from '../token';
+import { IDimensionProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper } from './css-tokenizer-helper';
 
@@ -78,12 +78,12 @@ export class CSSTokenizer extends BaseTokenizer {
     if (helper.isNumberStarter(this)) {
       const numberContent = helper.consumeNumber(this);
       if (helper.isIndentifierStarter(this)) {
-        const dimensionContent = JSON.parse(JSON.stringify(numberContent));
+        const dimensionContent: IDimensionProp = JSON.parse(JSON.stringify(numberContent));
         dimensionContent.unit = helper.consumeName(this);
         return TokenFactory(TokenType.DIMENSION, dimensionContent);
       }
       if (this.eat('%')) {
-        const percentageContent = {
+        const percentageContent: IPercentageProp = {
           repr: numberContent.repr,
           value: numberContent.value,
         };
@@ -183,28 +183,46 @@ export class CSSTokenizer extends BaseTokenizer {
     }
     return TokenFactory(TokenType.URL, urlContent);
   }
+  public unicodeRangeToken() {
+    const hexNumberReg = /[0-9]{1,6}/;
+    if (this.eat('u+') && (this.pick() === '?' || hexNumberReg.test(this.pick()))) {
+      const startDigits = this.matchReg(hexNumberReg);
+      this.step(startDigits.length);
+      let rangeStart = `0x${startDigits}`;
+      let rangeEnd = `0x${startDigits}`;
+      for (let i = startDigits.length; i < 6; i++) {
+        if (this.eat('?')) {
+          rangeStart += '0';
+          rangeEnd += 'F';
+        }
+      }
+      // has consumed '?'
+      if (rangeStart !== `0x${startDigits}`) {
+        return TokenFactory(TokenType.UNICODE_RANGE, {
+          end: rangeEnd,
+          start: rangeStart,
+        });
+      }
+      if (this.pick() === '-' && hexNumberReg.test(this.pick(1))) {
+        this.eat('-');
+        const endDigits = this.matchReg(hexNumberReg);
+        this.step(endDigits.length);
+        rangeEnd = `0x${endDigits}`;
+      }
+      return TokenFactory(TokenType.UNICODE_RANGE, {
+        end: rangeEnd,
+        start: rangeStart,
+      });
+    }
+  }
   /**
    * 生成Token用的
    */
   public nextToken() {
     /**
-     * 这里是排列优先级的
-     * 跟标准核对一下优先级
+     *  consume a token
+     *  https://www.w3.org/TR/css-syntax-3/#consume-a-token
      */
-    const tokens = [
-      this.atkeywordToken,
-      this.commentToken,
-      this.eofToken,
-      this.numberToken,
-      this.newlineToken,
-      this.stringToken,
-      this.identToken,
-    ];
-    for (const i of tokens) {
-      const token = i.apply(this);
-      if (token) {
-        return token;
-      }
-    }
+    return this.unicodeRangeToken();
   }
 }

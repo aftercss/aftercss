@@ -1,3 +1,4 @@
+import { INumberProp } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 
 export const helper = {
@@ -70,7 +71,7 @@ export const helper = {
      * https://www.w3.org/TR/css-syntax-3/#consume-a-number
      * Ensure that the stream starts with a number before calling this function
      */
-    const numberContent = {
+    const numberContent: INumberProp = {
       repr: '',
       type: 'integer',
       value: 0,

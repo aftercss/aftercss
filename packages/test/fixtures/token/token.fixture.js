@@ -13,6 +13,6 @@ class TokenFixture extends BaseFixture {
   }
 }
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './percentage-token'));
+const tokenFixture = new TokenFixture(path.resolve(__dirname, './unicoderange-token'));
 
-tokenFixture.runTask('Tokenizer', 'percentage.json');
+tokenFixture.runTask('Tokenizer', 'unicoderange.json');
