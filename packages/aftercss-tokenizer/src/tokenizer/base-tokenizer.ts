@@ -86,8 +86,8 @@ export class BaseTokenizer {
   }
 
   public allowWhitespace() {
-    while (this.current < this.content.length && WhiteSpaceRegex.test(this.content[this.current])) {
-      this.current++;
+    while (this.current < this.content.length && WhiteSpaceRegex.test(this.pick())) {
+      this.step();
     }
   }
   /**

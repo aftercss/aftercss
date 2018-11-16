@@ -1,26 +1,28 @@
 // tslint:disable max-classes-per-file
 export enum TokenType {
-  COMMENT = 'COMMENT',
-  EOF = 'EOF',
-  NEWLINE = 'NEWLINE',
   ANY = 'ANY',
-  IDENT = 'IDENT', // NO
   ATKEYWORD = 'ATKEYWORD',
-  STRING = 'STRING',
+  BAD_COMMENT = 'BAD_COMMENT',
   BAD_STRING = 'BAD_STRING',
   BAD_URL = 'BAD_URL',
-  BAD_COMMENT = 'BAD_COMMENT',
-  HASH = 'HASH',
-  NUMBER = 'NUMBER',
-  PERCENTAGE = 'PERCENTAGE',
-  DIMENSION = 'DIMENSION',
-  URL = 'URL',
-  UNICODE_RANGE = 'UNICODE_RANGE',
   CDO = 'CDO',
   CDC = 'CDC',
   COLON = 'COLON',
-  SEMI = 'SEMI',
+  COMMENT = 'COMMENT',
+  DIMENSION = 'DIMENSION',
+  DELIM = 'DELIM',
+  EOF = 'EOF',
   FUNCTION = 'FUNCTION',
+  HASH = 'HASH',
+  IDENT = 'IDENT', // NO
+  NEWLINE = 'NEWLINE',
+  UNICODE_RANGE = 'UNICODE_RANGE',
+  NUMBER = 'NUMBER',
+  PERCENTAGE = 'PERCENTAGE',
+  SEMI = 'SEMI',
+  STRING = 'STRING',
+  URL = 'URL',
+  WHITESPACE = 'WHITESPACE',
 }
 
 export interface IDimensionProp {
@@ -28,6 +30,11 @@ export interface IDimensionProp {
   type: 'integer' | 'number';
   unit: string;
   value: number;
+}
+
+export interface IHashProp {
+  value: string;
+  type?: string;
 }
 
 export interface INumberProp {
@@ -76,6 +83,16 @@ class DimensionToken extends Token {
   }
 }
 
+class HashToken extends Token {
+  public hashType?: string;
+  constructor(type: TokenType.HASH, prop: IHashProp) {
+    super(type, prop.value);
+    if (prop.type) {
+      this.hashType = prop.type;
+    }
+  }
+}
+
 class NumberToken extends Token {
   public numberType: 'integer' | 'number';
   public repr: string;
@@ -109,6 +126,7 @@ class UnicodeRangeToken extends Token {
 }
 
 function TokenFactory(type: TokenType.DIMENSION, prop: IDimensionProp): DimensionToken;
+function TokenFactory(type: TokenType.HASH, prop: IHashProp): HashToken;
 function TokenFactory(type: TokenType.NUMBER, prop: INumberProp): NumberToken;
 function TokenFactory(type: TokenType.PERCENTAGE, prop: IPercentageProp): PercentageToken;
 function TokenFactory(type: TokenType.UNICODE_RANGE, prop: IUnicodeRangeProp): UnicodeRangeToken;
@@ -117,6 +135,8 @@ function TokenFactory(type: TokenType, content?: any): Token {
   switch (type) {
     case TokenType.DIMENSION:
       return new DimensionToken(type, content);
+    case TokenType.HASH:
+      return new HashToken(type, content);
     case TokenType.NUMBER:
       return new NumberToken(type, content);
     case TokenType.PERCENTAGE:

@@ -13,6 +13,6 @@ class TokenFixture extends BaseFixture {
   }
 }
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './unicoderange-token'));
+const tokenFixture = new TokenFixture(path.resolve(__dirname, './hash-token'));
 
-tokenFixture.runTask('Tokenizer', 'unicoderange.json');
+tokenFixture.runTask('Tokenizer', 'hash.json');

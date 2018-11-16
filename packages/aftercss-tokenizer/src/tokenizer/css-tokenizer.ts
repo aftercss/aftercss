@@ -1,4 +1,4 @@
-import { IDimensionProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
+import { IDimensionProp, IHashProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper } from './css-tokenizer-helper';
 
@@ -16,20 +16,21 @@ export class CSSTokenizer extends BaseTokenizer {
     this.content.replace('\u0000', '\uFFFD');
   }
 
+  /**
+   * at-key-word token
+   * https://www.w3.org/TR/css-syntax-3/#at-keyword-token-diagram
+   */
   public atkeywordToken() {
-    /**
-     * at-key-word token
-     * https://www.w3.org/TR/css-syntax-3/#at-keyword-token-diagram
-     */
     if (this.eat('@')) {
       return TokenFactory(TokenType.ATKEYWORD, '@');
     }
   }
+
+  /**
+   * comment token
+   * https://www.w3.org/TR/css-syntax-3/#comment-diagram
+   */
   public commentToken() {
-    /**
-     * comment token
-     * https://www.w3.org/TR/css-syntax-3/#comment-diagram
-     */
     if (this.eat('/*')) {
       const commentContent = this.readUntil(/\*\//);
       return TokenFactory(TokenType.COMMENT, commentContent);
@@ -40,8 +41,30 @@ export class CSSTokenizer extends BaseTokenizer {
       return TokenFactory(TokenType.EOF);
     }
   }
+
+  /**
+   * hash token
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-token
+   */
+  public hashToken() {
+    if (this.eat('#') && (helper.isNameStarter(this) || /[0-9\-]/.test(this.pick()) || helper.isValidEscape(this))) {
+      const hashContent: IHashProp = {
+        value: '',
+      };
+      if (helper.isIdentifierStarter(this)) {
+        hashContent.type = 'id';
+      }
+      hashContent.value = helper.consumeName(this);
+      return TokenFactory(TokenType.HASH, hashContent);
+    }
+  }
+
+  /**
+   *  consume an ident-like token
+   *  https://www.w3.org/TR/css-syntax-3/#consume-an-ident-like-token
+   */
   public identToken() {
-    if (helper.isIndentifierStarter(this)) {
+    if (helper.isIdentifierStarter(this)) {
       const name = helper.consumeName(this);
       if (name.toLowerCase() === 'url' && this.eat('(')) {
         return this.urlToken();
@@ -53,31 +76,27 @@ export class CSSTokenizer extends BaseTokenizer {
       return TokenFactory(TokenType.IDENT, name);
     }
   }
+
+  /**
+   * new line token
+   * https://www.w3.org/TR/css-syntax-3/#newline
+   * transform ['\r\n' | '\r' | '\f'] into '\n' when preprocessing
+   * need to check '\n' only
+   */
   public newlineToken() {
-    /**
-     * new line token
-     * https://www.w3.org/TR/css-syntax-3/#newline
-     * transform ['\r\n' | '\r' | '\f'] into '\n' when preprocessing
-     * need to check '\n' only
-     */
-    // const newlineList = ['\r\n', '\n', '\r', '\f'];
-    // for (const item of newlineList) {
-    //   if (this.eat(item)) {
-    //     return TokenFactory(TokenType.NEWLINE, item);
-    //   }
-    // }
     if (this.eat('\n')) {
       return TokenFactory(TokenType.NEWLINE, '\n');
     }
   }
+
+  /**
+   * consume a numeric token
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-numeric-token
+   */
   public numberToken() {
-    /**
-     * consume a numeric token
-     * https://www.w3.org/TR/css-syntax-3/#consume-a-numeric-token
-     */
     if (helper.isNumberStarter(this)) {
       const numberContent = helper.consumeNumber(this);
-      if (helper.isIndentifierStarter(this)) {
+      if (helper.isIdentifierStarter(this)) {
         const dimensionContent: IDimensionProp = JSON.parse(JSON.stringify(numberContent));
         dimensionContent.unit = helper.consumeName(this);
         return TokenFactory(TokenType.DIMENSION, dimensionContent);
@@ -92,19 +111,19 @@ export class CSSTokenizer extends BaseTokenizer {
       return TokenFactory(TokenType.NUMBER, numberContent);
     }
   }
-  public stringToken() {
-    /**
-     * string token  || bad string token
-     * https://www.w3.org/TR/css-syntax-3/#string-token-diagram
-     */
 
+  /**
+   * string token  || bad string token
+   * https://www.w3.org/TR/css-syntax-3/#string-token-diagram
+   */
+  public stringToken() {
     if (this.eat("'") || this.eat('"')) {
       const quote = this.pick(-1);
       let stringContent = '';
       while (!this.eat(quote)) {
         if (this.isEof()) {
           return TokenFactory(TokenType.STRING, stringContent);
-        } else if (helper.isValidEscape(this.pick(), this.pick(1))) {
+        } else if (helper.isValidEscape(this)) {
           this.step(); // consume '\\'
           stringContent += helper.consumeEscaped(this);
         } else if (this.eat('\\') && this.eat('\n')) {
@@ -119,11 +138,12 @@ export class CSSTokenizer extends BaseTokenizer {
       return TokenFactory(TokenType.STRING, stringContent);
     }
   }
+
+  /**
+   * url token || bad url token
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
+   */
   public urlToken() {
-    /**
-     * url token || bad url token
-     * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
-     */
     // consume as much whitespace as possible
     this.allowWhitespace();
     let urlContent = '';
@@ -215,14 +235,27 @@ export class CSSTokenizer extends BaseTokenizer {
       });
     }
   }
+
   /**
-   * 生成Token用的
+   *  consume a token
+   *  https://www.w3.org/TR/css-syntax-3/#consume-a-token
+   * 	return a single token of any type
    */
   public nextToken() {
-    /**
-     *  consume a token
-     *  https://www.w3.org/TR/css-syntax-3/#consume-a-token
-     */
-    return this.unicodeRangeToken();
+    const currentCodePoint = this.pick();
+    switch (currentCodePoint) {
+      case ' ':
+        this.allowWhitespace();
+        return TokenFactory(TokenType.WHITESPACE);
+      case '"':
+        return this.stringToken();
+      case '#':
+        const hashToken = this.hashToken();
+        if (hashToken) {
+          return hashToken;
+        }
+        this.step();
+        return TokenFactory(TokenType.DELIM, currentCodePoint);
+    }
   }
 }

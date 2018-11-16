@@ -2,14 +2,14 @@ import { INumberProp } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 
 export const helper = {
+  /*  consume the remnants of a badurl
+  	*  https://www.w3.org/TR/css-syntax-3/#consume-the-remnants-of-a-bad-url
+  	*/
   consumeBadURL(tokenizer: BaseTokenizer) {
-    /* consume the remnants of a badurl
-     * https://www.w3.org/TR/css-syntax-3/#consume-the-remnants-of-a-bad-url
-     */
     let badurlContent = '';
     while (!tokenizer.isEof() && !tokenizer.eat(')')) {
       // consume a valid escape
-      if (this.isValidEscape(tokenizer.pick(), tokenizer.pick(1))) {
+      if (this.isValidEscape(tokenizer)) {
         tokenizer.step(); // consume '\\'
         badurlContent += this.consumeEscaped(tokenizer);
       } else {
@@ -19,11 +19,13 @@ export const helper = {
     }
     return badurlContent;
   },
+
+  /**
+   * reverse solidus followed by a non-newline
+   * https://www.w3.org/TR/css-syntax-3/#consume-an-escaped-code-point
+   * assume that the U+005C REVERSE SOLIDUS (\) has already been consumed
+   */
   consumeEscaped(tokenizer: BaseTokenizer) {
-    /* reverse solidus followed by a non-newline
-     * https://www.w3.org/TR/css-syntax-3/#consume-an-escaped-code-point
-     * assume that the U+005C REVERSE SOLIDUS (\) has already been consumed
-		 */
     let escapedContent = '';
     if (tokenizer.isEof()) {
       escapedContent = '\ufffd';
@@ -44,20 +46,22 @@ export const helper = {
     }
     return escapedContent;
   },
+
+  /**
+   * consume a name
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-name
+   */
   consumeName(tokenizer: BaseTokenizer) {
-    /* consume a name 
-		 * https://www.w3.org/TR/css-syntax-3/#consume-a-name
-		 */
     let nameContent = '';
     while (1) {
       const currentChar = tokenizer.pick();
       // name code point
-      if (this.isNameStart(currentChar) || /[0-9\-]/.test(currentChar)) {
+      if (this.isNameStarter(tokenizer) || /[0-9\-]/.test(currentChar)) {
         nameContent += currentChar;
         tokenizer.step();
         continue;
       }
-      if (this.isValidEscape(currentChar, tokenizer.pick(1))) {
+      if (this.isValidEscape(tokenizer)) {
         tokenizer.step(); // consume '\\'
         nameContent += this.consumeEscaped(tokenizer);
         continue;
@@ -65,12 +69,13 @@ export const helper = {
       return nameContent;
     }
   },
+
+  /**
+   * consume a number
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-number
+   * Ensure that the stream starts with a number before calling this function
+   */
   consumeNumber(tokenizer: BaseTokenizer) {
-    /**
-     * consume a number
-     * https://www.w3.org/TR/css-syntax-3/#consume-a-number
-     * Ensure that the stream starts with a number before calling this function
-     */
     const numberContent: INumberProp = {
       repr: '',
       type: 'integer',
@@ -109,19 +114,15 @@ export const helper = {
       }
     }
   },
-  isIndentifierStarter(tokenizer: BaseTokenizer) {
-    /**
-     * check if three code points would start an indentifier
-     * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
-     */
-    const firstCodePoint = tokenizer.pick();
-    const secondCodePoint = tokenizer.pick(1);
-    const thirdCodePoint = tokenizer.pick(2);
+  /**
+   * check if three code points would start an indentifier
+   * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
+   */
+  isIdentifierStarter(tokenizer: BaseTokenizer) {
     if (
-      (firstCodePoint === '-' &&
-        (this.isNameStart(secondCodePoint) || this.isValidEscape(secondCodePoint, thirdCodePoint))) ||
-      this.isNameStart(firstCodePoint) ||
-      this.isValidEscape(firstCodePoint, secondCodePoint)
+      (tokenizer.pick() === '-' && (this.isNameStarter(tokenizer, 1) || this.isValidEscape(tokenizer, 1))) ||
+      this.isNameStarter(tokenizer) ||
+      this.isValidEscape(tokenizer)
     ) {
       return true;
     }
@@ -141,10 +142,11 @@ export const helper = {
     }
     return false;
   },
-  isNameStart(codePoint: string) {
+  isNameStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
+    const codePoint = tokenizer.pick(cnt);
     return /[a-zA-Z\_]/.test(codePoint) || codePoint >= '\u0080';
   },
-  isValidEscape(firstCodePoint: string, secondCodePoint: string) {
-    return firstCodePoint === '\\' && secondCodePoint !== '\n';
+  isValidEscape(tokenizer: BaseTokenizer, cnt: number = 0) {
+    return tokenizer.pick(cnt) === '\\' && tokenizer.pick(cnt + 1) !== '\n';
   },
 };
