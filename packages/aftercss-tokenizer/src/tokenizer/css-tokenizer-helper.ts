@@ -81,57 +81,52 @@ export const helper = {
       type: 'integer',
       value: 0,
     };
-    const numberReg = /[0-9]/;
+    const digitReg = /[0-9]/;
+    const nonDigitReg = /[^0-9]/;
     if (tokenizer.pick() === '+' || tokenizer.pick() === '-') {
       numberContent.repr += tokenizer.pick();
       tokenizer.step();
     }
-    addContinusNumber();
-    if (tokenizer.pick() === '.' && numberReg.test(tokenizer.pick(1))) {
+    numberContent.repr += tokenizer.readUntil(nonDigitReg);
+    if (tokenizer.pick() === '.' && digitReg.test(tokenizer.pick(1))) {
       numberContent.repr += `.${tokenizer.pick(1)}`;
       numberContent.type = 'number';
       tokenizer.step(2);
-      addContinusNumber();
+      numberContent.repr += tokenizer.readUntil(nonDigitReg);
     }
     if (
       (tokenizer.pick() === 'e' || tokenizer.pick() === 'E') &&
-      (numberReg.test(tokenizer.pick(1)) ||
-        ((tokenizer.pick(1) === '+' || tokenizer.pick(1) === '-') && numberReg.test(tokenizer.pick(2))))
+      (digitReg.test(tokenizer.pick(1)) ||
+        ((tokenizer.pick(1) === '+' || tokenizer.pick(1) === '-') && digitReg.test(tokenizer.pick(2))))
     ) {
       numberContent.repr += `e${tokenizer.pick(1)}`;
       numberContent.type = 'number';
       tokenizer.step(2);
-      addContinusNumber();
+      numberContent.repr += tokenizer.readUntil(nonDigitReg);
     }
 
-    numberContent.value = Number(numberContent.repr);
+    numberContent.value = +numberContent.repr;
     return numberContent;
-
-    function addContinusNumber() {
-      while (numberReg.test(tokenizer.pick())) {
-        numberContent.repr += tokenizer.pick();
-        tokenizer.step();
-      }
-    }
   },
   /**
    * check if three code points would start an indentifier
    * https://www.w3.org/TR/css-syntax-3/#would-start-an-identifier
    */
-  isIdentifierStarter(tokenizer: BaseTokenizer) {
+  isIdentifierStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
     if (
-      (tokenizer.pick() === '-' && (this.isNameStarter(tokenizer, 1) || this.isValidEscape(tokenizer, 1))) ||
-      this.isNameStarter(tokenizer) ||
-      this.isValidEscape(tokenizer)
+      (tokenizer.pick(cnt) === '-' &&
+        (this.isNameStarter(tokenizer, cnt + 1) || this.isValidEscape(tokenizer, cnt + 1))) ||
+      this.isNameStarter(tokenizer, cnt) ||
+      this.isValidEscape(tokenizer, cnt)
     ) {
       return true;
     }
     return false;
   },
-  isNumberStarter(tokenizer: BaseTokenizer) {
-    const firstCodePoint = tokenizer.pick();
-    const secondCodePoint = tokenizer.pick(1);
-    const thirdCodePoint = tokenizer.pick(2);
+  isNumberStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
+    const firstCodePoint = tokenizer.pick(cnt);
+    const secondCodePoint = tokenizer.pick(cnt + 1);
+    const thirdCodePoint = tokenizer.pick(cnt + 2);
     const numberReg = /[0-9]/;
     if (
       ((firstCodePoint === '+' || firstCodePoint === '-') &&

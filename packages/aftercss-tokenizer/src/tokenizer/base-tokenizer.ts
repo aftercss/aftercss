@@ -2,8 +2,7 @@ const WhiteSpaceRegex = /\s+/;
 
 export class BaseTokenizer {
   public content: string = '';
-  private end: number = this.content.length;
-  private start: number = 0;
+  private end: number = 0;
   private current: number = 0;
 
   public constructor(content: string) {
@@ -11,32 +10,47 @@ export class BaseTokenizer {
     this.end = this.content.length;
   }
 
-  public error(message: string) {
-    throw new Error(message);
+  public allowWhitespace() {
+    while (this.current < this.end && WhiteSpaceRegex.test(this.pick())) {
+      this.step();
+    }
   }
+
   /**
-   * readUntil `s` show up
-   * @param s
+   * eat
    */
-  public readUntil(pattern: RegExp) {
-    if (this.current >= this.content.length) {
+  public eat(str: string, required: boolean = false, message?: string) {
+    if (str.length === 1) {
+      if (this.pick() === str) {
+        this.step();
+        return true;
+      }
+    } else {
+      if (this.match(str)) {
+        this.step(str.length);
+        return true;
+      }
+    }
+
+    if (required) {
       this.error(
         JSON.stringify({
-          code: `unexpected-eof`,
-          message: 'Unexpected end of input',
+          code: `unexpected-${this.current === this.end ? 'eof' : 'token'}`,
+          message: message || `Expected ${str}`,
         }),
       );
     }
-    const start = this.current;
-    const match = pattern.exec(this.content.slice(start));
-    if (match) {
-      this.current = start + match.index;
-      return this.content.slice(start, this.current);
-    }
-
-    this.current = this.content.length;
-    return this.content.slice(start);
+    return false;
   }
+
+  public error(message: string) {
+    throw new Error(message);
+  }
+
+  public isEof() {
+    return this.current >= this.end;
+  }
+
   /**
    * match
    * @param str
@@ -57,43 +71,38 @@ export class BaseTokenizer {
     }
     return match[0];
   }
-  public isEof() {
-    return this.current >= this.end;
-  }
 
-  public step(num: number = 1) {
-    this.current += num;
-  }
-
-  /**
-   * eat
-   */
-  public eat(str: string, required: boolean = false, message?: string) {
-    if (this.match(str)) {
-      this.current += str.length;
-      return true;
-    }
-
-    if (required) {
-      this.error(
-        JSON.stringify({
-          code: `unexpected-${this.current === this.content.length ? 'eof' : 'token'}`,
-          message: message || `Expected ${str}`,
-        }),
-      );
-    }
-    return false;
-  }
-
-  public allowWhitespace() {
-    while (this.current < this.content.length && WhiteSpaceRegex.test(this.pick())) {
-      this.step();
-    }
-  }
   /**
    * pick a char
    */
   public pick(cnt = 0) {
     return this.content.charAt(this.current + cnt);
+  }
+  /**
+   * readUntil `s` show up
+   * @param s
+   */
+  public readUntil(pattern: RegExp) {
+    if (this.current >= this.end) {
+      this.error(
+        JSON.stringify({
+          code: `unexpected-eof`,
+          message: 'Unexpected end of input',
+        }),
+      );
+    }
+    const start = this.current;
+    const match = pattern.exec(this.content.slice(start));
+    if (match) {
+      this.current = start + match.index;
+      return this.content.slice(start, this.current);
+    }
+
+    this.current = this.end;
+    return this.content.slice(start);
+  }
+
+  public step(num: number = 1) {
+    this.current += num;
   }
 }

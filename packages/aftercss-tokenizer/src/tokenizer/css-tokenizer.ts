@@ -22,7 +22,8 @@ export class CSSTokenizer extends BaseTokenizer {
    */
   public atkeywordToken() {
     if (this.eat('@')) {
-      return TokenFactory(TokenType.ATKEYWORD, '@');
+      const atkeywordContent = helper.consumeName(this);
+      return TokenFactory(TokenType.ATKEYWORD, atkeywordContent);
     }
   }
 
@@ -36,18 +37,21 @@ export class CSSTokenizer extends BaseTokenizer {
       return TokenFactory(TokenType.COMMENT, commentContent);
     }
   }
-  public eofToken() {
-    if (this.isEof()) {
-      return TokenFactory(TokenType.EOF);
-    }
+
+  public delimToken() {
+    const delimContent = this.pick();
+    this.step();
+    return TokenFactory(TokenType.DELIM, delimContent);
   }
 
   /**
    * hash token
    * https://www.w3.org/TR/css-syntax-3/#consume-a-token
+   * already know the current code point is '#'
    */
   public hashToken() {
-    if (this.eat('#') && (helper.isNameStarter(this) || /[0-9\-]/.test(this.pick()) || helper.isValidEscape(this))) {
+    if (helper.isNameStarter(this, 1) || /[0-9\-]/.test(this.pick(1)) || helper.isValidEscape(this, 1)) {
+      this.step(); // consume '#'
       const hashContent: IHashProp = {
         value: '',
       };
@@ -62,19 +66,18 @@ export class CSSTokenizer extends BaseTokenizer {
   /**
    *  consume an ident-like token
    *  https://www.w3.org/TR/css-syntax-3/#consume-an-ident-like-token
+   * already ensure that the current code point is a valid identifier-starter
    */
-  public identToken() {
-    if (helper.isIdentifierStarter(this)) {
-      const name = helper.consumeName(this);
-      if (name.toLowerCase() === 'url' && this.eat('(')) {
-        return this.urlToken();
-      } else if (this.eat('(')) {
-        // function token
-        return TokenFactory(TokenType.FUNCTION, name);
-      }
-      // ident token
-      return TokenFactory(TokenType.IDENT, name);
+  public identLikeToken() {
+    const name = helper.consumeName(this);
+    if (name.toLowerCase() === 'url' && this.eat('(')) {
+      return this.urlToken();
+    } else if (this.eat('(')) {
+      // function token
+      return TokenFactory(TokenType.FUNCTION, name);
     }
+    // ident token
+    return TokenFactory(TokenType.IDENT, name);
   }
 
   /**
@@ -92,51 +95,50 @@ export class CSSTokenizer extends BaseTokenizer {
   /**
    * consume a numeric token
    * https://www.w3.org/TR/css-syntax-3/#consume-a-numeric-token
+   * already ensure that the current code point is a valid number-starter
    */
-  public numberToken() {
-    if (helper.isNumberStarter(this)) {
-      const numberContent = helper.consumeNumber(this);
-      if (helper.isIdentifierStarter(this)) {
-        const dimensionContent: IDimensionProp = JSON.parse(JSON.stringify(numberContent));
-        dimensionContent.unit = helper.consumeName(this);
-        return TokenFactory(TokenType.DIMENSION, dimensionContent);
-      }
-      if (this.eat('%')) {
-        const percentageContent: IPercentageProp = {
-          repr: numberContent.repr,
-          value: numberContent.value,
-        };
-        return TokenFactory(TokenType.PERCENTAGE, percentageContent);
-      }
-      return TokenFactory(TokenType.NUMBER, numberContent);
+  public numericToken() {
+    const numberContent = helper.consumeNumber(this);
+    if (helper.isIdentifierStarter(this)) {
+      const dimensionContent: IDimensionProp = JSON.parse(JSON.stringify(numberContent));
+      dimensionContent.unit = helper.consumeName(this);
+      return TokenFactory(TokenType.DIMENSION, dimensionContent);
     }
+    if (this.eat('%')) {
+      const percentageContent: IPercentageProp = {
+        repr: numberContent.repr,
+        value: numberContent.value,
+      };
+      return TokenFactory(TokenType.PERCENTAGE, percentageContent);
+    }
+    return TokenFactory(TokenType.NUMBER, numberContent);
   }
 
   /**
    * string token  || bad string token
    * https://www.w3.org/TR/css-syntax-3/#string-token-diagram
+   * already know the current code point is '"' or "'"
    */
   public stringToken() {
-    if (this.eat("'") || this.eat('"')) {
-      const quote = this.pick(-1);
-      let stringContent = '';
-      while (!this.eat(quote)) {
-        if (this.isEof()) {
-          return TokenFactory(TokenType.STRING, stringContent);
-        } else if (helper.isValidEscape(this)) {
-          this.step(); // consume '\\'
-          stringContent += helper.consumeEscaped(this);
-        } else if (this.eat('\\') && this.eat('\n')) {
-          continue;
-        } else if (this.eat('\n')) {
-          return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
-        } else {
-          stringContent += this.pick();
-          this.step();
-        }
+    const quote = this.pick();
+    this.step();
+    let stringContent = '';
+    while (!this.eat(quote)) {
+      if (this.isEof()) {
+        return TokenFactory(TokenType.STRING, stringContent);
+      } else if (helper.isValidEscape(this)) {
+        this.step(); // consume '\\'
+        stringContent += helper.consumeEscaped(this);
+      } else if (this.eat('\\') && this.eat('\n')) {
+        continue;
+      } else if (this.eat('\n')) {
+        return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
+      } else {
+        stringContent += this.pick();
+        this.step();
       }
-      return TokenFactory(TokenType.STRING, stringContent);
     }
+    return TokenFactory(TokenType.STRING, stringContent);
   }
 
   /**
@@ -205,35 +207,33 @@ export class CSSTokenizer extends BaseTokenizer {
   }
   public unicodeRangeToken() {
     const hexNumberReg = /[0-9]{1,6}/;
-    if (this.eat('u+') && (this.pick() === '?' || hexNumberReg.test(this.pick()))) {
-      const startDigits = this.matchReg(hexNumberReg);
-      this.step(startDigits.length);
-      let rangeStart = `0x${startDigits}`;
-      let rangeEnd = `0x${startDigits}`;
-      for (let i = startDigits.length; i < 6; i++) {
-        if (this.eat('?')) {
-          rangeStart += '0';
-          rangeEnd += 'F';
-        }
+    const startDigits = this.matchReg(hexNumberReg);
+    this.step(startDigits.length);
+    let rangeStart = `0x${startDigits}`;
+    let rangeEnd = `0x${startDigits}`;
+    for (let i = startDigits.length; i < 6; i++) {
+      if (this.eat('?')) {
+        rangeStart += '0';
+        rangeEnd += 'F';
       }
-      // has consumed '?'
-      if (rangeStart !== `0x${startDigits}`) {
-        return TokenFactory(TokenType.UNICODE_RANGE, {
-          end: rangeEnd,
-          start: rangeStart,
-        });
-      }
-      if (this.pick() === '-' && hexNumberReg.test(this.pick(1))) {
-        this.eat('-');
-        const endDigits = this.matchReg(hexNumberReg);
-        this.step(endDigits.length);
-        rangeEnd = `0x${endDigits}`;
-      }
+    }
+    // has consumed '?'
+    if (rangeStart !== `0x${startDigits}`) {
       return TokenFactory(TokenType.UNICODE_RANGE, {
         end: rangeEnd,
         start: rangeStart,
       });
     }
+    if (this.pick() === '-' && hexNumberReg.test(this.pick(1))) {
+      this.eat('-');
+      const endDigits = this.matchReg(hexNumberReg);
+      this.step(endDigits.length);
+      rangeEnd = `0x${endDigits}`;
+    }
+    return TokenFactory(TokenType.UNICODE_RANGE, {
+      end: rangeEnd,
+      start: rangeStart,
+    });
   }
 
   /**
@@ -242,7 +242,11 @@ export class CSSTokenizer extends BaseTokenizer {
    * 	return a single token of any type
    */
   public nextToken() {
+    if (this.isEof()) {
+      return TokenFactory(TokenType.EOF);
+    }
     const currentCodePoint = this.pick();
+
     switch (currentCodePoint) {
       case ' ':
         this.allowWhitespace();
@@ -254,8 +258,119 @@ export class CSSTokenizer extends BaseTokenizer {
         if (hashToken) {
           return hashToken;
         }
-        this.step();
-        return TokenFactory(TokenType.DELIM, currentCodePoint);
+        return this.delimToken();
+      case '$':
+        if (this.pick(1) === '=') {
+          this.step(2);
+          return TokenFactory(TokenType.SUFFIX_MATCH);
+        }
+        return this.delimToken();
+      case "'":
+        return this.stringToken();
+      case '(':
+        return TokenFactory(TokenType.LEFT_PARENTHESIS);
+      case ')':
+        return TokenFactory(TokenType.RIGHT_PARENTHESIS);
+      case '*':
+        if (this.pick(1) === '=') {
+          this.step(2);
+          return TokenFactory(TokenType.SUBSTRING_MATCH);
+        }
+        return this.delimToken();
+      case '+':
+        if (helper.isNumberStarter(this)) {
+          return this.numericToken();
+        }
+        return this.delimToken();
+      case ',':
+        return TokenFactory(TokenType.COMMA);
+      case '-':
+        if (helper.isNumberStarter(this)) {
+          return this.numericToken();
+        }
+
+        if (helper.isIdentifierStarter(this)) {
+          return this.identLikeToken();
+        }
+
+        if (this.pick(1) === '-' && this.pick(2) === '>') {
+          this.step(3);
+          return TokenFactory(TokenType.CDC);
+        }
+        return this.delimToken();
+
+      case '.':
+        if (helper.isNumberStarter(this)) {
+          return this.numericToken();
+        }
+        return this.delimToken();
+      case '/':
+        if (this.pick(1) === '*') {
+          return this.commentToken();
+        }
+        return this.delimToken();
+      case ':':
+        return TokenFactory(TokenType.COLON);
+      case '<':
+        if (this.pick(1) === '!' && this.pick(2) === '-' && this.pick(3) === '-') {
+          this.step(3);
+          return TokenFactory(TokenType.CDO);
+        }
+        return this.delimToken();
+      case '@':
+        if (helper.isIdentifierStarter(this, 1)) {
+          return this.atkeywordToken();
+        }
+        return this.delimToken();
+      case '[':
+        return TokenFactory(TokenType.LEFT_SQUARE_BRACKET);
+      case '\\':
+        if (helper.isValidEscape(this)) {
+          return this.identLikeToken();
+        }
+        return this.delimToken();
+      case ']':
+        return TokenFactory(TokenType.RIGHT_SQUARE_BRACKET);
+      case '{':
+        return TokenFactory(TokenType.LEFT_CURLY_BRACKET);
+      case '}':
+        return TokenFactory(TokenType.RIGHT_CURLY_BRACKET);
+      case 'U':
+      case 'u':
+        if (this.pick(1) === '+' && /[0-9\?]/.test(this.pick(2))) {
+          this.step(2);
+          return this.unicodeRangeToken();
+        }
+        return this.identLikeToken();
+      case '|':
+        if (this.pick(1) === '=') {
+          this.step(2);
+          return TokenFactory(TokenType.DASH_MATCH);
+        }
+        if (this.pick(1) === '|') {
+          this.step(2);
+          return TokenFactory(TokenType.COLUMN);
+        }
+        return this.delimToken();
+      case '~':
+        if (this.pick(1) === '=') {
+          this.step(2);
+          return TokenFactory(TokenType.INCLUDE_MATCH);
+        }
+        return this.delimToken();
+
+      default:
+        // digit
+        if (/[0-9]/.test(currentCodePoint)) {
+          return this.numericToken();
+        }
+
+        // name start code point
+        if (helper.isNameStarter(this)) {
+          return this.identLikeToken();
+        }
+
+        return this.delimToken();
     }
   }
 }
