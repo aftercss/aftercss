@@ -19,12 +19,12 @@ export class CSSTokenizer extends BaseTokenizer {
   /**
    * at-key-word token
    * https://www.w3.org/TR/css-syntax-3/#at-keyword-token-diagram
+   * already ensure that the current code point is '@'
    */
   public atkeywordToken() {
-    if (this.eat('@')) {
-      const atkeywordContent = helper.consumeName(this);
-      return TokenFactory(TokenType.ATKEYWORD, atkeywordContent);
-    }
+    this.step(); // consume '@'
+    const atkeywordContent = helper.consumeName(this);
+    return TokenFactory(TokenType.ATKEYWORD, atkeywordContent);
   }
 
   /**
@@ -33,7 +33,7 @@ export class CSSTokenizer extends BaseTokenizer {
    */
   public commentToken() {
     if (this.eat('/*')) {
-      const commentContent = this.readUntil(/\*\//);
+      const commentContent = this.isEof() ? '' : this.readUntil(/\*\//);
       return TokenFactory(TokenType.COMMENT, commentContent);
     }
   }
@@ -50,23 +50,21 @@ export class CSSTokenizer extends BaseTokenizer {
    * already know the current code point is '#'
    */
   public hashToken() {
-    if (helper.isNameStarter(this, 1) || /[0-9\-]/.test(this.pick(1)) || helper.isValidEscape(this, 1)) {
-      this.step(); // consume '#'
-      const hashContent: IHashProp = {
-        value: '',
-      };
-      if (helper.isIdentifierStarter(this)) {
-        hashContent.type = 'id';
-      }
-      hashContent.value = helper.consumeName(this);
-      return TokenFactory(TokenType.HASH, hashContent);
+    this.step(); // consume '#'
+    const hashContent: IHashProp = {
+      value: '',
+    };
+    if (helper.isIdentifierStarter(this)) {
+      hashContent.type = 'id';
     }
+    hashContent.value = helper.consumeName(this);
+    return TokenFactory(TokenType.HASH, hashContent);
   }
 
   /**
    *  consume an ident-like token
    *  https://www.w3.org/TR/css-syntax-3/#consume-an-ident-like-token
-   * already ensure that the current code point is a valid identifier-starter
+   *  already ensure that the current code point is a valid identifier-starter
    */
   public identLikeToken() {
     const name = helper.consumeName(this);
@@ -126,11 +124,11 @@ export class CSSTokenizer extends BaseTokenizer {
     while (!this.eat(quote)) {
       if (this.isEof()) {
         return TokenFactory(TokenType.STRING, stringContent);
+      } else if (this.eat('\\') && this.eat('\n')) {
+        continue;
       } else if (helper.isValidEscape(this)) {
         this.step(); // consume '\\'
         stringContent += helper.consumeEscaped(this);
-      } else if (this.eat('\\') && this.eat('\n')) {
-        continue;
       } else if (this.eat('\n')) {
         return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
       } else {
@@ -190,7 +188,7 @@ export class CSSTokenizer extends BaseTokenizer {
         urlContent += helper.consumeEscaped(this);
         continue;
       }
-      if (this.eat(' ')) {
+      if (this.eat(' ') || this.eat('\n') || this.eat('\t')) {
         this.allowWhitespace();
         if (this.eat(')')) {
           return TokenFactory(TokenType.URL, urlContent);
@@ -205,6 +203,11 @@ export class CSSTokenizer extends BaseTokenizer {
     }
     return TokenFactory(TokenType.URL, urlContent);
   }
+
+  /**
+   * consume a unicode-range token
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-unicode-range-token
+   */
   public unicodeRangeToken() {
     const hexNumberReg = /[0-9]{1,6}/;
     const startDigits = this.matchReg(hexNumberReg);
@@ -249,14 +252,15 @@ export class CSSTokenizer extends BaseTokenizer {
 
     switch (currentCodePoint) {
       case ' ':
+      case '\t':
+      case '\n':
         this.allowWhitespace();
         return TokenFactory(TokenType.WHITESPACE);
       case '"':
         return this.stringToken();
       case '#':
-        const hashToken = this.hashToken();
-        if (hashToken) {
-          return hashToken;
+        if (helper.isNameStarter(this, 1) || /[0-9\-]/.test(this.pick(1)) || helper.isValidEscape(this, 1)) {
+          return this.hashToken();
         }
         return this.delimToken();
       case '$':
@@ -311,6 +315,8 @@ export class CSSTokenizer extends BaseTokenizer {
         return this.delimToken();
       case ':':
         return TokenFactory(TokenType.COLON);
+      case ';':
+        return TokenFactory(TokenType.SEMI);
       case '<':
         if (this.pick(1) === '!' && this.pick(2) === '-' && this.pick(3) === '-') {
           this.step(3);
@@ -331,6 +337,12 @@ export class CSSTokenizer extends BaseTokenizer {
         return this.delimToken();
       case ']':
         return TokenFactory(TokenType.RIGHT_SQUARE_BRACKET);
+      case '^':
+        if (this.pick(1) === '=') {
+          this.step(2);
+          return TokenFactory(TokenType.PREFIX_MATCH);
+        }
+        return this.delimToken();
       case '{':
         return TokenFactory(TokenType.LEFT_CURLY_BRACKET);
       case '}':

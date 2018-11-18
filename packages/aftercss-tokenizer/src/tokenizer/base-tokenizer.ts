@@ -1,4 +1,4 @@
-const WhiteSpaceRegex = /\s+/;
+// const WhiteSpaceRegex = /[\s\t\n]+/;
 
 export class BaseTokenizer {
   public content: string = '';
@@ -11,8 +11,8 @@ export class BaseTokenizer {
   }
 
   public allowWhitespace() {
-    while (this.current < this.end && WhiteSpaceRegex.test(this.pick())) {
-      this.step();
+    if (!this.isEof()) {
+      this.readUntil(/[^\s\t\n]/);
     }
   }
 

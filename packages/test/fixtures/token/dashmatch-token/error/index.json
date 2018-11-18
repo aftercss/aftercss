@@ -1,0 +1,6 @@
+{
+  "message": [
+    "Sun, 18 Nov 2018 09:27:35 GMT - '{\\n  \"type\": \"COLUMN\"\\n}' == '{\\n  \"type\": \"DASH_MATCH\"\\n}'",
+    "Sun, 18 Nov 2018 09:27:48 GMT - '{\\n  \"type\": \"DELIM\",\\n  \"raw\": \"|\"\\n}' == '{\\n  \"type\": \"DASH_MATCH\"\\n}'"
+  ]
+}

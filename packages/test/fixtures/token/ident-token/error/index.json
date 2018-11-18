@@ -8,6 +8,12 @@
     "Tue, 13 Nov 2018 11:53:34 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
     "Tue, 13 Nov 2018 12:02:58 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"-s\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
     "Tue, 13 Nov 2018 12:03:44 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"肁\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
-    "Tue, 13 Nov 2018 12:04:01 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"ffff\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'"
+    "Tue, 13 Nov 2018 12:04:01 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"ffff\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
+    "Sun, 18 Nov 2018 08:33:38 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"-fff\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
+    "Sun, 18 Nov 2018 09:12:40 GMT - this.step is not a function",
+    "Sun, 18 Nov 2018 09:13:58 GMT - this.step is not a function",
+    "Sun, 18 Nov 2018 09:14:39 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"肁\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
+    "Sun, 18 Nov 2018 09:14:50 GMT - '{\\n  \"type\": \"DELIM\",\\n  \"raw\": \"\\\\\\\\\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'",
+    "Sun, 18 Nov 2018 09:15:28 GMT - '{\\n  \"type\": \"IDENT\",\\n  \"raw\": \"-fff\"\\n}' == '{\\n  \"type\": \"function\",\\n  \"raw\": \"test\"\\n}'"
   ]
 }

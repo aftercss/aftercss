@@ -4,6 +4,11 @@
     "Fri, 16 Nov 2018 02:52:34 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"222\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
     "Fri, 16 Nov 2018 02:58:38 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"-test\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
     "Fri, 16 Nov 2018 02:59:12 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"-Ǒ\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
-    "Fri, 16 Nov 2018 02:59:20 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"Ǒ\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'"
+    "Fri, 16 Nov 2018 02:59:20 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"Ǒ\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
+    "Sun, 18 Nov 2018 03:17:47 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"Ǒ\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
+    "Sun, 18 Nov 2018 03:18:04 GMT - '{\\n  \"type\": \"DELIM\",\\n  \"raw\": \"#\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
+    "Sun, 18 Nov 2018 03:19:01 GMT - '{\\n  \"type\": \"DELIM\",\\n  \"raw\": \"#\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
+    "Sun, 18 Nov 2018 03:19:12 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23ee\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'",
+    "Sun, 18 Nov 2018 03:38:52 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"�\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"23er\"\\n}'"
   ]
 }

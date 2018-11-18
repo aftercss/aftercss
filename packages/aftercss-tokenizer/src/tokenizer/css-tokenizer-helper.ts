@@ -39,7 +39,10 @@ export const helper = {
         escapedContent += String.fromCodePoint(hexToDec); // a puzzle here
       }
       tokenizer.step(hex.length);
-      tokenizer.eat(' ');
+      const currentChar = tokenizer.pick();
+      if (currentChar === ' ' || currentChar === '\t' || currentChar === '\n') {
+        tokenizer.step();
+      }
     } else {
       escapedContent += tokenizer.pick();
       tokenizer.step();
@@ -92,7 +95,9 @@ export const helper = {
       numberContent.repr += `.${tokenizer.pick(1)}`;
       numberContent.type = 'number';
       tokenizer.step(2);
-      numberContent.repr += tokenizer.readUntil(nonDigitReg);
+      if (!tokenizer.isEof()) {
+        numberContent.repr += tokenizer.readUntil(nonDigitReg);
+      }
     }
     if (
       (tokenizer.pick() === 'e' || tokenizer.pick() === 'E') &&
@@ -102,7 +107,9 @@ export const helper = {
       numberContent.repr += `e${tokenizer.pick(1)}`;
       numberContent.type = 'number';
       tokenizer.step(2);
-      numberContent.repr += tokenizer.readUntil(nonDigitReg);
+      if (!tokenizer.isEof()) {
+        numberContent.repr += tokenizer.readUntil(nonDigitReg);
+      }
     }
 
     numberContent.value = +numberContent.repr;

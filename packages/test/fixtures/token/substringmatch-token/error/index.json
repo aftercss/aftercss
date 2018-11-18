@@ -1,0 +1,5 @@
+{
+  "message": [
+    "Sun, 18 Nov 2018 03:51:19 GMT - '{\\n  \"type\": \"DELIM\",\\n  \"raw\": \"*\"\\n}' == '{\\n  \"type\": \"SUBSTRING_MATCH\"\\n}'"
+  ]
+}
