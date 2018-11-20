@@ -1,17 +1,20 @@
 language: node_js
 
-cache: npm
-
-node_js: 
-  - "node"
 
 branches:
   only:
   - dev-spades
 
+cache: npm
+
+sudo: enabled
+
 install: 
-  - npm i cnpm
-  - npm i
+  - npm i cnpm -g
+  - npm run init
+
+node_js: 
+  - "node"
 
 script:
   - npm run build
