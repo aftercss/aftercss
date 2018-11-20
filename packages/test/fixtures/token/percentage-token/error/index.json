@@ -1,5 +1,0 @@
-{
-  "message": [
-    "Thu, 15 Nov 2018 03:31:14 GMT - '{\\n  \"type\": \"PERCENTAGE\",\\n  \"repr\": \".4e+3\",\\n  \"value\": 400\\n}' == '{\\n  \"type\": \"PERCENTAGE\",\\n  \"raw\": {\\n    \"repr\": \".4e+3\",\\n    \"value\": 400\\n  }\\n}'"
-  ]
-}

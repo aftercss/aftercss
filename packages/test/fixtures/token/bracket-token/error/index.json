@@ -1,7 +1,0 @@
-{
-  "message": [
-    "Sun, 18 Nov 2018 09:16:08 GMT - '{\\n  \"type\": \"RIGHT_SQUARE_BRACKET\"\\n}' == '{\\n  \"type\": \"LEFT_SQUARE_BRACKET\"\\n}'",
-    "Sun, 18 Nov 2018 09:21:01 GMT - '{\\n  \"type\": \"LEFT_CURLY_BRACKET\"\\n}' == '{\\n  \"type\": \"LEFT_SQUARE_BRACKET\"\\n}'",
-    "Sun, 18 Nov 2018 09:21:13 GMT - '{\\n  \"type\": \"RIGHT_CURLY_BRACKET\"\\n}' == '{\\n  \"type\": \"LEFT_SQUARE_BRACKET\"\\n}'"
-  ]
-}

@@ -1,5 +1,6 @@
 const BaseFixture = require('after-test').BaseFixture;
 const CSSTokenizer = require('@aftercss/tokenizer');
+const fs = require('fs');
 
 const path = require('path');
 
@@ -13,6 +14,16 @@ class TokenFixture extends BaseFixture {
   }
 }
 
-const tokenFixture = new TokenFixture(path.resolve(__dirname, './url-token'));
+const tokenDirs = fs.readdirSync(__dirname);
 
-tokenFixture.runTask('Tokenizer', 'url.json');
+
+module.exports = {
+  runTest() {
+    tokenDirs.forEach(item => {
+      if (item !== 'token.fixture.js') {
+				const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
+        tokenFixture.runTask('Tokenizer', `${item}.json`);
+      }
+    });
+  },
+};

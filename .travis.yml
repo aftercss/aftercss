@@ -1,0 +1,18 @@
+language: node_js
+
+cache: npm
+
+node_js: 
+  - "node"
+
+branches:
+  only:
+  - dev-spades
+
+install: 
+  - npm i cnpm
+  - npm i
+
+script:
+  - npm run build
+  - npm run test

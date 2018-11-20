@@ -1,5 +1,0 @@
-{
-  "message": [
-    "Thu, 15 Nov 2018 03:30:45 GMT - '{\\n  \"type\": \"DIMENSION\",\\n  \"numberType\": \"number\",\\n  \"repr\": \"2e+2\",\\n  \"unit\": \"rem\",\\n  \"value\": 200\\n}' == '{\\n  \"type\": \"DIMENSION\",\\n  \"raw\": {\\n    \"repr\": \"2e+2\",\\n    \"type\": \"number\",\\n    \"value\": 200,\\n    \"unit\": \"rem\"\\n  }..."
-  ]
-}
