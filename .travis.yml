@@ -5,8 +5,6 @@ branches:
   only:
   - dev-spades
 
-cache: npm
-
 sudo: enabled
 
 install: 
