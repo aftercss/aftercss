@@ -77,7 +77,6 @@ export class CSSTokenizer extends BaseTokenizer {
     return TokenFactory(TokenType.IDENT, name);
   }
 
-
   /**
    * consume a numeric token
    * https://www.w3.org/TR/css-syntax-3/#consume-a-numeric-token

@@ -1,7 +1,6 @@
 # after-css
 
 [![Build Status](https://travis-ci.com/aftercss/aftercss.svg?branch=dev-spades)](https://travis-ci.com/aftercss/aftercss)
-
 [![codecov](https://codecov.io/gh/aftercss/aftercss/branch/dev-spades/graph/badge.svg)](https://codecov.io/gh/aftercss/aftercss)
 
 ---
