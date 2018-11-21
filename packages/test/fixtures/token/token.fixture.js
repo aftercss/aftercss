@@ -16,14 +16,17 @@ class TokenFixture extends BaseFixture {
 
 const tokenDirs = fs.readdirSync(__dirname);
 
-
 module.exports = {
   runTest() {
     tokenDirs.forEach(item => {
       if (item !== 'token.fixture.js') {
-				const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
+        const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
         tokenFixture.runTask('Tokenizer', `${item}.json`);
       }
+      // if (item === 'string-token') {
+      //   const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
+      //   tokenFixture.runTask('Tokenizer', `${item}.json`);
+      // }
     });
   },
 };

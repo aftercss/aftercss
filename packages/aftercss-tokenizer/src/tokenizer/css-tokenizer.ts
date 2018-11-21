@@ -60,7 +60,6 @@ export class CSSTokenizer extends BaseTokenizer {
     hashContent.value = helper.consumeName(this);
     return TokenFactory(TokenType.HASH, hashContent);
   }
-
   /**
    *  consume an ident-like token
    *  https://www.w3.org/TR/css-syntax-3/#consume-an-ident-like-token
@@ -78,17 +77,6 @@ export class CSSTokenizer extends BaseTokenizer {
     return TokenFactory(TokenType.IDENT, name);
   }
 
-  /**
-   * new line token
-   * https://www.w3.org/TR/css-syntax-3/#newline
-   * transform ['\r\n' | '\r' | '\f'] into '\n' when preprocessing
-   * need to check '\n' only
-   */
-  public newlineToken() {
-    if (this.eat('\n')) {
-      return TokenFactory(TokenType.NEWLINE, '\n');
-    }
-  }
 
   /**
    * consume a numeric token
@@ -124,7 +112,8 @@ export class CSSTokenizer extends BaseTokenizer {
     while (!this.eat(quote)) {
       if (this.isEof()) {
         return TokenFactory(TokenType.STRING, stringContent);
-      } else if (this.eat('\\') && this.eat('\n')) {
+      } else if (this.pick() === '\\' && this.pick(1) === '\n') {
+        this.step(2);
         continue;
       } else if (helper.isValidEscape(this)) {
         this.step(); // consume '\\'
@@ -302,7 +291,6 @@ export class CSSTokenizer extends BaseTokenizer {
           return TokenFactory(TokenType.CDC);
         }
         return this.delimToken();
-
       case '.':
         if (helper.isNumberStarter(this)) {
           return this.numericToken();
