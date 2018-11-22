@@ -1,4 +1,5 @@
 {
   "type": "IDENT",
-  "raw": "-fff"
+  "raw": "-fff",
+  "content": "-fff"
 }

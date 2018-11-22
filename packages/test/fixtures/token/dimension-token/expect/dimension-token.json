@@ -1,5 +1,6 @@
 {
   "type": "DIMENSION",
+  "raw": "2e+2rem",
   "numberType": "number",
   "repr": "2e+2",
   "unit": "rem",

@@ -1,3 +1,4 @@
 {
-  "type": "DASH_MATCH"
+  "type": "DASH_MATCH",
+  "raw": "|="
 }

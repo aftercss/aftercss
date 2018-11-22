@@ -1,3 +1,4 @@
 {
-  "type": "INCLUDE_MATCH"
+  "type": "INCLUDE_MATCH",
+  "raw": "~="
 }

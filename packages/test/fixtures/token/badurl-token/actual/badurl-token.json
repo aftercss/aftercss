@@ -1,4 +1,4 @@
 {
   "type": "BAD_URL",
-  "raw": "www.baidu.com \n肁fff"
+  "raw": "url(www.baidu.com \n\\8081 fff)"
 }

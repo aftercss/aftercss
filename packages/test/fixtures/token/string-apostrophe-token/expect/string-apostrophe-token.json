@@ -1,4 +1,5 @@
 {
   "type": "STRING",
-  "raw": "肁� ��fffm"
+  "raw": "'\\8081 \\000\t \\10ffff \\d800 fff\\m",
+  "content": "肁� ��fffm"
 }

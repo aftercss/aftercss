@@ -1,3 +1,4 @@
 {
-  "type": "SUFFIX_MATCH"
+  "type": "SUFFIX_MATCH",
+  "raw": "$="
 }

@@ -23,10 +23,7 @@ module.exports = {
         const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
         tokenFixture.runTask('Tokenizer', `${item}.json`);
       }
-      // if (item === 'string-token') {
-      //   const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
-      //   tokenFixture.runTask('Tokenizer', `${item}.json`);
-      // }
     });
   },
 };
+

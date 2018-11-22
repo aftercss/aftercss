@@ -1,5 +1,6 @@
 {
   "type": "UNICODE_RANGE",
+  "raw": "u+233-456",
   "start": "0x233",
   "end": "0x456"
 }

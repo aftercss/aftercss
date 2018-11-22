@@ -1,3 +1,4 @@
 {
-  "type": "PREFIX_MATCH"
+  "type": "PREFIX_MATCH",
+  "raw": "^="
 }

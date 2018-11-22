@@ -1,4 +1,5 @@
 {
   "type": "FUNCTION",
-  "raw": "func"
+  "raw": "func(",
+  "content": "func"
 }

@@ -1,5 +1,0 @@
-{
-  "message": [
-    "Wed, 21 Nov 2018 03:53:56 GMT - '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"肁\",\\n  \"hashType\": \"id\"\\n}' == '{\\n  \"type\": \"HASH\",\\n  \"raw\": \"test\",\\n  \"hashType\": \"id\"\\n}'"
-  ]
-}

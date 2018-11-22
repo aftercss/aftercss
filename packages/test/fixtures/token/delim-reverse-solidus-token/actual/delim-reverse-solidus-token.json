@@ -1,4 +1,5 @@
 {
-  "type": "IDENT",
-  "raw": "�"
+  "type": "DELIM",
+  "raw": "\\",
+  "content": "\\"
 }

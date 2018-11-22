@@ -12,8 +12,9 @@ export class BaseTokenizer {
 
   public allowWhitespace() {
     if (!this.isEof()) {
-      this.readUntil(/[^\s\t\n]/);
+      return this.readUntil(/[^\s\t\n]/);
     }
+    return '';
   }
 
   /**

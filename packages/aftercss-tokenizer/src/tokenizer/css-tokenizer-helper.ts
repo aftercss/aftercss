@@ -1,23 +1,31 @@
 import { INumberProp } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 
+export interface IEscapedorName {
+  content: string;
+  raw: string;
+}
+
 export const helper = {
   /*  consume the remnants of a badurl
   	*  https://www.w3.org/TR/css-syntax-3/#consume-the-remnants-of-a-bad-url
   	*/
   consumeBadURL(tokenizer: BaseTokenizer) {
-    let badurlContent = '';
+    let badurlRaw = '';
     while (!tokenizer.isEof() && !tokenizer.eat(')')) {
       // consume a valid escape
-      if (this.isValidEscape(tokenizer)) {
+      if (helper.isValidEscape(tokenizer)) {
         tokenizer.step(); // consume '\\'
-        badurlContent += this.consumeEscaped(tokenizer);
+        badurlRaw += helper.consumeEscaped(tokenizer).raw;
       } else {
-        badurlContent += tokenizer.pick();
+        badurlRaw += tokenizer.pick();
         tokenizer.step();
       }
     }
-    return badurlContent;
+    if (tokenizer.pick(-1) === ')') {
+      badurlRaw += ')';
+    }
+    return badurlRaw;
   },
 
   /**
@@ -25,51 +33,66 @@ export const helper = {
    * https://www.w3.org/TR/css-syntax-3/#consume-an-escaped-code-point
    * assume that the U+005C REVERSE SOLIDUS (\) has already been consumed
    */
-  consumeEscaped(tokenizer: BaseTokenizer) {
-    let escapedContent = '';
+
+  consumeEscaped(tokenizer: BaseTokenizer): IEscapedorName {
+    const escaped: IEscapedorName = {
+      content: '',
+      raw: '\\',
+    };
     if (tokenizer.isEof()) {
-      escapedContent = '\ufffd';
+      escaped.content = '\ufffd';
+      return escaped;
     }
     const hex = tokenizer.matchReg(/[0-9a-fA-F]{1,6}/);
     if (hex) {
+      escaped.raw += hex;
       const hexToDec = parseInt(hex, 16);
       if (hexToDec === 0 || hexToDec >= 0x10ffff || (hexToDec >= 0xd800 && hexToDec <= 0xdfff)) {
-        escapedContent += '\ufffd';
+        escaped.content += '\ufffd';
       } else {
-        escapedContent += String.fromCodePoint(hexToDec); // a puzzle here
+        escaped.content += String.fromCodePoint(hexToDec);
       }
       tokenizer.step(hex.length);
       const currentChar = tokenizer.pick();
       if (currentChar === ' ' || currentChar === '\t' || currentChar === '\n') {
         tokenizer.step();
+        escaped.raw += currentChar;
       }
     } else {
-      escapedContent += tokenizer.pick();
+      const nonHex = tokenizer.pick();
+      escaped.content += nonHex;
+      escaped.raw += nonHex;
       tokenizer.step();
     }
-    return escapedContent;
+    return escaped;
   },
 
   /**
    * consume a name
    * https://www.w3.org/TR/css-syntax-3/#consume-a-name
    */
-  consumeName(tokenizer: BaseTokenizer) {
-    let nameContent = '';
+  consumeName(tokenizer: BaseTokenizer): IEscapedorName {
+    const name: IEscapedorName = {
+      content: '',
+      raw: '',
+    };
     while (1) {
       const currentChar = tokenizer.pick();
       // name code point
-      if (this.isNameStarter(tokenizer) || /[0-9\-]/.test(currentChar)) {
-        nameContent += currentChar;
+      if (helper.isNameStarter(tokenizer) || /[0-9\-]/.test(currentChar)) {
+        name.content += currentChar;
+        name.raw += currentChar;
         tokenizer.step();
         continue;
       }
-      if (this.isValidEscape(tokenizer)) {
+      if (helper.isValidEscape(tokenizer)) {
         tokenizer.step(); // consume '\\'
-        nameContent += this.consumeEscaped(tokenizer);
+        const escaped = helper.consumeEscaped(tokenizer);
+        name.content += escaped.content;
+        name.raw += escaped.raw;
         continue;
       }
-      return nameContent;
+      return name;
     }
   },
 
@@ -122,9 +145,9 @@ export const helper = {
   isIdentifierStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
     if (
       (tokenizer.pick(cnt) === '-' &&
-        (this.isNameStarter(tokenizer, cnt + 1) || this.isValidEscape(tokenizer, cnt + 1))) ||
-      this.isNameStarter(tokenizer, cnt) ||
-      this.isValidEscape(tokenizer, cnt)
+        (helper.isNameStarter(tokenizer, cnt + 1) || helper.isValidEscape(tokenizer, cnt + 1))) ||
+      helper.isNameStarter(tokenizer, cnt) ||
+      helper.isValidEscape(tokenizer, cnt)
     ) {
       return true;
     }

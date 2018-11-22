@@ -72,10 +72,14 @@ class Token {
    * maybe undefined will save some Memory than ''
    */
   public raw: string = undefined;
-  public constructor(type: TokenType, raw?: string) {
+  public content: string = undefined;
+  public constructor(type: TokenType, raw?: string, content?: string) {
     this.type = type;
     if (raw !== undefined) {
       this.raw = raw;
+    }
+    if (content !== undefined) {
+      this.content = content;
     }
   }
   public toString() {
@@ -88,8 +92,8 @@ class DimensionToken extends Token {
   public repr: string;
   public unit: string;
   public value: number;
-  constructor(type: TokenType.DIMENSION, prop: IDimensionProp) {
-    super(type);
+  constructor(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp) {
+    super(type, raw);
     this.numberType = prop.type;
     this.repr = prop.repr;
     this.unit = prop.unit;
@@ -99,8 +103,8 @@ class DimensionToken extends Token {
 
 class HashToken extends Token {
   public hashType?: string;
-  constructor(type: TokenType.HASH, prop: IHashProp) {
-    super(type, prop.value);
+  constructor(type: TokenType.HASH, raw: string, prop: IHashProp) {
+    super(type, raw, prop.value);
     if (prop.type) {
       this.hashType = prop.type;
     }
@@ -111,8 +115,8 @@ class NumberToken extends Token {
   public numberType: 'integer' | 'number';
   public repr: string;
   public value: number;
-  constructor(type: TokenType.NUMBER, prop: INumberProp) {
-    super(type);
+  constructor(type: TokenType.NUMBER, raw: string, prop: INumberProp) {
+    super(type, raw);
     this.numberType = prop.type;
     this.repr = prop.repr;
     this.value = prop.value;
@@ -122,8 +126,8 @@ class NumberToken extends Token {
 class PercentageToken extends Token {
   public repr: string;
   public value: number;
-  constructor(type: TokenType.PERCENTAGE, prop: IPercentageProp) {
-    super(type);
+  constructor(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp) {
+    super(type, raw);
     this.repr = prop.repr;
     this.value = prop.value;
   }
@@ -132,33 +136,33 @@ class PercentageToken extends Token {
 class UnicodeRangeToken extends Token {
   public start: string;
   public end: string;
-  constructor(type: TokenType.UNICODE_RANGE, prop: IUnicodeRangeProp) {
-    super(type);
+  constructor(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp) {
+    super(type, raw);
     this.start = prop.start;
     this.end = prop.end;
   }
 }
 
-function TokenFactory(type: TokenType.DIMENSION, prop: IDimensionProp): DimensionToken;
-function TokenFactory(type: TokenType.HASH, prop: IHashProp): HashToken;
-function TokenFactory(type: TokenType.NUMBER, prop: INumberProp): NumberToken;
-function TokenFactory(type: TokenType.PERCENTAGE, prop: IPercentageProp): PercentageToken;
-function TokenFactory(type: TokenType.UNICODE_RANGE, prop: IUnicodeRangeProp): UnicodeRangeToken;
-function TokenFactory(type: TokenType, content?: string): Token;
-function TokenFactory(type: TokenType, content?: any): Token {
+function TokenFactory(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp): DimensionToken;
+function TokenFactory(type: TokenType.HASH, raw: string, prop: IHashProp): HashToken;
+function TokenFactory(type: TokenType.NUMBER, raw: string, prop: INumberProp): NumberToken;
+function TokenFactory(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp): PercentageToken;
+function TokenFactory(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp): UnicodeRangeToken;
+function TokenFactory(type: TokenType, raw?: string, content?: string): Token;
+function TokenFactory(type: TokenType, raw?: string, content?: any): Token {
   switch (type) {
     case TokenType.DIMENSION:
-      return new DimensionToken(type, content);
+      return new DimensionToken(type, raw, content);
     case TokenType.HASH:
-      return new HashToken(type, content);
+      return new HashToken(type, raw, content);
     case TokenType.NUMBER:
-      return new NumberToken(type, content);
+      return new NumberToken(type, raw, content);
     case TokenType.PERCENTAGE:
-      return new PercentageToken(type, content);
+      return new PercentageToken(type, raw, content);
     case TokenType.UNICODE_RANGE:
-      return new UnicodeRangeToken(type, content);
+      return new UnicodeRangeToken(type, raw, content);
     default:
-      return new Token(type, content);
+      return new Token(type, raw, content);
   }
 }
 

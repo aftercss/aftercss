@@ -1,3 +1,4 @@
 {
-  "type": "SUBSTRING_MATCH"
+  "type": "SUBSTRING_MATCH",
+  "raw": "*="
 }

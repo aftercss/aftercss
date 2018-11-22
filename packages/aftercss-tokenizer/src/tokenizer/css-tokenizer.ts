@@ -1,6 +1,6 @@
 import { IDimensionProp, IHashProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
-import { helper } from './css-tokenizer-helper';
+import { helper, IEscapedorName } from './css-tokenizer-helper';
 
 export class CSSTokenizer extends BaseTokenizer {
   /**
@@ -23,8 +23,10 @@ export class CSSTokenizer extends BaseTokenizer {
    */
   public atkeywordToken() {
     this.step(); // consume '@'
-    const atkeywordContent = helper.consumeName(this);
-    return TokenFactory(TokenType.ATKEYWORD, atkeywordContent);
+    const name = helper.consumeName(this);
+    const atkeywordContent = name.content;
+    const atkeywordRaw = `@${name.raw}`;
+    return TokenFactory(TokenType.ATKEYWORD, atkeywordRaw, atkeywordContent);
   }
 
   /**
@@ -34,14 +36,18 @@ export class CSSTokenizer extends BaseTokenizer {
   public commentToken() {
     if (this.eat('/*')) {
       const commentContent = this.isEof() ? '' : this.readUntil(/\*\//);
-      return TokenFactory(TokenType.COMMENT, commentContent);
+      let commentRaw = `/*${commentContent}`;
+      if (this.eat('*/')) {
+        commentRaw += '*/';
+      }
+      return TokenFactory(TokenType.COMMENT, commentRaw, commentContent);
     }
   }
 
   public delimToken() {
     const delimContent = this.pick();
     this.step();
-    return TokenFactory(TokenType.DELIM, delimContent);
+    return TokenFactory(TokenType.DELIM, delimContent, delimContent);
   }
 
   /**
@@ -57,8 +63,9 @@ export class CSSTokenizer extends BaseTokenizer {
     if (helper.isIdentifierStarter(this)) {
       hashContent.type = 'id';
     }
-    hashContent.value = helper.consumeName(this);
-    return TokenFactory(TokenType.HASH, hashContent);
+    const name = helper.consumeName(this);
+    hashContent.value = name.content;
+    return TokenFactory(TokenType.HASH, `#${name.raw}`, hashContent);
   }
   /**
    *  consume an ident-like token
@@ -67,14 +74,15 @@ export class CSSTokenizer extends BaseTokenizer {
    */
   public identLikeToken() {
     const name = helper.consumeName(this);
-    if (name.toLowerCase() === 'url' && this.eat('(')) {
-      return this.urlToken();
+    if (name.content.toLowerCase() === 'url' && this.eat('(')) {
+      name.raw += '(';
+      return this.urlToken(name);
     } else if (this.eat('(')) {
       // function token
-      return TokenFactory(TokenType.FUNCTION, name);
+      return TokenFactory(TokenType.FUNCTION, `${name.raw}(`, name.content);
     }
     // ident token
-    return TokenFactory(TokenType.IDENT, name);
+    return TokenFactory(TokenType.IDENT, name.raw, name.content);
   }
 
   /**
@@ -86,17 +94,19 @@ export class CSSTokenizer extends BaseTokenizer {
     const numberContent = helper.consumeNumber(this);
     if (helper.isIdentifierStarter(this)) {
       const dimensionContent: IDimensionProp = JSON.parse(JSON.stringify(numberContent));
-      dimensionContent.unit = helper.consumeName(this);
-      return TokenFactory(TokenType.DIMENSION, dimensionContent);
+      const name = helper.consumeName(this);
+      dimensionContent.unit = name.content;
+      const dimensionRaw = dimensionContent.repr + name.raw;
+      return TokenFactory(TokenType.DIMENSION, dimensionRaw, dimensionContent);
     }
     if (this.eat('%')) {
       const percentageContent: IPercentageProp = {
         repr: numberContent.repr,
         value: numberContent.value,
       };
-      return TokenFactory(TokenType.PERCENTAGE, percentageContent);
+      return TokenFactory(TokenType.PERCENTAGE, `${percentageContent.repr}%`, percentageContent);
     }
-    return TokenFactory(TokenType.NUMBER, numberContent);
+    return TokenFactory(TokenType.NUMBER, numberContent.repr, numberContent);
   }
 
   /**
@@ -108,88 +118,101 @@ export class CSSTokenizer extends BaseTokenizer {
     const quote = this.pick();
     this.step();
     let stringContent = '';
+    let stringRaw = quote;
     while (!this.eat(quote)) {
       if (this.isEof()) {
-        return TokenFactory(TokenType.STRING, stringContent);
+        return TokenFactory(TokenType.STRING, stringRaw, stringContent);
       } else if (this.pick() === '\\' && this.pick(1) === '\n') {
+        stringRaw += '\\\n';
         this.step(2);
         continue;
       } else if (helper.isValidEscape(this)) {
         this.step(); // consume '\\'
-        stringContent += helper.consumeEscaped(this);
+        const escaped = helper.consumeEscaped(this);
+        stringContent += escaped.content;
+        stringRaw += escaped.raw;
       } else if (this.eat('\n')) {
         return TokenFactory(TokenType.BAD_STRING, `${stringContent}\n`);
       } else {
         stringContent += this.pick();
+        stringRaw += this.pick();
         this.step();
       }
     }
-    return TokenFactory(TokenType.STRING, stringContent);
+    stringRaw += quote;
+    return TokenFactory(TokenType.STRING, stringRaw, stringContent);
   }
 
   /**
    * url token || bad url token
    * https://www.w3.org/TR/css-syntax-3/#consume-a-url-token
    */
-  public urlToken() {
+  public urlToken(escapedName: IEscapedorName) {
     // consume as much whitespace as possible
-    this.allowWhitespace();
+    let urlRaw = escapedName.raw + this.allowWhitespace();
     let urlContent = '';
     // string token
     if (this.pick() === "'" || this.pick() === '"') {
       const stringToken = this.stringToken();
       if (stringToken) {
-        urlContent = stringToken.raw;
+        urlContent = stringToken.content;
+        urlRaw += stringToken.raw;
         // bad url token
         if (stringToken.type === 'BAD_STRING') {
           // consume the remnants of a bad url
-          urlContent += helper.consumeBadURL(this);
-          return TokenFactory(TokenType.BAD_URL, urlContent);
+          urlRaw += helper.consumeBadURL(this);
+          return TokenFactory(TokenType.BAD_URL, urlRaw);
         }
-        this.allowWhitespace();
+        urlRaw += this.allowWhitespace();
         if (this.eat(')') || this.isEof()) {
-          return TokenFactory(TokenType.URL, urlContent);
+          if (this.pick(-1) === ')') {
+            urlRaw += ')';
+          }
+          return TokenFactory(TokenType.URL, urlRaw, urlContent);
         }
-        urlContent += ' ';
-        urlContent += helper.consumeBadURL(this);
-        return TokenFactory(TokenType.BAD_URL, urlContent);
+        urlRaw += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlRaw);
       }
     }
     while (!this.eat(')')) {
       if (this.isEof()) {
-        return TokenFactory(TokenType.URL, urlContent);
+        return TokenFactory(TokenType.URL, urlRaw, urlContent);
       }
       // non-printalbe code point
       if (this.eat('(')) {
-        urlContent += '(';
-        urlContent += helper.consumeBadURL(this);
-        return TokenFactory(TokenType.BAD_URL, urlContent);
+        urlRaw += '(';
+        urlRaw += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlRaw);
       }
       // eacape code point
       if (this.eat('\\')) {
         // invalid escape code point
         if (this.eat('\n')) {
-          urlContent += '\n';
-          urlContent += helper.consumeBadURL(this);
-          return TokenFactory(TokenType.BAD_URL, urlContent);
+          urlRaw += '\\\n';
+          urlRaw += helper.consumeBadURL(this);
+          return TokenFactory(TokenType.BAD_URL, urlRaw);
         }
-        urlContent += helper.consumeEscaped(this);
+        const escaped = helper.consumeEscaped(this);
+        urlContent += escaped.content;
+        urlRaw = escaped.raw;
         continue;
       }
-      if (this.eat(' ') || this.eat('\n') || this.eat('\t')) {
-        this.allowWhitespace();
+      if (/[ \t\n]/.test(this.pick())) {
+        urlRaw += this.allowWhitespace();
         if (this.eat(')')) {
-          return TokenFactory(TokenType.URL, urlContent);
+          urlRaw += ')';
+          return TokenFactory(TokenType.URL, urlRaw, urlContent);
         }
-        urlContent += ' ';
-        urlContent += helper.consumeBadURL(this);
-        return TokenFactory(TokenType.BAD_URL, urlContent);
+        urlRaw += helper.consumeBadURL(this);
+        return TokenFactory(TokenType.BAD_URL, urlRaw);
       }
       // anything else
       urlContent += this.pick();
+      urlRaw += this.pick();
       this.step();
     }
-    return TokenFactory(TokenType.URL, urlContent);
+    urlRaw += ')';
+    return TokenFactory(TokenType.URL, urlRaw, urlContent);
   }
 
   /**
@@ -197,31 +220,36 @@ export class CSSTokenizer extends BaseTokenizer {
    * https://www.w3.org/TR/css-syntax-3/#consume-a-unicode-range-token
    */
   public unicodeRangeToken() {
+    let unicodeRangeRaw = `${this.pick(-2)}+`;
     const hexNumberReg = /[0-9]{1,6}/;
     const startDigits = this.matchReg(hexNumberReg);
     this.step(startDigits.length);
+    unicodeRangeRaw += startDigits;
     let rangeStart = `0x${startDigits}`;
     let rangeEnd = `0x${startDigits}`;
     for (let i = startDigits.length; i < 6; i++) {
       if (this.eat('?')) {
         rangeStart += '0';
         rangeEnd += 'F';
+        unicodeRangeRaw += '?';
       }
     }
     // has consumed '?'
     if (rangeStart !== `0x${startDigits}`) {
-      return TokenFactory(TokenType.UNICODE_RANGE, {
+      return TokenFactory(TokenType.UNICODE_RANGE, unicodeRangeRaw, {
         end: rangeEnd,
         start: rangeStart,
       });
     }
     if (this.pick() === '-' && hexNumberReg.test(this.pick(1))) {
       this.eat('-');
+      unicodeRangeRaw += '-';
       const endDigits = this.matchReg(hexNumberReg);
+      unicodeRangeRaw += endDigits;
       this.step(endDigits.length);
       rangeEnd = `0x${endDigits}`;
     }
-    return TokenFactory(TokenType.UNICODE_RANGE, {
+    return TokenFactory(TokenType.UNICODE_RANGE, unicodeRangeRaw, {
       end: rangeEnd,
       start: rangeStart,
     });
@@ -242,8 +270,8 @@ export class CSSTokenizer extends BaseTokenizer {
       case ' ':
       case '\t':
       case '\n':
-        this.allowWhitespace();
-        return TokenFactory(TokenType.WHITESPACE);
+        const whitespaceRaw = this.allowWhitespace();
+        return TokenFactory(TokenType.WHITESPACE, whitespaceRaw);
       case '"':
         return this.stringToken();
       case '#':
@@ -254,19 +282,21 @@ export class CSSTokenizer extends BaseTokenizer {
       case '$':
         if (this.pick(1) === '=') {
           this.step(2);
-          return TokenFactory(TokenType.SUFFIX_MATCH);
+          return TokenFactory(TokenType.SUFFIX_MATCH, '$=');
         }
         return this.delimToken();
       case "'":
         return this.stringToken();
       case '(':
-        return TokenFactory(TokenType.LEFT_PARENTHESIS);
+        this.step();
+        return TokenFactory(TokenType.LEFT_PARENTHESIS, '(');
       case ')':
-        return TokenFactory(TokenType.RIGHT_PARENTHESIS);
+        this.step();
+        return TokenFactory(TokenType.RIGHT_PARENTHESIS, ')');
       case '*':
         if (this.pick(1) === '=') {
           this.step(2);
-          return TokenFactory(TokenType.SUBSTRING_MATCH);
+          return TokenFactory(TokenType.SUBSTRING_MATCH, '*=');
         }
         return this.delimToken();
       case '+':
@@ -275,7 +305,8 @@ export class CSSTokenizer extends BaseTokenizer {
         }
         return this.delimToken();
       case ',':
-        return TokenFactory(TokenType.COMMA);
+        this.step();
+        return TokenFactory(TokenType.COMMA, ',');
       case '-':
         if (helper.isNumberStarter(this)) {
           return this.numericToken();
@@ -287,7 +318,7 @@ export class CSSTokenizer extends BaseTokenizer {
 
         if (this.pick(1) === '-' && this.pick(2) === '>') {
           this.step(3);
-          return TokenFactory(TokenType.CDC);
+          return TokenFactory(TokenType.CDC, '-->');
         }
         return this.delimToken();
       case '.':
@@ -301,13 +332,15 @@ export class CSSTokenizer extends BaseTokenizer {
         }
         return this.delimToken();
       case ':':
-        return TokenFactory(TokenType.COLON);
+        this.step();
+        return TokenFactory(TokenType.COLON, ':');
       case ';':
-        return TokenFactory(TokenType.SEMI);
+        this.step();
+        return TokenFactory(TokenType.SEMI, ';');
       case '<':
         if (this.pick(1) === '!' && this.pick(2) === '-' && this.pick(3) === '-') {
           this.step(3);
-          return TokenFactory(TokenType.CDO);
+          return TokenFactory(TokenType.CDO, '<!--');
         }
         return this.delimToken();
       case '@':
@@ -316,24 +349,28 @@ export class CSSTokenizer extends BaseTokenizer {
         }
         return this.delimToken();
       case '[':
-        return TokenFactory(TokenType.LEFT_SQUARE_BRACKET);
+        this.step();
+        return TokenFactory(TokenType.LEFT_SQUARE_BRACKET, '[');
       case '\\':
         if (helper.isValidEscape(this)) {
           return this.identLikeToken();
         }
         return this.delimToken();
       case ']':
-        return TokenFactory(TokenType.RIGHT_SQUARE_BRACKET);
+        this.step();
+        return TokenFactory(TokenType.RIGHT_SQUARE_BRACKET, ']');
       case '^':
         if (this.pick(1) === '=') {
           this.step(2);
-          return TokenFactory(TokenType.PREFIX_MATCH);
+          return TokenFactory(TokenType.PREFIX_MATCH, '^=');
         }
         return this.delimToken();
       case '{':
-        return TokenFactory(TokenType.LEFT_CURLY_BRACKET);
+        this.step();
+        return TokenFactory(TokenType.LEFT_CURLY_BRACKET, '{');
       case '}':
-        return TokenFactory(TokenType.RIGHT_CURLY_BRACKET);
+        this.step();
+        return TokenFactory(TokenType.RIGHT_CURLY_BRACKET, '}');
       case 'U':
       case 'u':
         if (this.pick(1) === '+' && /[0-9\?]/.test(this.pick(2))) {
@@ -344,17 +381,17 @@ export class CSSTokenizer extends BaseTokenizer {
       case '|':
         if (this.pick(1) === '=') {
           this.step(2);
-          return TokenFactory(TokenType.DASH_MATCH);
+          return TokenFactory(TokenType.DASH_MATCH, '|=');
         }
         if (this.pick(1) === '|') {
           this.step(2);
-          return TokenFactory(TokenType.COLUMN);
+          return TokenFactory(TokenType.COLUMN, '||');
         }
         return this.delimToken();
       case '~':
         if (this.pick(1) === '=') {
           this.step(2);
-          return TokenFactory(TokenType.INCLUDE_MATCH);
+          return TokenFactory(TokenType.INCLUDE_MATCH, '~=');
         }
         return this.delimToken();
 

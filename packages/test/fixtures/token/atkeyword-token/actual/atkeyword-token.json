@@ -1,4 +1,5 @@
 {
   "type": "ATKEYWORD",
-  "raw": "font-face"
+  "raw": "@font-face",
+  "content": "font-face"
 }
