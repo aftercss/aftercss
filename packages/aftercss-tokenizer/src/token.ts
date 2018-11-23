@@ -165,4 +165,3 @@ export function TokenFactory(type: TokenType, raw?: string, content?: any): Toke
       return new Token(type, raw, content);
   }
 }
-
