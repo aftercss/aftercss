@@ -71,16 +71,16 @@ export class Token {
   /**
    * maybe undefined will save some Memory than ''
    */
-  public raw: string = undefined;
-  public content: string = undefined;
-  public constructor(type: TokenType, raw?: string, content?: string) {
+  public raw: string;
+  public content: string;
+  public start: number;
+  public end: number;
+  public constructor(type: TokenType, start: number, raw?: string, content?: string) {
     this.type = type;
-    if (raw !== undefined) {
-      this.raw = raw;
-    }
-    if (content !== undefined) {
-      this.content = content;
-    }
+    this.raw = raw;
+    this.content = content;
+    this.start = start;
+    this.end = raw ? start + raw.length : start;
   }
   public toString() {
     return JSON.stringify(this, null, 2);
@@ -92,8 +92,8 @@ export class DimensionToken extends Token {
   public repr: string;
   public unit: string;
   public value: number;
-  constructor(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp) {
-    super(type, raw);
+  constructor(type: TokenType.DIMENSION, start: number, raw: string, prop: IDimensionProp) {
+    super(type, start, raw);
     this.numberType = prop.type;
     this.repr = prop.repr;
     this.unit = prop.unit;
@@ -103,8 +103,8 @@ export class DimensionToken extends Token {
 
 export class HashToken extends Token {
   public hashType?: string;
-  constructor(type: TokenType.HASH, raw: string, prop: IHashProp) {
-    super(type, raw, prop.value);
+  constructor(type: TokenType.HASH, start: number, raw: string, prop: IHashProp) {
+    super(type, start, raw, prop.value);
     if (prop.type) {
       this.hashType = prop.type;
     }
@@ -115,8 +115,8 @@ export class NumberToken extends Token {
   public numberType: 'integer' | 'number';
   public repr: string;
   public value: number;
-  constructor(type: TokenType.NUMBER, raw: string, prop: INumberProp) {
-    super(type, raw);
+  constructor(type: TokenType.NUMBER, start: number, raw: string, prop: INumberProp) {
+    super(type, start, raw);
     this.numberType = prop.type;
     this.repr = prop.repr;
     this.value = prop.value;
@@ -126,42 +126,57 @@ export class NumberToken extends Token {
 export class PercentageToken extends Token {
   public repr: string;
   public value: number;
-  constructor(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp) {
-    super(type, raw);
+  constructor(type: TokenType.PERCENTAGE, start: number, raw: string, prop: IPercentageProp) {
+    super(type, start, raw);
     this.repr = prop.repr;
     this.value = prop.value;
   }
 }
 
 export class UnicodeRangeToken extends Token {
-  public start: string;
-  public end: string;
-  constructor(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp) {
-    super(type, raw);
-    this.start = prop.start;
-    this.end = prop.end;
+  public unistart: string;
+  public uniend: string;
+  constructor(type: TokenType.UNICODE_RANGE, start: number, raw: string, prop: IUnicodeRangeProp) {
+    super(type, start, raw);
+    this.unistart = prop.start;
+    this.uniend = prop.end;
   }
 }
 
-export function TokenFactory(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp): DimensionToken;
-export function TokenFactory(type: TokenType.HASH, raw: string, prop: IHashProp): HashToken;
-export function TokenFactory(type: TokenType.NUMBER, raw: string, prop: INumberProp): NumberToken;
-export function TokenFactory(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp): PercentageToken;
-export function TokenFactory(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp): UnicodeRangeToken;
-export function TokenFactory(type: TokenType, raw?: string, content?: string): Token;
-export function TokenFactory(type: TokenType, raw?: string, content?: any): Token {
+export function TokenFactory(
+  type: TokenType.DIMENSION,
+  start: number,
+  raw: string,
+  prop: IDimensionProp,
+): DimensionToken;
+export function TokenFactory(type: TokenType.HASH, start: number, raw: string, prop: IHashProp): HashToken;
+export function TokenFactory(type: TokenType.NUMBER, start: number, raw: string, prop: INumberProp): NumberToken;
+export function TokenFactory(
+  type: TokenType.PERCENTAGE,
+  start: number,
+  raw: string,
+  prop: IPercentageProp,
+): PercentageToken;
+export function TokenFactory(
+  type: TokenType.UNICODE_RANGE,
+  start: number,
+  raw: string,
+  prop: IUnicodeRangeProp,
+): UnicodeRangeToken;
+export function TokenFactory(type: TokenType, start: number, raw?: string, content?: string): Token;
+export function TokenFactory(type: TokenType, start: number, raw?: string, content?: any): Token {
   switch (type) {
     case TokenType.DIMENSION:
-      return new DimensionToken(type, raw, content);
+      return new DimensionToken(type, start, raw, content);
     case TokenType.HASH:
-      return new HashToken(type, raw, content);
+      return new HashToken(type, start, raw, content);
     case TokenType.NUMBER:
-      return new NumberToken(type, raw, content);
+      return new NumberToken(type, start, raw, content);
     case TokenType.PERCENTAGE:
-      return new PercentageToken(type, raw, content);
+      return new PercentageToken(type, start, raw, content);
     case TokenType.UNICODE_RANGE:
-      return new UnicodeRangeToken(type, raw, content);
+      return new UnicodeRangeToken(type, start, raw, content);
     default:
-      return new Token(type, raw, content);
+      return new Token(type, start, raw, content);
   }
 }

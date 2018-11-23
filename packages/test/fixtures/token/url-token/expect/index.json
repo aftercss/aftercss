@@ -1,0 +1,7 @@
+{
+  "type": "URL",
+  "raw": "uRL(www.baidu.com   )",
+  "content": "www.baidu.com",
+  "start": 21,
+  "end": 42
+}

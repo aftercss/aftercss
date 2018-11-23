@@ -5,6 +5,8 @@
     "noImplicitAny": false,
     "outDir": "lib",
     "sourceMap": true,
+    "moduleResolution": "node",
+    "declaration": true,
     "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*.ts"],

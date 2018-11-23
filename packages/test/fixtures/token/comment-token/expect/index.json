@@ -1,0 +1,7 @@
+{
+  "type": "COMMENT",
+  "raw": "/* \ntest ff\n  *asdfasdf\n  asdf\n\tadsf\n\t*/",
+  "content": " \ntest ff\n  *asdfasdf\n  asdf\n\tadsf\n\t",
+  "start": 40,
+  "end": 80
+}

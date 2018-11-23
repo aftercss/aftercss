@@ -2,8 +2,8 @@
 
 export class BaseTokenizer {
   public content: string = '';
-  private end: number = 0;
-  private current: number = 0;
+  public end: number = 0;
+  public current: number = 0;
 
   public constructor(content: string) {
     this.content = content;

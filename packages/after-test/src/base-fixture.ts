@@ -1,5 +1,7 @@
 import * as assert from 'assert';
+import copyDir = require('copy-dir');
 import * as fs from 'fs';
+import glob = require('glob');
 import * as path from 'path';
 import { promisify } from 'util';
 
@@ -42,7 +44,10 @@ export class BaseFixture {
     }
     type = `${type}Dir`;
     const filePath = `${this[type]}/${fileName}`;
-    return writeFileP(filePath, content, { encoding: 'utf8', flag: 'w' });
+    if (!(await fileExistsP(this[type]))) {
+      fs.mkdirSync(this[type]);
+    }
+    return writeFileP(filePath, content, { encoding: 'utf8', flag: 'w+' });
   }
 
   public async readFile(type, fileName) {
@@ -117,34 +122,55 @@ export class BaseFixture {
     }
   }
 
-  public async generateActualFile(fileName: string): Promise<string> {
+  public async generateActualFile(): Promise<string> {
     const output = await this.build();
-    await this.writeFile('actual', output, fileName);
+    // await this.writeFile('actual', output, fileName);
     return output;
   }
 
-  public makeDiff(fileName: string) {
-    it(fileName, async () => {
-      try {
-        const actualContent = await this.generateActualFile(fileName);
-        const expectFileExists = await fileExistsP(`${this.expectDir}/${fileName}`);
-        if (expectFileExists) {
-          const expectContent = await this.readFile('expect', fileName);
-          assert.equal(actualContent, expectContent);
-        } else {
-          await this.writeFile('expect', actualContent, fileName);
-          assert.equal(1, 1);
-        }
-      } catch (err) {
-        this.compareError(err);
-        throw err;
-      }
+  public makeDiff(taskName: string) {
+    try {
+      it(taskName, async () => {
+        await this.generateActualFile();
+        await this.compareDir();
+      });
+    } catch (err) {
+      this.compareError(err);
+      throw err;
+    }
+  }
+
+  public async compareDir() {
+    const expectExists = await fileExistsP(this.expectDir);
+    if (expectExists) {
+      let actualFiles = glob.sync(path.resolve(this.actualDir, '**/*'));
+      let expectFiles = glob.sync(path.resolve(this.expectDir, '**/*'));
+      actualFiles = actualFiles.map(file => {
+        return path.relative(this.actualDir, file);
+      });
+      expectFiles = expectFiles.map(file => {
+        return path.relative(this.expectDir, file);
+      });
+      assert.deepEqual(actualFiles, expectFiles);
+      actualFiles.forEach(async file => {
+        const ac = await readFileP(path.resolve(this.actualDir, file));
+        const ex = await readFileP(path.resolve(this.expectDir, file));
+        assert.equal(ac.toString(), ex.toString());
+      });
+    } else {
+      this.moveActualToExpect();
+      assert(true);
+    }
+  }
+
+  public moveActualToExpect() {
+    // TODO:重新实现一下这个方法
+    copyDir(this.actualDir, this.expectDir, () => {
+      /** */
     });
   }
 
-  public runTask(taskName: string, fileName: string) {
-    describe(taskName, () => {
-      this.makeDiff(fileName);
-    });
+  public runTask(taskName: string) {
+    this.makeDiff(taskName);
   }
 }

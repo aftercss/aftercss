@@ -1,6 +1,7 @@
 import { Token } from '@aftercss/tokenizer';
-// class Parser {
-//   public constructor(tokens: Token[]) {
-//     const data = [];
-//   }
-// }
+export class Parser {
+  public tokens: Token[];
+  public constructor(tokens: Token[]) {
+    this.tokens = tokens;
+  }
+}

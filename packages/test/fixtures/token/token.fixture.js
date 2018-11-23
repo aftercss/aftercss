@@ -10,7 +10,7 @@ class TokenFixture extends BaseFixture {
     const tokenizer = new CSSTokenizer(content);
     tokenizer.preprocess();
     const token = tokenizer.nextToken();
-    return token.toString();
+    await this.writeFile('actual', token.toString(), 'index.json');
   }
 }
 
@@ -21,7 +21,7 @@ module.exports = {
     tokenDirs.forEach(item => {
       if (item !== 'token.fixture.js') {
         const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
-        tokenFixture.runTask('Tokenizer', `${item}.json`);
+        tokenFixture.runTask(`${item}`);
       }
     });
   },
