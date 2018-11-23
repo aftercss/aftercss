@@ -1,5 +1,5 @@
 const BaseFixture = require('after-test').BaseFixture;
-const CSSTokenizer = require('@aftercss/tokenizer');
+const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const fs = require('fs');
 
 const path = require('path');

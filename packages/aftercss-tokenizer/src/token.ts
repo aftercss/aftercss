@@ -1,4 +1,4 @@
-// tslint:disable max-classes-per-file
+// tslint:disable max-export classes-per-file max-classes-per-file
 export enum TokenType {
   ANY = 'ANY',
   ATKEYWORD = 'ATKEYWORD',
@@ -66,7 +66,7 @@ export interface IUnicodeRangeProp {
   end: string;
 }
 
-class Token {
+export class Token {
   public type: TokenType = TokenType.ANY;
   /**
    * maybe undefined will save some Memory than ''
@@ -87,7 +87,7 @@ class Token {
   }
 }
 
-class DimensionToken extends Token {
+export class DimensionToken extends Token {
   public numberType: 'integer' | 'number';
   public repr: string;
   public unit: string;
@@ -101,7 +101,7 @@ class DimensionToken extends Token {
   }
 }
 
-class HashToken extends Token {
+export class HashToken extends Token {
   public hashType?: string;
   constructor(type: TokenType.HASH, raw: string, prop: IHashProp) {
     super(type, raw, prop.value);
@@ -111,7 +111,7 @@ class HashToken extends Token {
   }
 }
 
-class NumberToken extends Token {
+export class NumberToken extends Token {
   public numberType: 'integer' | 'number';
   public repr: string;
   public value: number;
@@ -123,7 +123,7 @@ class NumberToken extends Token {
   }
 }
 
-class PercentageToken extends Token {
+export class PercentageToken extends Token {
   public repr: string;
   public value: number;
   constructor(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp) {
@@ -133,7 +133,7 @@ class PercentageToken extends Token {
   }
 }
 
-class UnicodeRangeToken extends Token {
+export class UnicodeRangeToken extends Token {
   public start: string;
   public end: string;
   constructor(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp) {
@@ -143,13 +143,13 @@ class UnicodeRangeToken extends Token {
   }
 }
 
-function TokenFactory(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp): DimensionToken;
-function TokenFactory(type: TokenType.HASH, raw: string, prop: IHashProp): HashToken;
-function TokenFactory(type: TokenType.NUMBER, raw: string, prop: INumberProp): NumberToken;
-function TokenFactory(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp): PercentageToken;
-function TokenFactory(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp): UnicodeRangeToken;
-function TokenFactory(type: TokenType, raw?: string, content?: string): Token;
-function TokenFactory(type: TokenType, raw?: string, content?: any): Token {
+export function TokenFactory(type: TokenType.DIMENSION, raw: string, prop: IDimensionProp): DimensionToken;
+export function TokenFactory(type: TokenType.HASH, raw: string, prop: IHashProp): HashToken;
+export function TokenFactory(type: TokenType.NUMBER, raw: string, prop: INumberProp): NumberToken;
+export function TokenFactory(type: TokenType.PERCENTAGE, raw: string, prop: IPercentageProp): PercentageToken;
+export function TokenFactory(type: TokenType.UNICODE_RANGE, raw: string, prop: IUnicodeRangeProp): UnicodeRangeToken;
+export function TokenFactory(type: TokenType, raw?: string, content?: string): Token;
+export function TokenFactory(type: TokenType, raw?: string, content?: any): Token {
   switch (type) {
     case TokenType.DIMENSION:
       return new DimensionToken(type, raw, content);
@@ -166,4 +166,3 @@ function TokenFactory(type: TokenType, raw?: string, content?: any): Token {
   }
 }
 
-export { Token, TokenFactory };

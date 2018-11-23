@@ -5,6 +5,8 @@
     "noImplicitAny": true,
     "outDir": "lib",
     "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*"],

@@ -1,6 +1,6 @@
 const BaseFixture = require('after-test/lib/base-fixture').BaseFixture;
 
-const CSSTokenizer = require('@aftercss/tokenizer');
+const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 
 class AllTokensFixture extends BaseFixture {
   async build() {
