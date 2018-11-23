@@ -23,7 +23,6 @@ class AllTokensFixture extends BaseFixture {
       res += token.raw;
     }
     this.writeFile('actual', res, 'index.css');
-    this.writeFile('actual', JSON.stringify(tokens, null, 2), 'tokens.json');
   }
 }
 

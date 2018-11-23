@@ -142,9 +142,9 @@ export class BaseFixture {
 
   public async compareDir() {
     const expectExists = await fileExistsP(this.expectDir);
-    if (expectExists) {
+    let expectFiles = glob.sync(path.resolve(this.expectDir, '**/*'));
+    if (expectExists && expectFiles.length > 0) {
       let actualFiles = glob.sync(path.resolve(this.actualDir, '**/*'));
-      let expectFiles = glob.sync(path.resolve(this.expectDir, '**/*'));
       actualFiles = actualFiles.map(file => {
         return path.relative(this.actualDir, file);
       });
