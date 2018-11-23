@@ -102,20 +102,18 @@ export class BaseFixture {
     } else {
       const errorJSON = require(errorPath);
       const errorMessage = errorJSON.message;
-      if (errorMessage.indexOf(error.message) < 0) {
-        errorMessage.push(message);
-        await this.writeFile(
-          'error',
-          JSON.stringify(
-            {
-              message: errorMessage,
-            },
-            null,
-            2,
-          ),
-          '',
-        );
-      }
+      errorMessage.push(message);
+      await this.writeFile(
+        'error',
+        JSON.stringify(
+          {
+            message: errorMessage,
+          },
+          null,
+          2,
+        ),
+        '',
+      );
     }
   }
 

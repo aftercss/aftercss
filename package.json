@@ -4,7 +4,8 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
-    "init": "yarn install && lerna bootstrap",
+    "init": "cnpm install && lerna clean --yes && lerna bootstrap",
+    "cov": "nyc mocha ./packages/test/index.js ",
     "dev": "lerna run dev --parallel",
     "build": "lerna run build",
     "lint": "npm run lint:prettier && npm run lint:ts",
@@ -13,6 +14,7 @@
     "lint:ts:fix": "lerna run lint:ts:fix",
     "lint:prettier": "prettier --list-different './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json'",
     "lint:prettier:fix": "prettier --write './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json' ",
+    "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=bca96c53-3d8c-41a2-b08d-ba18ec079372",
     "test": "lerna run test"
   },
   "private": true,
@@ -30,7 +32,10 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "devDependencies": {
+    "codecov": "^3.1.0",
     "lerna": "^2.11.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "pre-commit": "^1.2.2",
     "prettier": "1.14.2",
     "rimraf": "^2.6.2",

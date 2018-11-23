@@ -7,6 +7,12 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "Launch Program",
+			"program": "${workspaceFolder}/packages/test/fixtures/bigtest/index.js"
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "启动程序",
 			"program": "${workspaceFolder}/packages/test/node_modules/mocha/bin/_mocha",
 			"outFiles": [

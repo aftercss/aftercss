@@ -1,0 +1,20 @@
+language: node_js
+
+
+branches:
+  only:
+  - dev-spades
+
+sudo: enabled
+
+install: 
+  - npm i cnpm -g
+  - npm run init
+
+node_js: 
+  - "node"
+
+script:
+  - npm run build
+  - npm run test
+  - npm run cov && npm run report
