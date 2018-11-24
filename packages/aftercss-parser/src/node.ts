@@ -1,19 +1,37 @@
+import { MessageCollection } from '@aftercss/shared';
+
 // tslint:disable max-classes-per-file
-class ParserRange {
-  public readonly start: number;
-  public readonly end: number;
-  public constructor(start: number, end: number) {
-    this.start = start;
-    this.end = end;
+export enum ParserNodeType {
+  ANY = 'ANY',
+  ROOT = 'ROOT',
+  BLOCK = 'BLOCK',
+  ATRULE = 'ATRULE',
+  DECLARATION = 'DECLARATION',
+}
+export class ParserNode {
+  public type: ParserNodeType;
+  public childNodes: ParserNode[];
+  public clone() {
+    throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.clone', new Error().stack));
   }
 }
-class ParserNode {
-  public readonly range: ParserRange;
-  public readonly start: number;
-  public readonly end: number;
-  public readonly value: string;
 
-  public toValue(s: string) {
-    return s;
-  }
+export class Block extends ParserNode {
+  public type = ParserNodeType.BLOCK;
+}
+
+export class AtRule extends ParserNode {
+  public type = ParserNodeType.ATRULE;
+  public block: Block;
+}
+
+export class Root extends ParserNode {
+  public type = ParserNodeType.ROOT;
+}
+
+export class Declaration extends ParserNode {
+  public type = ParserNodeType.DECLARATION;
+  public name: ParserNode;
+  public betweenNameValue: ParserNode;
+  public value: ParserNode;
 }
