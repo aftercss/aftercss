@@ -129,15 +129,19 @@ export class BaseFixture {
   }
 
   public makeDiff(taskName: string) {
-    try {
-      it(taskName, async () => {
+    it(taskName, async () => {
+      let e = null;
+      try {
         await this.generateActualFile();
+      } catch (err) {
+        e = err;
+      }
+      if (e === null) {
         await this.compareDir();
-      });
-    } catch (err) {
-      this.compareError(err);
-      throw err;
-    }
+      } else {
+        await this.compareError(e);
+      }
+    });
   }
 
   public async compareDir() {
@@ -152,11 +156,12 @@ export class BaseFixture {
         return path.relative(this.expectDir, file);
       });
       assert.deepEqual(actualFiles, expectFiles);
-      actualFiles.forEach(async file => {
+      for (const file of actualFiles) {
         const ac = await readFileP(path.resolve(this.actualDir, file));
         const ex = await readFileP(path.resolve(this.expectDir, file));
         assert.equal(ac.toString(), ex.toString());
-      });
+      }
+      return;
     } else {
       this.moveActualToExpect();
       assert(true);

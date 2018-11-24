@@ -16,7 +16,7 @@
     "lint:prettier:fix": "prettier --write './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json' ",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=bca96c53-3d8c-41a2-b08d-ba18ec079372",
     "test": "lerna run test",
-    "test:clean": "rimraf packages/test/fixtures/**/{expect,actual}/**"
+    "test:clean": "rimraf packages/test/fixtures/**/{expect,actual,error}/**"
   },
   "private": true,
   "repository": {

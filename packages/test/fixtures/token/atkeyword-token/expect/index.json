@@ -2,6 +2,5 @@
   "type": "ATKEYWORD",
   "raw": "@font-face",
   "content": "font-face",
-  "start": 10,
-  "end": 20
+  "start": 10
 }

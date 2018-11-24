@@ -74,13 +74,11 @@ export class Token {
   public raw: string;
   public content: string;
   public start: number;
-  public end: number;
   public constructor(type: TokenType, start: number, raw?: string, content?: string) {
     this.type = type;
     this.raw = raw;
     this.content = content;
     this.start = start;
-    this.end = raw ? start + raw.length : start;
   }
   public toString() {
     return JSON.stringify(this, null, 2);

@@ -2,7 +2,6 @@
   "type": "DIMENSION",
   "raw": "2e+2rem",
   "start": 7,
-  "end": 14,
   "numberType": "number",
   "repr": "2e+2",
   "unit": "rem",

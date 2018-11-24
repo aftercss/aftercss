@@ -1,6 +1,5 @@
 {
   "type": "PREFIX_MATCH",
   "raw": "^=",
-  "start": 2,
-  "end": 4
+  "start": 2
 }

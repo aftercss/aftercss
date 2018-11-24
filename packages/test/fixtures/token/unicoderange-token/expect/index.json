@@ -2,7 +2,6 @@
   "type": "UNICODE_RANGE",
   "raw": "u+233-456",
   "start": 9,
-  "end": 18,
   "unistart": "0x233",
   "uniend": "0x456"
 }
