@@ -5,6 +5,8 @@
     "outDir": "lib",
     "sourceMap": true,
     "declaration": true,
+    "target": "es5",
+    "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*"],

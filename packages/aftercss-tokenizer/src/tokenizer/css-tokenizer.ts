@@ -1,8 +1,29 @@
-import { IDimensionProp, IHashProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
+import { AfterContext } from '@aftercss/shared';
+import { setContext } from '../context';
+import { IDimensionProp, IHashProp, IPercentageProp, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper, IEscapedorName } from './css-tokenizer-helper';
 
+function isString(a: any): a is string {
+  return Object.prototype.toString.call(a) === '[object String]';
+}
+
 export class CSSTokenizer extends BaseTokenizer {
+  public constructor(opt: string | AfterContext) {
+    let context = null;
+    if (isString(opt)) {
+      context = new AfterContext({
+        fileContent: opt,
+      });
+    } else {
+      context = opt;
+    }
+    super(context.fileContent);
+    /**
+     * set a global data.
+     */
+    setContext(context);
+  }
   /**
    * CSS3 defined input process https://www.w3.org/TR/css-syntax-3/#input-preprocessing
    * preprocess CSSChar

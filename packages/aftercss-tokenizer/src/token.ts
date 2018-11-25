@@ -1,4 +1,7 @@
 // tslint:disable max-export classes-per-file max-classes-per-file
+import { SourceNode } from 'source-map';
+import { getContext } from './context';
+
 export enum TokenType {
   ANY = 'ANY',
   ATKEYWORD = 'ATKEYWORD',
@@ -61,6 +64,7 @@ export interface IPercentageProp {
   repr: string;
   value: number;
 }
+
 export interface IUnicodeRangeProp {
   start: string;
   end: string;
@@ -68,17 +72,20 @@ export interface IUnicodeRangeProp {
 
 export class Token {
   public type: TokenType = TokenType.ANY;
-  /**
-   * maybe undefined will save some Memory than ''
-   */
   public raw: string;
   public content: string;
   public start: number;
+  public sourceNode: SourceNode;
   public constructor(type: TokenType, start: number, raw?: string, content?: string) {
     this.type = type;
     this.raw = raw;
     this.content = content;
     this.start = start;
+    const context = getContext();
+    if (context && context.sourceMap) {
+      const { line, column } = context.getLocation(start);
+      this.sourceNode = new SourceNode(line, column, raw);
+    }
   }
   public toString() {
     return JSON.stringify(this, null, 2);
