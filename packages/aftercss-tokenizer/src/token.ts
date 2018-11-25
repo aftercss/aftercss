@@ -1,6 +1,5 @@
 // tslint:disable max-export classes-per-file max-classes-per-file
 import { SourceNode } from 'source-map';
-import { getContext } from './context';
 
 export enum TokenType {
   ANY = 'ANY',
@@ -81,11 +80,6 @@ export class Token {
     this.raw = raw;
     this.content = content;
     this.start = start;
-    const context = getContext();
-    if (context && context.sourceMap) {
-      const { line, column } = context.getLocation(start);
-      this.sourceNode = new SourceNode(line, column, raw);
-    }
   }
   public toString() {
     return JSON.stringify(this, null, 2);

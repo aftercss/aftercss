@@ -9,7 +9,8 @@
   "private": true,
   "dependencies": {
     "after-test": "^1.0.0",
-    "@aftercss/tokenizer": "^0.1.0"
+    "@aftercss/tokenizer": "^0.1.0",
+    "@aftercss/shared": "^0.1.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0"

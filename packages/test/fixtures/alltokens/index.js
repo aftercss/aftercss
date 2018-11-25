@@ -1,11 +1,16 @@
 const BaseFixture = require('after-test/lib/base-fixture').BaseFixture;
 
 const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
+const AfterContext = require('@aftercss/shared').AfterContext;
 
 class AllTokensFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'app.css');
-    const tokenizer = new CSSTokenizer(content);
+    const tokenizer = new CSSTokenizer(
+      new AfterContext({
+        fileContent: content,
+      }),
+    );
     tokenizer.preprocess();
     const tokens = [];
     while (true) {

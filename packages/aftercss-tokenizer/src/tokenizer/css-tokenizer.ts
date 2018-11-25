@@ -1,28 +1,18 @@
 import { AfterContext } from '@aftercss/shared';
-import { setContext } from '../context';
+import { SourceNode } from 'source-map';
 import { IDimensionProp, IHashProp, IPercentageProp, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper, IEscapedorName } from './css-tokenizer-helper';
 
-function isString(a: any): a is string {
-  return Object.prototype.toString.call(a) === '[object String]';
-}
-
 export class CSSTokenizer extends BaseTokenizer {
-  public constructor(opt: string | AfterContext) {
-    let context = null;
-    if (isString(opt)) {
-      context = new AfterContext({
-        fileContent: opt,
-      });
-    } else {
-      context = opt;
-    }
+  public context: AfterContext;
+  /**
+   * AfterContext
+   * @param context
+   */
+  public constructor(context: AfterContext) {
     super(context.fileContent);
-    /**
-     * set a global data.
-     */
-    setContext(context);
+    this.context = context;
   }
   /**
    * CSS3 defined input process https://www.w3.org/TR/css-syntax-3/#input-preprocessing
@@ -281,7 +271,7 @@ export class CSSTokenizer extends BaseTokenizer {
    *  https://www.w3.org/TR/css-syntax-3/#consume-a-token
    * 	return a single token of any type
    */
-  public nextToken() {
+  public getNextToken() {
     if (this.isEof()) {
       return TokenFactory(TokenType.EOF, this.current);
     }
@@ -428,6 +418,16 @@ export class CSSTokenizer extends BaseTokenizer {
         }
 
         return this.delimToken();
+    }
+  }
+  public nextToken() {
+    const token = this.getNextToken();
+    if (!this.context.sourceMap) {
+      return token;
+    } else {
+      const { line, column } = this.context.getLocation(token.start);
+      token.sourceNode = new SourceNode(line, column, token.raw);
+      return token;
     }
   }
 }

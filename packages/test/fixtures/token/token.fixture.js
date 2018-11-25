@@ -1,5 +1,6 @@
 const BaseFixture = require('after-test').BaseFixture;
 const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
+const AfterContext = require('@aftercss/shared').AfterContext;
 const fs = require('fs');
 
 const path = require('path');
@@ -7,7 +8,11 @@ const path = require('path');
 class TokenFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
-    const tokenizer = new CSSTokenizer(content);
+    const tokenizer = new CSSTokenizer(
+      new AfterContext({
+        fileContent: content,
+      }),
+    );
     tokenizer.preprocess();
     const token = tokenizer.nextToken();
     await this.writeFile('actual', token.toString(), 'index.json');
@@ -26,4 +31,3 @@ module.exports = {
     });
   },
 };
-

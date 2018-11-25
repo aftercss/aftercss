@@ -135,6 +135,7 @@ export class BaseFixture {
         await this.generateActualFile();
       } catch (err) {
         e = err;
+        throw err;
       }
       if (e === null) {
         await this.compareDir();
