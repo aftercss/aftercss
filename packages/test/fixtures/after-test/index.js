@@ -11,6 +11,6 @@ const exampleFixture = new ExampleFixture(__dirname);
 
 module.exports = {
   runTest() {
-    exampleFixture.runTask('test', 'after-test.txt');
+    exampleFixture.runTask('test');
   },
 };

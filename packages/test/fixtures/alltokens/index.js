@@ -22,7 +22,7 @@ class AllTokensFixture extends BaseFixture {
       }
       res += token.raw;
     }
-    this.writeFile('actual', res, 'index.css');
+    await this.writeFile('actual', res, 'index.css');
   }
 }
 
@@ -30,6 +30,6 @@ const alltokensFixture = new AllTokensFixture(__dirname);
 
 module.exports = {
   runTest() {
-    alltokensFixture.runTask('AllTokens', 'app.css');
+    alltokensFixture.runTask('AllTokens');
   },
 };

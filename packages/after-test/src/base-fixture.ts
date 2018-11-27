@@ -1,10 +1,9 @@
 import * as assert from 'assert';
-import copyDir = require('copy-dir');
 import * as fs from 'fs';
-import glob = require('glob');
 import * as path from 'path';
 import { promisify } from 'util';
 
+const copyFileP = promisify(fs.copyFile);
 const writeFileP = promisify(fs.writeFile);
 const readFileP = promisify(fs.readFile);
 const fileExistsP = promisify(fs.exists);
@@ -66,10 +65,10 @@ export class BaseFixture {
     });
   }
 
-  public async getAllDirs() {
-    const files = await promisify(fs.readdir)(this.currentDir);
+  public async getAllDirs(dirPath: string) {
+    const files = await promisify(fs.readdir)(dirPath);
     const dirs = files.filter(async file => {
-      const stat = await promisify(fs.lstat)(`${this.currentDir}/${file}`);
+      const stat = await promisify(fs.lstat)(`${dirPath}/${file}`);
       return stat.isDirectory();
     });
     return dirs;
@@ -91,7 +90,7 @@ export class BaseFixture {
   public async compareError(error) {
     const errorPath = path.resolve(`${this.errorDir}/index.json`);
     const errorFileExists = await fileExistsP(errorPath);
-    const message = `${new Date().toUTCString()} - ${error.message}`;
+    const message = error.message;
     if (!errorFileExists) {
       await this.writeFile(
         'error',
@@ -107,32 +106,28 @@ export class BaseFixture {
     } else {
       const errorJSON = require(errorPath);
       const errorMessage = errorJSON.message;
-      errorMessage.push(message);
-      await this.writeFile(
-        'error',
-        JSON.stringify(
-          {
-            message: errorMessage,
-          },
-          null,
-          2,
-        ),
-        '',
-      );
+      if (errorMessage.indexOf(message) < 0) {
+        errorMessage.push(message);
+        await this.writeFile(
+          'error',
+          JSON.stringify(
+            {
+              message: errorMessage,
+            },
+            null,
+            2,
+          ),
+          '',
+        );
+      }
     }
-  }
-
-  public async generateActualFile(): Promise<string> {
-    const output = await this.build();
-    // await this.writeFile('actual', output, fileName);
-    return output;
   }
 
   public makeDiff(taskName: string) {
     it(taskName, async () => {
       let e = null;
       try {
-        await this.generateActualFile();
+        await this.build();
       } catch (err) {
         e = err;
       }
@@ -145,16 +140,9 @@ export class BaseFixture {
   }
 
   public async compareDir() {
-    const expectExists = await fileExistsP(this.expectDir);
-    let expectFiles = glob.sync(path.resolve(this.expectDir, '**/*'));
-    if (expectExists && expectFiles.length > 0) {
-      let actualFiles = glob.sync(path.resolve(this.actualDir, '**/*'));
-      actualFiles = actualFiles.map(file => {
-        return path.relative(this.actualDir, file);
-      });
-      expectFiles = expectFiles.map(file => {
-        return path.relative(this.expectDir, file);
-      });
+    const expectFiles = this.getFilelist(this.expectDir);
+    if (expectFiles.length > 0) {
+      const actualFiles = this.getFilelist(this.actualDir);
       assert.deepEqual(actualFiles, expectFiles);
       for (const file of actualFiles) {
         const ac = await readFileP(path.resolve(this.actualDir, file));
@@ -163,16 +151,18 @@ export class BaseFixture {
       }
       return;
     } else {
-      this.moveActualToExpect();
+      await this.moveActualToExpect();
       assert(true);
     }
   }
 
-  public moveActualToExpect() {
-    // TODO:重新实现一下这个方法
-    copyDir(this.actualDir, this.expectDir, () => {
-      /** */
+  public async moveActualToExpect() {
+    const files = this.getFilelist(this.actualDir);
+    const promises = [];
+    files.forEach(file => {
+      promises.push(copyFileP(`${this.actualDir}/${file}`, `${this.expectDir}/${file}`));
     });
+    return Promise.all(promises);
   }
 
   public runTask(taskName: string) {
