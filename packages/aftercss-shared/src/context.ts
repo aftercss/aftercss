@@ -1,6 +1,7 @@
 import { getLocator, Location } from 'locate-character';
 export interface IContextOption {
   sourceMap?: boolean;
+  sourcePath?: string;
   fileContent: string;
   fileName?: string;
 }
@@ -15,6 +16,7 @@ declare interface ILocator {
 export class AfterContext {
   public sourceMap: boolean;
   public fileName: string;
+  public sourcePath: string;
   public fileContent: string;
   public locater: ILocator;
   public constructor(option: IContextOption) {
@@ -22,6 +24,7 @@ export class AfterContext {
       throw Error('require file content to process');
     }
     this.sourceMap = option.sourceMap === true;
+    this.sourcePath = option.sourcePath || '';
     this.fileName = option.fileName || '';
     this.fileContent = option.fileContent;
     if (this.sourceMap) {

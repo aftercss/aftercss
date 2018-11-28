@@ -1,8 +1,10 @@
 import { AfterContext } from '@aftercss/shared';
 import { SourceNode } from 'source-map';
-import { IDimensionProp, IHashProp, IPercentageProp, TokenFactory, TokenType } from '../token';
+import { IDimensionProp, IHashProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper, IEscapedorName } from './css-tokenizer-helper';
+
+const digitReg = /[0-9]/;
 
 export class CSSTokenizer extends BaseTokenizer {
   public context: AfterContext;
@@ -408,7 +410,7 @@ export class CSSTokenizer extends BaseTokenizer {
 
       default:
         // digit
-        if (/[0-9]/.test(currentCodePoint)) {
+        if (digitReg.test(currentCodePoint)) {
           return this.numericToken();
         }
 
@@ -426,8 +428,23 @@ export class CSSTokenizer extends BaseTokenizer {
       return token;
     } else {
       const { line, column } = this.context.getLocation(token.start);
-      token.sourceNode = new SourceNode(line, column, token.raw);
+      token.sourceNode = new SourceNode(line, column, this.context.sourcePath, token.raw);
       return token;
     }
+  }
+
+  public generateSourceMap(tokens: Token[]) {
+    const sourceNodes: SourceNode[] = [];
+    for (const token of tokens) {
+      if (token.type === 'EOF') {
+        break;
+      }
+      sourceNodes.push(token.sourceNode);
+    }
+    return new SourceNode(1, 0, this.context.sourcePath, sourceNodes)
+      .toStringWithSourceMap({
+        file: this.context.fileName,
+      })
+      .map.toString();
   }
 }
