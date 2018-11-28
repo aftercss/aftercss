@@ -1,6 +1,7 @@
+// this file is for debugger;
 const RuleParser = require('./lib/rule-parser').RuleParser;
-// %background-color [%wsr %background-repeat]
-// %dpr 'px' [%wsr %background-repeat]
+// %background-color [$requireWhiteSpace %background-repeat]
+// %number 'px'
 // { %margin-top & %margin-bottom & %margin-top & %margin-right }
 //  ('0' / %d'px' / %d'%' / %d'rpx' / %d'vh' / 'env(safe-area)' )
 const parser = new RuleParser('%background-image $requireSpace %background-repeat');
