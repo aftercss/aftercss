@@ -86,3 +86,5 @@ yarn.lock
 
 # codecov
 coverage.lcov
+
+source-map-test

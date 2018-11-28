@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "dependencies": {
-    "@aftercss/tokenizer": "^0.1.0"
+    "@aftercss/tokenizer": "^0.1.0",
+    "@aftercss/shared": "^0.1.0"
   }
 }

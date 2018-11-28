@@ -4,14 +4,17 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
-    "test": "mocha index.js"
+    "test": "mocha index.js",
+    "test:clean": "after-test clean"
   },
   "private": true,
   "dependencies": {
     "after-test": "^1.0.0",
-    "@aftercss/tokenizer": "^0.1.0"
+    "@aftercss/tokenizer": "^0.1.0",
+    "@aftercss/shared": "^0.1.0"
   },
   "devDependencies": {
+    "after-test": "^1.0.0",
     "mocha": "^5.2.0"
   }
 }

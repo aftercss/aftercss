@@ -2,6 +2,7 @@
   "compilerOptions": {
 		"lib": ["es2015"],
     "module": "umd",
+    "target": "es5",
     "noImplicitAny": true,
     "outDir": "lib",
     "sourceMap": true,
