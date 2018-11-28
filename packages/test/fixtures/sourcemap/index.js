@@ -13,7 +13,7 @@ class AllTokensFixture extends BaseFixture {
         fileContent: content,
         sourceMap: true,
         sourcePath: '../src/app.css',
-        fileName: 'app.js',
+        fileName: 'app.css',
       }),
     );
     tokenizer.preprocess();
@@ -33,8 +33,8 @@ class AllTokensFixture extends BaseFixture {
       res += token.raw;
     }
     const sourcemapContent = tokenizer.generateSourceMap(tokens);
-    await this.writeFile('actual', sourcemapContent, 'index.js.map');
-    res += '/*# sourceMappingURL=index.js.map */';
+    await this.writeFile('actual', sourcemapContent, 'index.css.map');
+    res += '/*# sourceMappingURL=index.css.map */';
     await this.writeFile('actual', res, 'index.css');
   }
 }
