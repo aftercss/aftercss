@@ -4,7 +4,7 @@
   "npmClient": "npm",
   "command": {
     "publish": {
-      "npmClientArgs": ["--no-package-lock"]
+      "npmClientArgs": ["--access=public"]
     }
   },
   "version": "independent"
