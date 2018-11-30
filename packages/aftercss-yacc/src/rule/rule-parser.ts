@@ -53,7 +53,7 @@ export class RuleParser extends BaseParser {
   }
   public assert(b: boolean) {
     if (!b) {
-      throw Error('rule parseing error');
+      throw Error('rule parsing error');
     }
   }
   /**
@@ -98,7 +98,7 @@ export class RuleParser extends BaseParser {
      * 打开一个新的join
      */
     this.step();
-    this.checkStackTop(RuleType.ANDITEM);
+    this.checkStackTop(RuleType.AND_ITEM);
     this.popRule();
     const jRule = new AndItem();
     this.addRuleAsChild(jRule);
@@ -126,7 +126,7 @@ export class RuleParser extends BaseParser {
    */
   public orItem() {
     this.step();
-    this.checkStackTop(RuleType.ORITEM);
+    this.checkStackTop(RuleType.OR_ITEM);
     this.popRule();
     const jRule = new OrItem();
     this.addRuleAsChild(jRule);
@@ -153,9 +153,9 @@ export class RuleParser extends BaseParser {
           break;
         case ')':
           this.step();
-          this.checkStackTop(RuleType.ORITEM);
+          this.checkStackTop(RuleType.OR_ITEM);
           this.popRule();
-          this.checkStackTop(RuleType.ORCONTAINER);
+          this.checkStackTop(RuleType.OR_CONTAINER);
           this.popRule();
           break;
         case '/':
@@ -181,9 +181,9 @@ export class RuleParser extends BaseParser {
           break;
         case '}':
           this.step();
-          this.checkStackTop(RuleType.ANDITEM);
+          this.checkStackTop(RuleType.AND_ITEM);
           this.popRule();
-          this.checkStackTop(RuleType.ANDCONTAINER);
+          this.checkStackTop(RuleType.AND_CONTAINER);
           this.popRule();
           break;
         case '[':

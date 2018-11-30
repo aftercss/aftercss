@@ -7,10 +7,10 @@ export enum RuleType {
   ROOT = 'ROOT',
   OPTIONAL = 'OPTIONAL',
   STRING = 'STRING',
-  ORITEM = 'ORITEM',
-  ORCONTAINER = 'ORCONTAINER',
-  ANDITEM = 'ANDITEM',
-  ANDCONTAINER = 'ANDCONTAINER',
+  OR_ITEM = 'OR_ITEM',
+  OR_CONTAINER = 'OR_CONTAINER',
+  AND_ITEM = 'AND_ITEM',
+  AND_CONTAINER = 'AND_CONTAINER',
 }
 export class Rule {
   public type: RuleType;
@@ -34,7 +34,7 @@ export class OptionalRule extends Rule {
 }
 
 export class AndItem extends Rule {
-  public type = RuleType.ANDITEM;
+  public type = RuleType.AND_ITEM;
   public childRule: Rule[] = [];
 }
 export class StringRule extends Rule {
@@ -42,15 +42,15 @@ export class StringRule extends Rule {
   public str: string;
 }
 export class AndContainer extends Rule {
-  public type = RuleType.ANDCONTAINER;
+  public type = RuleType.AND_CONTAINER;
   public childRule: Rule[] = [];
 }
 export class OrContainer extends Rule {
-  public type = RuleType.ORCONTAINER;
+  public type = RuleType.OR_CONTAINER;
   public childRule: Rule[] = [];
 }
 export class OrItem extends Rule {
-  public type = RuleType.ORITEM;
+  public type = RuleType.OR_ITEM;
   public childRule: Rule[] = [];
 }
 export type ContainerRule = RootRule | OptionalRule | AndItem;

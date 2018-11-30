@@ -51,12 +51,12 @@ export class CodeParser extends BaseParser {
         return this.matchBaseRule(rule as BaseRule);
       case RuleType.SUB:
         return this.matchSubRule(rule as SubRule);
-      case RuleType.ANDCONTAINER:
+      case RuleType.AND_CONTAINER:
         return this.matchJoinContainer(rule as AndContainer);
-      case RuleType.ORCONTAINER:
+      case RuleType.OR_CONTAINER:
         return this.matchOrContainer(rule as OrContainer);
-      case RuleType.ORITEM:
-      case RuleType.ANDITEM:
+      case RuleType.OR_ITEM:
+      case RuleType.AND_ITEM:
         return this.matchItem(rule as AndItem);
       case RuleType.ROOT:
         throw new Error('root rule not going here');
@@ -82,7 +82,7 @@ export class CodeParser extends BaseParser {
     }
   }
   /**
-   * 遇到一个join join要求所有的规则都必须匹配成功，token中记录所有token
+   * 遇到一个join join要求所有的规则都必须匹配成功，token 中记录所有 token
    * @param rule
    */
   public matchJoinContainer(rule: AndContainer) {
@@ -117,11 +117,11 @@ export class CodeParser extends BaseParser {
       }
       tokens.push(token);
     }
-    const itoken = new ItemToken();
-    itoken.tokens = tokens;
-    itoken.start = start;
-    itoken.end = this.current;
-    return itoken;
+    const iToken = new ItemToken();
+    iToken.tokens = tokens;
+    iToken.start = start;
+    iToken.end = this.current;
+    return iToken;
   }
   /**
    * 遇到一个stringRule
@@ -133,10 +133,10 @@ export class CodeParser extends BaseParser {
     if (!success) {
       return false;
     }
-    const stringtoken = new StringToken();
-    stringtoken.start = start;
-    stringtoken.end = this.current;
-    return stringtoken;
+    const stringToken = new StringToken();
+    stringToken.start = start;
+    stringToken.end = this.current;
+    return stringToken;
   }
   /**
    * 遇到一个baseRule
