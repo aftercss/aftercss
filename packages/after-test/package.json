@@ -20,6 +20,9 @@
   "keywords": [
     "test"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Spades",
   "license": "MIT",
   "dependencies": {
