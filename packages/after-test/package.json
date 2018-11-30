@@ -1,6 +1,6 @@
 {
   "name": "after-test",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "aftercss",
   "bin": {
     "aftertest": "bin/aftertest"
