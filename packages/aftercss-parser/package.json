@@ -1,6 +1,6 @@
 {
   "name": "@aftercss/parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "dependencies": {
-    "@aftercss/tokenizer": "^0.1.0",
-    "@aftercss/shared": "^0.1.0"
+    "@aftercss/shared": "^0.1.1",
+    "@aftercss/tokenizer": "^0.1.1"
   }
 }
