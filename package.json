@@ -16,7 +16,8 @@
     "lint:prettier:fix": "prettier --write './packages/{aftercss-parser,aftercss-shared,aftercss-tokenizer,after-test}/src/**/*.ts' '*.json' ",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov --token=bca96c53-3d8c-41a2-b08d-ba18ec079372",
     "test": "cd packages/test && npm run test",
-    "test:clean": "cd packages/test && npm run test:clean"
+    "test:clean": "cd packages/test && npm run test:clean",
+    "cleangz": "rm **/*.tgz"
   },
   "private": true,
   "repository": {
