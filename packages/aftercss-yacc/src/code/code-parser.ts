@@ -1,20 +1,20 @@
-import { BaseParser } from './base-parser';
-import { BaseAtomicFunction } from './base-rule';
-import { BaseToken, ItemToken, JoinToken, OrToken, StringToken, SubToken, Token } from './code-tokens';
+import { BaseParser } from '../base';
 import {
+  AndContainer,
+  AndItem,
   BaseRule,
-  JoinContainer,
-  JoinRule,
-  OrRuleContainer,
+  OrContainer,
   RootRule,
   Rule,
   RuleType,
   StringRule,
   SubRule,
-} from './rule';
+} from '../rule/rule';
+import { AtomicFunction } from './atomic';
+import { BaseToken, ItemToken, JoinToken, OrToken, StringToken, SubToken, Token } from './code-tokens';
 
 /**
- * 用 Paser 生成 Token
+ * 用 Parser 生成 Token
  * 将规则的语法树向 style 铺平
  */
 export class CodeParser extends BaseParser {
@@ -51,25 +51,25 @@ export class CodeParser extends BaseParser {
         return this.matchBaseRule(rule as BaseRule);
       case RuleType.SUB:
         return this.matchSubRule(rule as SubRule);
-      case RuleType.JOINCONTAINER:
-        return this.matchJoinContainer(rule as JoinContainer);
+      case RuleType.ANDCONTAINER:
+        return this.matchJoinContainer(rule as AndContainer);
       case RuleType.ORCONTAINER:
-        return this.matchOrContainer(rule as OrRuleContainer);
+        return this.matchOrContainer(rule as OrContainer);
       case RuleType.ORITEM:
-      case RuleType.JOIN:
-        return this.matchItem(rule as JoinRule);
+      case RuleType.ANDITEM:
+        return this.matchItem(rule as AndItem);
       case RuleType.ROOT:
         throw new Error('root rule not going here');
       default:
         throw new Error('unknown rule');
     }
   }
-  public matchOrContainer(rule: OrRuleContainer) {
+  public matchOrContainer(rule: OrContainer) {
     const start = this.current;
     let token: Token;
     for (const childRule of rule.childRule) {
       this.goTo(start);
-      const joinRule = childRule as JoinRule;
+      const joinRule = childRule as AndItem;
       const itemToken = this.matchRule(joinRule);
       if (itemToken !== false) {
         token = itemToken;
@@ -85,12 +85,12 @@ export class CodeParser extends BaseParser {
    * 遇到一个join join要求所有的规则都必须匹配成功，token中记录所有token
    * @param rule
    */
-  public matchJoinContainer(rule: JoinContainer) {
+  public matchJoinContainer(rule: AndContainer) {
     const start = this.current;
     const tokens: Token[] = [];
     for (const childRule of rule.childRule) {
       this.goTo(start);
-      const joinRule = childRule as JoinRule;
+      const joinRule = childRule as AndItem;
       const itemToken = this.matchRule(joinRule);
       if (itemToken === false) {
         return false;
@@ -107,7 +107,7 @@ export class CodeParser extends BaseParser {
    * join item 和 or item 都走到这
    * @param rule
    */
-  public matchItem(rule: JoinRule) {
+  public matchItem(rule: AndItem) {
     const tokens: Token[] = [];
     const start = this.current;
     for (const childRule of rule.childRule) {
@@ -145,7 +145,7 @@ export class CodeParser extends BaseParser {
   public matchBaseRule(rule: BaseRule): false | BaseToken {
     const start = this.current;
     const baseRuleName = rule.name;
-    const baseRuleFunc = BaseAtomicFunction[`$${baseRuleName}`];
+    const baseRuleFunc = AtomicFunction[`$${baseRuleName}`];
     const baseRes = baseRuleFunc(this);
     if (!baseRes) {
       return false;
@@ -180,7 +180,6 @@ export class CodeParser extends BaseParser {
   public matchSubRule(rule: SubRule): false | SubToken {
     const start = this.current;
     try {
-      // TODO: undone
       const subRootRes = this.matchRootRule(this.loadRule(rule.name));
       if (subRootRes === false) {
         return false;

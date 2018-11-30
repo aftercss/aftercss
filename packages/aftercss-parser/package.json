@@ -1,8 +1,12 @@
 {
   "name": "@aftercss/parser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "aftercss",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "scripts": {
     "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
     "lint:ts:fix": "./../../node_modules/.bin/tslint -c ./../../tslint.json --fix -p tsconfig.json",
@@ -24,7 +28,7 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "dependencies": {
-    "@aftercss/shared": "^0.1.1",
-    "@aftercss/tokenizer": "^0.1.1"
+    "@aftercss/shared": "^0.1.2",
+    "@aftercss/tokenizer": "^0.1.2"
   }
 }

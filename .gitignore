@@ -81,6 +81,9 @@ yarn.lock
 .DS_Store
 .vscode/
 
+#webstorm
+.idea/
+
 # nyc
 .nyc_out/
 
