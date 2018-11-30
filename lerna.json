@@ -2,5 +2,10 @@
   "lerna": "2.11.0",
   "packages": ["packages/*"],
   "npmClient": "npm",
+  "command": {
+    "publish": {
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  },
   "version": "independent"
 }

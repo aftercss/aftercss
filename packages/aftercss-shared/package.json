@@ -30,5 +30,6 @@
   "dependencies": {
     "@babel/code-frame": "^7.0.0",
     "locate-character": "^2.0.5"
-  }
+  },
+  "gitHead": "88322487d217a7f8d019c445842f9bbbe6ab1649"
 }

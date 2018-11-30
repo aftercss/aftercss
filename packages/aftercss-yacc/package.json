@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/aftercss/after-css/issues"
   },
-  "homepage": "https://github.com/aftercss/after-css#readme"
+  "homepage": "https://github.com/aftercss/after-css#readme",
+  "gitHead": "88322487d217a7f8d019c445842f9bbbe6ab1649"
 }
