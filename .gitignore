@@ -91,3 +91,4 @@ yarn.lock
 coverage.lcov
 
 source-map-test
+package-lock.json
