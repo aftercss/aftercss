@@ -1,6 +1,6 @@
-import { BaseParser } from './base-parser';
+import { BaseParser } from '../base';
 
-export const BaseAtomicFunction: Record<string, (parser: BaseParser) => string | false> = {
+export const AtomicFunction: Record<string, (parser: BaseParser) => string | false> = {
   /**
    * 正整数
    * @param parser
@@ -17,7 +17,7 @@ export const BaseAtomicFunction: Record<string, (parser: BaseParser) => string |
    * 正整数
    * @param parser
    */
-  $negetiveInteger(parser: BaseParser): string | false {
+  $negativeInteger(parser: BaseParser): string | false {
     const res = parser.matchReg(/\-[\d+]/i);
     if (!res) {
       return false;
@@ -41,7 +41,7 @@ export const BaseAtomicFunction: Record<string, (parser: BaseParser) => string |
    * 负数
    * @param parser
    */
-  $negetiveDecimal(parser: BaseParser): string | false {
+  $negativeDecimal(parser: BaseParser): string | false {
     const res = parser.matchReg(/^\-[0-9]*[.][0-9]+/);
     if (!res) {
       return false;
@@ -54,17 +54,17 @@ export const BaseAtomicFunction: Record<string, (parser: BaseParser) => string |
    * 支持小数点
    */
   $decimal(parser: BaseParser): string | false {
-    return BaseAtomicFunction.$positiveDecimal(parser) || BaseAtomicFunction.$negetiveDecimal(parser);
+    return AtomicFunction.$positiveDecimal(parser) || AtomicFunction.$negativeDecimal(parser);
   },
   /**
    * 正负整数
    * @param parser
    */
   $integer(parser: BaseParser): string | false {
-    return BaseAtomicFunction.$positiveInteger(parser) || BaseAtomicFunction.$negetiveInteger(parser);
+    return AtomicFunction.$positiveInteger(parser) || AtomicFunction.$negativeInteger(parser);
   },
   $number(parser: BaseParser): string | false {
-    return BaseAtomicFunction.$decimal(parser) || BaseAtomicFunction.$integer(parser);
+    return AtomicFunction.$decimal(parser) || AtomicFunction.$integer(parser);
   },
   /**
    * 可选空白

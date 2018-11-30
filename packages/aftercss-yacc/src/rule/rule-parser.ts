@@ -1,12 +1,12 @@
-import { BaseParser } from './base-parser';
+import { BaseParser } from '../base';
 import {
+  AndContainer,
+  AndItem,
   BaseRule,
   ContainerRule,
-  JoinContainer,
-  JoinRule,
   OptionalRule,
-  OrRuleContainer,
-  OrRuleItem,
+  OrContainer,
+  OrItem,
   RootRule,
   Rule,
   RuleType,
@@ -81,10 +81,10 @@ export class RuleParser extends BaseParser {
      * 开一个新的JoinContainer的池子
      */
     this.step();
-    const jcRule = new JoinContainer();
+    const jcRule = new AndContainer();
     this.addRuleAsChild(jcRule);
     this.pushRule(jcRule);
-    const jRule = new JoinRule();
+    const jRule = new AndItem();
     this.addRuleAsChild(jRule);
     this.pushRule(jRule);
   }
@@ -98,29 +98,41 @@ export class RuleParser extends BaseParser {
      * 打开一个新的join
      */
     this.step();
-    this.checkStackTop(RuleType.JOIN);
+    this.checkStackTop(RuleType.ANDITEM);
     this.popRule();
-    const jRule = new JoinRule();
+    const jRule = new AndItem();
     this.addRuleAsChild(jRule);
     this.pushRule(jRule);
   }
+
+  /**
+   * start (
+   */
   public orContainer() {
+    /**
+     * 开启一个新的 orContainer
+     */
     this.step();
-    const ocRule = new OrRuleContainer();
+    const ocRule = new OrContainer();
     this.addRuleAsChild(ocRule);
     this.pushRule(ocRule);
-    const orRule = new OrRuleItem();
+    const orRule = new OrItem();
     this.addRuleAsChild(orRule);
     this.pushRule(orRule);
   }
+
+  /**
+   * match /
+   */
   public orItem() {
     this.step();
     this.checkStackTop(RuleType.ORITEM);
     this.popRule();
-    const jRule = new OrRuleItem();
+    const jRule = new OrItem();
     this.addRuleAsChild(jRule);
     this.pushRule(jRule);
   }
+
   /**
    * 检查栈顶类型
    * @param ruleType
@@ -128,6 +140,7 @@ export class RuleParser extends BaseParser {
   public checkStackTop(ruleType: RuleType) {
     this.assert(this.currentRule.type === ruleType);
   }
+
   /**
    * 循环入口
    */
@@ -168,17 +181,17 @@ export class RuleParser extends BaseParser {
           break;
         case '}':
           this.step();
-          this.checkStackTop(RuleType.JOIN);
+          this.checkStackTop(RuleType.ANDITEM);
           this.popRule();
-          this.checkStackTop(RuleType.JOINCONTAINER);
+          this.checkStackTop(RuleType.ANDCONTAINER);
           this.popRule();
           break;
         case '[':
           /* 这里面的内容可以出现可以不出现 [, %backgroundRepeat ] */
           this.step();
-          const orule = new OptionalRule();
-          this.addRuleAsChild(orule);
-          this.pushRule(orule);
+          const orRule = new OptionalRule();
+          this.addRuleAsChild(orRule);
+          this.pushRule(orRule);
           break;
         case ']':
           this.step();

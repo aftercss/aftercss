@@ -6,11 +6,11 @@ export enum RuleType {
   BASE = 'BASE',
   ROOT = 'ROOT',
   OPTIONAL = 'OPTIONAL',
-  JOIN = 'JOIN',
   STRING = 'STRING',
-  ORCONTAINER = 'ORCONTAINER',
   ORITEM = 'ORITEM',
-  JOINCONTAINER = 'JOINCONTAINER',
+  ORCONTAINER = 'ORCONTAINER',
+  ANDITEM = 'ANDITEM',
+  ANDCONTAINER = 'ANDCONTAINER',
 }
 export class Rule {
   public type: RuleType;
@@ -33,24 +33,24 @@ export class OptionalRule extends Rule {
   public childRule: Rule[] = [];
 }
 
-export class JoinRule extends Rule {
-  public type = RuleType.JOIN;
+export class AndItem extends Rule {
+  public type = RuleType.ANDITEM;
   public childRule: Rule[] = [];
 }
 export class StringRule extends Rule {
   public type = RuleType.STRING;
   public str: string;
 }
-export class JoinContainer extends Rule {
-  public type = RuleType.JOINCONTAINER;
+export class AndContainer extends Rule {
+  public type = RuleType.ANDCONTAINER;
   public childRule: Rule[] = [];
 }
-export class OrRuleContainer extends Rule {
+export class OrContainer extends Rule {
   public type = RuleType.ORCONTAINER;
   public childRule: Rule[] = [];
 }
-export class OrRuleItem extends Rule {
+export class OrItem extends Rule {
   public type = RuleType.ORITEM;
   public childRule: Rule[] = [];
 }
-export type ContainerRule = RootRule | OptionalRule | JoinRule;
+export type ContainerRule = RootRule | OptionalRule | AndItem;

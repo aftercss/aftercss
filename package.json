@@ -42,9 +42,21 @@
     "rimraf": "^2.6.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "webstorm-disable-index": "^1.2.0"
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "config": {
+    "webstorm": {
+      "modules": [
+        "packages/after-test",
+        "packages/after-parser",
+        "packages/after-shared",
+        "packages/aftercss-tokenizer",
+        "packages/aftercss-yacc"
+      ]
+    }
+  }
 }
