@@ -1,4 +1,4 @@
-class CSSSyntaxError extends Error {
+export class CSSSyntaxError extends Error {
   public index: number;
   public constructor(index: number, message: string) {
     super(message);

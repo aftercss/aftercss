@@ -18,6 +18,9 @@ export class ParserNode {
 
 export class Block extends ParserNode {
   public type = ParserNodeType.BLOCK;
+  public constructor() {
+    super();
+  }
 }
 
 export class AtRule extends ParserNode {

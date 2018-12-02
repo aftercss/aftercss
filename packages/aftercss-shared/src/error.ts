@@ -34,4 +34,7 @@ export namespace MessageCollection {
   export const _THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_ = messageBuilder<ArgNumber.TWO>(
     '{0} function should be in sub class, stack:\r\n {1}',
   );
+  export const _READER_INIT_WRONG_ = messageBuilder<ArgNumber.ZERO>(
+    'Stream reader should get a token list or a tokenizer. But got nothing',
+  );
 }
