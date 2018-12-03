@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha index.js",
-    "test:clean": "after-test clean"
+    "test:clean": "aftertest clean"
   },
   "private": true,
   "dependencies": {
     "@aftercss/shared": "^0.1.5",
+    "@aftercss/parser": "^0.1.5",
     "@aftercss/tokenizer": "^0.1.5",
     "after-test": "^1.0.5"
   },

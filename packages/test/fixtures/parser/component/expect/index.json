@@ -1,0 +1,47 @@
+{
+  "type": "BLOCK",
+  "childNodes": [
+    {
+      "type": "WHITESPACE",
+      "raw": "\n\t",
+      "start": 3
+    },
+    {
+      "type": "IDENT",
+      "raw": "color",
+      "content": "color",
+      "start": 8
+    },
+    {
+      "type": "COLON",
+      "raw": ":",
+      "start": 9
+    },
+    {
+      "type": "WHITESPACE",
+      "raw": " ",
+      "start": 10
+    },
+    {
+      "type": "IDENT",
+      "raw": "red",
+      "content": "red",
+      "start": 13
+    },
+    {
+      "type": "SEMI",
+      "raw": ";",
+      "start": 14
+    },
+    {
+      "type": "WHITESPACE",
+      "raw": "\n",
+      "start": 15
+    }
+  ],
+  "associatedToken": {
+    "type": "LEFT_CURLY_BRACKET",
+    "raw": "{",
+    "start": 1
+  }
+}

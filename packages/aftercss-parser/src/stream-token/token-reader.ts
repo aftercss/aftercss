@@ -33,6 +33,7 @@ export class TokenReader {
    */
   public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
     if (Object.prototype.toString.call(tokensOrTokenizer) === '[object Array]') {
+      this.tokenList = tokensOrTokenizer as Token[];
       this.readerType = TokenReaderType.TokenList;
       return;
     }

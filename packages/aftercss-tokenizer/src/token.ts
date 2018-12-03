@@ -81,6 +81,10 @@ export class Token {
     this.content = content;
     this.start = start;
   }
+
+  public checkType<T extends Token>(type: TokenType): this is T {
+    return this.type === type;
+  }
   public toString() {
     return JSON.stringify(this, null, 2);
   }
