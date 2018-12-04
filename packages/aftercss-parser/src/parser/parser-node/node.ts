@@ -9,6 +9,7 @@ export enum ParserNodeType {
   ATRULE = 'ATRULE',
   DECLARATION = 'DECLARATION',
   FUNCTION = 'FUNCTION',
+  QUALIFIEDRULE = 'QUALIFIEDRULE',
 }
 export class ParserNode {
   public type: ParserNodeType;
@@ -19,6 +20,10 @@ export class ParserNode {
   }
   public clone() {
     throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.clone', new Error().stack));
+  }
+
+  public addChild(node: ParserNode | Token) {
+    this.childNodes.push(node);
   }
 }
 
@@ -42,6 +47,14 @@ export class AtRule extends ParserNode {
   public prelude: Array<ParserNode | Token>;
   public constructor() {
     super(ParserNodeType.ATRULE);
+  }
+}
+
+export class QualifiedRule extends ParserNode {
+  public block: Block;
+  public prelude: Array<ParserNode | Token>;
+  public constructor() {
+    super(ParserNodeType.QUALIFIEDRULE);
   }
 }
 

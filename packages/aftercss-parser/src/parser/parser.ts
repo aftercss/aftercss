@@ -2,13 +2,11 @@ import { MessageCollection } from '@aftercss/shared';
 import { Token, TokenType } from '@aftercss/tokenizer';
 import { TokenReader } from './../stream-token/token-reader';
 import { CSSSyntaxError } from './parser-error';
-import { AtRule, Block, Func, ParserNode, Root } from './parser-node';
+import { AtRule, Block, Func, ParserNode, QualifiedRule, Root } from './parser-node';
 /**
  * Generate AST from Tokens
  */
 export class Parser extends TokenReader {
-  public currentParserNode: ParserNode = new Root();
-  public stack: ParserNode[] = [this.currentParserNode];
   public topLevel: boolean = true;
   /**
    * generate CSSSyntaxError with location infos
@@ -17,10 +15,6 @@ export class Parser extends TokenReader {
   public error(message: string) {
     const location = this.currentToken().start;
     return new CSSSyntaxError(location, message);
-  }
-
-  public addChild(node: ParserNode) {
-    this.currentParserNode.childNodes.push(node);
   }
 
   public allowWhiteSpace(): { start: number; space: string } {
@@ -34,23 +28,26 @@ export class Parser extends TokenReader {
   }
 
   public parseStyleSheet() {
-    // For now, don't care CDO & CDC
-    while (this.currentToken().type !== TokenType.EOF) {
-      switch (this.currentToken().type) {
-        case TokenType.WHITESPACE:
-          this.allowWhiteSpace();
-          continue;
-        case TokenType.NEWLINE:
-          break;
-      }
-    }
+    this.topLevel = true;
+    const rules = this.consumeRuleList();
+    const root = new Root();
+    root.childNodes = rules;
+    return root;
+  }
+
+  /**
+   * parse a list of component values
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-component-values
+   */
+  public parseComponentList() {
+    while (true) {}
   }
 
   /**
    * consume an at-rule
    * https://www.w3.org/TR/css-syntax-3/#consume-an-at-rule
    */
-  public consumeAtRule() {
+  private consumeAtRule() {
     const atRuleNode = new AtRule();
     atRuleNode.name = this.currentToken().content;
     this.step();
@@ -68,7 +65,7 @@ export class Parser extends TokenReader {
         // TODO simple block with an associated token of <{-token>
         // case simple-block:
         default:
-          atRuleNode.prelude.push(this.consumeComponent());
+          atRuleNode.addChild(this.consumeComponent());
       }
     }
   }
@@ -76,7 +73,7 @@ export class Parser extends TokenReader {
    * consume a component value
    * https://www.w3.org/TR/css-syntax-3/#consume-a-component-value
    */
-  public consumeComponent(): Func | Block | Token {
+  private consumeComponent(): Func | Block | Token {
     const currentToken = this.currentToken();
     switch (currentToken.type) {
       case TokenType.LEFT_CURLY_BRACKET:
@@ -95,7 +92,7 @@ export class Parser extends TokenReader {
    * https://www.w3.org/TR/css-syntax-3/#consume-a-function
    */
 
-  public consumeFunction() {
+  private consumeFunction() {
     const funcNode = new Func();
     funcNode.name = this.currentToken().content;
     this.step();
@@ -107,7 +104,7 @@ export class Parser extends TokenReader {
           this.step();
           return funcNode;
         default:
-          funcNode.childNodes.push(this.consumeComponent());
+          funcNode.addChild(this.consumeComponent());
       }
     }
   }
@@ -116,7 +113,8 @@ export class Parser extends TokenReader {
    * consume a list of rules
    * https://www.w3.org/TR/css-syntax-3/#consume-a-list-of-rules
    */
-  public consumeRuleList(): ParserNode[] {
+  private consumeRuleList(): ParserNode[] {
+    const rules: ParserNode[] = [];
     while (this.currentToken().type !== TokenType.EOF) {
       switch (this.currentToken().type) {
         case TokenType.WHITESPACE:
@@ -129,18 +127,41 @@ export class Parser extends TokenReader {
           }
           break;
         case TokenType.ATKEYWORD:
-        // this.consumeAtRule();
-        // break;
+          rules.push(this.consumeAtRule());
+          break;
+        default:
+          rules.push(this.consumeQualifiedRule());
       }
     }
-    return this.stack;
+    return rules;
+  }
+
+  /**
+   * consume a qualified rule
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-qualified-rule
+   */
+  private consumeQualifiedRule() {
+    const qualifiedRuleNode = new QualifiedRule();
+    while (true) {
+      switch (this.currentToken().type) {
+        case TokenType.EOF:
+          throw this.error('Encounter <EOF-token> when parsering a qualified rule');
+        case TokenType.LEFT_CURLY_BRACKET:
+          qualifiedRuleNode.block = this.consumeSimpleBlock();
+          return qualifiedRuleNode;
+        // TODO simpe block with an associated token of <{-token>
+        // case simple-block:
+        default:
+          qualifiedRuleNode.prelude.push(this.consumeComponent());
+      }
+    }
   }
 
   /**
    * consume a simple block
    * https://www.w3.org/TR/css-syntax-3/#consume-a-simple-block
    */
-  public consumeSimpleBlock() {
+  private consumeSimpleBlock() {
     const blockNode = new Block();
     let currentToken = this.currentToken();
     blockNode.associatedToken = currentToken;
@@ -167,7 +188,7 @@ export class Parser extends TokenReader {
           this.step();
           return blockNode;
         default:
-          blockNode.childNodes.push(this.consumeComponent());
+          blockNode.addChild(this.consumeComponent());
       }
     }
   }

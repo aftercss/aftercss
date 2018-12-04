@@ -1,5 +1,5 @@
 export function format(template: string, args: Array<string | number>) {
-  return template.replace(/{(\d+)}/, (i0, i1) => {
+  return template.replace(/{(\d+)}/g, (i0, i1) => {
     const index = +i1;
     if (isNaN(index)) {
       return i0;
