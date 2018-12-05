@@ -74,7 +74,6 @@ export class Token {
   public raw: string;
   public content: string;
   public start: number;
-  public sourceNode: SourceNode;
   public constructor(type: TokenType, start: number, raw?: string, content?: string) {
     this.type = type;
     this.raw = raw;

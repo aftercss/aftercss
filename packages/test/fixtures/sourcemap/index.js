@@ -1,6 +1,7 @@
 const BaseFixture = require('after-test/lib/base-fixture').BaseFixture;
 
 const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
+const TokenReaderWithSourceMap = require('@aftercss/tokenizer').TokenReaderWithSourceMap;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
 const generateSourceMap = require('@aftercss/tokenizer').generateSourceMap;
@@ -8,19 +9,20 @@ const generateSourceMap = require('@aftercss/tokenizer').generateSourceMap;
 class AllTokensFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'app.css');
-    const tokenizer = new CSSTokenizer(
-      new AfterContext({
-        fileContent: content,
-        sourceMap: true,
-        sourcePath: '../src/app.css',
-        fileName: 'app.css',
-      }),
-    );
+    const context = new AfterContext({
+      fileContent: content,
+      sourceMap: true,
+      sourcePath: '../src/app.css',
+      fileName: 'app.css',
+    });
+    const tokenizer = new CSSTokenizer(context);
     tokenizer.preprocess();
+    const tokenReader = new TokenReaderWithSourceMap(tokenizer);
     const tokens = [];
     while (true) {
-      const currentToken = tokenizer.nextToken();
+      const currentToken = tokenReader.currentToken();
       tokens.push(currentToken);
+      tokenReader.step();
       if (currentToken.type === 'EOF') {
         break;
       }
@@ -32,7 +34,8 @@ class AllTokensFixture extends BaseFixture {
       }
       res += token.raw;
     }
-    const sourcemapContent = tokenizer.generateSourceMap(tokens);
+    debugger;
+    const sourcemapContent = tokenReader.generateSourceMap();
     await this.writeFile('actual', sourcemapContent, 'index.css.map');
     res += '/*# sourceMappingURL=index.css.map */';
     await this.writeFile('actual', res, 'index.css');

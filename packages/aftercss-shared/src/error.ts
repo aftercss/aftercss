@@ -37,4 +37,10 @@ export namespace MessageCollection {
   export const _READER_INIT_WRONG_ = messageBuilder<ArgNumber.ZERO>(
     'Stream reader should get a token list or a tokenizer. But got nothing',
   );
+  export const _WHEN_USING_TOKENS_SHOULD_PASS_CONTEXT_ = messageBuilder<ArgNumber.ONE>(
+    'When generating source map for tokens( ArrayType ), should pass Context in second param.\n But get {0}',
+  );
+  export const _TOKEN_READER_NOT_GETTING_RIGHT_PARAM_ = messageBuilder<ArgNumber.ONE>(
+    'TokenSourceMap is not getting right params. {0}',
+  );
 }

@@ -1,5 +1,6 @@
 import { MessageCollection } from '@aftercss/shared';
-import { CSSTokenizer, Token } from '@aftercss/tokenizer';
+import { Token } from './../token';
+import { CSSTokenizer } from './../tokenizer/css-tokenizer';
 
 export enum TokenReaderType {
   Tokenizer = 'Tokenizer',
@@ -8,7 +9,7 @@ export enum TokenReaderType {
 
 /**
  * Token Reader
- * flat different source all to `getNextToken()` API
+ * flat different source all to `nextToken()` API
  * @support stream type
  * @support array type
  */
@@ -18,7 +19,7 @@ export class TokenReader {
    */
   private readerType: TokenReaderType;
   /**
-   * meta-data for list tyep
+   * meta-data for list type
    */
   private tokenList: Token[];
   private currentIndex: number = 0;
@@ -34,16 +35,15 @@ export class TokenReader {
   public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
     if (Object.prototype.toString.call(tokensOrTokenizer) === '[object Array]') {
       this.readerType = TokenReaderType.TokenList;
+      const tokens = tokensOrTokenizer as Token[];
+      this.tokenList = tokens;
       return;
-    }
-    if (tokensOrTokenizer instanceof CSSTokenizer) {
+    } else {
       this.readerType = TokenReaderType.Tokenizer;
+      this.tokenizer = tokensOrTokenizer as CSSTokenizer;
+      this.$currentToken = this.tokenizer.nextToken();
       return;
     }
-    /**
-     * checked source-type once only
-     */
-    throw new Error(MessageCollection._READER_INIT_WRONG_());
   }
 
   public currentToken(): Token {
