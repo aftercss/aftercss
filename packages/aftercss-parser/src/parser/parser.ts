@@ -2,7 +2,7 @@ import { MessageCollection } from '@aftercss/shared';
 import { Token, TokenType } from '@aftercss/tokenizer';
 import { TokenReader } from './../stream-token/token-reader';
 import { CSSSyntaxError } from './parser-error';
-import { AtRule, Block, Func, ParserNode, QualifiedRule, Root } from './parser-node';
+import { AtRule, Block, Declaration, Func, ParserNode, QualifiedRule, Root } from './parser-node';
 /**
  * Generate AST from Tokens
  */
@@ -27,6 +27,10 @@ export class Parser extends TokenReader {
     return { start: whiteSpaceStart, space: whiteSpace };
   }
 
+  /**
+   * parse a stylesheet
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-stylesheet
+   */
   public parseStyleSheet() {
     this.topLevel = true;
     const rules = this.consumeRuleList();
@@ -36,11 +40,51 @@ export class Parser extends TokenReader {
   }
 
   /**
-   * parse a list of component values
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-component-values
+   * parse a list of rule
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-rules
    */
-  public parseComponentList() {
-    while (true) {}
+  public parseRuleList() {
+    this.topLevel = false;
+    return this.consumeRuleList();
+  }
+
+  /**
+   * parse a rule. Parse text into a single rule
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-rule
+   */
+  public parseRule() {
+    let rule: AtRule | QualifiedRule;
+    this.allowWhiteSpace();
+
+    switch (this.currentToken().type) {
+      case TokenType.EOF:
+        return this.error('Encounter <EOF-token> when parsing a rule');
+      case TokenType.ATKEYWORD:
+        rule = this.consumeAtRule();
+        break;
+      default:
+        rule = this.consumeQualifiedRule();
+        if (!rule) {
+          return this.error('No rule to return when parsing a rule');
+        }
+    }
+    this.allowWhiteSpace();
+    if (this.currentToken().type === TokenType.EOF) {
+      return rule;
+    }
+    return this.error('Unexpected ending when parsing a rule');
+  }
+
+  /**
+   * parse a declaration. Used in `@supports`
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-declaration
+   */
+  public parseDeclaration() {
+    this.allowWhiteSpace();
+    if (this.currentToken().type !== TokenType.IDENT) {
+      return this.error('Declaration in `@support` should start with a <IDENT-token>');
+    }
+    // TODO consumeDeclaration
   }
 
   /**
@@ -65,7 +109,7 @@ export class Parser extends TokenReader {
         // TODO simple block with an associated token of <{-token>
         // case simple-block:
         default:
-          atRuleNode.addChild(this.consumeComponent());
+          atRuleNode.prelude.push(this.consumeComponent());
       }
     }
   }
@@ -87,6 +131,26 @@ export class Parser extends TokenReader {
         return currentToken;
     }
   }
+
+  /**
+   * consume a declaration
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-declaration
+   */
+  // private consumeDeclaration() {
+  //   const declNode = new Declaration();
+  //   declNode.name = this.currentToken().content;
+  //   this.step();
+  //   if (this.currentToken().type === TokenType.WHITESPACE) {
+  //     this.allowWhiteSpace();
+  //   }
+  //   if (this.currentToken().type !== TokenType.COLON) {
+	// 		return null;
+	// 	}
+  //   this.step(); // consume <COLON-token>
+  //   // TODO: a puzzle
+  //   // While the current input token is anything other than an <EOF-token> ??? 为啥是EOF？
+  // }
+
   /**
    * consume a function
    * https://www.w3.org/TR/css-syntax-3/#consume-a-function
@@ -118,19 +182,26 @@ export class Parser extends TokenReader {
     while (this.currentToken().type !== TokenType.EOF) {
       switch (this.currentToken().type) {
         case TokenType.WHITESPACE:
-          this.allowWhiteSpace();
           break;
         case TokenType.CDO:
         case TokenType.CDC:
           if (this.topLevel) {
             this.step();
+          } else {
+            const qualified = this.consumeQualifiedRule();
+            if (qualified) {
+              rules.push(qualified);
+            }
           }
           break;
         case TokenType.ATKEYWORD:
           rules.push(this.consumeAtRule());
           break;
         default:
-          rules.push(this.consumeQualifiedRule());
+          const qualifiedRule = this.consumeQualifiedRule();
+          if (qualifiedRule) {
+            rules.push(qualifiedRule);
+          }
       }
     }
     return rules;
@@ -145,7 +216,7 @@ export class Parser extends TokenReader {
     while (true) {
       switch (this.currentToken().type) {
         case TokenType.EOF:
-          throw this.error('Encounter <EOF-token> when parsering a qualified rule');
+          return null;
         case TokenType.LEFT_CURLY_BRACKET:
           qualifiedRuleNode.block = this.consumeSimpleBlock();
           return qualifiedRuleNode;

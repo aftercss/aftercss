@@ -41,6 +41,7 @@ export enum TokenType {
   WHITESPACE = 'WHITESPACE',
 }
 
+
 export interface IDimensionProp {
   repr: string;
   type: 'integer' | 'number';
@@ -85,6 +86,8 @@ export class Token {
   // public checkType<T extends Token>(type: TokenType): this is T {
   //   return this.type === type;
   // }
+
+
 
   public isDimensionToken(): this is DimensionToken {
     return this.type === TokenType.DIMENSION;
