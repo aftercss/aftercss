@@ -1,5 +1,5 @@
 import { MessageCollection } from '@aftercss/shared';
-import { Token, TokenType } from '@aftercss/tokenizer';
+import { Token, TokenType, TokenFactory } from '@aftercss/tokenizer';
 import { TokenReader } from './../stream-token/token-reader';
 import { CSSSyntaxError } from './parser-error';
 import { AtRule, Block, Declaration, Func, ParserNode, QualifiedRule, Root } from './parser-node';
@@ -84,7 +84,15 @@ export class Parser extends TokenReader {
     if (this.currentToken().type !== TokenType.IDENT) {
       return this.error('Declaration in `@support` should start with a <IDENT-token>');
     }
-    // TODO consumeDeclaration
+    return this.consumeDeclaration();
+  }
+
+  /**
+   * parse a list of declarations
+   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-declarations
+   */
+  public parseDeclarationList() {
+    // TODO consume declaration list
   }
 
   /**
@@ -136,20 +144,66 @@ export class Parser extends TokenReader {
    * consume a declaration
    * https://www.w3.org/TR/css-syntax-3/#consume-a-declaration
    */
-  // private consumeDeclaration() {
-  //   const declNode = new Declaration();
-  //   declNode.name = this.currentToken().content;
-  //   this.step();
-  //   if (this.currentToken().type === TokenType.WHITESPACE) {
-  //     this.allowWhiteSpace();
-  //   }
-  //   if (this.currentToken().type !== TokenType.COLON) {
-	// 		return null;
-	// 	}
-  //   this.step(); // consume <COLON-token>
-  //   // TODO: a puzzle
-  //   // While the current input token is anything other than an <EOF-token> ??? 为啥是EOF？
-  // }
+  private consumeDeclaration() {
+    const declNode = new Declaration();
+    declNode.name = this.currentToken().content;
+    this.step();
+    if (this.currentToken().type === TokenType.WHITESPACE) {
+      this.allowWhiteSpace();
+    }
+    if (this.currentToken().type !== TokenType.COLON) {
+      return null;
+    }
+    this.step(); // consume <COLON-token>
+    while (this.currentToken().type !== TokenType.EOF) {
+      declNode.value.push(this.currentToken());
+      this.step();
+    }
+    const lastToken = declNode.value.pop();
+    const beforeLastToken = declNode.value.pop();
+    if (lastToken.content === '!' && beforeLastToken.content.toLowerCase() === 'important') {
+      declNode.important = true;
+    } else {
+      declNode.value.push(beforeLastToken, lastToken);
+    }
+    return declNode;
+  }
+
+  /**
+   * consume a list of declarations
+   * https://www.w3.org/TR/css-syntax-3/#consume-a-list-of-declarations
+   */
+  private consumeDeclarationList() {
+    const list: Array<Declaration | AtRule> = [];
+    while (true) {
+      switch (this.currentToken().type) {
+        case TokenType.WHITESPACE:
+        case TokenType.SEMI:
+          this.step();
+          break;
+        case TokenType.EOF:
+          return list;
+        case TokenType.ATKEYWORD:
+          list.push(this.consumeAtRule());
+          break;
+				case TokenType.IDENT:
+					// TODO 
+          generateDeclaration(this);
+      }
+    }
+    function generateDeclaration(parser: Parser) {
+      const tokenList: Token[] = [];
+      while (true) {
+        const currentToken = parser.currentToken();
+        if (currentToken.type === TokenType.EOF || currentToken.type === TokenType.SEMI) {
+          break;
+        }
+        tokenList.push(parser.currentToken());
+      }
+      tokenList.push(TokenFactory(TokenType.EOF, tokenList[tokenList.length - 1].start));
+      return;
+    }
+  }
 
   /**
    * consume a function

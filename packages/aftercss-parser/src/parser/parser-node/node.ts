@@ -67,8 +67,10 @@ export class Root extends ParserNode {
 export class Declaration extends ParserNode {
   public name: string;
   public betweenNameValue: ParserNode;
-  public value: ParserNode;
+  public value: Token[];
+  public important: boolean;
   public constructor() {
     super(ParserNodeType.DECLARATION);
+    this.important = false;
   }
 }
