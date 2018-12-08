@@ -1,0 +1,25 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "DECLARATION",
+      "childNodes": [],
+      "source": {
+        "raw": "color: red !important"
+      },
+      "important": true,
+      "value": [
+        {
+          "type": "IDENT",
+          "raw": "red",
+          "content": "red",
+          "start": 10
+        }
+      ],
+      "name": "color"
+    }
+  ],
+  "source": {
+    "raw": ""
+  }
+}

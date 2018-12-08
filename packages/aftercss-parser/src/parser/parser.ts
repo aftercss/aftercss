@@ -1,8 +1,7 @@
-import { MessageCollection } from '@aftercss/shared';
-import { Token, TokenType, TokenFactory } from '@aftercss/tokenizer';
+import { Token, TokenType } from '@aftercss/tokenizer';
 import { TokenReader } from './../stream-token/token-reader';
 import { CSSSyntaxError } from './parser-error';
-import { AtRule, Block, Declaration, Func, ParserNode, QualifiedRule, Root } from './parser-node';
+import { CommentNode, Declaration, ParserNode, Root } from './parser-node';
 /**
  * Generate AST from Tokens
  */
@@ -20,7 +19,7 @@ export class Parser extends TokenReader {
   public allowWhiteSpace(): { start: number; space: string } {
     const whiteSpaceStart = this.currentToken().start;
     let whiteSpace = '';
-    while (this.currentToken().type === TokenType.WHITESPACE) {
+    while (this.currentToken() && this.currentToken().type === TokenType.WHITESPACE) {
       whiteSpace += this.currentToken().raw;
       this.step();
     }
@@ -29,7 +28,6 @@ export class Parser extends TokenReader {
 
   /**
    * parse a stylesheet
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-stylesheet
    */
   public parseStyleSheet() {
     this.topLevel = true;
@@ -40,281 +38,98 @@ export class Parser extends TokenReader {
   }
 
   /**
-   * parse a list of rule
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-rules
-   */
-  public parseRuleList() {
-    this.topLevel = false;
-    return this.consumeRuleList();
-  }
-
-  /**
-   * parse a rule. Parse text into a single rule
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-rule
-   */
-  public parseRule() {
-    let rule: AtRule | QualifiedRule;
-    this.allowWhiteSpace();
-
-    switch (this.currentToken().type) {
-      case TokenType.EOF:
-        return this.error('Encounter <EOF-token> when parsing a rule');
-      case TokenType.ATKEYWORD:
-        rule = this.consumeAtRule();
-        break;
-      default:
-        rule = this.consumeQualifiedRule();
-        if (!rule) {
-          return this.error('No rule to return when parsing a rule');
-        }
-    }
-    this.allowWhiteSpace();
-    if (this.currentToken().type === TokenType.EOF) {
-      return rule;
-    }
-    return this.error('Unexpected ending when parsing a rule');
-  }
-
-  /**
-   * parse a declaration. Used in `@supports`
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-declaration
-   */
-  public parseDeclaration() {
-    this.allowWhiteSpace();
-    if (this.currentToken().type !== TokenType.IDENT) {
-      return this.error('Declaration in `@support` should start with a <IDENT-token>');
-    }
-    return this.consumeDeclaration();
-  }
-
-  /**
-   * parse a list of declarations
-   * https://www.w3.org/TR/css-syntax-3/#parse-a-list-of-declarations
-   */
-  public parseDeclarationList() {
-    // TODO consume declaration list
-  }
-
-  /**
-   * consume an at-rule
-   * https://www.w3.org/TR/css-syntax-3/#consume-an-at-rule
-   */
-  private consumeAtRule() {
-    const atRuleNode = new AtRule();
-    atRuleNode.name = this.currentToken().content;
-    this.step();
-    while (true) {
-      const currentToken = this.currentToken();
-      switch (currentToken.type) {
-        case TokenType.SEMI:
-          this.step();
-          return atRuleNode;
-        case TokenType.EOF:
-          return atRuleNode;
-        case TokenType.LEFT_CURLY_BRACKET:
-          atRuleNode.block = this.consumeSimpleBlock();
-          return atRuleNode;
-        // TODO simple block with an associated token of <{-token>
-        // case simple-block:
-        default:
-          atRuleNode.prelude.push(this.consumeComponent());
-      }
-    }
-  }
-  /**
-   * consume a component value
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-component-value
-   */
-  private consumeComponent(): Func | Block | Token {
-    const currentToken = this.currentToken();
-    switch (currentToken.type) {
-      case TokenType.LEFT_CURLY_BRACKET:
-      case TokenType.LEFT_PARENTHESIS:
-      case TokenType.LEFT_SQUARE_BRACKET:
-        return this.consumeSimpleBlock();
-      case TokenType.FUNCTION:
-        return this.consumeFunction();
-      default:
-        this.step();
-        return currentToken;
-    }
-  }
-
-  /**
-   * consume a declaration
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-declaration
-   */
-  private consumeDeclaration() {
-    const declNode = new Declaration();
-    declNode.name = this.currentToken().content;
-    this.step();
-    if (this.currentToken().type === TokenType.WHITESPACE) {
-      this.allowWhiteSpace();
-    }
-    if (this.currentToken().type !== TokenType.COLON) {
-      return null;
-    }
-    this.step(); // consume <COLON-token>
-    while (this.currentToken().type !== TokenType.EOF) {
-      declNode.value.push(this.currentToken());
-      this.step();
-    }
-    const lastToken = declNode.value.pop();
-    const beforeLastToken = declNode.value.pop();
-    if (lastToken.content === '!' && beforeLastToken.content.toLowerCase() === 'important') {
-      declNode.important = true;
-    } else {
-      declNode.value.push(beforeLastToken, lastToken);
-    }
-    return declNode;
-  }
-
-  /**
-   * consume a list of declarations
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-list-of-declarations
-   */
-  private consumeDeclarationList() {
-    const list: Array<Declaration | AtRule> = [];
-    while (true) {
-      switch (this.currentToken().type) {
-        case TokenType.WHITESPACE:
-        case TokenType.SEMI:
-          this.step();
-          break;
-        case TokenType.EOF:
-          return list;
-        case TokenType.ATKEYWORD:
-          list.push(this.consumeAtRule());
-          break;
-				case TokenType.IDENT:
-					// TODO 
-          generateDeclaration(this);
-      }
-    }
-    function generateDeclaration(parser: Parser) {
-      const tokenList: Token[] = [];
-      while (true) {
-        const currentToken = parser.currentToken();
-        if (currentToken.type === TokenType.EOF || currentToken.type === TokenType.SEMI) {
-          break;
-        }
-        tokenList.push(parser.currentToken());
-      }
-      tokenList.push(TokenFactory(TokenType.EOF, tokenList[tokenList.length - 1].start));
-      return;
-    }
-  }
-
-  /**
-   * consume a function
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-function
-   */
-
-  private consumeFunction() {
-    const funcNode = new Func();
-    funcNode.name = this.currentToken().content;
-    this.step();
-    while (true) {
-      switch (this.currentToken().type) {
-        case TokenType.EOF:
-          return funcNode;
-        case TokenType.RIGHT_PARENTHESIS:
-          this.step();
-          return funcNode;
-        default:
-          funcNode.addChild(this.consumeComponent());
-      }
-    }
-  }
-
-  /**
    * consume a list of rules
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-list-of-rules
    */
   private consumeRuleList(): ParserNode[] {
-    const rules: ParserNode[] = [];
+    const childNodes: ParserNode[] = [];
     while (this.currentToken().type !== TokenType.EOF) {
       switch (this.currentToken().type) {
         case TokenType.WHITESPACE:
+          this.step();
           break;
         case TokenType.CDO:
         case TokenType.CDC:
           if (this.topLevel) {
             this.step();
-          } else {
-            const qualified = this.consumeQualifiedRule();
-            if (qualified) {
-              rules.push(qualified);
-            }
           }
+          break;
+        case TokenType.COMMENT:
+          childNodes.push(new CommentNode(this.currentToken().content));
           break;
         case TokenType.ATKEYWORD:
-          rules.push(this.consumeAtRule());
+          // childNodes.push(this.consumeAtRule());
           break;
         default:
-          const qualifiedRule = this.consumeQualifiedRule();
-          if (qualifiedRule) {
-            rules.push(qualifiedRule);
-          }
+          // TODO
+          // qualified rule OR declaration
+          childNodes.push(this.other());
       }
     }
-    return rules;
+    return childNodes;
   }
 
-  /**
-   * consume a qualified rule
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-qualified-rule
-   */
-  private consumeQualifiedRule() {
-    const qualifiedRuleNode = new QualifiedRule();
+  private other() {
+    const tokens: Token[] = [];
     while (true) {
-      switch (this.currentToken().type) {
-        case TokenType.EOF:
-          return null;
-        case TokenType.LEFT_CURLY_BRACKET:
-          qualifiedRuleNode.block = this.consumeSimpleBlock();
-          return qualifiedRuleNode;
-        // TODO simpe block with an associated token of <{-token>
-        // case simple-block:
-        default:
-          qualifiedRuleNode.prelude.push(this.consumeComponent());
-      }
-    }
-  }
-
-  /**
-   * consume a simple block
-   * https://www.w3.org/TR/css-syntax-3/#consume-a-simple-block
-   */
-  private consumeSimpleBlock() {
-    const blockNode = new Block();
-    let currentToken = this.currentToken();
-    blockNode.associatedToken = currentToken;
-    this.step();
-    let endingTokenType: TokenType;
-    switch (currentToken.type) {
-      case TokenType.LEFT_CURLY_BRACKET:
-        endingTokenType = TokenType.RIGHT_CURLY_BRACKET;
-        break;
-      case TokenType.LEFT_PARENTHESIS:
-        endingTokenType = TokenType.RIGHT_PARENTHESIS;
-        break;
-      case TokenType.LEFT_SQUARE_BRACKET:
-        endingTokenType = TokenType.RIGHT_SQUARE_BRACKET;
-        break;
-    }
-
-    while (true) {
-      currentToken = this.currentToken();
-      switch (currentToken.type) {
-        case TokenType.EOF:
-          return blockNode;
-        case endingTokenType:
+      const currentToken = this.currentToken();
+      if (currentToken.type === TokenType.SEMI || currentToken.type === TokenType.EOF) {
+        // consume a declaration
+        if (currentToken.type === TokenType.SEMI) {
           this.step();
-          return blockNode;
-        default:
-          blockNode.addChild(this.consumeComponent());
+        }
+        return this.consumeDeclaration(tokens);
       }
+      if (currentToken.type === TokenType.LEFT_CURLY_BRACKET) {
+        // consume a qualified rule
+        break;
+      }
+      tokens.push(currentToken);
+      this.step();
     }
+  }
+
+  /**
+   * consume a declaration
+   */
+
+  private consumeDeclaration(tokens: Token[]) {
+    const parser = new Parser(tokens);
+    if (parser.currentToken().type !== TokenType.IDENT) {
+      throw this.error('Invalid declaration');
+    }
+    const declNode = new Declaration();
+    declNode.name = parser.currentToken().content;
+    declNode.source.raw += parser.currentToken().raw;
+    parser.step();
+    if (parser.currentToken() && parser.currentToken().type === TokenType.WHITESPACE) {
+      declNode.source.raw += parser.allowWhiteSpace().space;
+    }
+    if (!parser.currentToken() || parser.currentToken().type !== TokenType.COLON) {
+      throw this.error('Invalid declaration');
+    }
+    parser.step();
+    declNode.source.raw += ':';
+    while (true) {
+      const currentToken = parser.currentToken();
+      parser.step();
+      if (!currentToken) {
+        break;
+      }
+      if (currentToken.type !== TokenType.COMMENT && currentToken.type !== TokenType.WHITESPACE) {
+        declNode.value.push(currentToken);
+      }
+      declNode.source.raw += currentToken.raw;
+    }
+    if (declNode.value.length < 2) {
+      return declNode;
+    }
+    const lastToken = declNode.value.pop();
+    const beforeLastToken = declNode.value.pop();
+    if (beforeLastToken.content === '!' && lastToken.content.toLowerCase() === 'important') {
+      declNode.important = true;
+    } else {
+      declNode.value.push(beforeLastToken, lastToken);
+    }
+    return declNode;
   }
 }

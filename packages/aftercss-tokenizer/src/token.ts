@@ -40,8 +40,6 @@ export enum TokenType {
   URL = 'URL',
   WHITESPACE = 'WHITESPACE',
 }
-
-
 export interface IDimensionProp {
   repr: string;
   type: 'integer' | 'number';
@@ -70,6 +68,15 @@ export interface IUnicodeRangeProp {
   end: string;
 }
 
+export interface ITokenMap {
+  DIMENSION: DimensionToken;
+  HASH: HashToken;
+  NUMBER: NumberToken;
+  PERCENTAGE: PercentageToken;
+  UNICODE_RANGE: UnicodeRangeToken;
+  [prop: string]: Token;
+}
+
 export class Token {
   public type: TokenType = TokenType.ANY;
   public raw: string;
@@ -83,34 +90,8 @@ export class Token {
     this.start = start;
   }
 
-  // public checkType<T extends Token>(type: TokenType): this is T {
-  //   return this.type === type;
-  // }
-
-
-
-  public isDimensionToken(): this is DimensionToken {
-    return this.type === TokenType.DIMENSION;
-  }
-
-  public isHashToken(): this is HashToken {
-    return this.type === TokenType.HASH;
-  }
-
-  public isNumberToken(): this is NumberToken {
-    return this.type === TokenType.NUMBER;
-  }
-
-  public isPercentageToken(): this is PercentageToken {
-    return this.type === TokenType.PERCENTAGE;
-  }
-
-  public isUnicodeRangeToken(): this is UnicodeRangeToken {
-    return this.type === TokenType.UNICODE_RANGE;
-  }
-
-  public toString() {
-    return JSON.stringify(this, null, 2);
+  public checkType<T extends TokenType>(type: T): this is ITokenMap[T] {
+    return this.type === type;
   }
 }
 

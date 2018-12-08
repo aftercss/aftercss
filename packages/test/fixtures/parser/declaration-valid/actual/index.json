@@ -1,0 +1,25 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "DECLARATION",
+      "childNodes": [],
+      "source": {
+        "raw": "color : red/*comment*/"
+      },
+      "important": false,
+      "value": [
+        {
+          "type": "IDENT",
+          "raw": "red",
+          "content": "red",
+          "start": 11
+        }
+      ],
+      "name": "color"
+    }
+  ],
+  "source": {
+    "raw": ""
+  }
+}
