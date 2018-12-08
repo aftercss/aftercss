@@ -1,6 +1,4 @@
 // tslint:disable max-export classes-per-file max-classes-per-file
-import { SourceNode } from 'source-map';
-
 export enum TokenType {
   ANY = 'ANY',
   ATKEYWORD = 'ATKEYWORD',

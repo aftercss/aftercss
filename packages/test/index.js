@@ -4,8 +4,8 @@ const removeCommentTest = require('./fixtures/remove-comments');
 const sourcemapTest = require('./fixtures/sourcemap');
 const tokenTest = require('./fixtures/token/token.fixture');
 
-// afterTest.runTest();
-// alltokensTest.runTest();
-// removeCommentTest.runTest();
+afterTest.runTest();
+alltokensTest.runTest();
+removeCommentTest.runTest();
 sourcemapTest.runTest();
-// tokenTest.runTest();
+tokenTest.runTest();

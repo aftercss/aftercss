@@ -6,7 +6,6 @@ import { CSSTokenizer } from '../tokenizer/css-tokenizer';
 
 export class TokenReaderWithSourceMap extends TokenReader {
   public context: AfterContext;
-  public sourceNodes: SourceNode[] = [];
 
   public constructor(tokenizer: CSSTokenizer);
   public constructor(tokens: Token[], context: AfterContext);
@@ -24,24 +23,13 @@ export class TokenReaderWithSourceMap extends TokenReader {
     }
   }
 
-  public getNextToken() {
-    const token = this.currentToken();
-    const { line, column } = this.context.getLocation(token.start);
-    const sourceNode = new SourceNode(line, column, token.raw);
-    this.sourceNodes.push(sourceNode);
-    return super.getNextToken();
-  }
-
-  public step() {
-    const token = this.currentToken();
-    const { line, column } = this.context.getLocation(token.start);
-    const sourceNode = new SourceNode(line, column, token.raw);
-    this.sourceNodes.push(sourceNode);
-    super.step();
-  }
-
-  public generateSourceMap() {
-    return new SourceNode(1, 0, this.context.sourcePath, this.sourceNodes)
+  public generateSourceMap(tokens: Token[]) {
+    const sourceNodes = tokens.map(token => {
+      const { line, column } = this.context.getLocation(token.start);
+      const sourceNode = new SourceNode(line, column, this.context.fileName, token.raw);
+      return sourceNode;
+    });
+    return new SourceNode(1, 0, this.context.fileName, sourceNodes)
       .toStringWithSourceMap({
         file: this.context.fileName,
       })

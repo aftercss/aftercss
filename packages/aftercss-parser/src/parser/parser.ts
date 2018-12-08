@@ -1,6 +1,5 @@
 import { MessageCollection } from '@aftercss/shared';
-import { Token, TokenType } from '@aftercss/tokenizer';
-import { TokenReader } from './../stream-token/token-reader';
+import { Token, TokenReader, TokenType } from '@aftercss/tokenizer';
 import { CSSSyntaxError } from './parser-error';
 import { ParserNode, Root } from './parser-node';
 /**

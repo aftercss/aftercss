@@ -12,7 +12,7 @@ class AllTokensFixture extends BaseFixture {
     const context = new AfterContext({
       fileContent: content,
       sourceMap: true,
-      sourcePath: '../src/app.css',
+      sourcePath: './../app.css',
       fileName: 'app.css',
     });
     const tokenizer = new CSSTokenizer(context);
@@ -35,7 +35,7 @@ class AllTokensFixture extends BaseFixture {
       res += token.raw;
     }
     debugger;
-    const sourcemapContent = tokenReader.generateSourceMap();
+    const sourcemapContent = tokenReader.generateSourceMap(tokens);
     await this.writeFile('actual', sourcemapContent, 'index.css.map');
     res += '/*# sourceMappingURL=index.css.map */';
     await this.writeFile('actual', res, 'index.css');
