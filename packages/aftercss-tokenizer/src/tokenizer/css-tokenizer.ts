@@ -273,7 +273,7 @@ export class CSSTokenizer extends BaseTokenizer {
    *  https://www.w3.org/TR/css-syntax-3/#consume-a-token
    * 	return a single token of any type
    */
-  public getNextToken() {
+  public nextToken() {
     if (this.isEof()) {
       return TokenFactory(TokenType.EOF, this.current);
     }
@@ -421,30 +421,5 @@ export class CSSTokenizer extends BaseTokenizer {
 
         return this.delimToken();
     }
-  }
-  public nextToken() {
-    const token = this.getNextToken();
-    if (!this.context.sourceMap) {
-      return token;
-    } else {
-      const { line, column } = this.context.getLocation(token.start);
-      token.sourceNode = new SourceNode(line, column, this.context.sourcePath, token.raw);
-      return token;
-    }
-  }
-
-  public generateSourceMap(tokens: Token[]) {
-    const sourceNodes: SourceNode[] = [];
-    for (const token of tokens) {
-      if (token.type === 'EOF') {
-        break;
-      }
-      sourceNodes.push(token.sourceNode);
-    }
-    return new SourceNode(1, 0, this.context.sourcePath, sourceNodes)
-      .toStringWithSourceMap({
-        file: this.context.fileName,
-      })
-      .map.toString();
   }
 }

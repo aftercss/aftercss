@@ -1,6 +1,4 @@
 // tslint:disable max-export classes-per-file max-classes-per-file
-import { SourceNode } from 'source-map';
-
 export enum TokenType {
   ANY = 'ANY',
   ATKEYWORD = 'ATKEYWORD',
@@ -82,7 +80,6 @@ export class Token {
   public raw: string;
   public content: string;
   public start: number;
-  public sourceNode: SourceNode;
   public constructor(type: TokenType, start: number, raw?: string, content?: string) {
     this.type = type;
     this.raw = raw;
@@ -185,6 +182,23 @@ export function TokenFactory(type: TokenType, start: number, raw?: string, conte
     case TokenType.UNICODE_RANGE:
       return new UnicodeRangeToken(type, start, raw, content);
     default:
+      /**
+       * Others are exactly like Token.
+       * So just create a Token.
+       */
       return new Token(type, start, raw, content);
   }
+}
+
+export interface ITokenTypeToType {
+  DIMENSION: DimensionToken;
+  HASH: HashToken;
+  NUMBER: NumberToken;
+  PERCENTAGE: PercentageToken;
+  UNICODE_RANGE: UnicodeRangeToken;
+  [key: string]: Token;
+}
+
+export function isTokenType<T extends TokenType>(token: Token, tokenType: T): token is ITokenTypeToType[T] {
+  return token.type === tokenType;
 }
