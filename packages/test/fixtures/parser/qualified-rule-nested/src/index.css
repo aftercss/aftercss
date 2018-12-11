@@ -1,0 +1,6 @@
+.outer{
+	color: red;
+	.inner{
+		background: black;
+	}
+}

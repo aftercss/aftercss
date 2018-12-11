@@ -6,7 +6,7 @@
       "childNodes": [],
       "source": {
         "from": 0,
-        "to": 22
+        "to": 9
       },
       "important": false,
       "value": [
@@ -14,7 +14,7 @@
           "type": "IDENT",
           "raw": "red",
           "content": "red",
-          "start": 11
+          "start": 9
         }
       ],
       "name": "color"
@@ -22,6 +22,6 @@
   ],
   "source": {
     "from": 0,
-    "to": 23
+    "to": 9
   }
 }

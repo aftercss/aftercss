@@ -1,5 +1,5 @@
 import { MessageCollection } from '@aftercss/shared';
-import { Token } from './../token';
+import { Token, TokenFactory, TokenType } from './../token';
 import { CSSTokenizer } from './../tokenizer/css-tokenizer';
 
 export enum TokenReaderType {
@@ -49,6 +49,11 @@ export class TokenReader {
 
   public currentToken(): Token {
     if (this.readerType === TokenReaderType.TokenList) {
+      const length = this.tokenList.length;
+      if (this.currentIndex >= length) {
+        const start = length > 0 ? this.tokenList[length - 1].start : 0;
+        return TokenFactory(TokenType.EOF, start);
+      }
       return this.tokenList[this.currentIndex];
     } else {
       return this.$currentToken;

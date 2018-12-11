@@ -1,0 +1,91 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 9,
+            "to": 19
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "red",
+              "content": "red",
+              "start": 19
+            }
+          ],
+          "name": "color"
+        },
+        {
+          "type": "QUALIFIEDRULE",
+          "childNodes": [
+            {
+              "type": "DECLARATION",
+              "childNodes": [],
+              "source": {
+                "from": 32,
+                "to": 49
+              },
+              "important": false,
+              "value": [
+                {
+                  "type": "IDENT",
+                  "raw": "black",
+                  "content": "black",
+                  "start": 49
+                }
+              ],
+              "name": "background"
+            }
+          ],
+          "source": {
+            "from": 22,
+            "to": 53
+          },
+          "prelude": [
+            {
+              "type": "DELIM",
+              "raw": ".",
+              "content": ".",
+              "start": 23
+            },
+            {
+              "type": "IDENT",
+              "raw": "inner",
+              "content": "inner",
+              "start": 28
+            }
+          ]
+        }
+      ],
+      "source": {
+        "from": 0,
+        "to": 55
+      },
+      "prelude": [
+        {
+          "type": "DELIM",
+          "raw": ".",
+          "content": ".",
+          "start": 1
+        },
+        {
+          "type": "IDENT",
+          "raw": "outer",
+          "content": "outer",
+          "start": 6
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 55
+  }
+}

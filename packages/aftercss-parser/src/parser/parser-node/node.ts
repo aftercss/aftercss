@@ -4,17 +4,17 @@ import { Token } from '@aftercss/tokenizer';
 // tslint:disable max-classes-per-file
 export enum ParserNodeType {
   ANY = 'ANY',
-  BAD_DECLARATION = 'BAD_DECLARATION',
-  ROOT = 'ROOT',
   ATRULE = 'ATRULE',
   COMMENT = 'COMMENT',
   DECLARATION = 'DECLARATION',
   FUNCTION = 'FUNCTION',
   QUALIFIEDRULE = 'QUALIFIEDRULE',
+  ROOT = 'ROOT',
 }
 
 export interface ISource {
-  raw: string;
+  from: number;
+  to: number;
 }
 export class ParserNode {
   public type: ParserNodeType;
@@ -24,7 +24,8 @@ export class ParserNode {
     this.type = type;
     this.childNodes = [];
     this.source = {
-      raw: '',
+      from: 0,
+      to: 0,
     };
   }
   public clone() {
@@ -36,12 +37,14 @@ export class ParserNode {
   }
 }
 
-export class FunctionNode {
+export class FunctionNode extends ParserNode {
   public name: string;
   public type: ParserNodeType;
-  public value: Token[];
+  public value: Array<Token | ParserNode>;
   public constructor() {
-    this.type = ParserNodeType.FUNCTION;
+    super(ParserNodeType.FUNCTION);
+    this.name = '';
+    this.value = [];
   }
 }
 
@@ -55,7 +58,7 @@ export class CommentNode extends ParserNode {
 
 export class AtRule extends ParserNode {
   public name: string;
-  public prelude: Array<ParserNode | Token>;
+  public prelude: Array<FunctionNode | Token>;
   public constructor() {
     super(ParserNodeType.ATRULE);
   }
@@ -76,18 +79,11 @@ export class Root extends ParserNode {
 
 export class Declaration extends ParserNode {
   public name: string;
-  public value: Token[];
+  public value: Array<FunctionNode | Token>;
   public important: boolean;
   public constructor() {
     super(ParserNodeType.DECLARATION);
     this.important = false;
     this.value = [];
-  }
-}
-
-export class BadDeclaration extends ParserNode {
-  public content: string;
-  public constructor() {
-    super(ParserNodeType.BAD_DECLARATION);
   }
 }

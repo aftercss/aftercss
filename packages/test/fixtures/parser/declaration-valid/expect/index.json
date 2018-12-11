@@ -5,7 +5,8 @@
       "type": "DECLARATION",
       "childNodes": [],
       "source": {
-        "raw": "color : red/*comment*/"
+        "from": 0,
+        "to": 22
       },
       "important": false,
       "value": [
@@ -20,6 +21,7 @@
     }
   ],
   "source": {
-    "raw": ""
+    "from": 0,
+    "to": 23
   }
 }

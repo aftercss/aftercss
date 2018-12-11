@@ -38,6 +38,10 @@ module.exports = {
         tokenFixture.runTask(`${item}`);
       }
     });
+
+    // const item = 'qualified-rule-valid';
+    // const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
+    // tokenFixture.runTask(`${item}`);
   },
 };
 

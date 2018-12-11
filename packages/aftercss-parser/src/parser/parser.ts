@@ -1,7 +1,7 @@
 import { MessageCollection } from '@aftercss/shared';
 import { Token, TokenReader, TokenType } from '@aftercss/tokenizer';
 import { CSSSyntaxError } from './parser-error';
-import { CommentNode, Declaration, ParserNode, Root } from './parser-node';
+import { CommentNode, Declaration, FunctionNode, ParserNode, QualifiedRule, Root } from './parser-node';
 /**
  * Generate AST from Tokens
  */
@@ -19,7 +19,7 @@ export class Parser extends TokenReader {
   public allowWhiteSpace(): { start: number; space: string } {
     const whiteSpaceStart = this.currentToken().start;
     let whiteSpace = '';
-    while (this.currentToken() && this.currentToken().type === TokenType.WHITESPACE) {
+    while (this.currentToken().type === TokenType.WHITESPACE) {
       whiteSpace += this.currentToken().raw;
       this.step();
     }
@@ -34,6 +34,7 @@ export class Parser extends TokenReader {
     const rules = this.consumeRuleList();
     const root = new Root();
     root.childNodes = rules;
+    root.source.to = this.currentToken().start;
     return root;
   }
 
@@ -72,19 +73,18 @@ export class Parser extends TokenReader {
     const tokens: Token[] = [];
     while (true) {
       const currentToken = this.currentToken();
-      if (currentToken.type === TokenType.SEMI || currentToken.type === TokenType.EOF) {
-        // consume a declaration
-        if (currentToken.type === TokenType.SEMI) {
-          this.step();
-        }
-        return this.consumeDeclaration(tokens);
-      }
-      if (currentToken.type === TokenType.LEFT_CURLY_BRACKET) {
-        // consume a qualified rule
-        break;
-      }
-      tokens.push(currentToken);
       this.step();
+      switch (currentToken.type) {
+        case TokenType.EOF:
+        case TokenType.SEMI:
+          return this.consumeDeclaration(tokens);
+        case TokenType.LEFT_CURLY_BRACKET:
+          return this.consumeQualifiedRule(tokens);
+        case TokenType.WHITESPACE:
+          break;
+        default:
+          tokens.push(currentToken);
+      }
     }
   }
 
@@ -98,38 +98,101 @@ export class Parser extends TokenReader {
       throw this.error('Invalid declaration');
     }
     const declNode = new Declaration();
+    declNode.source.from = parser.currentToken().start - parser.currentToken().raw.length;
     declNode.name = parser.currentToken().content;
-    declNode.source.raw += parser.currentToken().raw;
     parser.step();
-    if (parser.currentToken() && parser.currentToken().type === TokenType.WHITESPACE) {
-      declNode.source.raw += parser.allowWhiteSpace().space;
-    }
-    if (!parser.currentToken() || parser.currentToken().type !== TokenType.COLON) {
+    if (parser.currentToken().type !== TokenType.COLON) {
       throw this.error('Invalid declaration');
     }
     parser.step();
-    declNode.source.raw += ':';
-    while (true) {
+    while (parser.currentToken().type !== TokenType.EOF) {
       const currentToken = parser.currentToken();
-      parser.step();
-      if (!currentToken) {
-        break;
+      switch (currentToken.type) {
+        case TokenType.COMMENT:
+          parser.step();
+          break;
+        case TokenType.FUNCTION:
+          const functionNode = parser.consumeFunction();
+          declNode.value.push(functionNode);
+          break;
+        default:
+          parser.step();
+          declNode.value.push(currentToken);
       }
-      if (currentToken.type !== TokenType.COMMENT && currentToken.type !== TokenType.WHITESPACE) {
-        declNode.value.push(currentToken);
-      }
-      declNode.source.raw += currentToken.raw;
     }
+    declNode.source.to = parser.currentToken().start;
     if (declNode.value.length < 2) {
       return declNode;
     }
     const lastToken = declNode.value.pop();
     const beforeLastToken = declNode.value.pop();
-    if (beforeLastToken.content === '!' && lastToken.content.toLowerCase() === 'important') {
+    if (
+      lastToken instanceof Token &&
+      beforeLastToken instanceof Token &&
+      beforeLastToken.content === '!' &&
+      lastToken.content.toLowerCase() === 'important'
+    ) {
       declNode.important = true;
     } else {
       declNode.value.push(beforeLastToken, lastToken);
     }
     return declNode;
+  }
+
+  /**
+   * consume a function Node
+   */
+  private consumeFunction() {
+    const funcNode = new FunctionNode();
+    funcNode.name = this.currentToken().content;
+    funcNode.source.from = this.currentToken().start - this.currentToken().raw.length;
+    this.step();
+    while (true) {
+      const currentToken = this.currentToken();
+      switch (currentToken.type) {
+        case TokenType.EOF:
+          throw this.error('Encounter unclosed block when consuming Function Node');
+        case TokenType.RIGHT_PARENTHESIS:
+          funcNode.source.to = this.currentToken().start;
+          this.step();
+          return funcNode;
+        case TokenType.FUNCTION:
+          const childNode = this.consumeFunction();
+          funcNode.value.push(childNode);
+          break;
+        case TokenType.COMMENT:
+        case TokenType.WHITESPACE:
+          this.step();
+          break;
+        default:
+          this.step();
+          funcNode.value.push(currentToken);
+      }
+    }
+  }
+
+  /**
+   * consume a qualified rule
+   */
+  private consumeQualifiedRule(tokens: Token[]) {
+    if (tokens.length === 0) {
+      throw this.error('No selector exists in a qualified rule');
+    }
+    const rule = new QualifiedRule();
+    rule.prelude = tokens;
+    rule.source.from = tokens[0].start - tokens[0].raw.length;
+    while (true) {
+      this.allowWhiteSpace();
+      const currentToken = this.currentToken();
+      if (currentToken.type === TokenType.EOF) {
+        throw this.error('Encountering unclosed block when consuming a qualified rule');
+      }
+      if (currentToken.type === TokenType.RIGHT_CURLY_BRACKET) {
+        rule.source.to = this.currentToken().start;
+        this.step();
+        return rule;
+      }
+      rule.addChild(this.other());
+    }
   }
 }

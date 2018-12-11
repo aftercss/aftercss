@@ -5,21 +5,112 @@
       "type": "DECLARATION",
       "childNodes": [],
       "source": {
-        "raw": "color: red !important"
+        "from": 0,
+        "to": 74
       },
       "important": true,
       "value": [
         {
-          "type": "IDENT",
-          "raw": "red",
-          "content": "red",
-          "start": 10
+          "type": "FUNCTION",
+          "childNodes": [],
+          "source": {
+            "from": 12,
+            "to": 63
+          },
+          "name": "linear-gradient",
+          "value": [
+            {
+              "type": "DIMENSION",
+              "raw": "217deg",
+              "start": 34,
+              "numberType": "integer",
+              "repr": "217",
+              "unit": "deg",
+              "value": 217
+            },
+            {
+              "type": "COMMA",
+              "raw": ",",
+              "start": 35
+            },
+            {
+              "type": "FUNCTION",
+              "childNodes": [],
+              "source": {
+                "from": 36,
+                "to": 54
+              },
+              "name": "rgba",
+              "value": [
+                {
+                  "type": "NUMBER",
+                  "raw": "255",
+                  "start": 44,
+                  "numberType": "integer",
+                  "repr": "255",
+                  "value": 255
+                },
+                {
+                  "type": "COMMA",
+                  "raw": ",",
+                  "start": 45
+                },
+                {
+                  "type": "NUMBER",
+                  "raw": "0",
+                  "start": 47,
+                  "numberType": "integer",
+                  "repr": "0",
+                  "value": 0
+                },
+                {
+                  "type": "COMMA",
+                  "raw": ",",
+                  "start": 48
+                },
+                {
+                  "type": "NUMBER",
+                  "raw": "0",
+                  "start": 50,
+                  "numberType": "integer",
+                  "repr": "0",
+                  "value": 0
+                },
+                {
+                  "type": "COMMA",
+                  "raw": ",",
+                  "start": 51
+                },
+                {
+                  "type": "NUMBER",
+                  "raw": "0",
+                  "start": 53,
+                  "numberType": "integer",
+                  "repr": "0",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "type": "COMMA",
+              "raw": ",",
+              "start": 55
+            },
+            {
+              "type": "PERCENTAGE",
+              "raw": "70.71%",
+              "start": 62,
+              "repr": "70.71",
+              "value": 70.71
+            }
+          ]
         }
       ],
-      "name": "color"
+      "name": "background"
     }
   ],
   "source": {
-    "raw": ""
+    "from": 0,
+    "to": 75
   }
 }
