@@ -1,0 +1,62 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 5,
+            "to": 17
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "black",
+              "content": "black",
+              "start": 17
+            }
+          ],
+          "name": "color"
+        },
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 20,
+            "to": 37
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "white",
+              "content": "white",
+              "start": 37
+            }
+          ],
+          "name": "background"
+        }
+      ],
+      "source": {
+        "from": 0,
+        "to": 40
+      },
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "a",
+          "content": "a",
+          "start": 1
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 40
+  }
+}

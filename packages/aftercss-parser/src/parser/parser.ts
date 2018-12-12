@@ -55,7 +55,8 @@ export class Parser extends TokenReader {
           }
           break;
         case TokenType.COMMENT:
-          childNodes.push(new CommentNode(this.currentToken().content));
+          childNodes.push(new CommentNode(this.currentToken()));
+          this.step();
           break;
         case TokenType.ATKEYWORD:
           // childNodes.push(this.consumeAtRule());
@@ -73,16 +74,32 @@ export class Parser extends TokenReader {
     const tokens: Token[] = [];
     while (true) {
       const currentToken = this.currentToken();
-      this.step();
       switch (currentToken.type) {
+        case TokenType.COMMENT:
+          this.step();
+          if (tokens.length === 0) {
+            return new CommentNode(currentToken);
+          }
+          tokens.push(currentToken);
+          break;
         case TokenType.EOF:
         case TokenType.SEMI:
+          this.step();
           return this.consumeDeclaration(tokens);
+        case TokenType.RIGHT_CURLY_BRACKET:
+          if (tokens.length !== 0) {
+            return this.consumeDeclaration(tokens);
+          }
+          throw this.error('Unexpected {');
+          break;
         case TokenType.LEFT_CURLY_BRACKET:
+          this.step();
           return this.consumeQualifiedRule(tokens);
         case TokenType.WHITESPACE:
+          this.step();
           break;
         default:
+          this.step();
           tokens.push(currentToken);
       }
     }

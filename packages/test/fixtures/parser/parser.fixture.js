@@ -39,7 +39,7 @@ module.exports = {
       }
     });
 
-    // const item = 'qualified-rule-valid';
+    // const item = 'escape';
     // const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
     // tokenFixture.runTask(`${item}`);
   },

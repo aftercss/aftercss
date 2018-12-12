@@ -5,11 +5,20 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [
         {
-          "type": "DECLARATION",
+          "type": "COMMENT",
           "childNodes": [],
           "source": {
             "from": 18,
-            "to": 28
+            "to": 31
+          },
+          "content": "/* comment */"
+        },
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 33,
+            "to": 43
           },
           "important": false,
           "value": [
@@ -17,7 +26,7 @@
               "type": "IDENT",
               "raw": "red",
               "content": "red",
-              "start": 28
+              "start": 43
             }
           ],
           "name": "color"
@@ -25,7 +34,7 @@
       ],
       "source": {
         "from": 0,
-        "to": 31
+        "to": 45
       },
       "prelude": [
         {
@@ -58,6 +67,6 @@
   ],
   "source": {
     "from": 0,
-    "to": 31
+    "to": 45
   }
 }

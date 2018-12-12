@@ -1,5 +1,5 @@
 import { MessageCollection } from '@aftercss/shared';
-import { Token } from '@aftercss/tokenizer';
+import { Token, TokenReaderWithSourceMap } from '@aftercss/tokenizer';
 
 // tslint:disable max-classes-per-file
 export enum ParserNodeType {
@@ -50,9 +50,11 @@ export class FunctionNode extends ParserNode {
 
 export class CommentNode extends ParserNode {
   public content: string;
-  public constructor(content: string) {
+  public constructor(token: Token) {
     super(ParserNodeType.COMMENT);
-    this.content = content;
+    this.content = token.raw;
+    this.source.from = token.start - token.raw.length;
+    this.source.to = token.start;
   }
 }
 

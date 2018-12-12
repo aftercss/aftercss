@@ -1,0 +1,30 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [],
+      "source": {
+        "from": 0,
+        "to": 14
+      },
+      "prelude": [
+        {
+          "type": "COLON",
+          "raw": ":",
+          "start": 1
+        },
+        {
+          "type": "IDENT",
+          "raw": "fullscreen",
+          "content": "fullscreen",
+          "start": 11
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 14
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [],
+      "source": {
+        "from": 0,
+        "to": 8
+      },
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "a",
+          "content": "a",
+          "start": 1
+        },
+        {
+          "type": "COMMENT",
+          "raw": "/**/",
+          "content": "",
+          "start": 5
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 8
+  }
+}

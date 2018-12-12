@@ -1,0 +1,178 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "COMMENT",
+      "childNodes": [],
+      "source": {
+        "from": 0,
+        "to": 24
+      },
+      "content": "/* a { color: black } */"
+    },
+    {
+      "type": "COMMENT",
+      "childNodes": [],
+      "source": {
+        "from": 25,
+        "to": 29
+      },
+      "content": "/**/"
+    },
+    {
+      "type": "COMMENT",
+      "childNodes": [],
+      "source": {
+        "from": 30,
+        "to": 35
+      },
+      "content": "/* */"
+    },
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [
+        {
+          "type": "COMMENT",
+          "childNodes": [],
+          "source": {
+            "from": 43,
+            "to": 55
+          },
+          "content": "/* inside */"
+        },
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 57,
+            "to": 69
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "black",
+              "content": "black",
+              "start": 69
+            }
+          ],
+          "name": "color"
+        },
+        {
+          "type": "COMMENT",
+          "childNodes": [],
+          "source": {
+            "from": 72,
+            "to": 85
+          },
+          "content": "/* between */"
+        },
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 87,
+            "to": 122
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "DIMENSION",
+              "raw": "3px",
+              "start": 105,
+              "numberType": "integer",
+              "repr": "3",
+              "unit": "px",
+              "value": 3
+            },
+            {
+              "type": "DELIM",
+              "raw": "/",
+              "content": "/",
+              "start": 107
+            },
+            {
+              "type": "DIMENSION",
+              "raw": "7px",
+              "start": 111,
+              "numberType": "integer",
+              "repr": "7",
+              "unit": "px",
+              "value": 7
+            }
+          ],
+          "name": "border-radius"
+        }
+      ],
+      "source": {
+        "from": 36,
+        "to": 124
+      },
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "div",
+          "content": "div",
+          "start": 39
+        }
+      ]
+    },
+    {
+      "type": "COMMENT",
+      "childNodes": [],
+      "source": {
+        "from": 125,
+        "to": 132
+      },
+      "content": "/* b */"
+    },
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [
+        {
+          "type": "DECLARATION",
+          "childNodes": [],
+          "source": {
+            "from": 139,
+            "to": 151
+          },
+          "important": false,
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "black",
+              "content": "black",
+              "start": 151
+            }
+          ],
+          "name": "color"
+        },
+        {
+          "type": "COMMENT",
+          "childNodes": [],
+          "source": {
+            "from": 154,
+            "to": 161
+          },
+          "content": "/* c */"
+        }
+      ],
+      "source": {
+        "from": 134,
+        "to": 163
+      },
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "a",
+          "content": "a",
+          "start": 135
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 163
+  }
+}

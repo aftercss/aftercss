@@ -1,0 +1,169 @@
+{
+  "type": "ROOT",
+  "childNodes": [
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [
+        {
+          "type": "QUALIFIEDRULE",
+          "childNodes": [
+            {
+              "type": "DECLARATION",
+              "childNodes": [],
+              "source": {
+                "from": 29,
+                "to": 37
+              },
+              "important": false,
+              "value": [
+                {
+                  "type": "NUMBER",
+                  "raw": "0",
+                  "start": 37,
+                  "numberType": "integer",
+                  "repr": "0",
+                  "value": 0
+                }
+              ],
+              "name": "width"
+            },
+            {
+              "type": "DECLARATION",
+              "childNodes": [],
+              "source": {
+                "from": 43,
+                "to": 52
+              },
+              "important": false,
+              "value": [
+                {
+                  "type": "NUMBER",
+                  "raw": "0",
+                  "start": 52,
+                  "numberType": "integer",
+                  "repr": "0",
+                  "value": 0
+                }
+              ],
+              "name": "height"
+            }
+          ],
+          "source": {
+            "from": 10,
+            "to": 57
+          },
+          "prelude": [
+            {
+              "type": "DELIM",
+              "raw": "-",
+              "content": "-",
+              "start": 11
+            },
+            {
+              "type": "IDENT",
+              "raw": "-zero-size",
+              "content": "-zero-size",
+              "start": 21
+            },
+            {
+              "type": "COLON",
+              "raw": ":",
+              "start": 22
+            }
+          ]
+        },
+        {
+          "type": "QUALIFIEDRULE",
+          "childNodes": [
+            {
+              "type": "DECLARATION",
+              "childNodes": [],
+              "source": {
+                "from": 80,
+                "to": 91
+              },
+              "important": false,
+              "value": [
+                {
+                  "type": "DIMENSION",
+                  "raw": "16px",
+                  "start": 91,
+                  "numberType": "integer",
+                  "repr": "16",
+                  "unit": "px",
+                  "value": 16
+                }
+              ],
+              "name": "width"
+            },
+            {
+              "type": "DECLARATION",
+              "childNodes": [],
+              "source": {
+                "from": 97,
+                "to": 109
+              },
+              "important": false,
+              "value": [
+                {
+                  "type": "DIMENSION",
+                  "raw": "16px",
+                  "start": 109,
+                  "numberType": "integer",
+                  "repr": "16",
+                  "unit": "px",
+                  "value": 16
+                }
+              ],
+              "name": "height"
+            }
+          ],
+          "source": {
+            "from": 60,
+            "to": 114
+          },
+          "prelude": [
+            {
+              "type": "DELIM",
+              "raw": "-",
+              "content": "-",
+              "start": 61
+            },
+            {
+              "type": "IDENT",
+              "raw": "-small-icon",
+              "content": "-small-icon",
+              "start": 72
+            },
+            {
+              "type": "COLON",
+              "raw": ":",
+              "start": 73
+            }
+          ]
+        }
+      ],
+      "source": {
+        "from": 0,
+        "to": 116
+      },
+      "prelude": [
+        {
+          "type": "COLON",
+          "raw": ":",
+          "start": 1
+        },
+        {
+          "type": "IDENT",
+          "raw": "root",
+          "content": "root",
+          "start": 5
+        }
+      ]
+    }
+  ],
+  "source": {
+    "from": 0,
+    "to": 116
+  }
+}
