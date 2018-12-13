@@ -7,15 +7,13 @@ export enum EAtRuleName {
   import = 'import',
 }
 
-export enum kAtRuleRawName {
-  afterName = 'afterName',
+export interface IAtRuleRaw {
+  afterName: string;
 }
-
-export type AtRuleRaw = Map<kAtRuleRawName, string>;
 /**
  * atRule will be with @keyframes @import
  */
-export class AtRule extends ParserNode<AtRuleRaw> {
+export class AtRule extends ParserNode<IAtRuleRaw> {
   public type = EParserNodeType.AtRule;
   public name: EAtRuleName;
   public constructor(name: EAtRuleName) {

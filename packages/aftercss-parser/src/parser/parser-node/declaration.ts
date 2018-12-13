@@ -1,13 +1,11 @@
 import { EParserNodeType, ParserNode } from './node';
 
-export enum kDeclarationRawName {
-  beforeColon = 'beforeColon',
-  afterColon = 'afterColon',
+export interface IDeclarationRaw {
+  beforeColon: string;
+  afterColon: string;
 }
 
-export type DeclarationRaw = Map<kDeclarationRawName, string>;
-
-export class Declaration extends ParserNode<DeclarationRaw> {
+export class Declaration extends ParserNode<IDeclarationRaw> {
   public prop: string;
   public value: string;
   public important: boolean;
