@@ -9,6 +9,14 @@
         "to": 9
       },
       "important": false,
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "color",
+          "content": "color",
+          "start": 5
+        }
+      ],
       "value": [
         {
           "type": "IDENT",

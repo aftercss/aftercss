@@ -15,6 +15,14 @@
                 "to": 37
               },
               "important": false,
+              "prelude": [
+                {
+                  "type": "IDENT",
+                  "raw": "width",
+                  "content": "width",
+                  "start": 34
+                }
+              ],
               "value": [
                 {
                   "type": "NUMBER",
@@ -35,6 +43,14 @@
                 "to": 52
               },
               "important": false,
+              "prelude": [
+                {
+                  "type": "IDENT",
+                  "raw": "height",
+                  "content": "height",
+                  "start": 49
+                }
+              ],
               "value": [
                 {
                   "type": "NUMBER",
@@ -83,6 +99,14 @@
                 "to": 91
               },
               "important": false,
+              "prelude": [
+                {
+                  "type": "IDENT",
+                  "raw": "width",
+                  "content": "width",
+                  "start": 85
+                }
+              ],
               "value": [
                 {
                   "type": "DIMENSION",
@@ -104,6 +128,14 @@
                 "to": 109
               },
               "important": false,
+              "prelude": [
+                {
+                  "type": "IDENT",
+                  "raw": "height",
+                  "content": "height",
+                  "start": 103
+                }
+              ],
               "value": [
                 {
                   "type": "DIMENSION",

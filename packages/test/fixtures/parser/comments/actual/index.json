@@ -48,6 +48,14 @@
             "to": 69
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "color",
+              "content": "color",
+              "start": 62
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
@@ -75,6 +83,14 @@
             "to": 122
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "border-radius",
+              "content": "border-radius",
+              "start": 100
+            }
+          ],
           "value": [
             {
               "type": "DIMENSION",
@@ -99,6 +115,15 @@
               "repr": "7",
               "unit": "px",
               "value": 7
+            },
+            {
+              "type": "COMMENT",
+              "childNodes": [],
+              "source": {
+                "from": 113,
+                "to": 122
+              },
+              "content": "/* end */"
             }
           ],
           "name": "border-radius"
@@ -137,6 +162,14 @@
             "to": 151
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "color",
+              "content": "color",
+              "start": 144
+            }
+          ],
           "value": [
             {
               "type": "IDENT",

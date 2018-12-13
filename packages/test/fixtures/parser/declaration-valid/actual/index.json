@@ -9,12 +9,29 @@
         "to": 22
       },
       "important": false,
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "color",
+          "content": "color",
+          "start": 5
+        }
+      ],
       "value": [
         {
           "type": "IDENT",
           "raw": "red",
           "content": "red",
           "start": 11
+        },
+        {
+          "type": "COMMENT",
+          "childNodes": [],
+          "source": {
+            "from": 11,
+            "to": 22
+          },
+          "content": "/*comment*/"
         }
       ],
       "name": "color"

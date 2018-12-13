@@ -10,6 +10,7 @@ export enum ParserNodeType {
   FUNCTION = 'FUNCTION',
   QUALIFIEDRULE = 'QUALIFIEDRULE',
   ROOT = 'ROOT',
+  SQUAREBRACKET = 'SQUAREBRACKET',
 }
 
 export interface ISource {
@@ -19,6 +20,7 @@ export interface ISource {
 export class ParserNode {
   public type: ParserNodeType;
   public childNodes: ParserNode[];
+  public prelude: Array<Token | ParserNode>;
   public source: ISource;
   public constructor(type: ParserNodeType) {
     this.type = type;
@@ -39,11 +41,18 @@ export class ParserNode {
 
 export class FunctionNode extends ParserNode {
   public name: string;
-  public type: ParserNodeType;
   public value: Array<Token | ParserNode>;
   public constructor() {
     super(ParserNodeType.FUNCTION);
     this.name = '';
+    this.value = [];
+  }
+}
+
+export class SquareBracket extends ParserNode {
+  public value: Array<Token | ParserNode>;
+  public constructor() {
+    super(ParserNodeType.SQUAREBRACKET);
     this.value = [];
   }
 }
@@ -60,16 +69,15 @@ export class CommentNode extends ParserNode {
 
 export class AtRule extends ParserNode {
   public name: string;
-  public prelude: Array<FunctionNode | Token>;
   public constructor() {
     super(ParserNodeType.ATRULE);
   }
 }
 
 export class QualifiedRule extends ParserNode {
-  public prelude: Token[];
   public constructor() {
     super(ParserNodeType.QUALIFIEDRULE);
+    this.prelude = [];
   }
 }
 
@@ -80,12 +88,13 @@ export class Root extends ParserNode {
 }
 
 export class Declaration extends ParserNode {
-  public name: string;
-  public value: Array<FunctionNode | Token>;
   public important: boolean;
+  public name: string;
+  public value: Array<ParserNode | Token>;
   public constructor() {
     super(ParserNodeType.DECLARATION);
     this.important = false;
+    this.prelude = [];
     this.value = [];
   }
 }

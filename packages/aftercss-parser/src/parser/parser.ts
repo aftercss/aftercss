@@ -1,7 +1,7 @@
 import { MessageCollection } from '@aftercss/shared';
 import { Token, TokenReader, TokenType } from '@aftercss/tokenizer';
 import { CSSSyntaxError } from './parser-error';
-import { CommentNode, Declaration, FunctionNode, ParserNode, QualifiedRule, Root } from './parser-node';
+import { CommentNode, Declaration, FunctionNode, ParserNode, QualifiedRule, Root, SquareBracket } from './parser-node';
 /**
  * Generate AST from Tokens
  */
@@ -91,7 +91,6 @@ export class Parser extends TokenReader {
             return this.consumeDeclaration(tokens);
           }
           throw this.error('Unexpected {');
-          break;
         case TokenType.LEFT_CURLY_BRACKET:
           this.step();
           return this.consumeQualifiedRule(tokens);
@@ -115,9 +114,14 @@ export class Parser extends TokenReader {
       throw this.error('Invalid declaration');
     }
     const declNode = new Declaration();
+    declNode.prelude.push(parser.currentToken());
     declNode.source.from = parser.currentToken().start - parser.currentToken().raw.length;
     declNode.name = parser.currentToken().content;
     parser.step();
+    while (parser.currentToken().type === TokenType.COMMENT) {
+      declNode.prelude.push(parser.currentToken());
+      parser.step();
+    }
     if (parser.currentToken().type !== TokenType.COLON) {
       throw this.error('Invalid declaration');
     }
@@ -126,6 +130,7 @@ export class Parser extends TokenReader {
       const currentToken = parser.currentToken();
       switch (currentToken.type) {
         case TokenType.COMMENT:
+          declNode.value.push(new CommentNode(currentToken));
           parser.step();
           break;
         case TokenType.FUNCTION:
@@ -167,23 +172,56 @@ export class Parser extends TokenReader {
     while (true) {
       const currentToken = this.currentToken();
       switch (currentToken.type) {
+        case TokenType.COMMENT:
+          funcNode.value.push(new CommentNode(currentToken));
+          this.step();
+          break;
         case TokenType.EOF:
           throw this.error('Encounter unclosed block when consuming Function Node');
-        case TokenType.RIGHT_PARENTHESIS:
-          funcNode.source.to = this.currentToken().start;
-          this.step();
-          return funcNode;
         case TokenType.FUNCTION:
           const childNode = this.consumeFunction();
           funcNode.value.push(childNode);
           break;
-        case TokenType.COMMENT:
+        case TokenType.LEFT_SQUARE_BRACKET:
+          funcNode.value.push(this.consumeSquareBracket());
+          break;
+        case TokenType.RIGHT_PARENTHESIS:
+          funcNode.source.to = this.currentToken().start;
+          this.step();
+          return funcNode;
         case TokenType.WHITESPACE:
           this.step();
           break;
         default:
           this.step();
           funcNode.value.push(currentToken);
+      }
+    }
+  }
+
+  /**
+   * consume a square-bracket block
+   */
+  private consumeSquareBracket() {
+    this.step();
+    const squareBracketNode = new SquareBracket();
+    while (true) {
+      const currentToken = this.currentToken();
+      switch (currentToken.type) {
+        case TokenType.LEFT_SQUARE_BRACKET:
+          squareBracketNode.value.push(this.consumeSquareBracket());
+          break;
+        case TokenType.EOF:
+          throw this.error('Encounter unclosed block when consuming a square bracker');
+        case TokenType.FUNCTION:
+          squareBracketNode.value.push(this.consumeFunction());
+          break;
+        case TokenType.RIGHT_SQUARE_BRACKET:
+          this.step();
+          return squareBracketNode;
+        default:
+          this.step();
+          squareBracketNode.value.push(currentToken);
       }
     }
   }
@@ -196,7 +234,20 @@ export class Parser extends TokenReader {
       throw this.error('No selector exists in a qualified rule');
     }
     const rule = new QualifiedRule();
-    rule.prelude = tokens;
+    const parser = new Parser(tokens);
+    while (parser.currentToken().type !== TokenType.EOF) {
+      const currentToken = parser.currentToken();
+      if (currentToken.type === TokenType.FUNCTION) {
+        rule.prelude.push(parser.consumeFunction());
+        continue;
+      }
+      if (currentToken.type === TokenType.LEFT_SQUARE_BRACKET) {
+        rule.prelude.push(parser.consumeSquareBracket());
+        continue;
+      }
+      rule.prelude.push(currentToken);
+      parser.step();
+    }
     rule.source.from = tokens[0].start - tokens[0].raw.length;
     while (true) {
       this.allowWhiteSpace();

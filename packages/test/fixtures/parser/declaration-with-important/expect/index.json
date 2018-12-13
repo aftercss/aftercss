@@ -9,6 +9,14 @@
         "to": 74
       },
       "important": true,
+      "prelude": [
+        {
+          "type": "IDENT",
+          "raw": "background",
+          "content": "background",
+          "start": 10
+        }
+      ],
       "value": [
         {
           "type": "FUNCTION",

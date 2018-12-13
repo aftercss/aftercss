@@ -12,6 +12,14 @@
             "to": 19
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "color",
+              "content": "color",
+              "start": 14
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
@@ -33,6 +41,14 @@
                 "to": 49
               },
               "important": false,
+              "prelude": [
+                {
+                  "type": "IDENT",
+                  "raw": "background",
+                  "content": "background",
+                  "start": 42
+                }
+              ],
               "value": [
                 {
                   "type": "IDENT",

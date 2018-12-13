@@ -8,16 +8,30 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 5,
-            "to": 30
+            "from": 14,
+            "to": 49
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "background",
+              "content": "background",
+              "start": 24
+            },
+            {
+              "type": "COMMENT",
+              "raw": "/*teest*/",
+              "content": "teest",
+              "start": 34
+            }
+          ],
           "value": [
             {
               "type": "URL",
               "raw": "url(\"a).png\")",
               "content": "a).png",
-              "start": 30
+              "start": 49
             }
           ],
           "name": "background"
@@ -26,16 +40,24 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 33,
-            "to": 53
+            "from": 52,
+            "to": 72
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "background",
+              "content": "background",
+              "start": 62
+            }
+          ],
           "value": [
             {
               "type": "URL",
               "raw": "url(a;a)",
               "content": "a;a",
-              "start": 53
+              "start": 72
             }
           ],
           "name": "background"
@@ -44,16 +66,24 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 56,
-            "to": 76
+            "from": 75,
+            "to": 95
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "background",
+              "content": "background",
+              "start": 85
+            }
+          ],
           "value": [
             {
               "type": "URL",
               "raw": "url(a/*)",
               "content": "a/*",
-              "start": 76
+              "start": 95
             }
           ],
           "name": "background"
@@ -62,16 +92,24 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 79,
-            "to": 94
+            "from": 98,
+            "to": 113
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "background",
+              "content": "background",
+              "start": 108
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
               "raw": "\\;a",
               "content": ";a",
-              "start": 94
+              "start": 113
             }
           ],
           "name": "background"
@@ -79,7 +117,7 @@
       ],
       "source": {
         "from": 0,
-        "to": 97
+        "to": 116
       },
       "prelude": [
         {
@@ -87,6 +125,12 @@
           "raw": "a",
           "content": "a",
           "start": 1
+        },
+        {
+          "type": "COMMENT",
+          "raw": "/**test*/",
+          "content": "*test",
+          "start": 10
         }
       ]
     },
@@ -94,91 +138,53 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [],
       "source": {
-        "from": 99,
-        "to": 118
-      },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 100
-        },
-        {
-          "type": "FUNCTION",
-          "raw": "not(",
-          "content": "not",
-          "start": 104
-        },
-        {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 105
-        },
-        {
-          "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 108
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 109
-        },
-        {
-          "type": "STRING",
-          "raw": "\")\"",
-          "content": ")",
-          "start": 112
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 113
-        },
-        {
-          "type": "RIGHT_PARENTHESIS",
-          "raw": ")",
-          "start": 114
-        }
-      ]
-    },
-    {
-      "type": "QUALIFIEDRULE",
-      "childNodes": [],
-      "source": {
-        "from": 119,
+        "from": 118,
         "to": 137
       },
       "prelude": [
         {
           "type": "COLON",
           "raw": ":",
-          "start": 120
+          "start": 119
         },
         {
           "type": "FUNCTION",
-          "raw": "not(",
-          "content": "not",
-          "start": 124
-        },
-        {
-          "type": "IDENT",
-          "raw": "div",
-          "content": "div",
-          "start": 127
-        },
-        {
-          "type": "COMMENT",
-          "raw": "/*)*/",
-          "content": ")",
-          "start": 132
-        },
-        {
-          "type": "RIGHT_PARENTHESIS",
-          "raw": ")",
-          "start": 133
+          "childNodes": [],
+          "source": {
+            "from": 119,
+            "to": 133
+          },
+          "name": "not",
+          "value": [
+            {
+              "type": "SQUAREBRACKET",
+              "childNodes": [],
+              "source": {
+                "from": 0,
+                "to": 0
+              },
+              "value": [
+                {
+                  "type": "IDENT",
+                  "raw": "foo",
+                  "content": "foo",
+                  "start": 127
+                },
+                {
+                  "type": "DELIM",
+                  "raw": "=",
+                  "content": "=",
+                  "start": 128
+                },
+                {
+                  "type": "STRING",
+                  "raw": "\")\"",
+                  "content": ")",
+                  "start": 131
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -187,7 +193,7 @@
       "childNodes": [],
       "source": {
         "from": 138,
-        "to": 175
+        "to": 156
       },
       "prelude": [
         {
@@ -197,73 +203,114 @@
         },
         {
           "type": "FUNCTION",
-          "raw": "not(",
-          "content": "not",
-          "start": 143
-        },
+          "childNodes": [],
+          "source": {
+            "from": 139,
+            "to": 152
+          },
+          "name": "not",
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "div",
+              "content": "div",
+              "start": 146
+            },
+            {
+              "type": "COMMENT",
+              "childNodes": [],
+              "source": {
+                "from": 146,
+                "to": 151
+              },
+              "content": "/*)*/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [],
+      "source": {
+        "from": 157,
+        "to": 194
+      },
+      "prelude": [
         {
           "type": "COLON",
           "raw": ":",
-          "start": 144
+          "start": 158
         },
         {
           "type": "FUNCTION",
-          "raw": "nth-child(",
-          "content": "nth-child",
-          "start": 154
-        },
-        {
-          "type": "DIMENSION",
-          "raw": "2n",
-          "start": 156,
-          "numberType": "integer",
-          "repr": "2",
-          "unit": "n",
-          "value": 2
-        },
-        {
-          "type": "IDENT",
-          "raw": "of",
-          "content": "of",
-          "start": 159
-        },
-        {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 161
-        },
-        {
-          "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 164
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 165
-        },
-        {
-          "type": "STRING",
-          "raw": "\")\"",
-          "content": ")",
-          "start": 168
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 169
-        },
-        {
-          "type": "RIGHT_PARENTHESIS",
-          "raw": ")",
-          "start": 170
-        },
-        {
-          "type": "RIGHT_PARENTHESIS",
-          "raw": ")",
-          "start": 171
+          "childNodes": [],
+          "source": {
+            "from": 158,
+            "to": 190
+          },
+          "name": "not",
+          "value": [
+            {
+              "type": "COLON",
+              "raw": ":",
+              "start": 163
+            },
+            {
+              "type": "FUNCTION",
+              "childNodes": [],
+              "source": {
+                "from": 163,
+                "to": 189
+              },
+              "name": "nth-child",
+              "value": [
+                {
+                  "type": "DIMENSION",
+                  "raw": "2n",
+                  "start": 175,
+                  "numberType": "integer",
+                  "repr": "2",
+                  "unit": "n",
+                  "value": 2
+                },
+                {
+                  "type": "IDENT",
+                  "raw": "of",
+                  "content": "of",
+                  "start": 178
+                },
+                {
+                  "type": "SQUAREBRACKET",
+                  "childNodes": [],
+                  "source": {
+                    "from": 0,
+                    "to": 0
+                  },
+                  "value": [
+                    {
+                      "type": "IDENT",
+                      "raw": "foo",
+                      "content": "foo",
+                      "start": 183
+                    },
+                    {
+                      "type": "DELIM",
+                      "raw": "=",
+                      "content": "=",
+                      "start": 184
+                    },
+                    {
+                      "type": "STRING",
+                      "raw": "\")\"",
+                      "content": ")",
+                      "start": 187
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -271,37 +318,37 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [],
       "source": {
-        "from": 176,
-        "to": 188
+        "from": 195,
+        "to": 207
       },
       "prelude": [
         {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 177
-        },
-        {
-          "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 180
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 181
-        },
-        {
-          "type": "IDENT",
-          "raw": "\\\"",
-          "content": "\"",
-          "start": 183
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 184
+          "type": "SQUAREBRACKET",
+          "childNodes": [],
+          "source": {
+            "from": 0,
+            "to": 0
+          },
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "foo",
+              "content": "foo",
+              "start": 199
+            },
+            {
+              "type": "DELIM",
+              "raw": "=",
+              "content": "=",
+              "start": 200
+            },
+            {
+              "type": "IDENT",
+              "raw": "\\\"",
+              "content": "\"",
+              "start": 202
+            }
+          ]
         }
       ]
     },
@@ -309,37 +356,37 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [],
       "source": {
-        "from": 189,
-        "to": 201
+        "from": 208,
+        "to": 220
       },
       "prelude": [
         {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 190
-        },
-        {
-          "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 193
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 194
-        },
-        {
-          "type": "IDENT",
-          "raw": "\\{",
-          "content": "{",
-          "start": 196
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 197
+          "type": "SQUAREBRACKET",
+          "childNodes": [],
+          "source": {
+            "from": 0,
+            "to": 0
+          },
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "foo",
+              "content": "foo",
+              "start": 212
+            },
+            {
+              "type": "DELIM",
+              "raw": "=",
+              "content": "=",
+              "start": 213
+            },
+            {
+              "type": "IDENT",
+              "raw": "\\{",
+              "content": "{",
+              "start": 215
+            }
+          ]
         }
       ]
     },
@@ -347,37 +394,37 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [],
       "source": {
-        "from": 202,
-        "to": 214
+        "from": 221,
+        "to": 233
       },
       "prelude": [
         {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 203
-        },
-        {
-          "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 206
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 207
-        },
-        {
-          "type": "IDENT",
-          "raw": "\\(",
-          "content": "(",
-          "start": 209
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 210
+          "type": "SQUAREBRACKET",
+          "childNodes": [],
+          "source": {
+            "from": 0,
+            "to": 0
+          },
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "foo",
+              "content": "foo",
+              "start": 225
+            },
+            {
+              "type": "DELIM",
+              "raw": "=",
+              "content": "=",
+              "start": 226
+            },
+            {
+              "type": "IDENT",
+              "raw": "\\(",
+              "content": "(",
+              "start": 228
+            }
+          ]
         }
       ]
     },
@@ -385,37 +432,53 @@
       "type": "QUALIFIEDRULE",
       "childNodes": [],
       "source": {
-        "from": 215,
-        "to": 245
+        "from": 234,
+        "to": 264
       },
       "prelude": [
         {
-          "type": "LEFT_SQUARE_BRACKET",
-          "raw": "[",
-          "start": 216
-        },
+          "type": "SQUAREBRACKET",
+          "childNodes": [],
+          "source": {
+            "from": 0,
+            "to": 0
+          },
+          "value": [
+            {
+              "type": "IDENT",
+              "raw": "foo",
+              "content": "foo",
+              "start": 238
+            },
+            {
+              "type": "DELIM",
+              "raw": "=",
+              "content": "=",
+              "start": 239
+            },
+            {
+              "type": "IDENT",
+              "raw": "yes\\:\\(it\\'s\\ work\\)",
+              "content": "yes:(it's work)",
+              "start": 259
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "QUALIFIEDRULE",
+      "childNodes": [],
+      "source": {
+        "from": 266,
+        "to": 276
+      },
+      "prelude": [
         {
           "type": "IDENT",
-          "raw": "foo",
-          "content": "foo",
-          "start": 219
-        },
-        {
-          "type": "DELIM",
-          "raw": "=",
-          "content": "=",
-          "start": 220
-        },
-        {
-          "type": "IDENT",
-          "raw": "yes\\:\\(it\\'s\\ work\\)",
-          "content": "yes:(it's work)",
-          "start": 240
-        },
-        {
-          "type": "RIGHT_SQUARE_BRACKET",
-          "raw": "]",
-          "start": 241
+          "raw": "\\@noat",
+          "content": "@noat",
+          "start": 272
         }
       ]
     },
@@ -426,31 +489,39 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 255,
-            "to": 264
+            "from": 285,
+            "to": 294
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "color",
+              "content": "color",
+              "start": 290
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
               "raw": "\\\\",
               "content": "\\",
-              "start": 264
+              "start": 294
             }
           ],
           "name": "color"
         }
       ],
       "source": {
-        "from": 248,
-        "to": 267
+        "from": 278,
+        "to": 297
       },
       "prelude": [
         {
           "type": "IDENT",
           "raw": "h1\\\\",
           "content": "h1\\",
-          "start": 252
+          "start": 282
         }
       ]
     },
@@ -458,8 +529,8 @@
       "type": "COMMENT",
       "childNodes": [],
       "source": {
-        "from": 269,
-        "to": 287
+        "from": 299,
+        "to": 317
       },
       "content": "/* [attr=;] { } */"
     },
@@ -470,43 +541,51 @@
           "type": "DECLARATION",
           "childNodes": [],
           "source": {
-            "from": 298,
-            "to": 311
+            "from": 328,
+            "to": 341
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "\\62 olor",
+              "content": "bolor",
+              "start": 336
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
               "raw": "red",
               "content": "red",
-              "start": 311
+              "start": 341
             }
           ],
           "name": "bolor"
         }
       ],
       "source": {
-        "from": 289,
-        "to": 313
+        "from": 319,
+        "to": 343
       },
       "prelude": [
         {
           "type": "DELIM",
           "raw": ".",
           "content": ".",
-          "start": 290
+          "start": 320
         },
         {
           "type": "IDENT",
           "raw": "prop",
           "content": "prop",
-          "start": 294
+          "start": 324
         }
       ]
     }
   ],
   "source": {
     "from": 0,
-    "to": 313
+    "to": 344
   }
 }

@@ -1,5 +1,5 @@
-a {
-	background: url("a).png");
+a/**test*/ {
+	background /*teest*/: url("a).png");
 	background: url(a;a);
 	background: url(a/*);
 	background: \;a;
@@ -13,6 +13,7 @@ a {
 [foo=\(] { }
 [foo=yes\:\(it\'s\ work\)] { }
 
+\@noat { }
 
 h1\\{
 	color: \\;

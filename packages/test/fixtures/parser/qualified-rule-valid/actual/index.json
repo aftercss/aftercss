@@ -21,6 +21,14 @@
             "to": 43
           },
           "important": false,
+          "prelude": [
+            {
+              "type": "IDENT",
+              "raw": "color",
+              "content": "color",
+              "start": 38
+            }
+          ],
           "value": [
             {
               "type": "IDENT",
