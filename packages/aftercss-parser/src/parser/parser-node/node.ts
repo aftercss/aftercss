@@ -18,22 +18,6 @@ export class ParserNode<T> {
   }
 }
 
-export enum kDeclarationRawName {
-  beforeColon = 'beforeColon',
-  afterColon = 'afterColon',
-}
-
-export class Declaration extends ParserNode<Map<kDeclarationRawName, string>> {
-  public type = EParserNodeType.Declaration;
-  public important: boolean;
-  public prop: string;
-  public value: string;
-  public constructor(prop: string, value: string) {
-    super();
-    this.prop = prop;
-    this.value = value;
-  }
-}
 
 export class CommentNode extends ParserNode<void> {
   public content: string;
