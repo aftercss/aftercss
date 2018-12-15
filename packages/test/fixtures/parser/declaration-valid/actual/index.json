@@ -1,44 +1,27 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "DECLARATION",
-      "childNodes": [],
-      "source": {
-        "from": 0,
-        "to": 22
+      "raw": {
+        "afterColon": [
+          " ",
+          null,
+          " !important;"
+        ],
+        "beforeColon": ""
       },
-      "important": false,
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "color",
-          "content": "color",
-          "start": 5
-        }
-      ],
+      "type": "DECLARATION",
+      "important": true,
+      "prop": "color",
       "value": [
-        {
-          "type": "IDENT",
-          "raw": "red",
-          "content": "red",
-          "start": 11
-        },
-        {
-          "type": "COMMENT",
-          "childNodes": [],
-          "source": {
-            "from": 11,
-            "to": 22
-          },
-          "content": "/*comment*/"
-        }
-      ],
-      "name": "color"
+        "red"
+      ]
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 23
-  }
+  "type": "ROOT"
 }

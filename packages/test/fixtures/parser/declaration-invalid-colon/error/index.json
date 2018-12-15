@@ -1,5 +1,5 @@
 {
   "message": [
-    "Invalid declaration"
+    "Invalid Declaration, expect a colon in a declaration"
   ]
 }

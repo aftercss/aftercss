@@ -1,211 +1,138 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "COMMENT",
-      "childNodes": [],
-      "source": {
-        "from": 0,
-        "to": 24
-      },
-      "content": "/* a { color: black } */"
+      "content": "/* a { color: black } */",
+      "type": "COMMENT"
     },
     {
-      "type": "COMMENT",
-      "childNodes": [],
-      "source": {
-        "from": 25,
-        "to": 29
-      },
-      "content": "/**/"
+      "content": "/**/",
+      "type": "COMMENT"
     },
     {
-      "type": "COMMENT",
-      "childNodes": [],
-      "source": {
-        "from": 30,
-        "to": 35
-      },
-      "content": "/* */"
+      "content": "/* */",
+      "type": "COMMENT"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "div"
+      ],
       "childNodes": [
         {
-          "type": "COMMENT",
-          "childNodes": [],
-          "source": {
-            "from": 43,
-            "to": 55
-          },
-          "content": "/* inside */"
+          "content": "/* inside */",
+          "type": "COMMENT"
         },
         {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
           "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 57,
-            "to": 69
-          },
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 62
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "black",
-              "content": "black",
-              "start": 69
-            }
-          ],
-          "name": "color"
+            "black"
+          ]
         },
         {
-          "type": "COMMENT",
-          "childNodes": [],
-          "source": {
-            "from": 72,
-            "to": 85
+          "content": "/* between */",
+          "type": "COMMENT"
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              " ",
+              null,
+              "\n\t/* end */\n"
+            ],
+            "beforeColon": ""
           },
-          "content": "/* between */"
-        },
-        {
           "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 87,
-            "to": 122
-          },
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "border-radius",
-              "content": "border-radius",
-              "start": 100
-            }
-          ],
+          "prop": "border-radius",
           "value": [
-            {
-              "type": "DIMENSION",
-              "raw": "3px",
-              "start": 105,
-              "numberType": "integer",
-              "repr": "3",
-              "unit": "px",
-              "value": 3
-            },
-            {
-              "type": "DELIM",
-              "raw": "/",
-              "content": "/",
-              "start": 107
-            },
-            {
-              "type": "DIMENSION",
-              "raw": "7px",
-              "start": 111,
-              "numberType": "integer",
-              "repr": "7",
-              "unit": "px",
-              "value": 7
-            },
-            {
-              "type": "COMMENT",
-              "childNodes": [],
-              "source": {
-                "from": 113,
-                "to": 122
-              },
-              "content": "/* end */"
-            }
-          ],
-          "name": "border-radius"
+            "3px",
+            "/",
+            "7px"
+          ]
         }
       ],
-      "source": {
-        "from": 36,
-        "to": 124
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "div",
-          "content": "div",
-          "start": 39
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "COMMENT",
-      "childNodes": [],
-      "source": {
-        "from": 125,
-        "to": 132
-      },
-      "content": "/* b */"
+      "content": "/* b */",
+      "type": "COMMENT"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 139,
-            "to": 151
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 144
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "black",
-              "content": "black",
-              "start": 151
-            }
-          ],
-          "name": "color"
+            "black"
+          ]
         },
         {
-          "type": "COMMENT",
-          "childNodes": [],
-          "source": {
-            "from": 154,
-            "to": 161
-          },
-          "content": "/* c */"
+          "content": "/* c */",
+          "type": "COMMENT"
         }
       ],
-      "source": {
-        "from": 134,
-        "to": 163
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "a",
-          "content": "a",
-          "start": 135
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 163
-  }
+  "type": "ROOT"
 }

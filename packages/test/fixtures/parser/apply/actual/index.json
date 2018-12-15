@@ -1,201 +1,65 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          ",        ",
+          null,
+          ", "
+        ]
+      },
+      "selector": [
+        "--zero-size:",
+        "div"
+      ],
       "childNodes": [
         {
-          "type": "QUALIFIEDRULE",
-          "childNodes": [
-            {
-              "type": "DECLARATION",
-              "childNodes": [],
-              "source": {
-                "from": 29,
-                "to": 37
-              },
-              "important": false,
-              "prelude": [
-                {
-                  "type": "IDENT",
-                  "raw": "width",
-                  "content": "width",
-                  "start": 34
-                }
-              ],
-              "value": [
-                {
-                  "type": "NUMBER",
-                  "raw": "0",
-                  "start": 37,
-                  "numberType": "integer",
-                  "repr": "0",
-                  "value": 0
-                }
-              ],
-              "name": "width"
-            },
-            {
-              "type": "DECLARATION",
-              "childNodes": [],
-              "source": {
-                "from": 43,
-                "to": 52
-              },
-              "important": false,
-              "prelude": [
-                {
-                  "type": "IDENT",
-                  "raw": "height",
-                  "content": "height",
-                  "start": 49
-                }
-              ],
-              "value": [
-                {
-                  "type": "NUMBER",
-                  "raw": "0",
-                  "start": 52,
-                  "numberType": "integer",
-                  "repr": "0",
-                  "value": 0
-                }
-              ],
-              "name": "height"
-            }
-          ],
-          "source": {
-            "from": 10,
-            "to": 57
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
-          "prelude": [
-            {
-              "type": "DELIM",
-              "raw": "-",
-              "content": "-",
-              "start": 11
-            },
-            {
-              "type": "IDENT",
-              "raw": "-zero-size",
-              "content": "-zero-size",
-              "start": 21
-            },
-            {
-              "type": "COLON",
-              "raw": ":",
-              "start": 22
-            }
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "width",
+          "value": [
+            "0"
           ]
         },
         {
-          "type": "QUALIFIEDRULE",
-          "childNodes": [
-            {
-              "type": "DECLARATION",
-              "childNodes": [],
-              "source": {
-                "from": 80,
-                "to": 91
-              },
-              "important": false,
-              "prelude": [
-                {
-                  "type": "IDENT",
-                  "raw": "width",
-                  "content": "width",
-                  "start": 85
-                }
-              ],
-              "value": [
-                {
-                  "type": "DIMENSION",
-                  "raw": "16px",
-                  "start": 91,
-                  "numberType": "integer",
-                  "repr": "16",
-                  "unit": "px",
-                  "value": 16
-                }
-              ],
-              "name": "width"
-            },
-            {
-              "type": "DECLARATION",
-              "childNodes": [],
-              "source": {
-                "from": 97,
-                "to": 109
-              },
-              "important": false,
-              "prelude": [
-                {
-                  "type": "IDENT",
-                  "raw": "height",
-                  "content": "height",
-                  "start": 103
-                }
-              ],
-              "value": [
-                {
-                  "type": "DIMENSION",
-                  "raw": "16px",
-                  "start": 109,
-                  "numberType": "integer",
-                  "repr": "16",
-                  "unit": "px",
-                  "value": 16
-                }
-              ],
-              "name": "height"
-            }
-          ],
-          "source": {
-            "from": 60,
-            "to": 114
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
-          "prelude": [
-            {
-              "type": "DELIM",
-              "raw": "-",
-              "content": "-",
-              "start": 61
-            },
-            {
-              "type": "IDENT",
-              "raw": "-small-icon",
-              "content": "-small-icon",
-              "start": 72
-            },
-            {
-              "type": "COLON",
-              "raw": ":",
-              "start": 73
-            }
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "height",
+          "value": [
+            "0"
           ]
         }
       ],
-      "source": {
-        "from": 0,
-        "to": 116
-      },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 1
-        },
-        {
-          "type": "IDENT",
-          "raw": "root",
-          "content": "root",
-          "start": 5
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 116
-  }
+  "type": "ROOT"
 }

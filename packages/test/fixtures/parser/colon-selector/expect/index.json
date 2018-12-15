@@ -1,30 +1,25 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
-      "childNodes": [],
-      "source": {
-        "from": 0,
-        "to": 14
+      "raw": {
+        "beforeChildNodes": [],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
       },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 1
-        },
-        {
-          "type": "IDENT",
-          "raw": "fullscreen",
-          "content": "fullscreen",
-          "start": 11
-        }
-      ]
+      "selector": [
+        ":fullscreen"
+      ],
+      "childNodes": [],
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 14
-  }
+  "type": "ROOT"
 }

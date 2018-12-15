@@ -1,78 +1,62 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 5,
-            "to": 17
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 10
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "black",
-              "content": "black",
-              "start": 17
-            }
-          ],
-          "name": "color"
+            "black"
+          ]
         },
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 20,
-            "to": 37
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "background",
-              "content": "background",
-              "start": 30
-            }
-          ],
+          "prop": "background",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "white",
-              "content": "white",
-              "start": 37
-            }
-          ],
-          "name": "background"
+            "white"
+          ]
         }
       ],
-      "source": {
-        "from": 0,
-        "to": 40
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "a",
-          "content": "a",
-          "start": 1
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 40
-  }
+  "type": "ROOT"
 }

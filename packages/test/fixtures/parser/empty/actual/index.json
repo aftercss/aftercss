@@ -1,8 +1,9 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      ""
+    ]
+  },
   "childNodes": [],
-  "source": {
-    "from": 0,
-    "to": 0
-  }
+  "type": "ROOT"
 }

@@ -1,80 +1,50 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ".class #id div"
+      ],
       "childNodes": [
         {
-          "type": "COMMENT",
-          "childNodes": [],
-          "source": {
-            "from": 18,
-            "to": 31
-          },
-          "content": "/* comment */"
+          "content": "/* comment */",
+          "type": "COMMENT"
         },
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 33,
-            "to": 43
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 38
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "red",
-              "content": "red",
-              "start": 43
-            }
-          ],
-          "name": "color"
+            "red"
+          ]
         }
       ],
-      "source": {
-        "from": 0,
-        "to": 45
-      },
-      "prelude": [
-        {
-          "type": "DELIM",
-          "raw": ".",
-          "content": ".",
-          "start": 1
-        },
-        {
-          "type": "IDENT",
-          "raw": "class",
-          "content": "class",
-          "start": 6
-        },
-        {
-          "type": "HASH",
-          "raw": "#id",
-          "content": "id",
-          "start": 10,
-          "hashType": "id"
-        },
-        {
-          "type": "IDENT",
-          "raw": "div",
-          "content": "div",
-          "start": 14
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 45
-  }
+  "type": "ROOT"
 }

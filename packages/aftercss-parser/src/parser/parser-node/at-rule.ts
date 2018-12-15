@@ -13,7 +13,7 @@ export interface IAtRuleRaw {
 /**
  * atRule will be with @keyframes @import
  */
-export class AtRule extends ParserNode<IAtRuleRaw> {
+export class AtRule extends ParserNode {
   public type = EParserNodeType.AtRule;
   public name: EAtRuleName;
   public constructor(name: EAtRuleName) {

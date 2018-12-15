@@ -1,31 +1,25 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
-      "childNodes": [],
-      "source": {
-        "from": 0,
-        "to": 8
+      "raw": {
+        "beforeChildNodes": [],
+        "beforeOpenBracket": [
+          null,
+          "/**/\n"
+        ]
       },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "a",
-          "content": "a",
-          "start": 1
-        },
-        {
-          "type": "COMMENT",
-          "raw": "/**/",
-          "content": "",
-          "start": 5
-        }
-      ]
+      "selector": [
+        "a"
+      ],
+      "childNodes": [],
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 8
-  }
+  "type": "ROOT"
 }

@@ -121,7 +121,9 @@ export class BaseFixture {
         e = err;
         await this.compareError(e);
       }
-      await this.compareDir();
+      if (e == null) {
+        await this.compareDir();
+      }
     });
   }
 

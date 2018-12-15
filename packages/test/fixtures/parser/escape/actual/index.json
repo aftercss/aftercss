@@ -1,591 +1,306 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          "/**test*/ "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 14,
-            "to": 49
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": " /*teest*/"
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "background",
-              "content": "background",
-              "start": 24
-            },
-            {
-              "type": "COMMENT",
-              "raw": "/*teest*/",
-              "content": "teest",
-              "start": 34
-            }
-          ],
+          "prop": "background",
           "value": [
-            {
-              "type": "URL",
-              "raw": "url(\"a).png\")",
-              "content": "a).png",
-              "start": 49
-            }
-          ],
-          "name": "background"
+            "url(\"a).png\")"
+          ]
         },
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 52,
-            "to": 72
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "background",
-              "content": "background",
-              "start": 62
-            }
-          ],
+          "prop": "background",
           "value": [
-            {
-              "type": "URL",
-              "raw": "url(a;a)",
-              "content": "a;a",
-              "start": 72
-            }
-          ],
-          "name": "background"
+            "url(a;a)"
+          ]
         },
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 75,
-            "to": 95
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "background",
-              "content": "background",
-              "start": 85
-            }
-          ],
+          "prop": "background",
           "value": [
-            {
-              "type": "URL",
-              "raw": "url(a/*)",
-              "content": "a/*",
-              "start": 95
-            }
-          ],
-          "name": "background"
+            "url(a/*)"
+          ]
         },
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 98,
-            "to": 113
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "background",
-              "content": "background",
-              "start": 108
-            }
-          ],
+          "prop": "background",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "\\;a",
-              "content": ";a",
-              "start": 113
-            }
-          ],
-          "name": "background"
+            "\\;a"
+          ]
         }
       ],
-      "source": {
-        "from": 0,
-        "to": 116
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "a",
-          "content": "a",
-          "start": 1
-        },
-        {
-          "type": "COMMENT",
-          "raw": "/**test*/",
-          "content": "*test",
-          "start": 10
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not([foo=\")\"])"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 118,
-        "to": 137
-      },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 119
-        },
-        {
-          "type": "FUNCTION",
-          "childNodes": [],
-          "source": {
-            "from": 119,
-            "to": 133
-          },
-          "name": "not",
-          "value": [
-            {
-              "type": "SQUAREBRACKET",
-              "childNodes": [],
-              "source": {
-                "from": 0,
-                "to": 0
-              },
-              "value": [
-                {
-                  "type": "IDENT",
-                  "raw": "foo",
-                  "content": "foo",
-                  "start": 127
-                },
-                {
-                  "type": "DELIM",
-                  "raw": "=",
-                  "content": "=",
-                  "start": 128
-                },
-                {
-                  "type": "STRING",
-                  "raw": "\")\"",
-                  "content": ")",
-                  "start": 131
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(div/*)*/)"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 138,
-        "to": 156
-      },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 139
-        },
-        {
-          "type": "FUNCTION",
-          "childNodes": [],
-          "source": {
-            "from": 139,
-            "to": 152
-          },
-          "name": "not",
-          "value": [
-            {
-              "type": "IDENT",
-              "raw": "div",
-              "content": "div",
-              "start": 146
-            },
-            {
-              "type": "COMMENT",
-              "childNodes": [],
-              "source": {
-                "from": 146,
-                "to": 151
-              },
-              "content": "/*)*/"
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(:nth-child(2n of [foo=\")\"]))"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 157,
-        "to": 194
-      },
-      "prelude": [
-        {
-          "type": "COLON",
-          "raw": ":",
-          "start": 158
-        },
-        {
-          "type": "FUNCTION",
-          "childNodes": [],
-          "source": {
-            "from": 158,
-            "to": 190
-          },
-          "name": "not",
-          "value": [
-            {
-              "type": "COLON",
-              "raw": ":",
-              "start": 163
-            },
-            {
-              "type": "FUNCTION",
-              "childNodes": [],
-              "source": {
-                "from": 163,
-                "to": 189
-              },
-              "name": "nth-child",
-              "value": [
-                {
-                  "type": "DIMENSION",
-                  "raw": "2n",
-                  "start": 175,
-                  "numberType": "integer",
-                  "repr": "2",
-                  "unit": "n",
-                  "value": 2
-                },
-                {
-                  "type": "IDENT",
-                  "raw": "of",
-                  "content": "of",
-                  "start": 178
-                },
-                {
-                  "type": "SQUAREBRACKET",
-                  "childNodes": [],
-                  "source": {
-                    "from": 0,
-                    "to": 0
-                  },
-                  "value": [
-                    {
-                      "type": "IDENT",
-                      "raw": "foo",
-                      "content": "foo",
-                      "start": 183
-                    },
-                    {
-                      "type": "DELIM",
-                      "raw": "=",
-                      "content": "=",
-                      "start": 184
-                    },
-                    {
-                      "type": "STRING",
-                      "raw": "\")\"",
-                      "content": ")",
-                      "start": 187
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\\"]"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 195,
-        "to": 207
-      },
-      "prelude": [
-        {
-          "type": "SQUAREBRACKET",
-          "childNodes": [],
-          "source": {
-            "from": 0,
-            "to": 0
-          },
-          "value": [
-            {
-              "type": "IDENT",
-              "raw": "foo",
-              "content": "foo",
-              "start": 199
-            },
-            {
-              "type": "DELIM",
-              "raw": "=",
-              "content": "=",
-              "start": 200
-            },
-            {
-              "type": "IDENT",
-              "raw": "\\\"",
-              "content": "\"",
-              "start": 202
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\{]"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 208,
-        "to": 220
-      },
-      "prelude": [
-        {
-          "type": "SQUAREBRACKET",
-          "childNodes": [],
-          "source": {
-            "from": 0,
-            "to": 0
-          },
-          "value": [
-            {
-              "type": "IDENT",
-              "raw": "foo",
-              "content": "foo",
-              "start": 212
-            },
-            {
-              "type": "DELIM",
-              "raw": "=",
-              "content": "=",
-              "start": 213
-            },
-            {
-              "type": "IDENT",
-              "raw": "\\{",
-              "content": "{",
-              "start": 215
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\(]"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 221,
-        "to": 233
-      },
-      "prelude": [
-        {
-          "type": "SQUAREBRACKET",
-          "childNodes": [],
-          "source": {
-            "from": 0,
-            "to": 0
-          },
-          "value": [
-            {
-              "type": "IDENT",
-              "raw": "foo",
-              "content": "foo",
-              "start": 225
-            },
-            {
-              "type": "DELIM",
-              "raw": "=",
-              "content": "=",
-              "start": 226
-            },
-            {
-              "type": "IDENT",
-              "raw": "\\(",
-              "content": "(",
-              "start": 228
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=yes\\:\\(it\\'s\\ work\\)]"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 234,
-        "to": 264
-      },
-      "prelude": [
-        {
-          "type": "SQUAREBRACKET",
-          "childNodes": [],
-          "source": {
-            "from": 0,
-            "to": 0
-          },
-          "value": [
-            {
-              "type": "IDENT",
-              "raw": "foo",
-              "content": "foo",
-              "start": 238
-            },
-            {
-              "type": "DELIM",
-              "raw": "=",
-              "content": "=",
-              "start": 239
-            },
-            {
-              "type": "IDENT",
-              "raw": "yes\\:\\(it\\'s\\ work\\)",
-              "content": "yes:(it's work)",
-              "start": 259
-            }
-          ]
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "\\@noat"
+      ],
       "childNodes": [],
-      "source": {
-        "from": 266,
-        "to": 276
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "\\@noat",
-          "content": "@noat",
-          "start": 272
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        "h1\\\\"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 285,
-            "to": 294
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 290
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "\\\\",
-              "content": "\\",
-              "start": 294
-            }
-          ],
-          "name": "color"
+            "\\\\"
+          ]
         }
       ],
-      "source": {
-        "from": 278,
-        "to": 297
-      },
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "h1\\\\",
-          "content": "h1\\",
-          "start": 282
-        }
-      ]
+      "type": "RULE"
     },
     {
-      "type": "COMMENT",
-      "childNodes": [],
-      "source": {
-        "from": 299,
-        "to": 317
-      },
-      "content": "/* [attr=;] { } */"
+      "content": "/* [attr=;] { } */",
+      "type": "COMMENT"
     },
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ".prop"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 328,
-            "to": 341
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "\\62 olor",
-              "content": "bolor",
-              "start": 336
-            }
-          ],
+          "prop": "\\62 olor",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "red",
-              "content": "red",
-              "start": 341
-            }
-          ],
-          "name": "bolor"
+            "red"
+          ]
         }
       ],
-      "source": {
-        "from": 319,
-        "to": 343
-      },
-      "prelude": [
-        {
-          "type": "DELIM",
-          "raw": ".",
-          "content": ".",
-          "start": 320
-        },
-        {
-          "type": "IDENT",
-          "raw": "prop",
-          "content": "prop",
-          "start": 324
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 344
-  }
+  "type": "ROOT"
 }

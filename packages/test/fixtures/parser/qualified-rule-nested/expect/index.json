@@ -1,107 +1,78 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "QUALIFIEDRULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        ".outer"
+      ],
       "childNodes": [
         {
-          "type": "DECLARATION",
-          "childNodes": [],
-          "source": {
-            "from": 9,
-            "to": 19
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
           },
+          "type": "DECLARATION",
           "important": false,
-          "prelude": [
-            {
-              "type": "IDENT",
-              "raw": "color",
-              "content": "color",
-              "start": 14
-            }
-          ],
+          "prop": "color",
           "value": [
-            {
-              "type": "IDENT",
-              "raw": "red",
-              "content": "red",
-              "start": 19
-            }
-          ],
-          "name": "color"
+            "red"
+          ]
         },
         {
-          "type": "QUALIFIEDRULE",
+          "raw": {
+            "beforeChildNodes": [
+              "\n\t\t",
+              "\n\t"
+            ],
+            "beforeOpenBracket": [
+              null
+            ]
+          },
+          "selector": [
+            ".inner"
+          ],
           "childNodes": [
             {
-              "type": "DECLARATION",
-              "childNodes": [],
-              "source": {
-                "from": 32,
-                "to": 49
+              "raw": {
+                "afterColon": [
+                  " ",
+                  null,
+                  ";"
+                ],
+                "beforeColon": ""
               },
+              "type": "DECLARATION",
               "important": false,
-              "prelude": [
-                {
-                  "type": "IDENT",
-                  "raw": "background",
-                  "content": "background",
-                  "start": 42
-                }
-              ],
+              "prop": "background",
               "value": [
-                {
-                  "type": "IDENT",
-                  "raw": "black",
-                  "content": "black",
-                  "start": 49
-                }
-              ],
-              "name": "background"
+                "black"
+              ]
             }
           ],
-          "source": {
-            "from": 22,
-            "to": 53
-          },
-          "prelude": [
-            {
-              "type": "DELIM",
-              "raw": ".",
-              "content": ".",
-              "start": 23
-            },
-            {
-              "type": "IDENT",
-              "raw": "inner",
-              "content": "inner",
-              "start": 28
-            }
-          ]
+          "type": "RULE"
         }
       ],
-      "source": {
-        "from": 0,
-        "to": 55
-      },
-      "prelude": [
-        {
-          "type": "DELIM",
-          "raw": ".",
-          "content": ".",
-          "start": 1
-        },
-        {
-          "type": "IDENT",
-          "raw": "outer",
-          "content": "outer",
-          "start": 6
-        }
-      ]
+      "type": "RULE"
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 55
-  }
+  "type": "ROOT"
 }

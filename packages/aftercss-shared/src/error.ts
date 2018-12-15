@@ -43,4 +43,7 @@ export namespace MessageCollection {
   export const _TOKEN_READER_NOT_GETTING_RIGHT_PARAM_ = messageBuilder<ArgNumber.ONE>(
     'TokenSourceMap is not getting right params. {0}',
   );
+  export const _INVALID_DECLARATION_ = messageBuilder<ArgNumber.ONE>('Invalid Declaration, {0}');
+  export const _UNEXPECTED_RIGHT_CURLY_BRACKET_ = messageBuilder<ArgNumber.ZERO>('Unexpected }');
+  export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block');
 }

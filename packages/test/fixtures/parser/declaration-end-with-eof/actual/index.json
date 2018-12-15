@@ -1,35 +1,25 @@
 {
-  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "type": "DECLARATION",
-      "childNodes": [],
-      "source": {
-        "from": 0,
-        "to": 9
+      "raw": {
+        "afterColon": [
+          null
+        ],
+        "beforeColon": ""
       },
+      "type": "DECLARATION",
       "important": false,
-      "prelude": [
-        {
-          "type": "IDENT",
-          "raw": "color",
-          "content": "color",
-          "start": 5
-        }
-      ],
+      "prop": "color",
       "value": [
-        {
-          "type": "IDENT",
-          "raw": "red",
-          "content": "red",
-          "start": 9
-        }
-      ],
-      "name": "color"
+        "red"
+      ]
     }
   ],
-  "source": {
-    "from": 0,
-    "to": 9
-  }
+  "type": "ROOT"
 }
