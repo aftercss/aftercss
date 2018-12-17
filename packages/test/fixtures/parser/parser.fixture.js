@@ -1,4 +1,4 @@
-const Parser = require('@aftercss/parser').Parser;
+const CSSParser = require('@aftercss/parser').CSSParser;
 const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
@@ -22,7 +22,7 @@ class ParsreFixture extends BaseFixture {
         break;
       }
     }
-    const parser = new Parser(tokens);
+    const parser = new CSSParser(tokens);
     const res = JSON.stringify(parser.parseStyleSheet(), null, 2);
     await this.writeFile('actual', res, 'index.json');
   }

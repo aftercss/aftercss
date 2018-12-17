@@ -45,5 +45,7 @@ export namespace MessageCollection {
   );
   export const _INVALID_DECLARATION_ = messageBuilder<ArgNumber.ONE>('Invalid Declaration, {0}');
   export const _UNEXPECTED_RIGHT_CURLY_BRACKET_ = messageBuilder<ArgNumber.ZERO>('Unexpected }');
-  export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block');
+  export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block {0}');
+  export const _INVALID_CHARSET_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @charset rule: {0}');
+  export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
 }

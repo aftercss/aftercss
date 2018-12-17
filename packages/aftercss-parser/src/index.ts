@@ -1,1 +1,1 @@
-export { Parser } from './parser/parser';
+export { CSSParser } from './parser/css-parser';

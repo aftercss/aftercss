@@ -3,24 +3,47 @@ import { EParserNodeType, ParserNode } from './node';
 import { Rule } from './rule';
 
 export enum EAtRuleName {
-  keyframes = 'keyframes',
+  charset = 'charset',
   import = 'import',
+  namespace = 'namespace',
+  media = 'media',
+  supports = 'supports',
+  page = 'page',
+  'font-face' = 'font-face',
+  keyframes = 'keyframes',
+  'counter-style' = 'counter-style',
+  'font-feature-values' = 'font-feature-values',
 }
 
 export interface IAtRuleRaw {
   afterName: string;
 }
+
 /**
  * atRule will be with @keyframes @import
  */
 export class AtRule extends ParserNode {
-  public type = EParserNodeType.AtRule;
   public name: EAtRuleName;
   public constructor(name: EAtRuleName) {
     super();
+    this.name = name;
+    this.type = EParserNodeType.AtRule;
   }
 }
 
+export interface INonNestedAtRuleRaw {
+  besidesValues: string[];
+}
+
+export class CharsetAtRule extends AtRule {
+  public raw: INonNestedAtRuleRaw = {
+    besidesValues: [],
+  };
+  public value: string = undefined;
+  public constructor() {
+    super(EAtRuleName.charset);
+  }
+}
 export class ImportAtRule extends AtRule {
   constructor() {
     super(EAtRuleName.import);
