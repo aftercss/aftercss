@@ -1,0 +1,23 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "charset",
+      "type": "ATRULE",
+      "raw": {
+        "besidesValues": [
+          " ",
+          null,
+          " /*comment*/;"
+        ]
+      },
+      "value": "\"utf-8\""
+    }
+  ],
+  "type": "ROOT"
+}

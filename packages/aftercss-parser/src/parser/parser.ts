@@ -5,6 +5,9 @@ import { CSSSyntaxError } from './parser-error';
 export abstract class Parser extends TokenReader {
   public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
     super(tokensOrTokenizer);
+    if (new.target === Parser) {
+      throw this.error(MessageCollection._ABSTRACT_CLASS_('Parser'));
+    }
   }
   /**
    * generate CSSSyntaxError with location infos

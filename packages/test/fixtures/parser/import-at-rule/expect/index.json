@@ -1,0 +1,28 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "import",
+      "type": "ATRULE",
+      "raw": {
+        "besidesValues": [
+          " ",
+          null,
+          " ",
+          null,
+          ";"
+        ]
+      },
+      "value": [
+        "\"./test.css\"",
+        "screen and (orientation: landscape /**comment*/)"
+      ]
+    }
+  ],
+  "type": "ROOT"
+}

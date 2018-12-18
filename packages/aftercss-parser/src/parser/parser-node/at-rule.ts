@@ -45,8 +45,22 @@ export class CharsetAtRule extends AtRule {
   }
 }
 export class ImportAtRule extends AtRule {
-  constructor() {
+  public raw: INonNestedAtRuleRaw = {
+    besidesValues: [],
+  };
+  public value: string[] = []; // value[0] is url and value[1] is media-query
+  public constructor() {
     super(EAtRuleName.import);
+  }
+}
+
+export class NamespaceAtRule extends AtRule {
+  public raw: INonNestedAtRuleRaw = {
+    besidesValues: [],
+  };
+  public value: string[] = [];
+  public constructor() {
+    super(EAtRuleName.namespace);
   }
 }
 

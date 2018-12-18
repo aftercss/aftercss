@@ -1,0 +1,28 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "namespace",
+      "type": "ATRULE",
+      "raw": {
+        "besidesValues": [
+          " /*comment*/ ",
+          null,
+          "   ",
+          null,
+          ";"
+        ]
+      },
+      "value": [
+        "svg",
+        "url('test.css')"
+      ]
+    }
+  ],
+  "type": "ROOT"
+}

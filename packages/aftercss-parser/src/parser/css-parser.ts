@@ -2,7 +2,7 @@ import { MessageCollection } from '@aftercss/shared';
 import { CSSTokenizer, Token, TokenType } from '@aftercss/tokenizer';
 import { Parser } from './parser';
 import { Comment, Declaration, IDeclarationRaw, IRuleRaw, ParserNode, Root, Rule } from './parser-node';
-import { CharsetAtRule } from './parser-node/at-rule';
+import { CharsetAtRule, ImportAtRule, NamespaceAtRule } from './parser-node/at-rule';
 /**
  * Generate AST from Tokens
  */
@@ -61,7 +61,9 @@ export class CSSParser extends Parser {
           this.step();
           break;
         case TokenType.ATKEYWORD:
-          // childNodes.push(this.consumeAtRule());
+          beforeChildNodes.push(beforeChildNode);
+          beforeChildNode = '';
+          childNodes.push(this.consumeAtRule());
           break;
         default:
           // qualified rule OR declaration
@@ -85,10 +87,17 @@ export class CSSParser extends Parser {
     this.step();
     switch (name) {
       case 'charset':
-        this.consumeCharsetAtRule();
+        return this.consumeCharsetAtRule();
+      case 'import':
+        return this.consumeImportAtRule();
+      case 'namespace':
+        return this.consumeNamespaceAtRule();
     }
   }
 
+  /**
+   * consume charset-at-rule
+   */
   private consumeCharsetAtRule() {
     const charsetAtRule = new CharsetAtRule();
     let toMove = '';
@@ -105,11 +114,12 @@ export class CSSParser extends Parser {
           charsetAtRule.raw.besidesValues.push(toMove);
           return charsetAtRule;
         case TokenType.EOF:
-          charsetAtRule.raw.besidesValues.push(toMove);
-          toMove = '';
+          if (toMove !== '') {
+            charsetAtRule.raw.besidesValues.push(toMove);
+          }
           break;
         case TokenType.STRING:
-          if (charsetAtRule.value === undefined) {
+          if (charsetAtRule.value === undefined && currentToken.raw[0] === '"') {
             charsetAtRule.value = currentToken.raw;
             if (toMove !== '') {
               charsetAtRule.raw.besidesValues.push(toMove);
@@ -117,11 +127,122 @@ export class CSSParser extends Parser {
             }
             charsetAtRule.raw.besidesValues.push(undefined);
           } else {
-            toMove += currentToken.raw;
+            throw this.error(MessageCollection._INVALID_CHARSET_AT_RULE_('invalid @charset value'));
           }
           break;
         default:
           throw this.error(MessageCollection._INVALID_CHARSET_AT_RULE_('encounter unexpected tokens'));
+      }
+    }
+  }
+
+  /**
+   * consume import-at-rule
+   */
+  private consumeImportAtRule() {
+    const importAtRuleNode = new ImportAtRule();
+    let toMove = '';
+    let mediaQuery = '';
+    while (true) {
+      const currentToken = this.currentToken();
+      this.step();
+      if (importAtRuleNode.value.length === 0) {
+        switch (currentToken.type) {
+          case TokenType.COMMENT:
+          case TokenType.WHITESPACE:
+            toMove += currentToken.raw;
+            break;
+          case TokenType.SEMI:
+            toMove += currentToken.raw;
+          case TokenType.EOF:
+            if (toMove !== '') {
+              importAtRuleNode.raw.besidesValues.push(toMove);
+            }
+            return importAtRuleNode;
+          case TokenType.STRING:
+          case TokenType.URL:
+            if (toMove !== '') {
+              importAtRuleNode.raw.besidesValues.push(toMove);
+              toMove = '';
+            }
+            importAtRuleNode.value.push(currentToken.raw);
+            importAtRuleNode.raw.besidesValues.push(undefined);
+            break;
+          default:
+            throw this.error(MessageCollection._INVALID_IMPORT_AT_RULE_('encountering invalid url'));
+        }
+      } else {
+        switch (currentToken.type) {
+          case TokenType.COMMENT:
+          case TokenType.WHITESPACE:
+            toMove += currentToken.raw;
+            break;
+          case TokenType.SEMI:
+            toMove += currentToken.raw;
+          case TokenType.EOF:
+            if (mediaQuery !== '') {
+              importAtRuleNode.value.push(mediaQuery);
+              importAtRuleNode.raw.besidesValues.push(undefined);
+            }
+            if (toMove !== '') {
+              importAtRuleNode.raw.besidesValues.push(toMove);
+            }
+            return importAtRuleNode;
+          default:
+            if (mediaQuery === '') {
+              importAtRuleNode.raw.besidesValues.push(toMove);
+              toMove = '';
+            }
+            mediaQuery += toMove + currentToken.raw;
+            toMove = '';
+        }
+      }
+    }
+  }
+
+  /**
+   * consume namespace-at-rule
+   */
+  private consumeNamespaceAtRule() {
+    const namespaceAtRuleNode = new NamespaceAtRule();
+    let toMove = '';
+    while (true) {
+      const currentToken = this.currentToken();
+      this.step();
+      switch (currentToken.type) {
+        case TokenType.COMMENT:
+        case TokenType.WHITESPACE:
+          toMove += currentToken.raw;
+          break;
+        case TokenType.SEMI:
+          toMove += currentToken.raw;
+        case TokenType.EOF:
+          if (toMove !== '') {
+            namespaceAtRuleNode.raw.besidesValues.push(toMove);
+          }
+          return namespaceAtRuleNode;
+        case TokenType.IDENT:
+          if (namespaceAtRuleNode.value.length === 0) {
+            if (toMove !== '') {
+              namespaceAtRuleNode.raw.besidesValues.push(toMove);
+              toMove = '';
+            }
+            namespaceAtRuleNode.value.push(currentToken.raw);
+            namespaceAtRuleNode.raw.besidesValues.push(undefined);
+            break;
+          }
+          throw this.error(MessageCollection._INVALID_NAMESPACE_AT_RULE_('invalid url'));
+        case TokenType.STRING:
+        case TokenType.URL:
+          if (toMove !== '') {
+            namespaceAtRuleNode.raw.besidesValues.push(toMove);
+            toMove = '';
+          }
+          namespaceAtRuleNode.value.push(currentToken.raw);
+          namespaceAtRuleNode.raw.besidesValues.push(undefined);
+          break;
+        default:
+          throw this.error(MessageCollection._INVALID_NAMESPACE_AT_RULE_('encouter an unexpected token'));
       }
     }
   }
