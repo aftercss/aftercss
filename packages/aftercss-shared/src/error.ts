@@ -50,4 +50,5 @@ export namespace MessageCollection {
   export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
   export const _INVALID_IMPORT_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @import rule: {0}');
   export const _INVALID_NAMESPACE_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @namespace rule: {0}');
+  export const _INVALID_MEDIA_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @media rule: {0}');
 }

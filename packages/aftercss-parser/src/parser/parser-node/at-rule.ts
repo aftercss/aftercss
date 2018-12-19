@@ -9,19 +9,12 @@ export enum EAtRuleName {
   media = 'media',
   supports = 'supports',
   page = 'page',
-  'font-face' = 'font-face',
+  fontface = 'font-face',
   keyframes = 'keyframes',
-  'counter-style' = 'counter-style',
-  'font-feature-values' = 'font-feature-values',
+  counterstyle = 'counter-style',
+  fontfeaturevalues = 'font-feature-values',
 }
 
-export interface IAtRuleRaw {
-  afterName: string;
-}
-
-/**
- * atRule will be with @keyframes @import
- */
 export class AtRule extends ParserNode {
   public name: EAtRuleName;
   public constructor(name: EAtRuleName) {
@@ -35,38 +28,29 @@ export interface INonNestedAtRuleRaw {
   besidesValues: string[];
 }
 
-export class CharsetAtRule extends AtRule {
-  public raw: INonNestedAtRuleRaw = {
-    besidesValues: [],
-  };
-  public value: string = undefined;
-  public constructor() {
-    super(EAtRuleName.charset);
-  }
-}
-export class ImportAtRule extends AtRule {
-  public raw: INonNestedAtRuleRaw = {
-    besidesValues: [],
-  };
-  public value: string[] = []; // value[0] is url and value[1] is media-query
-  public constructor() {
-    super(EAtRuleName.import);
-  }
+export interface INestedAtRuleRaw {
+  beforeChildNodes: string[];
+  besidesParams: string[];
 }
 
-export class NamespaceAtRule extends AtRule {
+export class NonNestedAtRule extends AtRule {
   public raw: INonNestedAtRuleRaw = {
     besidesValues: [],
   };
   public value: string[] = [];
-  public constructor() {
-    super(EAtRuleName.namespace);
+  public constructor(props: EAtRuleName) {
+    super(props);
   }
 }
 
-export class KeyframesAtRule extends AtRule {
-  public children: Rule[] = [];
-  constructor() {
-    super(EAtRuleName.keyframes);
+export class NestedAtRule extends AtRule {
+  public childNodes: ParserNode[] = [];
+  public params: string[] = [];
+  public raw: INestedAtRuleRaw = {
+    beforeChildNodes: [],
+    besidesParams: [],
+  };
+  public constructor(props: EAtRuleName) {
+    super(props);
   }
 }

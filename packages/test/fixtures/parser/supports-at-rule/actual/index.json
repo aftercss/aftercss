@@ -1,0 +1,65 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "supports",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "beforeChildNodes": [
+              "\n    ",
+              "\n  "
+            ],
+            "beforeOpenBracket": [
+              null,
+              " "
+            ]
+          },
+          "selector": [
+            "div"
+          ],
+          "childNodes": [
+            {
+              "raw": {
+                "afterColon": [
+                  " ",
+                  null,
+                  ";"
+                ],
+                "beforeColon": ""
+              },
+              "type": "DECLARATION",
+              "important": false,
+              "prop": "float",
+              "value": [
+                "right"
+              ]
+            }
+          ],
+          "type": "RULE"
+        }
+      ],
+      "params": [
+        "not (display: grid)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n  ",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      }
+    }
+  ],
+  "type": "ROOT"
+}

@@ -11,9 +11,9 @@
       "type": "ATRULE",
       "raw": {
         "besidesValues": [
-          " /*comment*/ ",
+          " ",
           null,
-          "   ",
+          " ",
           null,
           ";"
         ]

@@ -1,0 +1,80 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "page",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "margin",
+          "value": [
+            "1cm"
+          ]
+        }
+      ],
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n  ",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      }
+    },
+    {
+      "name": "page",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "margin",
+          "value": [
+            "2cm"
+          ]
+        }
+      ],
+      "params": [
+        ":first"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n  ",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      }
+    }
+  ],
+  "type": "ROOT"
+}

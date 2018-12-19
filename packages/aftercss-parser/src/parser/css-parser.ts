@@ -2,7 +2,7 @@ import { MessageCollection } from '@aftercss/shared';
 import { CSSTokenizer, Token, TokenType } from '@aftercss/tokenizer';
 import { Parser } from './parser';
 import { Comment, Declaration, IDeclarationRaw, IRuleRaw, ParserNode, Root, Rule } from './parser-node';
-import { CharsetAtRule, ImportAtRule, NamespaceAtRule } from './parser-node/at-rule';
+import { EAtRuleName, NestedAtRule, NonNestedAtRule } from './parser-node/at-rule';
 /**
  * Generate AST from Tokens
  */
@@ -92,6 +92,20 @@ export class CSSParser extends Parser {
         return this.consumeImportAtRule();
       case 'namespace':
         return this.consumeNamespaceAtRule();
+      case 'media':
+        return this.consumeNestedAtRule(EAtRuleName.media);
+      case 'supports':
+        return this.consumeNestedAtRule(EAtRuleName.supports);
+      case 'page':
+        return this.consumeNestedAtRule(EAtRuleName.page);
+      case 'font-face':
+        return this.consumeNestedAtRule(EAtRuleName.fontface);
+      case 'keyframes':
+        return this.consumeNestedAtRule(EAtRuleName.keyframes);
+      case 'counter-style':
+        return this.consumeNestedAtRule(EAtRuleName.counterstyle);
+      case 'font-feature-values':
+        return this.consumeNestedAtRule(EAtRuleName.fontfeaturevalues);
     }
   }
 
@@ -99,7 +113,7 @@ export class CSSParser extends Parser {
    * consume charset-at-rule
    */
   private consumeCharsetAtRule() {
-    const charsetAtRule = new CharsetAtRule();
+    const charsetAtRule = new NonNestedAtRule(EAtRuleName.charset);
     let toMove = '';
     while (true) {
       const currentToken = this.currentToken();
@@ -119,8 +133,8 @@ export class CSSParser extends Parser {
           }
           break;
         case TokenType.STRING:
-          if (charsetAtRule.value === undefined && currentToken.raw[0] === '"') {
-            charsetAtRule.value = currentToken.raw;
+          if (charsetAtRule.value.length === 0 && currentToken.raw[0] === '"') {
+            charsetAtRule.value.push(currentToken.raw);
             if (toMove !== '') {
               charsetAtRule.raw.besidesValues.push(toMove);
               toMove = '';
@@ -140,7 +154,7 @@ export class CSSParser extends Parser {
    * consume import-at-rule
    */
   private consumeImportAtRule() {
-    const importAtRuleNode = new ImportAtRule();
+    const importAtRuleNode = new NonNestedAtRule(EAtRuleName.import);
     let toMove = '';
     let mediaQuery = '';
     while (true) {
@@ -188,8 +202,10 @@ export class CSSParser extends Parser {
               importAtRuleNode.raw.besidesValues.push(toMove);
             }
             return importAtRuleNode;
+          case TokenType.LEFT_CURLY_BRACKET:
+            throw this.error(MessageCollection._INVALID_IMPORT_AT_RULE_('unexpected {'));
           default:
-            if (mediaQuery === '') {
+            if (mediaQuery === '' && toMove !== '') {
               importAtRuleNode.raw.besidesValues.push(toMove);
               toMove = '';
             }
@@ -204,7 +220,7 @@ export class CSSParser extends Parser {
    * consume namespace-at-rule
    */
   private consumeNamespaceAtRule() {
-    const namespaceAtRuleNode = new NamespaceAtRule();
+    const namespaceAtRuleNode = new NonNestedAtRule(EAtRuleName.namespace);
     let toMove = '';
     while (true) {
       const currentToken = this.currentToken();
@@ -245,6 +261,52 @@ export class CSSParser extends Parser {
           throw this.error(MessageCollection._INVALID_NAMESPACE_AT_RULE_('encouter an unexpected token'));
       }
     }
+  }
+
+  /**
+   * consume nested-at-rule
+   */
+  private consumeNestedAtRule(type: EAtRuleName) {
+    const mediaAtRuleNode = new NestedAtRule(type);
+    let toMove = '';
+    let query = '';
+    while (true) {
+      const currentToken = this.currentToken();
+      this.step();
+      if (currentToken.type === TokenType.LEFT_CURLY_BRACKET) {
+        if (query !== '') {
+          mediaAtRuleNode.params.push(query);
+          mediaAtRuleNode.raw.besidesParams.push(undefined);
+        }
+        if (toMove !== '') {
+          mediaAtRuleNode.raw.besidesParams.push(toMove);
+        }
+        break;
+      }
+      switch (currentToken.type) {
+        case TokenType.COMMENT:
+        case TokenType.WHITESPACE:
+          toMove += currentToken.raw;
+          break;
+        case TokenType.EOF:
+          throw this.error(MessageCollection._INVALID_MEDIA_AT_RULE_('expected { in @media rule'));
+        default:
+          if (query === '' && toMove !== '') {
+            mediaAtRuleNode.raw.besidesParams.push(toMove);
+            toMove = '';
+          }
+          query += toMove + currentToken.raw;
+          toMove = '';
+      }
+    }
+    const ruleList = this.consumeRuleList(false);
+    mediaAtRuleNode.childNodes = ruleList.childNodes;
+    mediaAtRuleNode.raw.beforeChildNodes = ruleList.beforeChildNodes;
+    if (this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET) {
+      throw this.error(MessageCollection._INVALID_MEDIA_AT_RULE_('encoutering unclosed  block'));
+    }
+    this.step();
+    return mediaAtRuleNode;
   }
 
   /**

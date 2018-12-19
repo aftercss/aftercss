@@ -16,7 +16,9 @@
           " /*comment*/;"
         ]
       },
-      "value": "\"utf-8\""
+      "value": [
+        "\"utf-8\""
+      ]
     }
   ],
   "type": "ROOT"
