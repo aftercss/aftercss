@@ -1,0 +1,62 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a::before"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "content",
+          "value": [
+            "\";'@ /**/\\\"\""
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "content",
+          "value": [
+            "'\\'\"\\\\'"
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

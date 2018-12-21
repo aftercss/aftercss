@@ -1,0 +1,120 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "supports",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "name": "keyframes",
+          "type": "ATRULE",
+          "childNodes": [
+            {
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  "\n\t\t\t"
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "from"
+              ],
+              "childNodes": [
+                {
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      ";"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "type": "DECLARATION",
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "black"
+                  ]
+                }
+              ],
+              "type": "RULE"
+            },
+            {
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  ""
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "to"
+              ],
+              "childNodes": [
+                {
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      "\n\t\t\t"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "type": "DECLARATION",
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "white"
+                  ]
+                }
+              ],
+              "type": "RULE"
+            }
+          ],
+          "params": [
+            "anim"
+          ],
+          "raw": {
+            "beforeChildNodes": [
+              "\n\t\t\t",
+              "\n\t\t\t",
+              "\n\t"
+            ],
+            "besidesParams": [
+              " ",
+              null,
+              " "
+            ]
+          }
+        }
+      ],
+      "params": [
+        "(animation-name: test)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      }
+    }
+  ],
+  "type": "ROOT"
+}

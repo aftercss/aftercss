@@ -51,4 +51,5 @@ export namespace MessageCollection {
   export const _INVALID_IMPORT_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @import rule: {0}');
   export const _INVALID_NAMESPACE_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @namespace rule: {0}');
   export const _INVALID_MEDIA_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @media rule: {0}');
+  export const _UNEXPECTED_AT_RULE_ = messageBuilder<ArgNumber.ZERO>('Unexpected at rule');
 }

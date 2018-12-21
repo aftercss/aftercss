@@ -1,0 +1,40 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "\n",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a/* { } */ b"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a/* test */b"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

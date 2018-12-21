@@ -13,6 +13,8 @@ export enum EAtRuleName {
   keyframes = 'keyframes',
   counterstyle = 'counter-style',
   fontfeaturevalues = 'font-feature-values',
+  viewport = 'viewport',
+  msviewport = '-ms-viewport',
 }
 
 export class AtRule extends ParserNode {

@@ -1,5 +1,0 @@
-@supports not (display: grid) {
-  div {
-    float: right;
-  }
-}

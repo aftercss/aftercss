@@ -1,0 +1,23 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "import",
+      "type": "ATRULE",
+      "raw": {
+        "besidesValues": [
+          null
+        ]
+      },
+      "value": [
+        "\"test.css\""
+      ]
+    }
+  ],
+  "type": "ROOT"
+}

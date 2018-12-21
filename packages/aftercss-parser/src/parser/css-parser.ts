@@ -3,12 +3,11 @@ import { CSSTokenizer, Token, TokenType } from '@aftercss/tokenizer';
 import { Parser } from './parser';
 import { Comment, Declaration, IDeclarationRaw, IRuleRaw, ParserNode, Root, Rule } from './parser-node';
 import { EAtRuleName, NestedAtRule, NonNestedAtRule } from './parser-node/at-rule';
+
 /**
  * Generate AST from Tokens
  */
 export class CSSParser extends Parser {
-  public topLevel: boolean = true;
-
   public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
     super(tokensOrTokenizer);
   }
@@ -17,7 +16,6 @@ export class CSSParser extends Parser {
    * parse a stylesheet
    */
   public parseStyleSheet() {
-    this.topLevel = true;
     const ruleList = this.consumeRuleList();
     const root = new Root();
     root.childNodes = ruleList.childNodes;
@@ -50,9 +48,7 @@ export class CSSParser extends Parser {
           break;
         case TokenType.CDO:
         case TokenType.CDC:
-          if (this.topLevel) {
-            this.step();
-          }
+          this.step();
           break;
         case TokenType.COMMENT:
           beforeChildNodes.push(beforeChildNode);
@@ -106,6 +102,12 @@ export class CSSParser extends Parser {
         return this.consumeNestedAtRule(EAtRuleName.counterstyle);
       case 'font-feature-values':
         return this.consumeNestedAtRule(EAtRuleName.fontfeaturevalues);
+      case 'viewport':
+        return this.consumeNestedAtRule(EAtRuleName.viewport);
+      case '-ms-viewport':
+        return this.consumeNestedAtRule(EAtRuleName.msviewport);
+      default:
+        throw this.error(MessageCollection._UNEXPECTED_AT_RULE_());
     }
   }
 
@@ -125,13 +127,11 @@ export class CSSParser extends Parser {
           break;
         case TokenType.SEMI:
           toMove += currentToken.raw;
-          charsetAtRule.raw.besidesValues.push(toMove);
-          return charsetAtRule;
         case TokenType.EOF:
           if (toMove !== '') {
             charsetAtRule.raw.besidesValues.push(toMove);
           }
-          break;
+          return charsetAtRule;
         case TokenType.STRING:
           if (charsetAtRule.value.length === 0 && currentToken.raw[0] === '"') {
             charsetAtRule.value.push(currentToken.raw);
@@ -161,6 +161,7 @@ export class CSSParser extends Parser {
       const currentToken = this.currentToken();
       this.step();
       if (importAtRuleNode.value.length === 0) {
+        // url
         switch (currentToken.type) {
           case TokenType.COMMENT:
           case TokenType.WHITESPACE:
@@ -186,6 +187,7 @@ export class CSSParser extends Parser {
             throw this.error(MessageCollection._INVALID_IMPORT_AT_RULE_('encountering invalid url'));
         }
       } else {
+        // media-query
         switch (currentToken.type) {
           case TokenType.COMMENT:
           case TokenType.WHITESPACE:
@@ -270,6 +272,7 @@ export class CSSParser extends Parser {
     const mediaAtRuleNode = new NestedAtRule(type);
     let toMove = '';
     let query = '';
+    // media query
     while (true) {
       const currentToken = this.currentToken();
       this.step();
@@ -414,11 +417,11 @@ export class CSSParser extends Parser {
       let cnt = 0;
       let concatStr = '';
       for (let i = raw.afterColon.length - 1; i > -1; i--) {
-        if (raw.afterColon[i] === undefined) {
-          cnt++;
-        } else {
+        if (raw.afterColon[i] !== undefined) {
           concatStr = raw.afterColon[i] + concatStr;
+          continue;
         }
+        cnt++;
         if (cnt === 1) {
           concatStr = 'important' + concatStr;
         }
@@ -469,6 +472,10 @@ export class CSSParser extends Parser {
           beforeOpenBracket.push(undefined, toMove);
           toMove = '';
           selector = '';
+          break;
+        case TokenType.LEFT_SQUARE_BRACKET:
+          selector += toMove + currentToken.raw + parser.consumeSquareBracket();
+          toMove = '';
           break;
         default:
           selector += toMove + currentToken.raw;

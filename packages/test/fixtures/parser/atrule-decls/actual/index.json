@@ -1,0 +1,182 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "page",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "params": [
+        ":left"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      }
+    },
+    {
+      "name": "media",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "white"
+          ]
+        }
+      ],
+      "params": [
+        "(min-width: 0)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "besidesParams": [
+          null,
+          " "
+        ]
+      }
+    },
+    {
+      "name": "font-face",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "family-name",
+          "value": [
+            "\"A;' /**/\""
+          ]
+        }
+      ],
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      }
+    },
+    {
+      "name": "viewport",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "width",
+          "value": [
+            "110px"
+          ]
+        }
+      ],
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      }
+    },
+    {
+      "name": "-ms-viewport",
+      "type": "ATRULE",
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "width",
+          "value": [
+            "100px"
+          ]
+        }
+      ],
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      }
+    }
+  ],
+  "type": "ROOT"
+}

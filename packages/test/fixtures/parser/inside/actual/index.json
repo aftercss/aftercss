@@ -1,0 +1,43 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "name": "import",
+          "type": "ATRULE",
+          "raw": {
+            "besidesValues": [
+              " ",
+              null,
+              ";"
+            ]
+          },
+          "value": [
+            "\"a.css\""
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}
