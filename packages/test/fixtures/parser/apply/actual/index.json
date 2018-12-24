@@ -1,0 +1,65 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          ",        ",
+          null,
+          ", "
+        ]
+      },
+      "selector": [
+        "--zero-size:",
+        "div"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "width",
+          "value": [
+            "0"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "height",
+          "value": [
+            "0"
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

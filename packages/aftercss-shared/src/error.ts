@@ -1,5 +1,5 @@
 export function format(template: string, args: Array<string | number>) {
-  return template.replace(/{(\d+)}/, (i0, i1) => {
+  return template.replace(/{(\d+)}/g, (i0, i1) => {
     const index = +i1;
     if (isNaN(index)) {
       return i0;
@@ -43,4 +43,13 @@ export namespace MessageCollection {
   export const _TOKEN_READER_NOT_GETTING_RIGHT_PARAM_ = messageBuilder<ArgNumber.ONE>(
     'TokenSourceMap is not getting right params. {0}',
   );
+  export const _INVALID_DECLARATION_ = messageBuilder<ArgNumber.ONE>('Invalid Declaration, {0}');
+  export const _UNEXPECTED_RIGHT_CURLY_BRACKET_ = messageBuilder<ArgNumber.ZERO>('Unexpected }');
+  export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block {0}');
+  export const _INVALID_CHARSET_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @charset rule: {0}');
+  export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
+  export const _INVALID_IMPORT_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @import rule: {0}');
+  export const _INVALID_NAMESPACE_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @namespace rule: {0}');
+  export const _INVALID_MEDIA_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @media rule: {0}');
+  export const _UNEXPECTED_AT_RULE_ = messageBuilder<ArgNumber.ZERO>('Unexpected at rule');
 }

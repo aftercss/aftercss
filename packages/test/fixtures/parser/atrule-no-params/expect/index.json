@@ -1,0 +1,23 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "page",
+      "type": "ATRULE",
+      "childNodes": [],
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "besidesParams": []
+      }
+    }
+  ],
+  "type": "ROOT"
+}

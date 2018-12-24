@@ -1,0 +1,29 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "media",
+      "type": "ATRULE",
+      "childNodes": [],
+      "params": [
+        "screen"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          ""
+        ],
+        "besidesParams": [
+          "/* near */ /* filter */ ",
+          null,
+          " /* a */ "
+        ]
+      }
+    }
+  ],
+  "type": "ROOT"
+}

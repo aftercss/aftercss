@@ -1,13 +1,14 @@
 import { MessageCollection } from '@aftercss/shared';
-import { Token, TokenReader, TokenType } from '@aftercss/tokenizer';
+import { CSSTokenizer, Token, TokenReader, TokenType } from '../../../aftercss-tokenizer/lib';
 import { CSSSyntaxError } from './parser-error';
-import { ParserNode, Root } from './parser-node';
-/**
- * Generate AST from Tokens
- */
-export class Parser extends TokenReader {
-  public currentParserNode: ParserNode = new Root();
-  public stack: ParserNode[] = [this.currentParserNode];
+
+export abstract class Parser extends TokenReader {
+  public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
+    super(tokensOrTokenizer);
+    if (new.target === Parser) {
+      throw this.error(MessageCollection._ABSTRACT_CLASS_('Parser'));
+    }
+  }
   /**
    * generate CSSSyntaxError with location infos
    * @param message
@@ -17,28 +18,62 @@ export class Parser extends TokenReader {
     return new CSSSyntaxError(location, message);
   }
 
-  public addChild(node: ParserNode) {
-    this.currentParserNode.childNodes.push(node);
-  }
-
-  public allowWhiteSpace(): { start: number; space: string } {
-    const whiteSpaceStart = this.currentToken().start;
-    let whiteSpace = '';
-    while (this.currentToken().type === TokenType.WHITESPACE) {
-      whiteSpace += this.currentToken().raw;
-      this.step();
-    }
-    return { start: whiteSpaceStart, space: whiteSpace };
-  }
-
-  public parseStyleSheet() {
-    // For now, don't care CDO & CDC
-    while (this.currentToken().type !== TokenType.EOF) {
-      switch (this.currentToken().type) {
+  /**
+   * consume a function Node
+   */
+  public consumeFunction(): string {
+    let funcNode = '';
+    funcNode += this.currentToken().raw;
+    this.step();
+    while (true) {
+      const currentToken = this.currentToken();
+      switch (currentToken.type) {
+        case TokenType.EOF:
+          throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming Function Node'));
+        case TokenType.FUNCTION:
+          funcNode += this.consumeFunction();
+          break;
+        case TokenType.LEFT_SQUARE_BRACKET:
+          funcNode += this.consumeSquareBracket();
+          break;
+        case TokenType.RIGHT_PARENTHESIS:
+          funcNode += currentToken.raw;
+          this.step();
+          return funcNode;
         case TokenType.WHITESPACE:
-          this.allowWhiteSpace();
-          continue;
-        case TokenType.NEWLINE:
+        default:
+          funcNode += currentToken.raw;
+          this.step();
+          break;
+      }
+    }
+  }
+
+  /**
+   * consume a square-bracket block
+   */
+  public consumeSquareBracket(): string {
+    let squareBracket = '';
+    squareBracket += this.currentToken().raw;
+    this.step();
+    while (true) {
+      const currentToken = this.currentToken();
+      switch (currentToken.type) {
+        case TokenType.LEFT_SQUARE_BRACKET:
+          squareBracket += this.consumeSquareBracket();
+          break;
+        case TokenType.EOF:
+          throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a square bracket'));
+        case TokenType.FUNCTION:
+          squareBracket += this.consumeFunction();
+          break;
+        case TokenType.RIGHT_SQUARE_BRACKET:
+          squareBracket += currentToken.raw;
+          this.step();
+          return squareBracket;
+        default:
+          this.step();
+          squareBracket += currentToken.raw;
       }
     }
   }

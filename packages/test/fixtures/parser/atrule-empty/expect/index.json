@@ -1,0 +1,25 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "name": "charset",
+      "type": "ATRULE",
+      "raw": {
+        "besidesValues": [
+          " ",
+          null,
+          ";"
+        ]
+      },
+      "value": [
+        "\"UTF-8\""
+      ]
+    }
+  ],
+  "type": "ROOT"
+}

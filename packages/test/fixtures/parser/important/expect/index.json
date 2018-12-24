@@ -1,0 +1,259 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "!important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "width",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "  !important ;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "p"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "prop",
+          "value": [
+            "important"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "color",
+          "value": [
+            "red",
+            "important"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "      !      important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "margin",
+          "value": [
+            "10px"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "     !  /* test */   important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "20px"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! /*! test */ important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "width",
+          "value": [
+            "100px"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " /*! test */ ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "height",
+          "value": [
+            "100px",
+            "important"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              "! important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "z-index",
+          "value": [
+            "1",
+            "\"\""
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "/* sep */!important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " !important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "left",
+          "value": [
+            "10"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! important;"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": true,
+          "prop": "right",
+          "value": [
+            "10"
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

@@ -1,0 +1,42 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              null
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

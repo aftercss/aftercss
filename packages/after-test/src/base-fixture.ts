@@ -107,18 +107,7 @@ export class BaseFixture {
       const errorJSON = require(errorPath);
       const errorMessage = errorJSON.message;
       if (errorMessage.indexOf(message) < 0) {
-        errorMessage.push(message);
-        await this.writeFile(
-          'error',
-          JSON.stringify(
-            {
-              message: errorMessage,
-            },
-            null,
-            2,
-          ),
-          '',
-        );
+        throw error;
       }
     }
   }
@@ -130,12 +119,10 @@ export class BaseFixture {
         await this.build();
       } catch (err) {
         e = err;
-        throw err;
-      }
-      if (e === null) {
-        await this.compareDir();
-      } else {
         await this.compareError(e);
+      }
+      if (e == null) {
+        await this.compareDir();
       }
     });
   }

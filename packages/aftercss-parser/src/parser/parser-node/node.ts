@@ -1,40 +1,43 @@
+// tslint:disable max-classes-per-file
 import { MessageCollection } from '@aftercss/shared';
 
-// tslint:disable max-classes-per-file
-export enum ParserNodeType {
-  ANY = 'ANY',
-  ROOT = 'ROOT',
-  BLOCK = 'BLOCK',
-  ATRULE = 'ATRULE',
-  DECLARATION = 'DECLARATION',
+export enum EParserNodeType {
+  AtRule = 'ATRULE',
+  Comment = 'COMMENT',
+  Declaration = 'DECLARATION',
+  Root = 'ROOT',
+  Rule = 'RULE',
 }
+
 export class ParserNode {
-  public type: ParserNodeType;
+  public type: EParserNodeType;
+  public start: number;
   public childNodes: ParserNode[];
   public clone() {
     throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.clone', new Error().stack));
   }
 }
 
-export class Block extends ParserNode {
-  public type = ParserNodeType.BLOCK;
-  public constructor() {
+export interface IRootRaw {
+  beforeChildNodes: string[];
+}
+
+export class Comment extends ParserNode {
+  public content: string;
+  public constructor(content: string) {
     super();
+    this.content = content;
+    this.type = EParserNodeType.Comment;
   }
 }
 
-export class AtRule extends ParserNode {
-  public type = ParserNodeType.ATRULE;
-  public block: Block;
-}
-
 export class Root extends ParserNode {
-  public type = ParserNodeType.ROOT;
-}
-
-export class Declaration extends ParserNode {
-  public type = ParserNodeType.DECLARATION;
-  public name: ParserNode;
-  public betweenNameValue: ParserNode;
-  public value: ParserNode;
+  public raw: IRootRaw = {
+    beforeChildNodes: [],
+  };
+  public constructor() {
+    super();
+    this.childNodes = [];
+    this.type = EParserNodeType.Root;
+  }
 }

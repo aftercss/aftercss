@@ -15,7 +15,7 @@ class TokenFixture extends BaseFixture {
     );
     tokenizer.preprocess();
     const token = tokenizer.nextToken();
-    await this.writeFile('actual', token.toString(), 'index.json');
+    await this.writeFile('actual', JSON.stringify(token, null, 2), 'index.json');
   }
 }
 

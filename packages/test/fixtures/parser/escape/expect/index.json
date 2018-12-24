@@ -1,0 +1,306 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          "/**test*/ "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": " /*teest*/"
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(\"a).png\")"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(a;a)"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(a/*)"
+          ]
+        },
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "background",
+          "value": [
+            "\\;a"
+          ]
+        }
+      ],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not([foo=\")\"])"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(div/*)*/)"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(:nth-child(2n of [foo=\")\"]))"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\\"]"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\{]"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\(]"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=yes\\:\\(it\\'s\\ work\\)]"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "\\@noat"
+      ],
+      "childNodes": [],
+      "type": "RULE"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        "h1\\\\"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "color",
+          "value": [
+            "\\\\"
+          ]
+        }
+      ],
+      "type": "RULE"
+    },
+    {
+      "content": "/* [attr=;] { } */",
+      "type": "COMMENT"
+    },
+    {
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ".prop"
+      ],
+      "childNodes": [
+        {
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "type": "DECLARATION",
+          "important": false,
+          "prop": "\\62 olor",
+          "value": [
+            "red"
+          ]
+        }
+      ],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}
