@@ -1,0 +1,20 @@
+{
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "raw": {
+        "beforeChildNodes": [],
+        "beforeOpenBracket": []
+      },
+      "selector": [],
+      "childNodes": [],
+      "type": "RULE"
+    }
+  ],
+  "type": "ROOT"
+}

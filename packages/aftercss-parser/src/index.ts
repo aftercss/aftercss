@@ -1,2 +1,2 @@
 export { CSSParser } from './parser/css-parser';
-export { Parser } from './parser/parser';
+export { BaseParser } from './parser/base-parser';

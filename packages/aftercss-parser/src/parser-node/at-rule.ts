@@ -9,12 +9,12 @@ export enum EAtRuleName {
   media = 'media',
   supports = 'supports',
   page = 'page',
-  fontface = 'font-face',
+  'font-face' = 'font-face',
   keyframes = 'keyframes',
-  counterstyle = 'counter-style',
-  fontfeaturevalues = 'font-feature-values',
+  'counter-style' = 'counter-style',
+  'font-feature-values' = 'font-feature-values',
   viewport = 'viewport',
-  msviewport = '-ms-viewport',
+  '-ms-viewport' = '-ms-viewport',
 }
 
 export class AtRule extends ParserNode {

@@ -39,10 +39,9 @@ module.exports = {
       }
     });
 
-    // const item = 'important';
+    // const item = 'selector';
     // const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
     // tokenFixture.runTask(`${item}`);
   },
 };
 
-// module.exports.runTest();
