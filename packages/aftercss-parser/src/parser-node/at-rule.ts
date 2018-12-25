@@ -1,6 +1,5 @@
 // tslint:disable max-classes-per-file
 import { EParserNodeType, ParserNode } from './node';
-import { Rule } from './rule';
 
 export enum EAtRuleName {
   charset = 'charset',
@@ -17,42 +16,22 @@ export enum EAtRuleName {
   '-ms-viewport' = '-ms-viewport',
 }
 
-export class AtRule extends ParserNode {
-  public name: EAtRuleName;
-  public constructor(name: EAtRuleName) {
-    super();
-    this.name = name;
-    this.type = EParserNodeType.AtRule;
-  }
-}
-
-export interface INonNestedAtRuleRaw {
-  besidesValues: string[];
-}
-
-export interface INestedAtRuleRaw {
+export interface IAtRuleRaw {
   beforeChildNodes: string[];
   besidesParams: string[];
 }
 
-export class NonNestedAtRule extends AtRule {
-  public raw: INonNestedAtRuleRaw = {
-    besidesValues: [],
-  };
-  public value: string[] = [];
-  public constructor(props: EAtRuleName) {
-    super(props);
-  }
-}
-
-export class NestedAtRule extends AtRule {
-  public childNodes: ParserNode[] = [];
+export class AtRule extends ParserNode {
+  public name: EAtRuleName;
+  public isNested: boolean = false;
   public params: string[] = [];
-  public raw: INestedAtRuleRaw = {
+  public raw: IAtRuleRaw = {
     beforeChildNodes: [],
     besidesParams: [],
   };
-  public constructor(props: EAtRuleName) {
-    super(props);
+  public constructor(name: EAtRuleName) {
+    super();
+    this.name = name;
+    this.type = EParserNodeType.AtRule;
   }
 }

@@ -7,10 +7,41 @@
   },
   "childNodes": [
     {
+      "isNested": true,
+      "params": [
+        "(animation-name: test)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      },
       "name": "supports",
       "type": "ATRULE",
       "childNodes": [
         {
+          "isNested": true,
+          "params": [
+            "anim"
+          ],
+          "raw": {
+            "beforeChildNodes": [
+              "\n\t\t\t",
+              "\n\t\t\t",
+              "\n\t"
+            ],
+            "besidesParams": [
+              " ",
+              null,
+              " "
+            ]
+          },
           "name": "keyframes",
           "type": "ATRULE",
           "childNodes": [
@@ -82,38 +113,9 @@
               ],
               "type": "RULE"
             }
-          ],
-          "params": [
-            "anim"
-          ],
-          "raw": {
-            "beforeChildNodes": [
-              "\n\t\t\t",
-              "\n\t\t\t",
-              "\n\t"
-            ],
-            "besidesParams": [
-              " ",
-              null,
-              " "
-            ]
-          }
+          ]
         }
-      ],
-      "params": [
-        "(animation-name: test)"
-      ],
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "besidesParams": [
-          " ",
-          null,
-          " "
-        ]
-      }
+      ]
     }
   ],
   "type": "ROOT"

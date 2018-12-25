@@ -1,6 +1,6 @@
 import { MessageCollection } from '@aftercss/shared';
 import { CSSTokenizer, Token, TokenType } from '@aftercss/tokenizer';
-import { Comment, EAtRuleName, NestedAtRule, NonNestedAtRule, ParserNode, Rule } from '../parser-node/';
+import { AtRule, Comment, EAtRuleName, ParserNode, Rule } from '../parser-node/';
 import { BaseParser } from './base-parser';
 
 export interface IChildNodesRaw {
@@ -47,7 +47,7 @@ export class CSSParser extends BaseParser {
         case TokenType.ATKEYWORD:
           beforeChildNodes.push(beforeChildNode);
           beforeChildNode = '';
-          childNodes.push(this.consumeAtRule());
+          childNodes.push(this.consumeAtRules());
           break;
         default:
           // qualified rule OR declaration
@@ -66,16 +66,13 @@ export class CSSParser extends BaseParser {
   /**
    * consume an at-rule
    */
-  private consumeAtRule() {
+  private consumeAtRules() {
     const name = this.currentToken().content;
     this.step();
     switch (name) {
       case 'charset':
-        return this.consumeCharsetAtRule();
       case 'import':
-        return this.consumeImportAtRule();
       case 'namespace':
-        return this.consumeNamespaceAtRule();
       case 'media':
       case 'supports':
       case 'page':
@@ -85,30 +82,32 @@ export class CSSParser extends BaseParser {
       case 'counter-style':
       case 'font-feature-values':
       case '-ms-viewport':
-        return this.consumeNestedAtRule(EAtRuleName[name]);
+        return this.consumeOneAtRule(EAtRuleName[name]);
       default:
         throw this.error(MessageCollection._UNEXPECTED_AT_RULE_());
     }
   }
 
   /**
-   * consume nested-at-rule
+   * @param type
+   * @returns AtRule
    */
-  private consumeNestedAtRule(type: EAtRuleName) {
-    const nestedAtRuleNode = new NestedAtRule(type);
+  private consumeOneAtRule(type: EAtRuleName): AtRule {
+    const atRuleNode = new AtRule(type);
     let toMove = '';
     let query = '';
-    // media query
+    // atrule params
     while (true) {
       const currentToken = this.currentToken();
       this.step();
       if (currentToken.type === TokenType.LEFT_CURLY_BRACKET) {
+        atRuleNode.isNested = true;
         if (query !== '') {
-          nestedAtRuleNode.params.push(query);
-          nestedAtRuleNode.raw.besidesParams.push(undefined);
+          atRuleNode.params.push(query);
+          atRuleNode.raw.besidesParams.push(undefined);
         }
         if (toMove !== '') {
-          nestedAtRuleNode.raw.besidesParams.push(toMove);
+          atRuleNode.raw.besidesParams.push(toMove);
         }
         break;
       }
@@ -117,11 +116,20 @@ export class CSSParser extends BaseParser {
         case TokenType.WHITESPACE:
           toMove += currentToken.raw;
           break;
+        case TokenType.SEMI:
+          toMove += currentToken.raw;
         case TokenType.EOF:
-          throw this.error(MessageCollection._INVALID_MEDIA_AT_RULE_('expected { in @media rule'));
+          if (query !== '') {
+            atRuleNode.params.push(query);
+            atRuleNode.raw.besidesParams.push(undefined);
+          }
+          if (toMove !== '') {
+            atRuleNode.raw.besidesParams.push(toMove);
+          }
+          return atRuleNode;
         default:
           if (query === '' && toMove !== '') {
-            nestedAtRuleNode.raw.besidesParams.push(toMove);
+            atRuleNode.raw.besidesParams.push(toMove);
             toMove = '';
           }
           query += toMove + currentToken.raw;
@@ -129,167 +137,13 @@ export class CSSParser extends BaseParser {
       }
     }
     const ruleList = this.consumeRuleList(false);
-    nestedAtRuleNode.childNodes = ruleList.childNodes;
-    nestedAtRuleNode.raw.beforeChildNodes = ruleList.beforeChildNodes;
+    atRuleNode.childNodes = ruleList.childNodes;
+    atRuleNode.raw.beforeChildNodes = ruleList.beforeChildNodes;
     if (this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET) {
-      throw this.error(MessageCollection._INVALID_MEDIA_AT_RULE_('encoutering unclosed  block'));
+      throw this.error(MessageCollection._UNCLOSED_BLOCK_('encoutering unclosed  block'));
     }
     this.step();
-    return nestedAtRuleNode;
-  }
-
-  /**
-   * consume charset-at-rule
-   */
-  private consumeCharsetAtRule() {
-    const charsetAtRule = new NonNestedAtRule(EAtRuleName.charset);
-    let toMove = '';
-    while (true) {
-      const currentToken = this.currentToken();
-      this.step();
-      switch (currentToken.type) {
-        case TokenType.COMMENT:
-        case TokenType.WHITESPACE:
-          toMove += currentToken.raw;
-          break;
-        case TokenType.SEMI:
-          toMove += currentToken.raw;
-        case TokenType.EOF:
-          if (toMove !== '') {
-            charsetAtRule.raw.besidesValues.push(toMove);
-          }
-          return charsetAtRule;
-        case TokenType.STRING:
-          if (charsetAtRule.value.length === 0 && currentToken.raw[0] === '"') {
-            charsetAtRule.value.push(currentToken.raw);
-            if (toMove !== '') {
-              charsetAtRule.raw.besidesValues.push(toMove);
-              toMove = '';
-            }
-            charsetAtRule.raw.besidesValues.push(undefined);
-          } else {
-            throw this.error(MessageCollection._INVALID_CHARSET_AT_RULE_('invalid @charset value'));
-          }
-          break;
-        default:
-          throw this.error(MessageCollection._INVALID_CHARSET_AT_RULE_('encounter unexpected tokens'));
-      }
-    }
-  }
-
-  /**
-   * consume import-at-rule
-   */
-  private consumeImportAtRule() {
-    const importAtRuleNode = new NonNestedAtRule(EAtRuleName.import);
-    let toMove = '';
-    let mediaQuery = '';
-    while (true) {
-      const currentToken = this.currentToken();
-      this.step();
-      if (importAtRuleNode.value.length === 0) {
-        // url
-        switch (currentToken.type) {
-          case TokenType.COMMENT:
-          case TokenType.WHITESPACE:
-            toMove += currentToken.raw;
-            break;
-          case TokenType.SEMI:
-            toMove += currentToken.raw;
-          case TokenType.EOF:
-            if (toMove !== '') {
-              importAtRuleNode.raw.besidesValues.push(toMove);
-            }
-            return importAtRuleNode;
-          case TokenType.STRING:
-          case TokenType.URL:
-            if (toMove !== '') {
-              importAtRuleNode.raw.besidesValues.push(toMove);
-              toMove = '';
-            }
-            importAtRuleNode.value.push(currentToken.raw);
-            importAtRuleNode.raw.besidesValues.push(undefined);
-            break;
-          default:
-            throw this.error(MessageCollection._INVALID_IMPORT_AT_RULE_('encountering invalid url'));
-        }
-      } else {
-        // media-query
-        switch (currentToken.type) {
-          case TokenType.COMMENT:
-          case TokenType.WHITESPACE:
-            toMove += currentToken.raw;
-            break;
-          case TokenType.SEMI:
-            toMove += currentToken.raw;
-          case TokenType.EOF:
-            if (mediaQuery !== '') {
-              importAtRuleNode.value.push(mediaQuery);
-              importAtRuleNode.raw.besidesValues.push(undefined);
-            }
-            if (toMove !== '') {
-              importAtRuleNode.raw.besidesValues.push(toMove);
-            }
-            return importAtRuleNode;
-          case TokenType.LEFT_CURLY_BRACKET:
-            throw this.error(MessageCollection._INVALID_IMPORT_AT_RULE_('unexpected {'));
-          default:
-            if (mediaQuery === '' && toMove !== '') {
-              importAtRuleNode.raw.besidesValues.push(toMove);
-              toMove = '';
-            }
-            mediaQuery += toMove + currentToken.raw;
-            toMove = '';
-        }
-      }
-    }
-  }
-
-  /**
-   * consume namespace-at-rule
-   */
-  private consumeNamespaceAtRule() {
-    const namespaceAtRuleNode = new NonNestedAtRule(EAtRuleName.namespace);
-    let toMove = '';
-    while (true) {
-      const currentToken = this.currentToken();
-      this.step();
-      switch (currentToken.type) {
-        case TokenType.COMMENT:
-        case TokenType.WHITESPACE:
-          toMove += currentToken.raw;
-          break;
-        case TokenType.SEMI:
-          toMove += currentToken.raw;
-        case TokenType.EOF:
-          if (toMove !== '') {
-            namespaceAtRuleNode.raw.besidesValues.push(toMove);
-          }
-          return namespaceAtRuleNode;
-        case TokenType.IDENT:
-          if (namespaceAtRuleNode.value.length === 0) {
-            if (toMove !== '') {
-              namespaceAtRuleNode.raw.besidesValues.push(toMove);
-              toMove = '';
-            }
-            namespaceAtRuleNode.value.push(currentToken.raw);
-            namespaceAtRuleNode.raw.besidesValues.push(undefined);
-            break;
-          }
-          throw this.error(MessageCollection._INVALID_NAMESPACE_AT_RULE_('invalid url'));
-        case TokenType.STRING:
-        case TokenType.URL:
-          if (toMove !== '') {
-            namespaceAtRuleNode.raw.besidesValues.push(toMove);
-            toMove = '';
-          }
-          namespaceAtRuleNode.value.push(currentToken.raw);
-          namespaceAtRuleNode.raw.besidesValues.push(undefined);
-          break;
-        default:
-          throw this.error(MessageCollection._INVALID_NAMESPACE_AT_RULE_('encouter an unexpected token'));
-      }
-    }
+    return atRuleNode;
   }
 
   /**

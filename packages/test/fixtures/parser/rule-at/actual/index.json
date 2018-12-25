@@ -59,6 +59,21 @@
           ]
         },
         {
+          "isNested": true,
+          "params": [
+            "mobile"
+          ],
+          "raw": {
+            "beforeChildNodes": [
+              "\n\t\t\t",
+              "\n\t"
+            ],
+            "besidesParams": [
+              " ",
+              null,
+              " "
+            ]
+          },
           "name": "media",
           "type": "ATRULE",
           "childNodes": [
@@ -78,21 +93,7 @@
                 "100px"
               ]
             }
-          ],
-          "params": [
-            "mobile"
-          ],
-          "raw": {
-            "beforeChildNodes": [
-              "\n\t\t\t",
-              "\n\t"
-            ],
-            "besidesParams": [
-              " ",
-              null,
-              " "
-            ]
-          }
+          ]
         }
       ],
       "type": "RULE"

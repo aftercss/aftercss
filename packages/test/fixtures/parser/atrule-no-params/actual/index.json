@@ -7,16 +7,17 @@
   },
   "childNodes": [
     {
-      "name": "page",
-      "type": "ATRULE",
-      "childNodes": [],
+      "isNested": true,
       "params": [],
       "raw": {
         "beforeChildNodes": [
           " "
         ],
         "besidesParams": []
-      }
+      },
+      "name": "page",
+      "type": "ATRULE",
+      "childNodes": []
     }
   ],
   "type": "ROOT"

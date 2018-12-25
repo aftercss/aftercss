@@ -22,18 +22,20 @@
       ],
       "childNodes": [
         {
-          "name": "import",
-          "type": "ATRULE",
+          "isNested": false,
+          "params": [
+            "\"a.css\""
+          ],
           "raw": {
-            "besidesValues": [
+            "beforeChildNodes": [],
+            "besidesParams": [
               " ",
               null,
               ";"
             ]
           },
-          "value": [
-            "\"a.css\""
-          ]
+          "name": "import",
+          "type": "ATRULE"
         }
       ],
       "type": "RULE"

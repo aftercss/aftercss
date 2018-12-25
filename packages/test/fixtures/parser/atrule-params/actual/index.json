@@ -7,9 +7,7 @@
   },
   "childNodes": [
     {
-      "name": "media",
-      "type": "ATRULE",
-      "childNodes": [],
+      "isNested": true,
       "params": [
         "screen"
       ],
@@ -22,7 +20,10 @@
           null,
           " /* a */ "
         ]
-      }
+      },
+      "name": "media",
+      "type": "ATRULE",
+      "childNodes": []
     }
   ],
   "type": "ROOT"

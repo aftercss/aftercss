@@ -7,16 +7,18 @@
   },
   "childNodes": [
     {
-      "name": "import",
-      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"test.css\""
+      ],
       "raw": {
-        "besidesValues": [
+        "beforeChildNodes": [],
+        "besidesParams": [
           null
         ]
       },
-      "value": [
-        "\"test.css\""
-      ]
+      "name": "import",
+      "type": "ATRULE"
     }
   ],
   "type": "ROOT"

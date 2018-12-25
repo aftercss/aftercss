@@ -8,9 +8,7 @@
   },
   "childNodes": [
     {
-      "name": "media",
-      "type": "ATRULE",
-      "childNodes": [],
+      "isNested": true,
       "params": [
         "screen"
       ],
@@ -23,21 +21,26 @@
           null,
           " "
         ]
-      }
+      },
+      "name": "media",
+      "type": "ATRULE",
+      "childNodes": []
     },
     {
-      "name": "charset",
-      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"UTF-8\""
+      ],
       "raw": {
-        "besidesValues": [
+        "beforeChildNodes": [],
+        "besidesParams": [
           " ",
           null,
           "\n"
         ]
       },
-      "value": [
-        "\"UTF-8\""
-      ]
+      "name": "charset",
+      "type": "ATRULE"
     }
   ],
   "type": "ROOT"

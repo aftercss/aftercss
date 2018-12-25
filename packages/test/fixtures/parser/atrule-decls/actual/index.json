@@ -11,6 +11,21 @@
   },
   "childNodes": [
     {
+      "isNested": true,
+      "params": [
+        ":left"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      },
       "name": "page",
       "type": "ATRULE",
       "childNodes": [
@@ -30,9 +45,12 @@
             "black"
           ]
         }
-      ],
+      ]
+    },
+    {
+      "isNested": true,
       "params": [
-        ":left"
+        "(min-width: 0)"
       ],
       "raw": {
         "beforeChildNodes": [
@@ -40,13 +58,10 @@
           ""
         ],
         "besidesParams": [
-          " ",
           null,
           " "
         ]
-      }
-    },
-    {
+      },
       "name": "media",
       "type": "ATRULE",
       "childNodes": [
@@ -66,22 +81,20 @@
             "white"
           ]
         }
-      ],
-      "params": [
-        "(min-width: 0)"
-      ],
+      ]
+    },
+    {
+      "isNested": true,
+      "params": [],
       "raw": {
         "beforeChildNodes": [
           "\n\t",
-          ""
+          "\n"
         ],
         "besidesParams": [
-          null,
           " "
         ]
-      }
-    },
-    {
+      },
       "name": "font-face",
       "type": "ATRULE",
       "childNodes": [
@@ -101,7 +114,10 @@
             "\"A;' /**/\""
           ]
         }
-      ],
+      ]
+    },
+    {
+      "isNested": true,
       "params": [],
       "raw": {
         "beforeChildNodes": [
@@ -111,9 +127,7 @@
         "besidesParams": [
           " "
         ]
-      }
-    },
-    {
+      },
       "name": "viewport",
       "type": "ATRULE",
       "childNodes": [
@@ -133,7 +147,10 @@
             "110px"
           ]
         }
-      ],
+      ]
+    },
+    {
+      "isNested": true,
       "params": [],
       "raw": {
         "beforeChildNodes": [
@@ -143,9 +160,7 @@
         "besidesParams": [
           " "
         ]
-      }
-    },
-    {
+      },
       "name": "-ms-viewport",
       "type": "ATRULE",
       "childNodes": [
@@ -165,17 +180,7 @@
             "100px"
           ]
         }
-      ],
-      "params": [],
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "besidesParams": [
-          " "
-        ]
-      }
+      ]
     }
   ],
   "type": "ROOT"

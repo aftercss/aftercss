@@ -7,18 +7,20 @@
   },
   "childNodes": [
     {
-      "name": "charset",
-      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"UTF-8\""
+      ],
       "raw": {
-        "besidesValues": [
+        "beforeChildNodes": [],
+        "besidesParams": [
           " ",
           null,
           ";"
         ]
       },
-      "value": [
-        "\"UTF-8\""
-      ]
+      "name": "charset",
+      "type": "ATRULE"
     }
   ],
   "type": "ROOT"

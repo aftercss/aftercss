@@ -58,12 +58,12 @@ export class BaseParser extends TokenReader {
       throw this.error(MessageCollection._INVALID_DECLARATION_('unexpected prop'));
     }
     const prop: string = parser.currentToken().raw;
+    parser.step();
     const value: string[] = [];
     const raw: IDeclarationRaw = {
       afterColon: [],
       beforeColon: '',
     };
-    parser.step();
     while (true) {
       const currentToken = parser.currentToken();
       if (
@@ -166,7 +166,10 @@ export class BaseParser extends TokenReader {
           funcNode += this.consumeFunction();
           break;
         case TokenType.LEFT_SQUARE_BRACKET:
-          funcNode += this.consumeSquareBracket();
+          funcNode += this.consumeBracketButCurly('square');
+          break;
+        case TokenType.LEFT_PARENTHESIS:
+          funcNode += this.consumeBracketButCurly('square');
           break;
         case TokenType.RIGHT_PARENTHESIS:
           funcNode += currentToken.raw;
@@ -217,7 +220,11 @@ export class BaseParser extends TokenReader {
             selector = '';
             break;
           case TokenType.LEFT_SQUARE_BRACKET:
-            selector += toMove + currentToken.raw + parser.consumeSquareBracket();
+            selector += toMove + currentToken.raw + parser.consumeBracketButCurly('square');
+            toMove = '';
+            break;
+          case TokenType.LEFT_PARENTHESIS:
+            selector += toMove + currentToken.raw + parser.consumeBracketButCurly('paren');
             toMove = '';
             break;
           default:
@@ -237,32 +244,67 @@ export class BaseParser extends TokenReader {
   }
 
   /**
-   * consume a square-bracket block
-   * @returns the raw content of a square-bracket block
+   * consume a square-bracket block or a parenthesis
+   * @returns the raw content of the bracket block
    */
-  public consumeSquareBracket(): string {
-    let squareBracket = '';
-    squareBracket += this.currentToken().raw;
+  public consumeBracketButCurly(type: 'square' | 'paren'): string {
+    let endingType: TokenType = TokenType.RIGHT_SQUARE_BRACKET;
+    if (type === 'paren') {
+      endingType = TokenType.RIGHT_PARENTHESIS;
+    }
+    let bracketContent = this.currentToken().raw;
     this.step();
     while (true) {
       const currentToken = this.currentToken();
       switch (currentToken.type) {
-        case TokenType.LEFT_SQUARE_BRACKET:
-          squareBracket += this.consumeSquareBracket();
-          break;
+        case endingType:
+          bracketContent += currentToken.raw;
+          this.step();
+          return bracketContent;
         case TokenType.EOF:
-          throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a square bracket'));
-        case TokenType.FUNCTION:
-          squareBracket += this.consumeFunction();
+          throw this.error(MessageCollection._UNCLOSED_BLOCK_(`when consuming a ${type} bracket`));
+        case TokenType.LEFT_PARENTHESIS:
+          bracketContent += this.consumeBracketButCurly('paren');
           break;
-        case TokenType.RIGHT_SQUARE_BRACKET:
-          squareBracket += currentToken.raw;
-          this.step();
-          return squareBracket;
+        case TokenType.LEFT_SQUARE_BRACKET:
+          bracketContent += this.consumeBracketButCurly('square');
+          break;
+        case TokenType.FUNCTION:
+          bracketContent += this.consumeFunction();
         default:
+          bracketContent += currentToken.raw;
           this.step();
-          squareBracket += currentToken.raw;
       }
     }
   }
+
+  // /**
+  //  * consume a square-bracket block
+  //  * @returns the raw content of a square-bracket block
+  //  */
+  // public consumeSquareBracket(): string {
+  //   let squareBracket = '';
+  //   squareBracket += this.currentToken().raw;
+  //   this.step();
+  //   while (true) {
+  //     const currentToken = this.currentToken();
+  //     switch (currentToken.type) {
+  //       case TokenType.LEFT_SQUARE_BRACKET:
+  //         squareBracket += this.consumeSquareBracket();
+  //         break;
+  //       case TokenType.EOF:
+  //         throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a square bracket'));
+  //       case TokenType.FUNCTION:
+  //         squareBracket += this.consumeFunction();
+  //         break;
+  //       case TokenType.RIGHT_SQUARE_BRACKET:
+  //         squareBracket += currentToken.raw;
+  //         this.step();
+  //         return squareBracket;
+  //       default:
+  //         this.step();
+  //         squareBracket += currentToken.raw;
+  //     }
+  //   }
+  // }
 }

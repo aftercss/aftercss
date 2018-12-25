@@ -48,9 +48,6 @@ export namespace MessageCollection {
   export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block {0}');
   export const _INVALID_CHARSET_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @charset rule: {0}');
   export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
-  export const _INVALID_IMPORT_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @import rule: {0}');
-  export const _INVALID_NAMESPACE_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @namespace rule: {0}');
-  export const _INVALID_MEDIA_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @media rule: {0}');
   export const _UNEXPECTED_AT_RULE_ = messageBuilder<ArgNumber.ZERO>('Unexpected at rule');
   export const _SHOULD_BE_OVERLOADED_ = messageBuilder<ArgNumber.ONE>('{0} should be overloaded');
 }
