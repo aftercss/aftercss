@@ -24,6 +24,7 @@
       },
       "name": "media",
       "type": "ATRULE",
+      "start": 6,
       "childNodes": []
     },
     {
@@ -40,7 +41,8 @@
         ]
       },
       "name": "charset",
-      "type": "ATRULE"
+      "type": "ATRULE",
+      "start": 26
     }
   ],
   "type": "ROOT"

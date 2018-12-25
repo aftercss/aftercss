@@ -13,15 +13,18 @@
   "childNodes": [
     {
       "content": "/* a { color: black } */",
-      "type": "COMMENT"
+      "type": "COMMENT",
+      "start": 24
     },
     {
       "content": "/**/",
-      "type": "COMMENT"
+      "type": "COMMENT",
+      "start": 29
     },
     {
       "content": "/* */",
-      "type": "COMMENT"
+      "type": "COMMENT",
+      "start": 35
     },
     {
       "raw": {
@@ -43,7 +46,8 @@
       "childNodes": [
         {
           "content": "/* inside */",
-          "type": "COMMENT"
+          "type": "COMMENT",
+          "start": 55
         },
         {
           "raw": {
@@ -59,11 +63,13 @@
           "prop": "color",
           "value": [
             "black"
-          ]
+          ],
+          "start": 62
         },
         {
           "content": "/* between */",
-          "type": "COMMENT"
+          "type": "COMMENT",
+          "start": 85
         },
         {
           "raw": {
@@ -85,14 +91,17 @@
             "3px",
             "/",
             "7px"
-          ]
+          ],
+          "start": 100
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 39
     },
     {
       "content": "/* b */",
-      "type": "COMMENT"
+      "type": "COMMENT",
+      "start": 132
     },
     {
       "raw": {
@@ -124,14 +133,17 @@
           "prop": "color",
           "value": [
             "black"
-          ]
+          ],
+          "start": 144
         },
         {
           "content": "/* c */",
-          "type": "COMMENT"
+          "type": "COMMENT",
+          "start": 161
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 135
     }
   ],
   "type": "ROOT"

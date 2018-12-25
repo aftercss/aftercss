@@ -21,7 +21,8 @@
       "prop": "one",
       "value": [
         "1"
-      ]
+      ],
+      "start": 3
     },
     {
       "raw": {
@@ -53,7 +54,8 @@
           "prop": "two",
           "value": [
             "2"
-          ]
+          ],
+          "start": 20
         },
         {
           "raw": {
@@ -84,13 +86,16 @@
               "prop": "three",
               "value": [
                 "3"
-              ]
+              ],
+              "start": 46
             }
           ],
-          "type": "RULE"
+          "type": "RULE",
+          "start": 30
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 10
     }
   ],
   "type": "ROOT"

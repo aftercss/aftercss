@@ -32,10 +32,12 @@
           "prop": "color",
           "value": [
             "black"
-          ]
+          ],
+          "start": 7
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

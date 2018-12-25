@@ -20,7 +20,8 @@
         ]
       },
       "name": "charset",
-      "type": "ATRULE"
+      "type": "ATRULE",
+      "start": 8
     }
   ],
   "type": "ROOT"

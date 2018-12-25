@@ -29,9 +29,10 @@ export class CSSParser extends BaseParser {
         this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET &&
         this.currentToken().type !== TokenType.EOF)
     ) {
-      switch (this.currentToken().type) {
+      const currentToken = this.currentToken();
+      switch (currentToken.type) {
         case TokenType.WHITESPACE:
-          beforeChildNode = this.currentToken().raw;
+          beforeChildNode = currentToken.raw;
           this.step();
           break;
         case TokenType.CDO:
@@ -40,7 +41,9 @@ export class CSSParser extends BaseParser {
           break;
         case TokenType.COMMENT:
           beforeChildNodes.push(beforeChildNode);
-          childNodes.push(new Comment(this.currentToken().raw));
+          const commentNode = new Comment(currentToken.raw);
+          commentNode.start = currentToken.start;
+          childNodes.push(commentNode);
           beforeChildNode = '';
           this.step();
           break;
@@ -68,7 +71,6 @@ export class CSSParser extends BaseParser {
    */
   private consumeAtRules() {
     const name = this.currentToken().content;
-    this.step();
     switch (name) {
       case 'charset':
       case 'import':
@@ -94,6 +96,8 @@ export class CSSParser extends BaseParser {
    */
   private consumeOneAtRule(type: EAtRuleName): AtRule {
     const atRuleNode = new AtRule(type);
+    atRuleNode.start = this.currentToken().start;
+    this.step(); // skip the at-rule name
     let toMove = '';
     let query = '';
     // atrule params
@@ -179,8 +183,9 @@ export class CSSParser extends BaseParser {
    */
   private consumeRule(tokens: Token[]) {
     const selectorRaw = this.consumeSelector(tokens);
-    const rule = new Rule(selectorRaw.selectors);
-    rule.raw.beforeOpenBracket = selectorRaw.beforeOpenBracket;
+    const ruleNode = new Rule(selectorRaw.selectors);
+    ruleNode.start = tokens.length > 0 ? tokens[0].start : this.currentToken().start;
+    ruleNode.raw.beforeOpenBracket = selectorRaw.beforeOpenBracket;
     while (true) {
       const currentToken = this.currentToken();
       switch (currentToken.type) {
@@ -188,11 +193,11 @@ export class CSSParser extends BaseParser {
           throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a rule'));
         case TokenType.RIGHT_CURLY_BRACKET:
           this.step();
-          return rule;
+          return ruleNode;
         default:
           const childNodesRaw = this.consumeRuleList(false);
-          rule.childNodes = childNodesRaw.childNodes;
-          rule.raw.beforeChildNodes = childNodesRaw.beforeChildNodes;
+          ruleNode.childNodes = childNodesRaw.childNodes;
+          ruleNode.raw.beforeChildNodes = childNodesRaw.beforeChildNodes;
       }
     }
   }

@@ -58,6 +58,7 @@ export class BaseParser extends TokenReader {
       throw this.error(MessageCollection._INVALID_DECLARATION_('unexpected prop'));
     }
     const prop: string = parser.currentToken().raw;
+    const start = parser.currentToken().start;
     parser.step();
     const value: string[] = [];
     const raw: IDeclarationRaw = {
@@ -114,6 +115,7 @@ export class BaseParser extends TokenReader {
       toMove = '';
     }
     const declNode = new Declaration(prop, value, false);
+    declNode.start = start;
     declNode.raw = raw;
     if (value.length < 2) {
       return declNode;
@@ -277,34 +279,4 @@ export class BaseParser extends TokenReader {
       }
     }
   }
-
-  // /**
-  //  * consume a square-bracket block
-  //  * @returns the raw content of a square-bracket block
-  //  */
-  // public consumeSquareBracket(): string {
-  //   let squareBracket = '';
-  //   squareBracket += this.currentToken().raw;
-  //   this.step();
-  //   while (true) {
-  //     const currentToken = this.currentToken();
-  //     switch (currentToken.type) {
-  //       case TokenType.LEFT_SQUARE_BRACKET:
-  //         squareBracket += this.consumeSquareBracket();
-  //         break;
-  //       case TokenType.EOF:
-  //         throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a square bracket'));
-  //       case TokenType.FUNCTION:
-  //         squareBracket += this.consumeFunction();
-  //         break;
-  //       case TokenType.RIGHT_SQUARE_BRACKET:
-  //         squareBracket += currentToken.raw;
-  //         this.step();
-  //         return squareBracket;
-  //       default:
-  //         this.step();
-  //         squareBracket += currentToken.raw;
-  //     }
-  //   }
-  // }
 }

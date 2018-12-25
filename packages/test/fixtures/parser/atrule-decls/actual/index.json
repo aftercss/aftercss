@@ -28,6 +28,7 @@
       },
       "name": "page",
       "type": "ATRULE",
+      "start": 5,
       "childNodes": [
         {
           "raw": {
@@ -43,7 +44,8 @@
           "prop": "background",
           "value": [
             "black"
-          ]
+          ],
+          "start": 25
         }
       ]
     },
@@ -64,6 +66,7 @@
       },
       "name": "media",
       "type": "ATRULE",
+      "start": 42,
       "childNodes": [
         {
           "raw": {
@@ -79,7 +82,8 @@
           "prop": "background",
           "value": [
             "white"
-          ]
+          ],
+          "start": 70
         }
       ]
     },
@@ -97,6 +101,7 @@
       },
       "name": "font-face",
       "type": "ATRULE",
+      "start": 91,
       "childNodes": [
         {
           "raw": {
@@ -112,7 +117,8 @@
           "prop": "family-name",
           "value": [
             "\"A;' /**/\""
-          ]
+          ],
+          "start": 106
         }
       ]
     },
@@ -130,6 +136,7 @@
       },
       "name": "viewport",
       "type": "ATRULE",
+      "start": 132,
       "childNodes": [
         {
           "raw": {
@@ -145,7 +152,8 @@
           "prop": "width",
           "value": [
             "110px"
-          ]
+          ],
+          "start": 141
         }
       ]
     },
@@ -163,6 +171,7 @@
       },
       "name": "-ms-viewport",
       "type": "ATRULE",
+      "start": 166,
       "childNodes": [
         {
           "raw": {
@@ -178,7 +187,8 @@
           "prop": "width",
           "value": [
             "100px"
-          ]
+          ],
+          "start": 175
         }
       ]
     }

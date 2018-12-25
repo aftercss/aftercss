@@ -18,7 +18,8 @@
         ]
       },
       "name": "import",
-      "type": "ATRULE"
+      "type": "ATRULE",
+      "start": 7
     }
   ],
   "type": "ROOT"

@@ -36,7 +36,8 @@
           "prop": "color",
           "value": [
             "black"
-          ]
+          ],
+          "start": 10
         },
         {
           "raw": {
@@ -52,10 +53,12 @@
           "prop": "background",
           "value": [
             "white"
-          ]
+          ],
+          "start": 30
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

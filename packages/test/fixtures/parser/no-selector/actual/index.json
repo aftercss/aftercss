@@ -13,7 +13,8 @@
       },
       "selector": [],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 2
     }
   ],
   "type": "ROOT"

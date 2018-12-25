@@ -37,7 +37,8 @@
           "prop": "width",
           "value": [
             "1px"
-          ]
+          ],
+          "start": 10
         },
         {
           "raw": {
@@ -53,10 +54,12 @@
           "prop": "color",
           "value": [
             "black"
-          ]
+          ],
+          "start": 33
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     },
     {
       "raw": {
@@ -96,7 +99,8 @@
           "prop": "prop",
           "value": [
             "important"
-          ]
+          ],
+          "start": 67
         },
         {
           "raw": {
@@ -115,7 +119,8 @@
           "value": [
             "red",
             "important"
-          ]
+          ],
+          "start": 86
         },
         {
           "raw": {
@@ -131,7 +136,8 @@
           "prop": "margin",
           "value": [
             "10px"
-          ]
+          ],
+          "start": 110
         },
         {
           "raw": {
@@ -147,7 +153,8 @@
           "prop": "padding",
           "value": [
             "20px"
-          ]
+          ],
+          "start": 148
         },
         {
           "raw": {
@@ -163,7 +170,8 @@
           "prop": "width",
           "value": [
             "100px"
-          ]
+          ],
+          "start": 192
         },
         {
           "raw": {
@@ -182,7 +190,8 @@
           "value": [
             "100px",
             "important"
-          ]
+          ],
+          "start": 232
         },
         {
           "raw": {
@@ -201,7 +210,8 @@
           "value": [
             "1",
             "\"\""
-          ]
+          ],
+          "start": 271
         },
         {
           "raw": {
@@ -217,7 +227,8 @@
           "prop": "padding",
           "value": [
             "1px"
-          ]
+          ],
+          "start": 298
         },
         {
           "raw": {
@@ -233,7 +244,8 @@
           "prop": "left",
           "value": [
             "10"
-          ]
+          ],
+          "start": 329
         },
         {
           "raw": {
@@ -249,10 +261,12 @@
           "prop": "right",
           "value": [
             "10"
-          ]
+          ],
+          "start": 352
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 59
     }
   ],
   "type": "ROOT"

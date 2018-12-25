@@ -39,7 +39,8 @@
           "prop": "width",
           "value": [
             "0"
-          ]
+          ],
+          "start": 34
         },
         {
           "raw": {
@@ -55,10 +56,12 @@
           "prop": "height",
           "value": [
             "0"
-          ]
+          ],
+          "start": 46
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

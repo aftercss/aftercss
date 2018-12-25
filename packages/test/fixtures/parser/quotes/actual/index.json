@@ -36,7 +36,8 @@
           "prop": "content",
           "value": [
             "\";'@ /**/\\\"\""
-          ]
+          ],
+          "start": 20
         },
         {
           "raw": {
@@ -52,10 +53,12 @@
           "prop": "content",
           "value": [
             "'\\'\"\\\\'"
-          ]
+          ],
+          "start": 44
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

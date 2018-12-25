@@ -24,6 +24,7 @@
       },
       "name": "supports",
       "type": "ATRULE",
+      "start": 9,
       "childNodes": [
         {
           "isNested": true,
@@ -44,6 +45,7 @@
           },
           "name": "keyframes",
           "type": "ATRULE",
+          "start": 46,
           "childNodes": [
             {
               "raw": {
@@ -74,10 +76,12 @@
                   "prop": "color",
                   "value": [
                     "black"
-                  ]
+                  ],
+                  "start": 74
                 }
               ],
-              "type": "RULE"
+              "type": "RULE",
+              "start": 61
             },
             {
               "raw": {
@@ -108,10 +112,12 @@
                   "prop": "color",
                   "value": [
                     "white"
-                  ]
+                  ],
+                  "start": 106
                 }
               ],
-              "type": "RULE"
+              "type": "RULE",
+              "start": 93
             }
           ]
         }

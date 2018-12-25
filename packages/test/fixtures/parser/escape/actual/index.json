@@ -49,7 +49,8 @@
           "prop": "background",
           "value": [
             "url(\"a).png\")"
-          ]
+          ],
+          "start": 24
         },
         {
           "raw": {
@@ -65,7 +66,8 @@
           "prop": "background",
           "value": [
             "url(a;a)"
-          ]
+          ],
+          "start": 62
         },
         {
           "raw": {
@@ -81,7 +83,8 @@
           "prop": "background",
           "value": [
             "url(a/*)"
-          ]
+          ],
+          "start": 85
         },
         {
           "raw": {
@@ -97,10 +100,12 @@
           "prop": "background",
           "value": [
             "\\;a"
-          ]
+          ],
+          "start": 108
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     },
     {
       "raw": {
@@ -116,7 +121,8 @@
         ":not([foo=\")\"])"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 119
     },
     {
       "raw": {
@@ -132,7 +138,8 @@
         ":not(div/*)*/)"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 139
     },
     {
       "raw": {
@@ -148,7 +155,8 @@
         ":not(:nth-child(2n of [foo=\")\"]))"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 158
     },
     {
       "raw": {
@@ -164,7 +172,8 @@
         "[foo=\\\"]"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 196
     },
     {
       "raw": {
@@ -180,7 +189,8 @@
         "[foo=\\{]"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 209
     },
     {
       "raw": {
@@ -196,7 +206,8 @@
         "[foo=\\(]"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 222
     },
     {
       "raw": {
@@ -212,7 +223,8 @@
         "[foo=yes\\:\\(it\\'s\\ work\\)]"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 235
     },
     {
       "raw": {
@@ -228,7 +240,8 @@
         "\\@noat"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 272
     },
     {
       "raw": {
@@ -258,14 +271,17 @@
           "prop": "color",
           "value": [
             "\\\\"
-          ]
+          ],
+          "start": 290
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 282
     },
     {
       "content": "/* [attr=;] { } */",
-      "type": "COMMENT"
+      "type": "COMMENT",
+      "start": 317
     },
     {
       "raw": {
@@ -296,10 +312,12 @@
           "prop": "\\62 olor",
           "value": [
             "red"
-          ]
+          ],
+          "start": 336
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 320
     }
   ],
   "type": "ROOT"

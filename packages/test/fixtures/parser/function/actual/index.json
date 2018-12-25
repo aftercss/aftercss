@@ -37,7 +37,8 @@
           "prop": "background-image",
           "value": [
             "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)"
-          ]
+          ],
+          "start": 21
         },
         {
           "raw": {
@@ -53,7 +54,8 @@
           "prop": "background-image",
           "value": [
             "url(\"./image (1).jpg\")"
-          ]
+          ],
+          "start": 125
         },
         {
           "raw": {
@@ -69,10 +71,12 @@
           "prop": "background-image",
           "value": [
             "url( './image (1).jpg' )"
-          ]
+          ],
+          "start": 168
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

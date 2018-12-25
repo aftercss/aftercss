@@ -18,7 +18,8 @@
         "a"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"

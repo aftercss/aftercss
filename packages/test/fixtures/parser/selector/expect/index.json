@@ -19,7 +19,8 @@
         "a/* { } */ b"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 2
     },
     {
       "raw": {
@@ -33,7 +34,8 @@
         "a/* test */b"
       ],
       "childNodes": [],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 19
     }
   ],
   "type": "ROOT"

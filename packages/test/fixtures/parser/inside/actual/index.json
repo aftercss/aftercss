@@ -35,10 +35,12 @@
             ]
           },
           "name": "import",
-          "type": "ATRULE"
+          "type": "ATRULE",
+          "start": 12
         }
       ],
-      "type": "RULE"
+      "type": "RULE",
+      "start": 1
     }
   ],
   "type": "ROOT"
