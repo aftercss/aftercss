@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -18,6 +19,7 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -36,6 +38,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -44,7 +47,6 @@
             ],
             "beforeColon": " /*teest*/"
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -53,6 +55,7 @@
           "start": 24
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -61,7 +64,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -70,6 +72,7 @@
           "start": 62
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -78,7 +81,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -87,6 +89,7 @@
           "start": 85
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -95,7 +98,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -104,10 +106,10 @@
           "start": 108
         }
       ],
-      "type": "RULE",
       "start": 1
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -121,10 +123,10 @@
         ":not([foo=\")\"])"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 119
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -138,10 +140,10 @@
         ":not(div/*)*/)"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 139
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -155,10 +157,10 @@
         ":not(:nth-child(2n of [foo=\")\"]))"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 158
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -172,10 +174,10 @@
         "[foo=\\\"]"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 196
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -189,10 +191,10 @@
         "[foo=\\{]"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 209
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -206,10 +208,10 @@
         "[foo=\\(]"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 222
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -223,10 +225,10 @@
         "[foo=yes\\:\\(it\\'s\\ work\\)]"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 235
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           " "
@@ -240,10 +242,10 @@
         "\\@noat"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 272
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -258,6 +260,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -266,7 +269,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "color",
           "value": [
@@ -275,15 +277,15 @@
           "start": 290
         }
       ],
-      "type": "RULE",
       "start": 282
     },
     {
-      "content": "/* [attr=;] { } */",
       "type": "COMMENT",
+      "content": "/* [attr=;] { } */",
       "start": 317
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -299,6 +301,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -307,7 +310,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "\\62 olor",
           "value": [
@@ -316,9 +318,7 @@
           "start": 336
         }
       ],
-      "type": "RULE",
       "start": 320
     }
-  ],
-  "type": "ROOT"
+  ]
 }

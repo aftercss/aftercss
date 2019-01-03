@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -26,6 +28,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -34,7 +37,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "width",
           "value": [
@@ -43,6 +45,7 @@
           "start": 34
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -51,7 +54,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "height",
           "value": [
@@ -60,9 +62,7 @@
           "start": 46
         }
       ],
-      "type": "RULE",
       "start": 1
     }
-  ],
-  "type": "ROOT"
+  ]
 }

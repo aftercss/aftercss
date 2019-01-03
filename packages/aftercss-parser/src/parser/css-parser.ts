@@ -1,6 +1,6 @@
 import { MessageCollection } from '@aftercss/shared';
 import { CSSTokenizer, Token, TokenType } from '@aftercss/tokenizer';
-import { AtRule, Comment, EAtRuleName, ParserNode, Rule } from '../parser-node/';
+import { AtRule, Comment, EAtRuleName, EParserNodeType, ParserNode, Rule } from '../parser-node/';
 import { BaseParser } from './base-parser';
 
 export interface IChildNodesRaw {
@@ -64,6 +64,88 @@ export class CSSParser extends BaseParser {
       beforeChildNodes,
       childNodes,
     };
+  }
+
+  /**
+   * stringify AST-tree
+   * @param node
+   */
+  public stringify(node: ParserNode): string {
+    let res: string = '';
+    switch (node.type) {
+      case EParserNodeType.AtRule:
+        if (node.checkType(EParserNodeType.AtRule)) {
+          // at-rule name
+          res += `@${node.name}`;
+          // at-rule params
+          let paramsIndex = 0;
+          node.raw.besidesParams.forEach(item => {
+            if (item === undefined) {
+              res += node.params[paramsIndex];
+              paramsIndex++;
+            } else {
+              res += item;
+            }
+          });
+          if (node.isNested) {
+            res += '{';
+            for (let i = 0; i < node.childNodes.length; i++) {
+              res += node.raw.beforeChildNodes[i];
+              res += this.stringify(node.childNodes[i]);
+            }
+            res += node.raw.beforeChildNodes[node.childNodes.length] + '}';
+          }
+        }
+        break;
+      case EParserNodeType.Comment:
+        if (node.checkType(EParserNodeType.Comment)) {
+          res += node.content;
+        }
+        break;
+      case EParserNodeType.Declaration:
+        if (node.checkType(EParserNodeType.Declaration)) {
+          res += node.prop + node.raw.beforeColon + ':';
+          let valueIndex = 0;
+          node.raw.afterColon.forEach(item => {
+            if (item === undefined) {
+              res += node.value[valueIndex];
+              valueIndex++;
+            } else {
+              res += item;
+            }
+          });
+        }
+        break;
+      case EParserNodeType.Root:
+        if (node.checkType(EParserNodeType.Root)) {
+          for (let i = 0; i < node.childNodes.length; i++) {
+            res += node.raw.beforeChildNodes[i];
+            res += this.stringify(node.childNodes[i]);
+          }
+          res += node.raw.beforeChildNodes[node.childNodes.length];
+        }
+        break;
+      case EParserNodeType.Rule:
+        if (node.checkType(EParserNodeType.Rule)) {
+          let selectorIndex = 0;
+          node.raw.beforeOpenBracket.forEach(item => {
+            if (item === undefined) {
+              res += node.selector[selectorIndex];
+              selectorIndex++;
+            } else {
+              res += item;
+            }
+          });
+          res += '{';
+          for (let i = 0; i < node.childNodes.length; i++) {
+            res += node.raw.beforeChildNodes[i];
+            res += this.stringify(node.childNodes[i]);
+          }
+          res += node.raw.beforeChildNodes[node.childNodes.length] + '}';
+        }
+        break;
+    }
+    return res;
   }
 
   /**
@@ -193,6 +275,10 @@ export class CSSParser extends BaseParser {
           throw this.error(MessageCollection._UNCLOSED_BLOCK_('when consuming a rule'));
         case TokenType.RIGHT_CURLY_BRACKET:
           this.step();
+          // {} 紧挨着，补一个beforeChildNodes
+          if (ruleNode.raw.beforeChildNodes.length === 0) {
+            ruleNode.raw.beforeChildNodes.push('');
+          }
           return ruleNode;
         default:
           const childNodesRaw = this.consumeRuleList(false);

@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,8 +8,11 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
-        "beforeChildNodes": [],
+        "beforeChildNodes": [
+          ""
+        ],
         "beforeOpenBracket": [
           null,
           " "
@@ -18,9 +22,7 @@
         ":fullscreen"
       ],
       "childNodes": [],
-      "type": "RULE",
       "start": 1
     }
-  ],
-  "type": "ROOT"
+  ]
 }

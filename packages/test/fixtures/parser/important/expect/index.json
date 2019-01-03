@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -8,6 +9,7 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -24,6 +26,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -32,7 +35,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "width",
           "value": [
@@ -41,6 +43,7 @@
           "start": 10
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -49,7 +52,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "color",
           "value": [
@@ -58,10 +60,10 @@
           "start": 33
         }
       ],
-      "type": "RULE",
       "start": 1
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -86,6 +88,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -94,7 +97,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "prop",
           "value": [
@@ -103,6 +105,7 @@
           "start": 67
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -113,7 +116,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "color",
           "value": [
@@ -123,6 +125,7 @@
           "start": 86
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -131,7 +134,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "margin",
           "value": [
@@ -140,6 +142,7 @@
           "start": 110
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -148,7 +151,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "padding",
           "value": [
@@ -157,6 +159,7 @@
           "start": 148
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -165,7 +168,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "width",
           "value": [
@@ -174,6 +176,7 @@
           "start": 192
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -184,7 +187,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "height",
           "value": [
@@ -194,6 +196,7 @@
           "start": 232
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -204,7 +207,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "z-index",
           "value": [
@@ -214,6 +216,7 @@
           "start": 271
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -222,7 +225,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "padding",
           "value": [
@@ -231,15 +233,15 @@
           "start": 298
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
               null,
-              " !important;"
+              " !IMPORTANT;"
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "left",
           "value": [
@@ -248,15 +250,15 @@
           "start": 329
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
               null,
-              " ! important;"
+              " ! IMPORTANT;"
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": true,
           "prop": "right",
           "value": [
@@ -265,9 +267,7 @@
           "start": 352
         }
       ],
-      "type": "RULE",
       "start": 59
     }
-  ],
-  "type": "ROOT"
+  ]
 }

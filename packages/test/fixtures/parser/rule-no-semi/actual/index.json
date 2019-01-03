@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "",
@@ -21,13 +23,13 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               null
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "color",
           "value": [
@@ -36,9 +38,7 @@
           "start": 7
         }
       ],
-      "type": "RULE",
       "start": 1
     }
-  ],
-  "type": "ROOT"
+  ]
 }

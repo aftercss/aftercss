@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [
         "(animation-name: test)"
@@ -23,10 +25,10 @@
         ]
       },
       "name": "supports",
-      "type": "ATRULE",
       "start": 9,
       "childNodes": [
         {
+          "type": "ATRULE",
           "isNested": true,
           "params": [
             "anim"
@@ -44,10 +46,10 @@
             ]
           },
           "name": "keyframes",
-          "type": "ATRULE",
           "start": 46,
           "childNodes": [
             {
+              "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
                   "\n\t\t\t\t\t",
@@ -63,6 +65,7 @@
               ],
               "childNodes": [
                 {
+                  "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
                       " ",
@@ -71,7 +74,6 @@
                     ],
                     "beforeColon": ""
                   },
-                  "type": "DECLARATION",
                   "important": false,
                   "prop": "color",
                   "value": [
@@ -80,10 +82,10 @@
                   "start": 74
                 }
               ],
-              "type": "RULE",
               "start": 61
             },
             {
+              "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
                   "\n\t\t\t\t\t",
@@ -99,6 +101,7 @@
               ],
               "childNodes": [
                 {
+                  "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
                       " ",
@@ -107,7 +110,6 @@
                     ],
                     "beforeColon": ""
                   },
-                  "type": "DECLARATION",
                   "important": false,
                   "prop": "color",
                   "value": [
@@ -116,13 +118,11 @@
                   "start": 106
                 }
               ],
-              "type": "RULE",
               "start": 93
             }
           ]
         }
       ]
     }
-  ],
-  "type": "ROOT"
+  ]
 }

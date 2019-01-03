@@ -133,10 +133,10 @@ export class BaseParser extends TokenReader {
         }
         cnt++;
         if (cnt === 1) {
-          concatStr = 'important' + concatStr;
+          concatStr = last + concatStr;
         }
         if (cnt === 2) {
-          concatStr = '!' + concatStr;
+          concatStr = beforeLast + concatStr;
           if (raw.afterColon[i - 1] !== undefined) {
             i = i - 1;
             concatStr = raw.afterColon[i] + concatStr;
@@ -278,5 +278,9 @@ export class BaseParser extends TokenReader {
           this.step();
       }
     }
+  }
+
+  public stringify(node: ParserNode): string {
+    throw this.error(MessageCollection._SHOULD_BE_OVERLOADED_('Function stringify'));
   }
 }

@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -8,6 +9,7 @@
   },
   "childNodes": [
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [
         "screen"
@@ -23,11 +25,11 @@
         ]
       },
       "name": "media",
-      "type": "ATRULE",
       "start": 6,
       "childNodes": []
     },
     {
+      "type": "ATRULE",
       "isNested": false,
       "params": [
         "\"UTF-8\""
@@ -41,9 +43,7 @@
         ]
       },
       "name": "charset",
-      "type": "ATRULE",
       "start": 26
     }
-  ],
-  "type": "ROOT"
+  ]
 }

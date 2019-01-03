@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [
         "screen"
@@ -22,10 +24,8 @@
         ]
       },
       "name": "media",
-      "type": "ATRULE",
       "start": 6,
       "childNodes": []
     }
-  ],
-  "type": "ROOT"
+  ]
 }

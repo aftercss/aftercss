@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -12,21 +13,22 @@
   },
   "childNodes": [
     {
-      "content": "/* a { color: black } */",
       "type": "COMMENT",
+      "content": "/* a { color: black } */",
       "start": 24
     },
     {
-      "content": "/**/",
       "type": "COMMENT",
+      "content": "/**/",
       "start": 29
     },
     {
-      "content": "/* */",
       "type": "COMMENT",
+      "content": "/* */",
       "start": 35
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -45,11 +47,12 @@
       ],
       "childNodes": [
         {
-          "content": "/* inside */",
           "type": "COMMENT",
+          "content": "/* inside */",
           "start": 55
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -58,7 +61,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "color",
           "value": [
@@ -67,11 +69,12 @@
           "start": 62
         },
         {
-          "content": "/* between */",
           "type": "COMMENT",
+          "content": "/* between */",
           "start": 85
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -84,7 +87,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "border-radius",
           "value": [
@@ -95,15 +97,15 @@
           "start": 100
         }
       ],
-      "type": "RULE",
       "start": 39
     },
     {
-      "content": "/* b */",
       "type": "COMMENT",
+      "content": "/* b */",
       "start": 132
     },
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -120,6 +122,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -128,7 +131,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "color",
           "value": [
@@ -137,14 +139,12 @@
           "start": 144
         },
         {
-          "content": "/* c */",
           "type": "COMMENT",
+          "content": "/* c */",
           "start": 161
         }
       ],
-      "type": "RULE",
       "start": 135
     }
-  ],
-  "type": "ROOT"
+  ]
 }

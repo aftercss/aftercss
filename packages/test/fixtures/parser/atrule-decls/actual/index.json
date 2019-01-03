@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -11,6 +12,7 @@
   },
   "childNodes": [
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [
         ":left"
@@ -27,10 +29,10 @@
         ]
       },
       "name": "page",
-      "type": "ATRULE",
       "start": 5,
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -39,7 +41,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -50,6 +51,7 @@
       ]
     },
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [
         "(min-width: 0)"
@@ -65,10 +67,10 @@
         ]
       },
       "name": "media",
-      "type": "ATRULE",
       "start": 42,
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -77,7 +79,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "background",
           "value": [
@@ -88,6 +89,7 @@
       ]
     },
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [],
       "raw": {
@@ -100,10 +102,10 @@
         ]
       },
       "name": "font-face",
-      "type": "ATRULE",
       "start": 91,
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -112,7 +114,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "family-name",
           "value": [
@@ -123,6 +124,7 @@
       ]
     },
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [],
       "raw": {
@@ -135,10 +137,10 @@
         ]
       },
       "name": "viewport",
-      "type": "ATRULE",
       "start": 132,
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -147,7 +149,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "width",
           "value": [
@@ -158,6 +159,7 @@
       ]
     },
     {
+      "type": "ATRULE",
       "isNested": true,
       "params": [],
       "raw": {
@@ -170,10 +172,10 @@
         ]
       },
       "name": "-ms-viewport",
-      "type": "ATRULE",
       "start": 166,
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -182,7 +184,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "width",
           "value": [
@@ -192,6 +193,5 @@
         }
       ]
     }
-  ],
-  "type": "ROOT"
+  ]
 }

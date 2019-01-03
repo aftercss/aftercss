@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "RULE",
       "raw": {
         "beforeChildNodes": [
           "\n\t",
@@ -24,6 +26,7 @@
       ],
       "childNodes": [
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -32,7 +35,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "width",
           "value": [
@@ -41,6 +43,7 @@
           "start": 10
         },
         {
+          "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
@@ -51,7 +54,6 @@
             ],
             "beforeColon": ""
           },
-          "type": "DECLARATION",
           "important": false,
           "prop": "margin",
           "value": [
@@ -61,6 +63,7 @@
           "start": 25
         },
         {
+          "type": "ATRULE",
           "isNested": true,
           "params": [
             "mobile"
@@ -77,10 +80,10 @@
             ]
           },
           "name": "media",
-          "type": "ATRULE",
           "start": 44,
           "childNodes": [
             {
+              "type": "DECLARATION",
               "raw": {
                 "afterColon": [
                   " ",
@@ -89,7 +92,6 @@
                 ],
                 "beforeColon": ""
               },
-              "type": "DECLARATION",
               "important": false,
               "prop": "height",
               "value": [
@@ -100,9 +102,7 @@
           ]
         }
       ],
-      "type": "RULE",
       "start": 1
     }
-  ],
-  "type": "ROOT"
+  ]
 }

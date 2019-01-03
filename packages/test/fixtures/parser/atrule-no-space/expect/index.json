@@ -1,4 +1,5 @@
 {
+  "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
       "",
@@ -7,6 +8,7 @@
   },
   "childNodes": [
     {
+      "type": "ATRULE",
       "isNested": false,
       "params": [
         "\"test.css\""
@@ -18,9 +20,7 @@
         ]
       },
       "name": "import",
-      "type": "ATRULE",
       "start": 7
     }
-  ],
-  "type": "ROOT"
+  ]
 }
