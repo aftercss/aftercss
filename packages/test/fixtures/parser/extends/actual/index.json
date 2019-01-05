@@ -1,14 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 3,
       "type": "DECLARATION",
       "raw": {
         "afterColon": [
@@ -22,10 +16,67 @@
       "prop": "one",
       "value": [
         "1"
-      ],
-      "start": 3
+      ]
     },
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 20,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "two",
+          "value": [
+            "2"
+          ]
+        },
+        {
+          "childNodes": [
+            {
+              "childNodes": [],
+              "start": 46,
+              "type": "DECLARATION",
+              "raw": {
+                "afterColon": [
+                  " ",
+                  null,
+                  ";"
+                ],
+                "beforeColon": ""
+              },
+              "important": false,
+              "prop": "three",
+              "value": [
+                "3"
+              ]
+            }
+          ],
+          "start": 30,
+          "type": "RULE",
+          "raw": {
+            "beforeChildNodes": [
+              "\n        ",
+              "\n    "
+            ],
+            "beforeOpenBracket": [
+              null,
+              " "
+            ]
+          },
+          "selector": [
+            "b"
+          ]
+        }
+      ],
+      "start": 10,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -40,63 +91,16 @@
       },
       "selector": [
         "a"
-      ],
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "two",
-          "value": [
-            "2"
-          ],
-          "start": 20
-        },
-        {
-          "type": "RULE",
-          "raw": {
-            "beforeChildNodes": [
-              "\n        ",
-              "\n    "
-            ],
-            "beforeOpenBracket": [
-              null,
-              " "
-            ]
-          },
-          "selector": [
-            "b"
-          ],
-          "childNodes": [
-            {
-              "type": "DECLARATION",
-              "raw": {
-                "afterColon": [
-                  " ",
-                  null,
-                  ";"
-                ],
-                "beforeColon": ""
-              },
-              "important": false,
-              "prop": "three",
-              "value": [
-                "3"
-              ],
-              "start": 46
-            }
-          ],
-          "start": 30
-        }
-      ],
-      "start": 10
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n"
+    ]
+  }
 }

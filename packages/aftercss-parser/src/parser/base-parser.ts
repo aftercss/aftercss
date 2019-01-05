@@ -14,6 +14,7 @@ export interface IChildNodesRaw {
 }
 
 export class BaseParser extends TokenReader {
+  public root: Root = new Root();
   public constructor(tokensOrTokenizer: Token[] | CSSTokenizer) {
     super(tokensOrTokenizer);
   }
@@ -32,10 +33,9 @@ export class BaseParser extends TokenReader {
    */
   public parseStyleSheet() {
     const childNodesRaw = this.consumeRuleList();
-    const root = new Root();
-    root.childNodes = childNodesRaw.childNodes;
-    root.raw.beforeChildNodes = childNodesRaw.beforeChildNodes;
-    return root;
+    this.root.childNodes = childNodesRaw.childNodes;
+    this.root.raw.beforeChildNodes = childNodesRaw.beforeChildNodes;
+    return this.root;
   }
 
   /**
@@ -44,7 +44,9 @@ export class BaseParser extends TokenReader {
    * @returns IChildNodeRaw
    */
   public consumeRuleList(): IChildNodesRaw {
-    throw this.error(MessageCollection._SHOULD_BE_OVERLOADED_('Function consumeRuleList'));
+    throw this.error(
+      MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('BaseParser.consumeRuleList', new Error().stack),
+    );
   }
 
   /**
@@ -281,6 +283,8 @@ export class BaseParser extends TokenReader {
   }
 
   public stringify(node: ParserNode): string {
-    throw this.error(MessageCollection._SHOULD_BE_OVERLOADED_('Function stringify'));
+    throw this.error(
+      MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('BaseParser.stringify', new Error().stack),
+    );
   }
 }

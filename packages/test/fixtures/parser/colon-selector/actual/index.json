@@ -1,13 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      ""
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 1,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -20,9 +15,15 @@
       },
       "selector": [
         ":fullscreen"
-      ],
-      "childNodes": [],
-      "start": 1
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  }
 }

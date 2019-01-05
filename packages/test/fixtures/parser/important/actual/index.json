@@ -1,14 +1,45 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 10,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "!important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "width",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 33,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "  !important ;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "start": 1,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -23,46 +54,201 @@
       },
       "selector": [
         "a"
-      ],
+      ]
+    },
+    {
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 67,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
               null,
-              "!important;"
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "prop",
+          "value": [
+            "important"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 86,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "red",
+            "important"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 110,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "      !      important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "margin",
+          "value": [
+            "10px"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 148,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "     !  /* test */   important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "20px"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 192,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! /*! test */ important;"
             ],
             "beforeColon": ""
           },
           "important": true,
           "prop": "width",
           "value": [
-            "1px"
-          ],
-          "start": 10
+            "100px"
+          ]
         },
         {
+          "childNodes": [],
+          "start": 232,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
               " ",
               null,
-              "  !important ;"
+              " /*! test */ ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "height",
+          "value": [
+            "100px",
+            "important"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 271,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              "! important;"
             ],
             "beforeColon": ""
           },
           "important": true,
-          "prop": "color",
+          "prop": "z-index",
           "value": [
-            "black"
-          ],
-          "start": 33
+            "1",
+            "\"\""
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 298,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "/* sep */!important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 329,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " !IMPORTANT;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "left",
+          "value": [
+            "10"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 352,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! IMPORTANT;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "right",
+          "value": [
+            "10"
+          ]
         }
       ],
-      "start": 1
-    },
-    {
+      "start": 59,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -85,189 +271,16 @@
       },
       "selector": [
         "p"
-      ],
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "prop",
-          "value": [
-            "important"
-          ],
-          "start": 67
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "color",
-          "value": [
-            "red",
-            "important"
-          ],
-          "start": 86
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              "      !      important;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "margin",
-          "value": [
-            "10px"
-          ],
-          "start": 110
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              "     !  /* test */   important;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "padding",
-          "value": [
-            "20px"
-          ],
-          "start": 148
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " ! /*! test */ important;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "width",
-          "value": [
-            "100px"
-          ],
-          "start": 192
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " /*! test */ ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "height",
-          "value": [
-            "100px",
-            "important"
-          ],
-          "start": 232
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " ",
-              null,
-              "! important;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "z-index",
-          "value": [
-            "1",
-            "\"\""
-          ],
-          "start": 271
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              "/* sep */!important;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "padding",
-          "value": [
-            "1px"
-          ],
-          "start": 298
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " !IMPORTANT;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "left",
-          "value": [
-            "10"
-          ],
-          "start": 329
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              " ! IMPORTANT;"
-            ],
-            "beforeColon": ""
-          },
-          "important": true,
-          "prop": "right",
-          "value": [
-            "10"
-          ],
-          "start": 352
-        }
-      ],
-      "start": 59
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n"
+    ]
+  }
 }

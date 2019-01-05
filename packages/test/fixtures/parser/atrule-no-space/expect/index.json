@@ -1,13 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      ""
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 7,
       "type": "ATRULE",
       "isNested": false,
       "params": [
@@ -19,8 +14,15 @@
           null
         ]
       },
-      "name": "import",
-      "start": 7
+      "name": "import"
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  }
 }

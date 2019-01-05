@@ -26,11 +26,42 @@ export class ParserNode {
   public type: EParserNodeType = EParserNodeType.ANY;
   public start: number;
   public childNodes: ParserNode[];
+  public parent: ParserNode = null;
   public clone() {
     throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.clone', new Error().stack));
   }
   public checkType<T extends EParserNodeType>(type: T): this is ITypeMap[T] {
     return this.type === type;
+  }
+  public toJSON() {
+    const res: {
+      type: EParserNodeType;
+      start: number;
+      childNodes: ParserNode[];
+      [prop: string]: any;
+    } = {
+      childNodes: [],
+      start: 0,
+      type: EParserNodeType.ANY,
+    };
+    for (const attr in this) {
+      if (!this.hasOwnProperty(attr) || attr === 'parent') {
+        continue;
+      }
+      const value = this[attr];
+      if (Array.isArray(value)) {
+        res[attr] = value.map(item => {
+          if (Object.prototype.toString.call(item) === '[object Object]' && item.toJSON) {
+            return item.toJSON();
+          } else {
+            return item;
+          }
+        });
+      } else {
+        res[attr] = value;
+      }
+    }
+    return res;
   }
 }
 
@@ -55,5 +86,6 @@ export class Root extends ParserNode {
     super();
     this.childNodes = [];
     this.type = EParserNodeType.Root;
+    this.start = 0;
   }
 }

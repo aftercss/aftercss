@@ -1,13 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 8,
       "type": "ATRULE",
       "isNested": false,
       "params": [
@@ -21,8 +16,15 @@
           ";"
         ]
       },
-      "name": "charset",
-      "start": 8
+      "name": "charset"
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  }
 }

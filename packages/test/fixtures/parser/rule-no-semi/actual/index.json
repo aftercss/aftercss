@@ -1,13 +1,25 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 7,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              null
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "start": 1,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -20,25 +32,15 @@
       },
       "selector": [
         "a"
-      ],
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              null
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "color",
-          "value": [
-            "black"
-          ],
-          "start": 7
-        }
-      ],
-      "start": 1
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  }
 }

@@ -1,17 +1,27 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      "\n\n",
-      "\n\n",
-      "\n\n",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 25,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "black"
+          ]
+        }
+      ],
+      "start": 5,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -28,10 +38,13 @@
           " "
         ]
       },
-      "name": "page",
-      "start": 5,
+      "name": "page"
+    },
+    {
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 70,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -44,13 +57,11 @@
           "important": false,
           "prop": "background",
           "value": [
-            "black"
-          ],
-          "start": 25
+            "white"
+          ]
         }
-      ]
-    },
-    {
+      ],
+      "start": 42,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -66,45 +77,13 @@
           " "
         ]
       },
-      "name": "media",
-      "start": 42,
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              "\n"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "background",
-          "value": [
-            "white"
-          ],
-          "start": 70
-        }
-      ]
+      "name": "media"
     },
     {
-      "type": "ATRULE",
-      "isNested": true,
-      "params": [],
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "besidesParams": [
-          " "
-        ]
-      },
-      "name": "font-face",
-      "start": 91,
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 106,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -118,12 +97,10 @@
           "prop": "family-name",
           "value": [
             "\"A;' /**/\""
-          ],
-          "start": 106
+          ]
         }
-      ]
-    },
-    {
+      ],
+      "start": 91,
       "type": "ATRULE",
       "isNested": true,
       "params": [],
@@ -136,10 +113,13 @@
           " "
         ]
       },
-      "name": "viewport",
-      "start": 132,
+      "name": "font-face"
+    },
+    {
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 141,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -153,12 +133,10 @@
           "prop": "width",
           "value": [
             "110px"
-          ],
-          "start": 141
+          ]
         }
-      ]
-    },
-    {
+      ],
+      "start": 132,
       "type": "ATRULE",
       "isNested": true,
       "params": [],
@@ -171,10 +149,13 @@
           " "
         ]
       },
-      "name": "-ms-viewport",
-      "start": 166,
+      "name": "viewport"
+    },
+    {
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 175,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -188,10 +169,35 @@
           "prop": "width",
           "value": [
             "100px"
-          ],
-          "start": 175
+          ]
         }
-      ]
+      ],
+      "start": 166,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      },
+      "name": "-ms-viewport"
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  }
 }

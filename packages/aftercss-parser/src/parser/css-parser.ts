@@ -18,14 +18,15 @@ export class CSSParser extends BaseParser {
 
   /**
    * consume a list of rules
+   * @param node   the parent node of the rule
    */
-  public consumeRuleList(isTopLevel: boolean = true): IChildNodesRaw {
+  public consumeRuleList(node: ParserNode = this.root): IChildNodesRaw {
     const beforeChildNodes: string[] = [];
     const childNodes: ParserNode[] = [];
     let beforeChildNode: string = '';
     while (
-      (isTopLevel && this.currentToken().type !== TokenType.EOF) ||
-      (!isTopLevel &&
+      (node.type === EParserNodeType.Root && this.currentToken().type !== TokenType.EOF) ||
+      (node.type !== EParserNodeType.Root &&
         this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET &&
         this.currentToken().type !== TokenType.EOF)
     ) {
@@ -42,6 +43,7 @@ export class CSSParser extends BaseParser {
         case TokenType.COMMENT:
           beforeChildNodes.push(beforeChildNode);
           const commentNode = new Comment(currentToken.raw);
+          commentNode.parent = node;
           commentNode.start = currentToken.start;
           childNodes.push(commentNode);
           beforeChildNode = '';
@@ -50,13 +52,17 @@ export class CSSParser extends BaseParser {
         case TokenType.ATKEYWORD:
           beforeChildNodes.push(beforeChildNode);
           beforeChildNode = '';
-          childNodes.push(this.consumeAtRules());
+          const atRuleNode = this.consumeAtRule();
+          atRuleNode.parent = node;
+          childNodes.push(atRuleNode);
           break;
         default:
           // qualified rule OR declaration
           beforeChildNodes.push(beforeChildNode);
           beforeChildNode = '';
-          childNodes.push(this.other());
+          const otherNode = this.other();
+          otherNode.parent = node;
+          childNodes.push(otherNode);
       }
     }
     beforeChildNodes.push(beforeChildNode);
@@ -151,7 +157,7 @@ export class CSSParser extends BaseParser {
   /**
    * consume an at-rule
    */
-  private consumeAtRules() {
+  private consumeAtRule() {
     const name = this.currentToken().content;
     switch (name) {
       case 'charset':
@@ -166,7 +172,7 @@ export class CSSParser extends BaseParser {
       case 'counter-style':
       case 'font-feature-values':
       case '-ms-viewport':
-        return this.consumeOneAtRule(EAtRuleName[name]);
+        return this.consumeCertianAtRule(EAtRuleName[name]);
       default:
         throw this.error(MessageCollection._UNEXPECTED_AT_RULE_());
     }
@@ -176,7 +182,7 @@ export class CSSParser extends BaseParser {
    * @param type
    * @returns AtRule
    */
-  private consumeOneAtRule(type: EAtRuleName): AtRule {
+  private consumeCertianAtRule(type: EAtRuleName): AtRule {
     const atRuleNode = new AtRule(type);
     atRuleNode.start = this.currentToken().start;
     this.step(); // skip the at-rule name
@@ -222,7 +228,7 @@ export class CSSParser extends BaseParser {
           toMove = '';
       }
     }
-    const ruleList = this.consumeRuleList(false);
+    const ruleList = this.consumeRuleList(atRuleNode);
     atRuleNode.childNodes = ruleList.childNodes;
     atRuleNode.raw.beforeChildNodes = ruleList.beforeChildNodes;
     if (this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET) {
@@ -281,7 +287,7 @@ export class CSSParser extends BaseParser {
           }
           return ruleNode;
         default:
-          const childNodesRaw = this.consumeRuleList(false);
+          const childNodesRaw = this.consumeRuleList(ruleNode);
           ruleNode.childNodes = childNodesRaw.childNodes;
           ruleNode.raw.beforeChildNodes = childNodesRaw.beforeChildNodes;
       }

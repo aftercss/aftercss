@@ -1,13 +1,63 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 21,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 125,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url(\"./image (1).jpg\")"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 168,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url( './image (1).jpg' )"
+          ]
+        }
+      ],
+      "start": 1,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -23,61 +73,15 @@
       },
       "selector": [
         "a"
-      ],
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "background-image",
-          "value": [
-            "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)"
-          ],
-          "start": 21
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "background-image",
-          "value": [
-            "url(\"./image (1).jpg\")"
-          ],
-          "start": 125
-        },
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "background-image",
-          "value": [
-            "url( './image (1).jpg' )"
-          ],
-          "start": 168
-        }
-      ],
-      "start": 1
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  }
 }

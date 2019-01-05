@@ -1,29 +1,10 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      ""
-    ]
-  },
   "childNodes": [
     {
-      "type": "RULE",
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "beforeOpenBracket": [
-          null,
-          " "
-        ]
-      },
-      "selector": [
-        "a"
-      ],
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 12,
           "type": "ATRULE",
           "isNested": false,
           "params": [
@@ -37,11 +18,32 @@
               ";"
             ]
           },
-          "name": "import",
-          "start": 12
+          "name": "import"
         }
       ],
-      "start": 1
+      "start": 1,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  }
 }

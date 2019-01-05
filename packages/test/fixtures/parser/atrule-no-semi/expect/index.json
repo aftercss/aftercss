@@ -1,14 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      ""
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 6,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -24,11 +18,11 @@
           " "
         ]
       },
-      "name": "media",
-      "start": 6,
-      "childNodes": []
+      "name": "media"
     },
     {
+      "childNodes": [],
+      "start": 26,
       "type": "ATRULE",
       "isNested": false,
       "params": [
@@ -42,8 +36,16 @@
           "\n"
         ]
       },
-      "name": "charset",
-      "start": 26
+      "name": "charset"
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      ""
+    ]
+  }
 }

@@ -1,57 +1,34 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n",
-      "\n",
-      "\n",
-      "\n",
-      "\n\n",
-      ""
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 24,
       "type": "COMMENT",
-      "content": "/* a { color: black } */",
-      "start": 24
+      "content": "/* a { color: black } */"
     },
     {
+      "childNodes": [],
+      "start": 29,
       "type": "COMMENT",
-      "content": "/**/",
-      "start": 29
+      "content": "/**/"
     },
     {
+      "childNodes": [],
+      "start": 35,
       "type": "COMMENT",
-      "content": "/* */",
-      "start": 35
+      "content": "/* */"
     },
     {
-      "type": "RULE",
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n\t",
-          "\n\t",
-          "\n\t",
-          ""
-        ],
-        "beforeOpenBracket": [
-          null,
-          " "
-        ]
-      },
-      "selector": [
-        "div"
-      ],
       "childNodes": [
         {
+          "childNodes": [],
+          "start": 55,
           "type": "COMMENT",
-          "content": "/* inside */",
-          "start": 55
+          "content": "/* inside */"
         },
         {
+          "childNodes": [],
+          "start": 62,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -65,15 +42,17 @@
           "prop": "color",
           "value": [
             "black"
-          ],
-          "start": 62
+          ]
         },
         {
+          "childNodes": [],
+          "start": 85,
           "type": "COMMENT",
-          "content": "/* between */",
-          "start": 85
+          "content": "/* between */"
         },
         {
+          "childNodes": [],
+          "start": 100,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -93,18 +72,62 @@
             "3px",
             "/",
             "7px"
-          ],
-          "start": 100
+          ]
         }
       ],
-      "start": 39
+      "start": 39,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "div"
+      ]
     },
     {
+      "childNodes": [],
+      "start": 132,
       "type": "COMMENT",
-      "content": "/* b */",
-      "start": 132
+      "content": "/* b */"
     },
     {
+      "childNodes": [
+        {
+          "childNodes": [],
+          "start": 144,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        },
+        {
+          "childNodes": [],
+          "start": 161,
+          "type": "COMMENT",
+          "content": "/* c */"
+        }
+      ],
+      "start": 135,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -119,32 +142,20 @@
       },
       "selector": [
         "a"
-      ],
-      "childNodes": [
-        {
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "color",
-          "value": [
-            "black"
-          ],
-          "start": 144
-        },
-        {
-          "type": "COMMENT",
-          "content": "/* c */",
-          "start": 161
-        }
-      ],
-      "start": 135
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      ""
+    ]
+  }
 }

@@ -1,14 +1,8 @@
 {
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "\n",
-      "\n\n",
-      "\n"
-    ]
-  },
   "childNodes": [
     {
+      "childNodes": [],
+      "start": 2,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -21,11 +15,11 @@
       },
       "selector": [
         "a/* { } */ b"
-      ],
-      "childNodes": [],
-      "start": 2
+      ]
     },
     {
+      "childNodes": [],
+      "start": 19,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -38,9 +32,16 @@
       },
       "selector": [
         "a/* test */b"
-      ],
-      "childNodes": [],
-      "start": 19
+      ]
     }
-  ]
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "\n",
+      "\n\n",
+      "\n"
+    ]
+  }
 }
