@@ -1,0 +1,18 @@
+{
+  "childNodes": [
+    {
+      "childNodes": [],
+      "start": 0,
+      "type": "COMMENT",
+      "content": "replace ast-node"
+    }
+  ],
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  }
+}

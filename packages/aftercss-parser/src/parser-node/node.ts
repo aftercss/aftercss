@@ -22,24 +22,82 @@ export interface ITypeMap {
   [prop: string]: ParserNode;
 }
 
+export interface IJSONParserNode {
+  type: EParserNodeType;
+  start: number;
+  childNodes: ParserNode[];
+  [prop: string]: any;
+}
+
 export class ParserNode {
   public type: EParserNodeType = EParserNodeType.ANY;
   public start: number;
   public childNodes: ParserNode[];
   public parent: ParserNode = null;
-  public clone() {
-    throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.clone', new Error().stack));
+  [prop: string]: any;
+  public appendChildNode(nodes: ParserNode | ParserNode[]) {
+    if (this.type === EParserNodeType.Comment || this.type === EParserNodeType.Declaration) {
+      throw this.error(MessageCollection._INVALID_APPEND_CHILDNODE('Comment/Declatation'));
+    }
+    if (Array.isArray(nodes)) {
+      this.childNodes.push(...nodes);
+    } else {
+      this.childNodes.push(nodes);
+    }
   }
   public checkType<T extends EParserNodeType>(type: T): this is ITypeMap[T] {
     return this.type === type;
   }
+  public clone() {
+    return this.cloneObject(this);
+  }
+
+  public insertAfter(nodes: ParserNode | ParserNode[]) {
+    if (!this.parent) {
+      throw this.error(MessageCollection._INVALID_PARENT_NODE('insert nodes after'));
+    }
+    const index = this.index();
+    if (Array.isArray(nodes)) {
+      this.parent.childNodes.splice(index, 1, this, ...nodes);
+    } else {
+      this.parent.childNodes.splice(index, 1, this, nodes);
+    }
+  }
+
+  public insertBefore(nodes: ParserNode | ParserNode[]) {
+    if (!this.parent) {
+      throw this.error(MessageCollection._INVALID_PARENT_NODE('insert nodes before'));
+    }
+    const index = this.index();
+    if (Array.isArray(nodes)) {
+      this.parent.childNodes.splice(index, 0, ...nodes);
+    } else {
+      this.parent.childNodes.splice(index, 0, nodes);
+    }
+  }
+
+  public remove(): ParserNode {
+    if (this.parent) {
+      const index = this.parent.childNodes.indexOf(this);
+      this.parent.childNodes.splice(index, 1);
+    }
+    this.parent = null;
+    return this;
+  }
+
+  public replaceWith(nodes: ParserNode | ParserNode[]) {
+    if (!this.parent) {
+      throw this.error(MessageCollection._INVALID_PARENT_NODE('replace'));
+    }
+    const index = this.index();
+    if (Array.isArray(nodes)) {
+      this.parent.childNodes.splice(index, 1, ...nodes);
+    } else {
+      this.parent.childNodes.splice(index, 1, nodes);
+    }
+  }
   public toJSON() {
-    const res: {
-      type: EParserNodeType;
-      start: number;
-      childNodes: ParserNode[];
-      [prop: string]: any;
-    } = {
+    const res: IJSONParserNode = {
       childNodes: [],
       start: 0,
       type: EParserNodeType.ANY,
@@ -50,7 +108,7 @@ export class ParserNode {
       }
       const value = this[attr];
       if (Array.isArray(value)) {
-        res[attr] = value.map(item => {
+        res[attr] = value.map((item: any) => {
           if (Object.prototype.toString.call(item) === '[object Object]' && item.toJSON) {
             return item.toJSON();
           } else {
@@ -62,6 +120,42 @@ export class ParserNode {
       }
     }
     return res;
+  }
+
+  private cloneObject(source: any, parent?: ParserNode) {
+    const cloned = Object.create(source);
+    for (const attr in source) {
+      if (!source.hasOwnProperty(attr)) {
+        continue;
+      }
+      let value = source[attr];
+      if (attr === 'parent' && parent) {
+        cloned[attr] = parent;
+      } else if (Array.isArray(value)) {
+        value = value.map((item: any) => {
+          if (Array.isArray(item) || Object.prototype.toString.call(item) === '[object Object]') {
+            if (attr === 'childNodes') {
+              // 当有子结点时，须设置子结点对应的父结点
+              return this.cloneObject(item, cloned);
+            }
+            return this.cloneObject(item);
+          } else {
+            return item;
+          }
+        });
+      } else if (Object.prototype.toString.call(value) === '[object Object]') {
+        value = this.cloneObject(value);
+      }
+      cloned[attr] = value;
+    }
+    return cloned;
+  }
+
+  private index(): number {
+    if (!this.parent) {
+      return -1;
+    }
+    return this.parent.childNodes.indexOf(this);
   }
 }
 

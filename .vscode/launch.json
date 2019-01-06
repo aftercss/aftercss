@@ -16,7 +16,7 @@
       "request": "launch",
       "name": "启动程序",
       "program": "${workspaceFolder}/packages/test/node_modules/mocha/bin/_mocha",
-      "args": ["${workspaceFolder}/packages/test/fixtures/parser/parser.fixture.js"]
+      "args": ["${workspaceFolder}/packages/test/fixtures/ast-manipulation/insert-before/index.js"]
     }
   ]
 }

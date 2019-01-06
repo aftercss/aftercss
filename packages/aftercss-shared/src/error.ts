@@ -49,5 +49,6 @@ export namespace MessageCollection {
   export const _INVALID_CHARSET_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @charset rule: {0}');
   export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
   export const _UNEXPECTED_AT_RULE_ = messageBuilder<ArgNumber.ZERO>('Unexpected at rule');
-  export const _SHOULD_BE_OVERLOADED_ = messageBuilder<ArgNumber.ONE>('{0} should be overloaded');
+  export const _INVALID_APPEND_CHILDNODE = messageBuilder<ArgNumber.ONE>("Cann't append a childNode to {0} node");
+  export const _INVALID_PARENT_NODE = messageBuilder<ArgNumber.ONE>("Cann't {0} a node whose parent node is null");
 }

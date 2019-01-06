@@ -1,0 +1,10 @@
+@supports (animation-name: test) {
+	@keyframes anim {
+			from {
+					color: black;
+			}
+			to {
+					color: white
+			}
+	}
+}
