@@ -21,4 +21,16 @@ export class Declaration extends ParserNode {
     this.prop = prop;
     this.value = value;
   }
+
+  public toString(): string {
+    let str = this.prop + this.raw.beforeColon + ':';
+    let valueIndex = 0;
+    str += this.raw.afterColon.reduce((acc, cur) => {
+      if (cur === undefined) {
+        return acc + this.value[valueIndex++];
+      }
+      return acc + cur;
+    }, '');
+    return str;
+  }
 }
