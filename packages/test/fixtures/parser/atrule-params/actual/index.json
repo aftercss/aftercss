@@ -1,7 +1,14 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [],
       "start": 6,
       "type": "ATRULE",
       "isNested": true,
@@ -18,15 +25,8 @@
           " /* a */ "
         ]
       },
-      "name": "media"
+      "name": "media",
+      "childNodes": []
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

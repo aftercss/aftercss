@@ -1,7 +1,15 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [],
       "start": 3,
       "type": "DECLARATION",
       "raw": {
@@ -19,9 +27,24 @@
       ]
     },
     {
+      "start": 10,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n    ",
+          "\n    ",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
       "childNodes": [
         {
-          "childNodes": [],
           "start": 20,
           "type": "DECLARATION",
           "raw": {
@@ -39,9 +62,23 @@
           ]
         },
         {
+          "start": 30,
+          "type": "RULE",
+          "raw": {
+            "beforeChildNodes": [
+              "\n        ",
+              "\n    "
+            ],
+            "beforeOpenBracket": [
+              null,
+              " "
+            ]
+          },
+          "selector": [
+            "b"
+          ],
           "childNodes": [
             {
-              "childNodes": [],
               "start": 46,
               "type": "DECLARATION",
               "raw": {
@@ -58,49 +95,9 @@
                 "3"
               ]
             }
-          ],
-          "start": 30,
-          "type": "RULE",
-          "raw": {
-            "beforeChildNodes": [
-              "\n        ",
-              "\n    "
-            ],
-            "beforeOpenBracket": [
-              null,
-              " "
-            ]
-          },
-          "selector": [
-            "b"
           ]
         }
-      ],
-      "start": 10,
-      "type": "RULE",
-      "raw": {
-        "beforeChildNodes": [
-          "\n    ",
-          "\n    ",
-          "\n"
-        ],
-        "beforeOpenBracket": [
-          null,
-          " "
-        ]
-      },
-      "selector": [
-        "a"
       ]
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      "\n"
-    ]
-  }
+  ]
 }

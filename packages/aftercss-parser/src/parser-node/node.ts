@@ -25,14 +25,13 @@ export interface ITypeMap {
 export interface IJSONParserNode {
   type: EParserNodeType;
   start: number;
-  childNodes: ParserNode[];
+  childNodes?: ParserNode[];
   [prop: string]: any;
 }
 
 export class ParserNode {
   public type: EParserNodeType = EParserNodeType.ANY;
   public start: number;
-  public childNodes: ParserNode[];
   public parent: ParserNode = null;
   [prop: string]: any;
   public appendChildNode(nodes: ParserNode | ParserNode[]) {
@@ -98,7 +97,6 @@ export class ParserNode {
   }
   public toJSON() {
     const res: IJSONParserNode = {
-      childNodes: [],
       start: 0,
       type: EParserNodeType.ANY,
     };
@@ -181,6 +179,7 @@ export class Comment extends ParserNode {
 }
 
 export class Root extends ParserNode {
+  public childNodes: ParserNode[];
   public raw: IRootRaw = {
     beforeChildNodes: [],
   };

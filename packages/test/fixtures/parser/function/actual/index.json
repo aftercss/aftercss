@@ -1,9 +1,33 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
+      "start": 1,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
       "childNodes": [
         {
-          "childNodes": [],
           "start": 21,
           "type": "DECLARATION",
           "raw": {
@@ -21,7 +45,6 @@
           ]
         },
         {
-          "childNodes": [],
           "start": 125,
           "type": "DECLARATION",
           "raw": {
@@ -39,7 +62,6 @@
           ]
         },
         {
-          "childNodes": [],
           "start": 168,
           "type": "DECLARATION",
           "raw": {
@@ -56,32 +78,7 @@
             "url( './image (1).jpg' )"
           ]
         }
-      ],
-      "start": 1,
-      "type": "RULE",
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n\t",
-          "\n\t",
-          "\n"
-        ],
-        "beforeOpenBracket": [
-          null,
-          " "
-        ]
-      },
-      "selector": [
-        "a"
       ]
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

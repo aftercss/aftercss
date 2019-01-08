@@ -6,6 +6,7 @@ export interface IRuleRaw {
 }
 
 export class Rule extends ParserNode {
+  public childNodes: ParserNode[];
   public selector: string[];
   public raw: IRuleRaw = {
     beforeChildNodes: [],

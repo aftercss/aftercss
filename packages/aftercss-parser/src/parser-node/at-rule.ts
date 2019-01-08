@@ -22,6 +22,7 @@ export interface IAtRuleRaw {
 }
 
 export class AtRule extends ParserNode {
+  public childNodes: ParserNode[];
   public name: EAtRuleName;
   public isNested: boolean = false;
   public params: string[] = [];

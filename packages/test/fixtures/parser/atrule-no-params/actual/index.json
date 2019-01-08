@@ -1,7 +1,14 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [],
       "start": 5,
       "type": "ATRULE",
       "isNested": true,
@@ -12,15 +19,8 @@
         ],
         "besidesParams": []
       },
-      "name": "page"
+      "name": "page",
+      "childNodes": []
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

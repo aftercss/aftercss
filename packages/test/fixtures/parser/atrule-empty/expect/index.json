@@ -1,7 +1,14 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [],
       "start": 8,
       "type": "ATRULE",
       "isNested": false,
@@ -18,13 +25,5 @@
       },
       "name": "charset"
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

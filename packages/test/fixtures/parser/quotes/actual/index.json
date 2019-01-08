@@ -1,9 +1,32 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
+      "start": 1,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a::before"
+      ],
       "childNodes": [
         {
-          "childNodes": [],
           "start": 20,
           "type": "DECLARATION",
           "raw": {
@@ -21,7 +44,6 @@
           ]
         },
         {
-          "childNodes": [],
           "start": 44,
           "type": "DECLARATION",
           "raw": {
@@ -38,31 +60,7 @@
             "'\\'\"\\\\'"
           ]
         }
-      ],
-      "start": 1,
-      "type": "RULE",
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n\t",
-          "\n"
-        ],
-        "beforeOpenBracket": [
-          null,
-          " "
-        ]
-      },
-      "selector": [
-        "a::before"
       ]
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

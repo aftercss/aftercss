@@ -1,44 +1,14 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [
-        {
-          "childNodes": [],
-          "start": 34,
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "width",
-          "value": [
-            "0"
-          ]
-        },
-        {
-          "childNodes": [],
-          "start": 46,
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              ";"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "height",
-          "value": [
-            "0"
-          ]
-        }
-      ],
       "start": 1,
       "type": "RULE",
       "raw": {
@@ -57,15 +27,43 @@
       "selector": [
         "--zero-size:",
         "div"
+      ],
+      "childNodes": [
+        {
+          "start": 34,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "width",
+          "value": [
+            "0"
+          ]
+        },
+        {
+          "start": 46,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "height",
+          "value": [
+            "0"
+          ]
+        }
       ]
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      ""
-    ]
-  }
+  ]
 }

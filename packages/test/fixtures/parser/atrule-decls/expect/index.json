@@ -1,26 +1,18 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
-      "childNodes": [
-        {
-          "childNodes": [],
-          "start": 25,
-          "type": "DECLARATION",
-          "raw": {
-            "afterColon": [
-              " ",
-              null,
-              "\n"
-            ],
-            "beforeColon": ""
-          },
-          "important": false,
-          "prop": "background",
-          "value": [
-            "black"
-          ]
-        }
-      ],
       "start": 5,
       "type": "ATRULE",
       "isNested": true,
@@ -38,13 +30,10 @@
           " "
         ]
       },
-      "name": "page"
-    },
-    {
+      "name": "page",
       "childNodes": [
         {
-          "childNodes": [],
-          "start": 70,
+          "start": 25,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -57,10 +46,12 @@
           "important": false,
           "prop": "background",
           "value": [
-            "white"
+            "black"
           ]
         }
-      ],
+      ]
+    },
+    {
       "start": 42,
       "type": "ATRULE",
       "isNested": true,
@@ -77,12 +68,44 @@
           " "
         ]
       },
-      "name": "media"
-    },
-    {
+      "name": "media",
       "childNodes": [
         {
-          "childNodes": [],
+          "start": 70,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "white"
+          ]
+        }
+      ]
+    },
+    {
+      "start": 91,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " "
+        ]
+      },
+      "name": "font-face",
+      "childNodes": [
+        {
           "start": 106,
           "type": "DECLARATION",
           "raw": {
@@ -99,8 +122,10 @@
             "\"A;' /**/\""
           ]
         }
-      ],
-      "start": 91,
+      ]
+    },
+    {
+      "start": 132,
       "type": "ATRULE",
       "isNested": true,
       "params": [],
@@ -113,12 +138,9 @@
           " "
         ]
       },
-      "name": "font-face"
-    },
-    {
+      "name": "viewport",
       "childNodes": [
         {
-          "childNodes": [],
           "start": 141,
           "type": "DECLARATION",
           "raw": {
@@ -135,8 +157,10 @@
             "110px"
           ]
         }
-      ],
-      "start": 132,
+      ]
+    },
+    {
+      "start": 166,
       "type": "ATRULE",
       "isNested": true,
       "params": [],
@@ -149,12 +173,9 @@
           " "
         ]
       },
-      "name": "viewport"
-    },
-    {
+      "name": "-ms-viewport",
       "childNodes": [
         {
-          "childNodes": [],
           "start": 175,
           "type": "DECLARATION",
           "raw": {
@@ -171,33 +192,7 @@
             "100px"
           ]
         }
-      ],
-      "start": 166,
-      "type": "ATRULE",
-      "isNested": true,
-      "params": [],
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "besidesParams": [
-          " "
-        ]
-      },
-      "name": "-ms-viewport"
+      ]
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n\n",
-      "\n\n",
-      "\n\n",
-      "\n\n",
-      "\n"
-    ]
-  }
+  ]
 }
