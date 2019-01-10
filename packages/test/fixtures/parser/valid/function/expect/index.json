@@ -1,0 +1,155 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 1,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 21,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)"
+          ]
+        },
+        {
+          "start": 125,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url(\"./image (1).jpg\")"
+          ]
+        },
+        {
+          "start": 168,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background-image",
+          "value": [
+            "url('./image (1).jpg')"
+          ]
+        },
+        {
+          "start": 205,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              "    ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "linear-gradient(top, rgb(100, 100, 100), blue)"
+          ]
+        },
+        {
+          "start": 269,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "linear-gradient(top, rgb(100, 100, 100), blue)"
+          ]
+        },
+        {
+          "start": 324,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "width",
+          "value": [
+            "calc(100% - (10px))"
+          ]
+        },
+        {
+          "start": 354,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "height",
+          "value": [
+            "func([1, 2, 3])"
+          ]
+        }
+      ]
+    }
+  ]
+}

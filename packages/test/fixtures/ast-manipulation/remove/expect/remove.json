@@ -1,5 +1,4 @@
 {
-  "childNodes": [],
   "start": 0,
   "type": "ROOT",
   "raw": {
@@ -7,5 +6,6 @@
       "",
       "\n"
     ]
-  }
+  },
+  "childNodes": []
 }

@@ -1,84 +1,34 @@
 {
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
   "childNodes": [
     {
+      "start": 9,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [
+        "(animation-name: test)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      },
+      "name": "supports",
       "childNodes": [
         {
-          "childNodes": [
-            {
-              "childNodes": [
-                {
-                  "childNodes": [],
-                  "start": 74,
-                  "type": "DECLARATION",
-                  "raw": {
-                    "afterColon": [
-                      " ",
-                      null,
-                      ";"
-                    ],
-                    "beforeColon": ""
-                  },
-                  "important": false,
-                  "prop": "color",
-                  "value": [
-                    "black"
-                  ]
-                }
-              ],
-              "start": 61,
-              "type": "RULE",
-              "raw": {
-                "beforeChildNodes": [
-                  "\n\t\t\t\t\t",
-                  "\n\t\t\t"
-                ],
-                "beforeOpenBracket": [
-                  null,
-                  " "
-                ]
-              },
-              "selector": [
-                "from"
-              ]
-            },
-            {
-              "childNodes": [
-                {
-                  "childNodes": [],
-                  "start": 106,
-                  "type": "DECLARATION",
-                  "raw": {
-                    "afterColon": [
-                      " ",
-                      null,
-                      "\n\t\t\t"
-                    ],
-                    "beforeColon": ""
-                  },
-                  "important": false,
-                  "prop": "color",
-                  "value": [
-                    "white"
-                  ]
-                }
-              ],
-              "start": 93,
-              "type": "RULE",
-              "raw": {
-                "beforeChildNodes": [
-                  "\n\t\t\t\t\t",
-                  ""
-                ],
-                "beforeOpenBracket": [
-                  null,
-                  " "
-                ]
-              },
-              "selector": [
-                "to"
-              ]
-            }
-          ],
           "start": 46,
           "type": "ATRULE",
           "isNested": true,
@@ -97,41 +47,88 @@
               " "
             ]
           },
-          "name": "keyframes"
+          "name": "keyframes",
+          "childNodes": [
+            {
+              "start": 61,
+              "type": "RULE",
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  "\n\t\t\t"
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "from"
+              ],
+              "childNodes": [
+                {
+                  "start": 74,
+                  "type": "DECLARATION",
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      ";"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "black"
+                  ]
+                }
+              ]
+            },
+            {
+              "start": 93,
+              "type": "RULE",
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  ""
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "to"
+              ],
+              "childNodes": [
+                {
+                  "start": 106,
+                  "type": "DECLARATION",
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      "\n\t\t\t"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "white"
+                  ]
+                }
+              ]
+            }
+          ]
         }
-      ],
-      "start": 9,
-      "type": "ATRULE",
-      "isNested": true,
-      "params": [
-        "(animation-name: test)"
-      ],
-      "raw": {
-        "beforeChildNodes": [
-          "\n\t",
-          "\n"
-        ],
-        "besidesParams": [
-          " ",
-          null,
-          " "
-        ]
-      },
-      "name": "supports"
+      ]
     },
     {
-      "childNodes": [],
       "start": 0,
       "type": "COMMENT",
       "content": "append child"
     }
-  ],
-  "start": 0,
-  "type": "ROOT",
-  "raw": {
-    "beforeChildNodes": [
-      "",
-      "\n"
-    ]
-  }
+  ]
 }

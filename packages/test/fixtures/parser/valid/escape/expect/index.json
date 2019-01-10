@@ -1,0 +1,330 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 1,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          ",  ",
+          null,
+          "/**test*/,",
+          null
+        ]
+      },
+      "selector": [
+        "(name)",
+        "div",
+        "span"
+      ],
+      "childNodes": [
+        {
+          "start": 39,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": " /*teest*/"
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(\"a).png\")"
+          ]
+        },
+        {
+          "start": 77,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(a;a)"
+          ]
+        },
+        {
+          "start": 100,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "url(a/*)"
+          ]
+        },
+        {
+          "start": 123,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "\\;a"
+          ]
+        }
+      ]
+    },
+    {
+      "start": 134,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not([foo=\")\"])"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 154,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(div/*)*/)"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 173,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ":not(:nth-child(2n of [foo=\")\"]))"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 211,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=[]]"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 224,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=\\{]"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 237,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=(())]"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 252,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[foo=yes\\:\\(it\\'s\\ work\\)]"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 289,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "\\@noat"
+      ],
+      "childNodes": []
+    },
+    {
+      "start": 299,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        "h1\\\\"
+      ],
+      "childNodes": [
+        {
+          "start": 307,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "\\\\"
+          ]
+        }
+      ]
+    },
+    {
+      "start": 334,
+      "type": "COMMENT",
+      "content": "/* [attr=;] { } */"
+    },
+    {
+      "start": 337,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        ".prop"
+      ],
+      "childNodes": [
+        {
+          "start": 353,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "\n"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "\\62 olor",
+          "value": [
+            "red"
+          ]
+        }
+      ]
+    }
+  ]
+}

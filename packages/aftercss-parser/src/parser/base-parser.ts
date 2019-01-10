@@ -173,7 +173,7 @@ export class BaseParser extends TokenReader {
           funcNode += this.consumeBracketButCurly('square');
           break;
         case TokenType.LEFT_PARENTHESIS:
-          funcNode += this.consumeBracketButCurly('square');
+          funcNode += this.consumeBracketButCurly('paren');
           break;
         case TokenType.RIGHT_PARENTHESIS:
           funcNode += currentToken.raw;
@@ -205,13 +205,14 @@ export class BaseParser extends TokenReader {
       let toMove = '';
       while (parser.currentToken().type !== TokenType.EOF) {
         const currentToken = parser.currentToken();
-        parser.step();
         switch (currentToken.type) {
           case TokenType.COMMENT:
           case TokenType.WHITESPACE:
+            parser.step();
             toMove += currentToken.raw;
             break;
           case TokenType.COMMA:
+            parser.step();
             selectorRaw.selectors.push(selector);
             toMove += ',';
             const nextToken = parser.currentToken();
@@ -224,14 +225,15 @@ export class BaseParser extends TokenReader {
             selector = '';
             break;
           case TokenType.LEFT_SQUARE_BRACKET:
-            selector += toMove + currentToken.raw + parser.consumeBracketButCurly('square');
+            selector += toMove + parser.consumeBracketButCurly('square');
             toMove = '';
             break;
           case TokenType.LEFT_PARENTHESIS:
-            selector += toMove + currentToken.raw + parser.consumeBracketButCurly('paren');
+            selector += toMove + parser.consumeBracketButCurly('paren');
             toMove = '';
             break;
           default:
+            parser.step();
             selector += toMove + currentToken.raw;
             toMove = '';
         }
@@ -280,11 +282,5 @@ export class BaseParser extends TokenReader {
           this.step();
       }
     }
-  }
-
-  public stringify(node: ParserNode): string {
-    throw this.error(
-      MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('BaseParser.stringify', new Error().stack),
-    );
   }
 }
