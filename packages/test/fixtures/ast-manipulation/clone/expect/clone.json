@@ -4,7 +4,8 @@
   "raw": {
     "beforeChildNodes": [
       "",
-      "\n"
+      "\n\n",
+      ""
     ]
   },
   "childNodes": [
@@ -37,8 +38,8 @@
           ],
           "raw": {
             "beforeChildNodes": [
-              "\n\t\t\t",
-              "\n\t\t\t",
+              "\n\t\t",
+              "\n\t\t",
               "\n\t"
             ],
             "besidesParams": [
@@ -50,12 +51,12 @@
           "name": "keyframes",
           "childNodes": [
             {
-              "start": 61,
+              "start": 60,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
-                  "\n\t\t\t\t\t",
-                  "\n\t\t\t"
+                  "\n\t\t\t",
+                  "\n\t\t"
                 ],
                 "beforeOpenBracket": [
                   null,
@@ -67,7 +68,7 @@
               ],
               "childNodes": [
                 {
-                  "start": 74,
+                  "start": 71,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
@@ -86,11 +87,11 @@
               ]
             },
             {
-              "start": 93,
+              "start": 88,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
-                  "\n\t\t\t\t\t",
+                  "\n\t\t\t",
                   ""
                 ],
                 "beforeOpenBracket": [
@@ -103,13 +104,13 @@
               ],
               "childNodes": [
                 {
-                  "start": 106,
+                  "start": 99,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
                       " ",
                       null,
-                      "\n\t\t\t"
+                      "\n\t\t"
                     ],
                     "beforeColon": ""
                   },
@@ -124,6 +125,23 @@
           ]
         }
       ]
+    },
+    {
+      "start": 120,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "div"
+      ],
+      "childNodes": []
     }
   ]
 }

@@ -1,9 +1,9 @@
-const CSSParser = require('@aftercss/parser').CSSParser;
+const { CSSParser, Comment } = require('@aftercss/parser');
 const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class ParsreFixture extends BaseFixture {
+class AstAppendChildFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -22,14 +22,13 @@ class ParsreFixture extends BaseFixture {
     }
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
-    const res = JSON.stringify(ast, null, 2);
-    await this.writeFile('actual', res, 'index.json');
+    ast.childNodes[0].appendChildNode([new Comment('append first child'), new Comment('append second child')]);
   }
 }
 
 module.exports = {
   runTest() {
-    const tokenFixture = new ParsreFixture(__dirname);
-    tokenFixture.runTask('no-colon-in-decl');
+    const tokenFixture = new AstAppendChildFixture(__dirname);
+    tokenFixture.runTask('ast-invalid-append-child');
   },
 };

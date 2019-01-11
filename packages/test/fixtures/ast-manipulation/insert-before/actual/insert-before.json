@@ -19,6 +19,11 @@
       "content": "second"
     },
     {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "insert before"
+    },
+    {
       "start": 9,
       "type": "ATRULE",
       "isNested": true,

@@ -134,6 +134,11 @@
       "start": 0,
       "type": "COMMENT",
       "content": "second"
+    },
+    {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "second"
     }
   ]
 }

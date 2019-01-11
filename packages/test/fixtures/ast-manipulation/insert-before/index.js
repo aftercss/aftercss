@@ -23,6 +23,7 @@ class AstInsertBeforeFixture extends BaseFixture {
     }
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
+    ast.childNodes[0].insertBefore(new Comment('insert before'));
     ast.childNodes[0].insertBefore([new Comment('first'), new Comment('second')]);
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'insert-before.json');
   }
@@ -34,4 +35,3 @@ module.exports = {
     tokenFixture.runTask('ast-insert-before');
   },
 };
-

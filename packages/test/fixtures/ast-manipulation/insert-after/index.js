@@ -23,6 +23,7 @@ class AstInsertAfterFixture extends BaseFixture {
     }
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
+    ast.childNodes[0].insertAfter(new Comment('second'));
     ast.childNodes[0].insertAfter([new Comment('first'), new Comment('second')]);
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'insert-after.json');
   }

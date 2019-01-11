@@ -23,6 +23,7 @@ class AstCloneFixture extends BaseFixture {
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
     const cloned = ast.clone();
+    ast.childNodes[1].clone();
     await this.writeFile('actual', JSON.stringify(cloned, null, 2), 'clone.json');
   }
 }
@@ -33,3 +34,5 @@ module.exports = {
     tokenFixture.runTask('ast-clone');
   },
 };
+
+module.exports.runTest();

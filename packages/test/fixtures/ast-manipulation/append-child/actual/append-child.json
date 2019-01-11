@@ -129,6 +129,16 @@
       "start": 0,
       "type": "COMMENT",
       "content": "append child"
+    },
+    {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "append first child"
+    },
+    {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "append second child"
     }
   ]
 }

@@ -23,6 +23,7 @@ class AstAppendChildFixture extends BaseFixture {
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
     ast.appendChildNode(new Comment('append child'));
+    ast.appendChildNode([new Comment('append first child'), new Comment('append second child')]);
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'append-child.json');
   }
 }

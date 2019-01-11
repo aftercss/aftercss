@@ -1,5 +1,5 @@
 {
   "message": [
-    "BaseParser.consumeRuleList function should be in sub class, stack:\r\n Error\n    at BaseParser.consumeRuleList (/Users/spades/Documents/PROJECT/aftercss/packages/aftercss-parser/lib/parser/base-parser.js:44:125)\n    at BaseParser.parseStyleSheet (/Users/spades/Documents/PROJECT/aftercss/packages/aftercss-parser/lib/parser/base-parser.js:33:40)\n    at ParsreFixture.build (/Users/spades/Documents/PROJECT/aftercss/packages/test/fixtures/parser/throw-error/unoverload-consumeRuleList/index.js:24:24)"
+    "BaseParser.consumeRuleList function should be in sub class, stack:\r\n "
   ]
 }

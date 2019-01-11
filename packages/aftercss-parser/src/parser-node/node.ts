@@ -36,14 +36,19 @@ export class ParserNode {
   [prop: string]: any;
   public appendChildNode(nodes: ParserNode | ParserNode[]) {
     if (this.type === EParserNodeType.Comment || this.type === EParserNodeType.Declaration) {
-      throw this.error(MessageCollection._INVALID_APPEND_CHILDNODE('Comment/Declatation'));
+      throw new Error(MessageCollection._INVALID_APPEND_CHILDNODE('Comment/Declatation'));
     }
     if (Array.isArray(nodes)) {
       this.childNodes.push(...nodes);
+      nodes.forEach(node => {
+        node.parent = this;
+      });
     } else {
       this.childNodes.push(nodes);
+      nodes.parent = this;
     }
   }
+  /* istanbul ignore next */
   public checkType<T extends EParserNodeType>(type: T): this is ITypeMap[T] {
     return this.type === type;
   }
@@ -53,25 +58,33 @@ export class ParserNode {
 
   public insertAfter(nodes: ParserNode | ParserNode[]) {
     if (!this.parent) {
-      throw this.error(MessageCollection._INVALID_PARENT_NODE('insert nodes after'));
+      throw new Error(MessageCollection._INVALID_PARENT_NODE('insert nodes after'));
     }
     const index = this.index();
     if (Array.isArray(nodes)) {
       this.parent.childNodes.splice(index, 1, this, ...nodes);
+      nodes.forEach(node => {
+        node.parent = this.parent;
+      });
     } else {
       this.parent.childNodes.splice(index, 1, this, nodes);
+      nodes.parent = this.parent;
     }
   }
 
   public insertBefore(nodes: ParserNode | ParserNode[]) {
     if (!this.parent) {
-      throw this.error(MessageCollection._INVALID_PARENT_NODE('insert nodes before'));
+      throw new Error(MessageCollection._INVALID_PARENT_NODE('insert nodes before'));
     }
     const index = this.index();
     if (Array.isArray(nodes)) {
       this.parent.childNodes.splice(index, 0, ...nodes);
+      nodes.forEach(node => {
+        node.parent = this.parent;
+      });
     } else {
       this.parent.childNodes.splice(index, 0, nodes);
+      nodes.parent = this.parent;
     }
   }
 
@@ -86,13 +99,17 @@ export class ParserNode {
 
   public replaceWith(nodes: ParserNode | ParserNode[]) {
     if (!this.parent) {
-      throw this.error(MessageCollection._INVALID_PARENT_NODE('replace'));
+      throw new Error(MessageCollection._INVALID_PARENT_NODE('replace'));
     }
     const index = this.index();
     if (Array.isArray(nodes)) {
       this.parent.childNodes.splice(index, 1, ...nodes);
+      nodes.forEach(node => {
+        node.parent = this.parent;
+      });
     } else {
       this.parent.childNodes.splice(index, 1, nodes);
+      nodes.parent = this.parent;
     }
   }
   public toJSON() {
@@ -120,13 +137,15 @@ export class ParserNode {
     return res;
   }
 
+  /* istanbul ignore next */
   public toString(): string {
-    throw this.error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.toString', new Error().stack));
+    throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.toString', new Error().stack));
   }
 
   private cloneObject(source: any, parent?: ParserNode) {
     const cloned = Object.create(source);
     for (const attr in source) {
+      /* istanbul ignore if */
       if (!source.hasOwnProperty(attr)) {
         continue;
       }
@@ -136,11 +155,13 @@ export class ParserNode {
       } else if (Array.isArray(value)) {
         value = value.map((item: any) => {
           if (Array.isArray(item) || Object.prototype.toString.call(item) === '[object Object]') {
+            /* istanbul ignore else */
             if (attr === 'childNodes') {
               // 当有子结点时，须设置子结点对应的父结点
               return this.cloneObject(item, cloned);
+            } else {
+              return this.cloneObject(item);
             }
-            return this.cloneObject(item);
           } else {
             return item;
           }

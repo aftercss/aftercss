@@ -23,6 +23,7 @@ class AstRemoveFixture extends BaseFixture {
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
     ast.childNodes[0].remove();
+    ast.remove();
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'remove.json');
   }
 }

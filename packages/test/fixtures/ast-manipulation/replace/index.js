@@ -24,6 +24,7 @@ class AstReplaceFixture extends BaseFixture {
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
     ast.childNodes[0].replaceWith(new Comment('replace ast-node'));
+    ast.childNodes[0].replaceWith([new Comment('first comment node'), new Comment('second comment node')]);
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'replace.json');
   }
 }

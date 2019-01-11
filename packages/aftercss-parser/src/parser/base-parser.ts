@@ -44,9 +44,7 @@ export class BaseParser extends TokenReader {
    * @returns IChildNodeRaw
    */
   public consumeRuleList(): IChildNodesRaw {
-    throw this.error(
-      MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('BaseParser.consumeRuleList', new Error().stack),
-    );
+    throw this.error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('BaseParser.consumeRuleList', ''));
   }
 
   /**
@@ -277,6 +275,7 @@ export class BaseParser extends TokenReader {
           break;
         case TokenType.FUNCTION:
           bracketContent += this.consumeFunction();
+          break;
         default:
           bracketContent += currentToken.raw;
           this.step();

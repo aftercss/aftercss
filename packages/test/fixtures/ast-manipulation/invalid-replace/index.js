@@ -1,9 +1,10 @@
 const CSSParser = require('@aftercss/parser').CSSParser;
+const Comment = require('@aftercss/parser').Comment;
 const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class ParsreFixture extends BaseFixture {
+class AstReplaceFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -22,14 +23,13 @@ class ParsreFixture extends BaseFixture {
     }
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
-    const res = JSON.stringify(ast, null, 2);
-    await this.writeFile('actual', res, 'index.json');
+    ast.replaceWith(new Comment('replace ast-node'));
   }
 }
 
 module.exports = {
   runTest() {
-    const tokenFixture = new ParsreFixture(__dirname);
-    tokenFixture.runTask('unclosed-function');
+    const tokenFixture = new AstReplaceFixture(__dirname);
+    tokenFixture.runTask('ast-invalid-replace');
   },
 };

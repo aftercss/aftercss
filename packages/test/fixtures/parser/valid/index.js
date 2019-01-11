@@ -39,9 +39,9 @@ module.exports = {
       if (item !== 'index.js') {
         const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
         tokenFixture.runTask(`${item}`);
-    	}
+      }
     });
-    // const item = 'escape';
+    // const item = 'decls';
     // const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
     // tokenFixture.runTask(`${item}`);
   },

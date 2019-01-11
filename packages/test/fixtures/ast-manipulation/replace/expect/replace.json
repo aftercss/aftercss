@@ -11,7 +11,12 @@
     {
       "start": 0,
       "type": "COMMENT",
-      "content": "replace ast-node"
+      "content": "first comment node"
+    },
+    {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "second comment node"
     }
   ]
 }
