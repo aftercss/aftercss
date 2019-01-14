@@ -1,5 +1,4 @@
 import { AfterContext } from '@aftercss/shared';
-import { SourceNode } from 'source-map';
 import { IDimensionProp, IHashProp, IPercentageProp, Token, TokenFactory, TokenType } from '../token';
 import { BaseTokenizer } from './base-tokenizer';
 import { helper, IEscapedorName } from './css-tokenizer-helper';

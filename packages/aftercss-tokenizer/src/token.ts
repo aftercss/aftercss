@@ -87,6 +87,7 @@ export class Token {
     this.start = start;
   }
 
+  /* istanbul ignore next */
   public checkType<T extends TokenType>(type: T): this is ITokenMap[T] {
     return this.type === type;
   }
@@ -197,8 +198,4 @@ export interface ITokenTypeToType {
   PERCENTAGE: PercentageToken;
   UNICODE_RANGE: UnicodeRangeToken;
   [key: string]: Token;
-}
-
-export function isTokenType<T extends TokenType>(token: Token, tokenType: T): token is ITokenTypeToType[T] {
-  return token.type === tokenType;
 }

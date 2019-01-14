@@ -36,8 +36,6 @@ export class TokenReader {
     if (Object.prototype.toString.call(tokensOrTokenizer) === '[object Array]') {
       this.tokenList = tokensOrTokenizer as Token[];
       this.readerType = TokenReaderType.TokenList;
-      const tokens = tokensOrTokenizer as Token[];
-      this.tokenList = tokens;
       return;
     } else {
       this.readerType = TokenReaderType.Tokenizer;
