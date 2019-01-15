@@ -1,15 +1,9 @@
 const afterTest = require('./fixtures/after-test');
-const alltokensTest = require('./fixtures/alltokens');
-const astManipulationTest = require('./fixtures/ast-manipulation');
-const parserTest = require('./fixtures/parser/index');
+const aftercssParser = require('./fixtures/aftercss-parser');
+const aftercssTokenizer = require('./fixtures/aftercss-tokenizer');
 const removeCommentTest = require('./fixtures/remove-comments');
-const sourcemapTest = require('./fixtures/sourcemap');
-const tokenTest = require('./fixtures/token/token.fixture');
 
 afterTest.runTest();
-alltokensTest.runTest();
-astManipulationTest.runTest();
-parserTest.runTest();
+aftercssParser.runTest();
+aftercssTokenizer.runTest();
 removeCommentTest.runTest();
-sourcemapTest.runTest();
-tokenTest.runTest();

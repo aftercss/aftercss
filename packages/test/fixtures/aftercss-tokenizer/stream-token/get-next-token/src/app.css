@@ -1,0 +1,12 @@
+/**
+ * admin.css
+ */
+
+/*
+ fixed-layout 固定头部和边栏布局
+*/
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}

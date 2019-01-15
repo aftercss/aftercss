@@ -24,7 +24,7 @@ const tokenDirs = fs.readdirSync(__dirname);
 module.exports = {
   runTest() {
     tokenDirs.forEach(item => {
-      if (item !== 'token.fixture.js') {
+      if (item !== 'index.js') {
         const tokenFixture = new TokenFixture(path.resolve(__dirname, item));
         tokenFixture.runTask(`${item}`);
       }

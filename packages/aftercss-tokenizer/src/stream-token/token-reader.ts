@@ -66,12 +66,8 @@ export class TokenReader {
     }
   }
 
-  public getNextToken() {
-    if (this.readerType === TokenReaderType.TokenList) {
-      return this.tokenList[this.currentIndex++];
-    } else {
-      this.$currentToken = this.tokenizer.nextToken();
-      return this.$currentToken;
-    }
+  public getNextToken(): Token {
+    this.step();
+    return this.currentToken();
   }
 }

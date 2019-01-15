@@ -1,0 +1,5 @@
+{
+  "message": [
+    "When generating source map for tokens( ArrayType ), should pass Context in second param.\n But get [object Object]"
+  ]
+}
