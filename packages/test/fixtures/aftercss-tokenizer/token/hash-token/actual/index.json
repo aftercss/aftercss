@@ -1,7 +1,9 @@
-{
-  "type": "HASH",
-  "raw": "#\\8081",
-  "content": "肁",
-  "start": 6,
-  "hashType": "id"
-}
+[
+  {
+    "type": "HASH",
+    "raw": "#\\8081",
+    "content": "肁",
+    "start": 6,
+    "hashType": "id"
+  }
+]

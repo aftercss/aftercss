@@ -1,6 +1,20 @@
-{
-  "type": "IDENT",
-  "raw": "-fff",
-  "content": "-fff",
-  "start": 4
-}
+[
+  {
+    "type": "IDENT",
+    "raw": "-fff",
+    "content": "-fff",
+    "start": 4
+  },
+  {
+    "type": "DELIM",
+    "raw": ".",
+    "content": ".",
+    "start": 7
+  },
+  {
+    "type": "IDENT",
+    "raw": "div",
+    "content": "div",
+    "start": 10
+  }
+]

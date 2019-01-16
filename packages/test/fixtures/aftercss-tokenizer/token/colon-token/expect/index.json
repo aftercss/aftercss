@@ -1,5 +1,7 @@
-{
-  "type": "COLON",
-  "raw": ":",
-  "start": 1
-}
+[
+  {
+    "type": "COLON",
+    "raw": ":",
+    "start": 1
+  }
+]

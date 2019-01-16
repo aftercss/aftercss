@@ -1,6 +1,8 @@
-{
-  "type": "FUNCTION",
-  "raw": "func(",
-  "content": "func",
-  "start": 5
-}
+[
+  {
+    "type": "FUNCTION",
+    "raw": "func(",
+    "content": "func",
+    "start": 5
+  }
+]

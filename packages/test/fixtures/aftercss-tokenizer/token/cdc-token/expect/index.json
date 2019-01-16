@@ -1,5 +1,7 @@
-{
-  "type": "CDC",
-  "raw": "-->",
-  "start": 3
-}
+[
+  {
+    "type": "CDC",
+    "raw": "-->",
+    "start": 3
+  }
+]

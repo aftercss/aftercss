@@ -1,5 +1,13 @@
-{
-  "type": "CDO",
-  "raw": "<!--",
-  "start": 3
-}
+[
+  {
+    "type": "CDO",
+    "raw": "<!--",
+    "start": 3
+  },
+  {
+    "type": "DELIM",
+    "raw": "-",
+    "content": "-",
+    "start": 4
+  }
+]

@@ -1,5 +1,7 @@
-{
-  "type": "COMMA",
-  "raw": ",",
-  "start": 1
-}
+[
+  {
+    "type": "COMMA",
+    "raw": ",",
+    "start": 1
+  }
+]

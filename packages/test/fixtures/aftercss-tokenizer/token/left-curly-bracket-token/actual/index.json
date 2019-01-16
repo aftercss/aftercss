@@ -1,5 +1,7 @@
-{
-  "type": "LEFT_CURLY_BRACKET",
-  "raw": "{",
-  "start": 1
-}
+[
+  {
+    "type": "LEFT_CURLY_BRACKET",
+    "raw": "{",
+    "start": 1
+  }
+]

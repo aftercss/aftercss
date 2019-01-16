@@ -1,5 +1,7 @@
-{
-  "type": "INCLUDE_MATCH",
-  "raw": "~=",
-  "start": 2
-}
+[
+  {
+    "type": "INCLUDE_MATCH",
+    "raw": "~=",
+    "start": 2
+  }
+]

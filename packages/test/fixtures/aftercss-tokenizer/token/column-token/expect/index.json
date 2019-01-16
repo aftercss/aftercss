@@ -1,5 +1,7 @@
-{
-  "type": "COLUMN",
-  "raw": "||",
-  "start": 2
-}
+[
+  {
+    "type": "COLUMN",
+    "raw": "||",
+    "start": 2
+  }
+]

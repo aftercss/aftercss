@@ -1,5 +1,7 @@
-{
-  "type": "SEMI",
-  "raw": ";",
-  "start": 1
-}
+[
+  {
+    "type": "SEMI",
+    "raw": ";",
+    "start": 1
+  }
+]

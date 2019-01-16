@@ -1,6 +1,6 @@
 const BaseFixture = require('after-test/lib/base-fixture').BaseFixture;
 const CSSTokenizer = require('@aftercss/tokenizer').CSSTokenizer;
-const TokenReaderWithSourceMap = require('@aftercss/tokenizer').TokenReaderWithSourceMap;
+const TokenReader = require('@aftercss/tokenizer').TokenReader;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
 class GetNextTokenFixture extends BaseFixture {
@@ -19,7 +19,7 @@ class GetNextTokenFixture extends BaseFixture {
         break;
       }
     }
-    const tokenReader = new TokenReaderWithSourceMap(tokens, context);
+    const tokenReader = new TokenReader(tokens, context);
     const nextToken = tokenReader.getNextToken();
     await this.writeFile('actual', JSON.stringify(nextToken, null, 2), 'nextToken.json');
   }

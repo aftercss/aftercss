@@ -1,5 +1,7 @@
-{
-  "type": "DASH_MATCH",
-  "raw": "|=",
-  "start": 2
-}
+[
+  {
+    "type": "DASH_MATCH",
+    "raw": "|=",
+    "start": 2
+  }
+]

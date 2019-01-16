@@ -22,6 +22,7 @@ export const helper = {
         tokenizer.step();
       }
     }
+    // istanbul ignore else
     if (tokenizer.pick(-1) === ')') {
       badurlRaw += ')';
     }
@@ -127,9 +128,10 @@ export const helper = {
       (digitReg.test(tokenizer.pick(1)) ||
         ((tokenizer.pick(1) === '+' || tokenizer.pick(1) === '-') && digitReg.test(tokenizer.pick(2))))
     ) {
-      numberContent.repr += `e${tokenizer.pick(1)}`;
+      numberContent.repr += `${tokenizer.pick()}${tokenizer.pick(1)}`;
       numberContent.type = 'number';
       tokenizer.step(2);
+      // istanbul ignore else
       if (!tokenizer.isEof()) {
         numberContent.repr += tokenizer.readUntil(nonDigitReg);
       }
@@ -153,6 +155,7 @@ export const helper = {
     }
     return false;
   },
+
   isNumberStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
     const firstCodePoint = tokenizer.pick(cnt);
     const secondCodePoint = tokenizer.pick(cnt + 1);
@@ -167,10 +170,12 @@ export const helper = {
     }
     return false;
   },
+
   isNameStarter(tokenizer: BaseTokenizer, cnt: number = 0) {
     const codePoint = tokenizer.pick(cnt);
     return /[a-zA-Z\_]/.test(codePoint) || codePoint >= '\u0080';
   },
+
   isValidEscape(tokenizer: BaseTokenizer, cnt: number = 0) {
     return tokenizer.pick(cnt) === '\\' && tokenizer.pick(cnt + 1) !== '\n';
   },

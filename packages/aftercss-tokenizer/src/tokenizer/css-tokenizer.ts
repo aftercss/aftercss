@@ -191,8 +191,9 @@ export class CSSTokenizer extends BaseTokenizer {
         return TokenFactory(TokenType.URL, this.current, urlRaw, urlContent);
       }
       // non-printalbe code point
-      if (this.eat('(')) {
-        urlRaw += '(';
+      if (this.pick() === '(' || this.pick() === '"' || this.pick() === "'") {
+        urlRaw += this.pick();
+        this.step();
         urlRaw += helper.consumeBadURL(this);
         return TokenFactory(TokenType.BAD_URL, this.current, urlRaw);
       }

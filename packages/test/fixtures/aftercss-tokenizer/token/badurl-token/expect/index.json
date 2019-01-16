@@ -1,5 +1,43 @@
-{
-  "type": "BAD_URL",
-  "raw": "url(www.baidu.com \n\\8081 fff)",
-  "start": 30
-}
+[
+  {
+    "type": "BAD_URL",
+    "raw": "url(\\\nwww.baidu.com)",
+    "start": 20
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "\\8081www.baidu.com fff)",
+    "start": 48
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "url(www.baidu.com \n\\8081 fff)",
+    "start": 79
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "url(www'baidu.com)",
+    "start": 98
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "url(www\"baidu.com)",
+    "start": 117
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "url(www(baidu.com)",
+    "start": 136
+  },
+  {
+    "type": "BAD_URL",
+    "raw": "url(\"www.baidu.com\" fff)",
+    "start": 161
+  },
+  {
+    "type": "URL",
+    "raw": "url(www.baidu.com",
+    "content": "www.baidu.com",
+    "start": 179
+  }
+]
