@@ -33,16 +33,18 @@ export class BaseFixture {
   public async writeFile(type, content, fileName) {
     const Types = ['actual', 'expect', 'error'];
     if (!(this.isString(fileName) && this.isString(content))) {
-      throw new Error('[func writeFile]  Filename/Content must be a string.');
+      throw new Error('[Aftertest writeFile]  Filename/Content must be a string.');
     }
     if (Types.indexOf(type) < 0) {
-      throw new Error('[func writeFile]  Type is wrong.');
+      throw new Error('[Aftertest writeFile]  Type is wrong.');
     }
+    // istanbul ignore next
     if (type === 'error') {
       fileName = 'index.json';
     }
     type = `${type}Dir`;
     const filePath = `${this[type]}/${fileName}`;
+    // istanbul ignore next
     if (!(await fileExistsP(this[type]))) {
       fs.mkdirSync(this[type]);
     }
@@ -50,14 +52,11 @@ export class BaseFixture {
   }
 
   public async readFile(type, fileName) {
-    const Types = ['actual', 'expect', 'error', 'src'];
+    const Types = ['actual', 'expect', 'src'];
     if (Types.indexOf(type) < 0) {
-      throw new Error('[func readFile]  Type is wrong.');
+      throw new Error('[Aftertest readFile]  Type is wrong.');
     }
     type = `${type}Dir`;
-    if (type === 'error') {
-      fileName = 'index.json';
-    }
     const filePath = `${this[type]}/${fileName}`;
     return readFileP(filePath, {
       encoding: 'utf8',
@@ -67,8 +66,8 @@ export class BaseFixture {
 
   public async getAllDirs(dirPath: string) {
     const files = await promisify(fs.readdir)(dirPath);
-    const dirs = files.filter(async file => {
-      const stat = await promisify(fs.lstat)(`${dirPath}/${file}`);
+    const dirs = files.filter(file => {
+      const stat = fs.lstatSync(`${dirPath}/${file}`);
       return stat.isDirectory();
     });
     return dirs;
@@ -139,7 +138,9 @@ export class BaseFixture {
       }
       return;
     } else {
+      // istanbul ignore next
       await this.moveActualToExpect();
+      // istanbul ignore next
       assert(true);
     }
   }

@@ -25,8 +25,6 @@ class ParsreFixture extends BaseFixture {
     }
     const parser = new CSSParser(tokens);
     const ast = parser.parseStyleSheet();
-    const res = JSON.stringify(ast, null, 2);
-    await this.writeFile('actual', res, 'index.json');
   }
 }
 const parserDirs = fs.readdirSync(__dirname);
