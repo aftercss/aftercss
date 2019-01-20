@@ -24,7 +24,7 @@
       "content": "insert before"
     },
     {
-      "start": 9,
+      "start": 0,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -44,7 +44,7 @@
       "name": "supports",
       "childNodes": [
         {
-          "start": 46,
+          "start": 36,
           "type": "ATRULE",
           "isNested": true,
           "params": [
@@ -65,7 +65,7 @@
           "name": "keyframes",
           "childNodes": [
             {
-              "start": 61,
+              "start": 57,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
@@ -82,7 +82,7 @@
               ],
               "childNodes": [
                 {
-                  "start": 74,
+                  "start": 69,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
@@ -101,7 +101,7 @@
               ]
             },
             {
-              "start": 93,
+              "start": 91,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
@@ -118,7 +118,7 @@
               ],
               "childNodes": [
                 {
-                  "start": 106,
+                  "start": 101,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [

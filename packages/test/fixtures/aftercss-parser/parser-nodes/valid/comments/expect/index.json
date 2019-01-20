@@ -14,22 +14,22 @@
   },
   "childNodes": [
     {
-      "start": 24,
+      "start": 0,
       "type": "COMMENT",
       "content": "/* a { color: black } */"
     },
     {
-      "start": 29,
+      "start": 25,
       "type": "COMMENT",
       "content": "/**/"
     },
     {
-      "start": 35,
+      "start": 30,
       "type": "COMMENT",
       "content": "/* */"
     },
     {
-      "start": 39,
+      "start": 36,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -49,12 +49,12 @@
       ],
       "childNodes": [
         {
-          "start": 55,
+          "start": 43,
           "type": "COMMENT",
           "content": "/* inside */"
         },
         {
-          "start": 62,
+          "start": 57,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -71,12 +71,12 @@
           ]
         },
         {
-          "start": 85,
+          "start": 72,
           "type": "COMMENT",
           "content": "/* between */"
         },
         {
-          "start": 100,
+          "start": 87,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -101,12 +101,12 @@
       ]
     },
     {
-      "start": 132,
+      "start": 125,
       "type": "COMMENT",
       "content": "/* b */"
     },
     {
-      "start": 135,
+      "start": 134,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -124,7 +124,7 @@
       ],
       "childNodes": [
         {
-          "start": 144,
+          "start": 139,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -141,7 +141,7 @@
           ]
         },
         {
-          "start": 161,
+          "start": 154,
           "type": "COMMENT",
           "content": "/* c */"
         }

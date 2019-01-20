@@ -3,13 +3,13 @@
   "type": "ROOT",
   "raw": {
     "beforeChildNodes": [
-      "",
+      " ",
       " "
     ]
   },
   "childNodes": [
     {
-      "start": 4,
+      "start": 5,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -21,7 +21,7 @@
         ]
       },
       "selector": [
-        "- div"
+        "div"
       ],
       "childNodes": []
     }

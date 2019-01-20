@@ -7,7 +7,6 @@ module.exports = {
     it('after-test-get-dirs', async () => {
       const dirsFixture = new BaseFixture(__dirname);
       const dirs = await dirsFixture.getAllDirs(path.resolve(__dirname, './dirs'));
-      console.log(dirs);
       assert.equal(dirs.length, 0);
     });
   },

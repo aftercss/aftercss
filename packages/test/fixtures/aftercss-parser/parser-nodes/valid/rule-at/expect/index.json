@@ -9,7 +9,7 @@
   },
   "childNodes": [
     {
-      "start": 1,
+      "start": 0,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -28,7 +28,7 @@
       ],
       "childNodes": [
         {
-          "start": 10,
+          "start": 5,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -45,7 +45,7 @@
           ]
         },
         {
-          "start": 25,
+          "start": 19,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -65,7 +65,7 @@
           ]
         },
         {
-          "start": 44,
+          "start": 38,
           "type": "ATRULE",
           "isNested": true,
           "params": [
@@ -85,7 +85,7 @@
           "name": "media",
           "childNodes": [
             {
-              "start": 63,
+              "start": 57,
               "type": "DECLARATION",
               "raw": {
                 "afterColon": [

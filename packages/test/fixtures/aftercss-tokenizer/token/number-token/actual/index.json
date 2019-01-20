@@ -2,7 +2,7 @@
   {
     "type": "NUMBER",
     "raw": "-.444",
-    "start": 5,
+    "start": 0,
     "numberType": "number",
     "repr": "-.444",
     "value": -0.444
@@ -10,7 +10,7 @@
   {
     "type": "NUMBER",
     "raw": "+.34e3",
-    "start": 12,
+    "start": 6,
     "numberType": "number",
     "repr": "+.34e3",
     "value": 340
@@ -18,7 +18,7 @@
   {
     "type": "NUMBER",
     "raw": ".1E-1",
-    "start": 18,
+    "start": 13,
     "numberType": "number",
     "repr": ".1E-1",
     "value": 0.01
@@ -26,7 +26,7 @@
   {
     "type": "NUMBER",
     "raw": ".4",
-    "start": 21,
+    "start": 19,
     "numberType": "number",
     "repr": ".4",
     "value": 0.4

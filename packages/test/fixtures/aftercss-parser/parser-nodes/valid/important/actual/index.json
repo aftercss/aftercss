@@ -10,7 +10,7 @@
   },
   "childNodes": [
     {
-      "start": 1,
+      "start": 0,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -28,7 +28,7 @@
       ],
       "childNodes": [
         {
-          "start": 10,
+          "start": 5,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -45,7 +45,7 @@
           ]
         },
         {
-          "start": 33,
+          "start": 28,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "start": 59,
+      "start": 58,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -90,7 +90,7 @@
       ],
       "childNodes": [
         {
-          "start": 67,
+          "start": 63,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -107,7 +107,7 @@
           ]
         },
         {
-          "start": 86,
+          "start": 81,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -127,7 +127,7 @@
           ]
         },
         {
-          "start": 110,
+          "start": 104,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -144,7 +144,7 @@
           ]
         },
         {
-          "start": 148,
+          "start": 141,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -161,7 +161,7 @@
           ]
         },
         {
-          "start": 192,
+          "start": 187,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -178,7 +178,7 @@
           ]
         },
         {
-          "start": 232,
+          "start": 226,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -198,7 +198,7 @@
           ]
         },
         {
-          "start": 271,
+          "start": 264,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -218,7 +218,7 @@
           ]
         },
         {
-          "start": 298,
+          "start": 291,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -235,7 +235,7 @@
           ]
         },
         {
-          "start": 329,
+          "start": 325,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -252,7 +252,7 @@
           ]
         },
         {
-          "start": 352,
+          "start": 347,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [

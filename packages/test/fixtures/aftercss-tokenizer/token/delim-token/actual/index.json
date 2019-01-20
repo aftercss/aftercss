@@ -3,84 +3,84 @@
     "type": "DELIM",
     "raw": "*",
     "content": "*",
-    "start": 1
+    "start": 0
   },
   {
     "type": "DELIM",
     "raw": "@",
     "content": "@",
-    "start": 3
+    "start": 2
   },
   {
     "type": "DELIM",
     "raw": "^",
     "content": "^",
-    "start": 5
+    "start": 4
   },
   {
     "type": "DELIM",
     "raw": "$",
     "content": "$",
-    "start": 7
+    "start": 6
   },
   {
     "type": "DELIM",
     "raw": ".",
     "content": ".",
-    "start": 9
+    "start": 8
   },
   {
     "type": "DELIM",
     "raw": "-",
     "content": "-",
-    "start": 11
+    "start": 10
   },
   {
     "type": "DELIM",
     "raw": "<",
     "content": "<",
-    "start": 13
+    "start": 12
   },
   {
     "type": "DELIM",
     "raw": "#",
     "content": "#",
-    "start": 15
+    "start": 14
   },
   {
     "type": "DELIM",
     "raw": "+",
     "content": "+",
-    "start": 17
+    "start": 16
   },
   {
     "type": "DELIM",
     "raw": "\\",
     "content": "\\",
-    "start": 19
+    "start": 18
   },
   {
     "type": "DELIM",
     "raw": "/",
     "content": "/",
-    "start": 21
+    "start": 20
   },
   {
     "type": "DELIM",
     "raw": "~",
     "content": "~",
-    "start": 23
+    "start": 22
   },
   {
     "type": "DELIM",
     "raw": "@",
     "content": "@",
-    "start": 25
+    "start": 24
   },
   {
     "type": "DELIM",
     "raw": "|",
     "content": "|",
-    "start": 26
+    "start": 25
   }
 ]

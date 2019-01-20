@@ -10,7 +10,7 @@
   },
   "childNodes": [
     {
-      "start": 9,
+      "start": 0,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -30,7 +30,7 @@
       "name": "supports",
       "childNodes": [
         {
-          "start": 46,
+          "start": 36,
           "type": "ATRULE",
           "isNested": true,
           "params": [
@@ -51,7 +51,7 @@
           "name": "keyframes",
           "childNodes": [
             {
-              "start": 60,
+              "start": 56,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
@@ -68,7 +68,7 @@
               ],
               "childNodes": [
                 {
-                  "start": 71,
+                  "start": 66,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
@@ -87,7 +87,7 @@
               ]
             },
             {
-              "start": 88,
+              "start": 86,
               "type": "RULE",
               "raw": {
                 "beforeChildNodes": [
@@ -104,7 +104,7 @@
               ],
               "childNodes": [
                 {
-                  "start": 99,
+                  "start": 94,
                   "type": "DECLARATION",
                   "raw": {
                     "afterColon": [
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "start": 120,
+      "start": 117,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [

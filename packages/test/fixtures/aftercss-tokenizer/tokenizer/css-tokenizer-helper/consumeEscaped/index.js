@@ -2,7 +2,6 @@ const { BaseFixture } = require('after-test');
 const { CSSTokenizer } = require('@aftercss/tokenizer');
 const { AfterContext } = require('@aftercss/shared');
 const consumeEscaped = require('@aftercss/tokenizer/lib/tokenizer/css-tokenizer-helper').helper.consumeEscaped;
-console.log(consumeEscaped);
 
 class ConsumeEscapedFixture extends BaseFixture {
   async build() {

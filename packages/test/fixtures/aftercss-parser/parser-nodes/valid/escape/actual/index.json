@@ -20,7 +20,7 @@
   },
   "childNodes": [
     {
-      "start": 1,
+      "start": 0,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -45,7 +45,7 @@
       ],
       "childNodes": [
         {
-          "start": 39,
+          "start": 29,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -62,7 +62,7 @@
           ]
         },
         {
-          "start": 77,
+          "start": 67,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -79,7 +79,7 @@
           ]
         },
         {
-          "start": 100,
+          "start": 90,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -96,7 +96,7 @@
           ]
         },
         {
-          "start": 123,
+          "start": 113,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "start": 134,
+      "start": 133,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -132,7 +132,7 @@
       "childNodes": []
     },
     {
-      "start": 154,
+      "start": 153,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -149,7 +149,7 @@
       "childNodes": []
     },
     {
-      "start": 173,
+      "start": 172,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -166,7 +166,7 @@
       "childNodes": []
     },
     {
-      "start": 211,
+      "start": 210,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -183,7 +183,7 @@
       "childNodes": []
     },
     {
-      "start": 224,
+      "start": 223,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -200,7 +200,7 @@
       "childNodes": []
     },
     {
-      "start": 237,
+      "start": 236,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -217,7 +217,7 @@
       "childNodes": []
     },
     {
-      "start": 252,
+      "start": 251,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -234,7 +234,7 @@
       "childNodes": []
     },
     {
-      "start": 289,
+      "start": 283,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -251,7 +251,7 @@
       "childNodes": []
     },
     {
-      "start": 299,
+      "start": 295,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -267,7 +267,7 @@
       ],
       "childNodes": [
         {
-          "start": 307,
+          "start": 302,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -286,12 +286,12 @@
       ]
     },
     {
-      "start": 334,
+      "start": 316,
       "type": "COMMENT",
       "content": "/* [attr=;] { } */"
     },
     {
-      "start": 337,
+      "start": 336,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -308,7 +308,7 @@
       ],
       "childNodes": [
         {
-          "start": 353,
+          "start": 345,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [

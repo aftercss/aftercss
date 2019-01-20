@@ -9,7 +9,7 @@
   },
   "childNodes": [
     {
-      "start": 1,
+      "start": 0,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -30,7 +30,7 @@
       ],
       "childNodes": [
         {
-          "start": 34,
+          "start": 29,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -47,7 +47,7 @@
           ]
         },
         {
-          "start": 46,
+          "start": 40,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [

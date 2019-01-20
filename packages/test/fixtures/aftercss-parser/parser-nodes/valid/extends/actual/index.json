@@ -10,7 +10,7 @@
   },
   "childNodes": [
     {
-      "start": 3,
+      "start": 0,
       "type": "DECLARATION",
       "raw": {
         "afterColon": [
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "start": 10,
+      "start": 9,
       "type": "RULE",
       "raw": {
         "beforeChildNodes": [
@@ -45,7 +45,7 @@
       ],
       "childNodes": [
         {
-          "start": 20,
+          "start": 17,
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
@@ -62,7 +62,7 @@
           ]
         },
         {
-          "start": 30,
+          "start": 29,
           "type": "RULE",
           "raw": {
             "beforeChildNodes": [
@@ -79,7 +79,7 @@
           ],
           "childNodes": [
             {
-              "start": 46,
+              "start": 41,
               "type": "DECLARATION",
               "raw": {
                 "afterColon": [

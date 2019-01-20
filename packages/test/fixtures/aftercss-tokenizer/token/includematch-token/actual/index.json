@@ -2,6 +2,6 @@
   {
     "type": "INCLUDE_MATCH",
     "raw": "~=",
-    "start": 2
+    "start": 0
   }
 ]

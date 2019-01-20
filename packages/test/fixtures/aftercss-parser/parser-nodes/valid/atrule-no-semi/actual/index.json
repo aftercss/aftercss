@@ -10,7 +10,7 @@
   },
   "childNodes": [
     {
-      "start": 6,
+      "start": 0,
       "type": "ATRULE",
       "isNested": true,
       "params": [
@@ -30,7 +30,7 @@
       "childNodes": []
     },
     {
-      "start": 26,
+      "start": 18,
       "type": "ATRULE",
       "isNested": false,
       "params": [
