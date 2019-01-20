@@ -35,28 +35,4 @@ export class AtRule extends ParserNode {
     this.name = name;
     this.type = EParserNodeType.AtRule;
   }
-
-  public toString(): string {
-    let str = '';
-    // name
-    str += `@${this.name}`;
-    // params content
-    let paramIndex = 0;
-    str += this.raw.besidesParams.reduce((acc, cur) => {
-      if (cur === undefined) {
-        return acc + this.params[paramIndex++];
-      }
-      return acc + cur;
-    }, '');
-    // childNodes
-    if (this.isNested) {
-      str += '{';
-      for (let i = 0; i < this.childNodes.length; i++) {
-        str += this.raw.beforeChildNodes[i];
-        str += this.childNodes[i].toString();
-      }
-      str += this.raw.beforeChildNodes[this.childNodes.length] + '}';
-    }
-    return str;
-  }
 }

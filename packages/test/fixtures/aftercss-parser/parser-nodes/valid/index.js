@@ -26,8 +26,6 @@ class ParsreFixture extends BaseFixture {
     const ast = parser.parseStyleSheet();
     const res = JSON.stringify(ast, null, 2);
     await this.writeFile('actual', res, 'index.json');
-    const stringify = parser.root.toString();
-    await this.writeFile('actual', stringify, 'stringify.css');
   }
 }
 
@@ -41,10 +39,5 @@ module.exports = {
         tokenFixture.runTask(`${item}`);
       }
     });
-    // const item = 'decls';
-    // const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
-    // tokenFixture.runTask(`${item}`);
   },
 };
-
-// module.exports.runTest();

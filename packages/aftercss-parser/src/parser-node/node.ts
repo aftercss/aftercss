@@ -137,11 +137,6 @@ export class ParserNode {
     return res;
   }
 
-  /* istanbul ignore next */
-  public toString(): string {
-    throw new Error(MessageCollection._THIS_FUNCTION_SHOULD_BE_IN_SUBCLASS_('ParserNode.toString', new Error().stack));
-  }
-
   private cloneObject(source: any, parent?: ParserNode) {
     const cloned = Object.create(source);
     for (const attr in source) {
@@ -193,10 +188,6 @@ export class Comment extends ParserNode {
     this.content = content;
     this.type = EParserNodeType.Comment;
   }
-
-  public toString(): string {
-    return this.content;
-  }
 }
 
 export class Root extends ParserNode {
@@ -209,14 +200,5 @@ export class Root extends ParserNode {
     this.childNodes = [];
     this.type = EParserNodeType.Root;
     this.start = 0;
-  }
-  public toString(): string {
-    let str = '';
-    for (let i = 0; i < this.childNodes.length; i++) {
-      str += this.raw.beforeChildNodes[i];
-      str += this.childNodes[i].toString();
-    }
-    str += this.raw.beforeChildNodes[this.childNodes.length];
-    return str;
   }
 }
