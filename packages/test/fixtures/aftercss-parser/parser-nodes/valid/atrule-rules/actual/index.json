@@ -1,0 +1,129 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [
+        "(animation-name: test)"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      },
+      "name": "supports",
+      "childNodes": [
+        {
+          "start": 36,
+          "type": "ATRULE",
+          "isNested": true,
+          "params": [
+            "anim"
+          ],
+          "raw": {
+            "beforeChildNodes": [
+              "\n\t\t\t",
+              "\n\t\t\t",
+              "\n\t"
+            ],
+            "besidesParams": [
+              " ",
+              null,
+              " "
+            ]
+          },
+          "name": "keyframes",
+          "childNodes": [
+            {
+              "start": 57,
+              "type": "RULE",
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  "\n\t\t\t"
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "from"
+              ],
+              "childNodes": [
+                {
+                  "start": 69,
+                  "type": "DECLARATION",
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      ";"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "black"
+                  ]
+                }
+              ]
+            },
+            {
+              "start": 91,
+              "type": "RULE",
+              "raw": {
+                "beforeChildNodes": [
+                  "\n\t\t\t\t\t",
+                  ""
+                ],
+                "beforeOpenBracket": [
+                  null,
+                  " "
+                ]
+              },
+              "selector": [
+                "to"
+              ],
+              "childNodes": [
+                {
+                  "start": 101,
+                  "type": "DECLARATION",
+                  "raw": {
+                    "afterColon": [
+                      " ",
+                      null,
+                      "\n\t\t\t"
+                    ],
+                    "beforeColon": ""
+                  },
+                  "important": false,
+                  "prop": "color",
+                  "value": [
+                    "white"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

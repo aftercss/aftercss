@@ -1,0 +1,45 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 2,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              null
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ]
+    }
+  ]
+}

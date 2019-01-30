@@ -57,6 +57,9 @@
         "packages/aftercss-tokenizer",
         "packages/aftercss-yacc"
       ]
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }

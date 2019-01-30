@@ -1,0 +1,51 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          " ",
+          " "
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 4,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "/* ; */ ",
+              null,
+              "  ;"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    }
+  ]
+}

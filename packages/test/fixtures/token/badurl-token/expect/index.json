@@ -1,5 +1,0 @@
-{
-  "type": "BAD_URL",
-  "raw": "url(www.baidu.com \n\\8081 fff)",
-  "start": 30
-}

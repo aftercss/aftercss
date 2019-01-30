@@ -1,0 +1,84 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "[func()]"
+      ],
+      "childNodes": [
+        {
+          "start": 12,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        },
+        {
+          "start": 27,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "background",
+          "value": [
+            "white"
+          ]
+        },
+        {
+          "start": 47,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "height",
+          "value": [
+            "calc(100% - 20px)"
+          ]
+        }
+      ]
+    }
+  ]
+}

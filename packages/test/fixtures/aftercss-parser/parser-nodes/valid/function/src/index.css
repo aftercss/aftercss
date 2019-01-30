@@ -1,0 +1,9 @@
+a {
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+	background-image: url("./image (1).jpg");
+	background-image: url('./image (1).jpg');
+	background:    linear-gradient(top, rgb(100, 100, 100), blue);
+	background:linear-gradient(top, rgb(100, 100, 100), blue);
+	width: calc(100% - (10px));
+	height: func([1, 2, 3]);
+}

@@ -1,0 +1,27 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"test.css\""
+      ],
+      "raw": {
+        "beforeChildNodes": [],
+        "besidesParams": [
+          null
+        ]
+      },
+      "name": "import"
+    }
+  ]
+}

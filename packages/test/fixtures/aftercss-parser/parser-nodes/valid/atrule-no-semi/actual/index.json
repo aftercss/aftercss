@@ -1,0 +1,50 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [
+        "screen"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          ""
+        ],
+        "besidesParams": [
+          " ",
+          null,
+          " "
+        ]
+      },
+      "name": "media",
+      "childNodes": []
+    },
+    {
+      "start": 18,
+      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"UTF-8\""
+      ],
+      "raw": {
+        "beforeChildNodes": [],
+        "besidesParams": [
+          " ",
+          null,
+          "\n"
+        ]
+      },
+      "name": "charset"
+    }
+  ]
+}

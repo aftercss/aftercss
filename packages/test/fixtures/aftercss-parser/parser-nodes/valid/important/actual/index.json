@@ -1,0 +1,274 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n\n",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 5,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "!important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "width",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "start": 28,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "  !important ;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        }
+      ]
+    },
+    {
+      "start": 58,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "p"
+      ],
+      "childNodes": [
+        {
+          "start": 63,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "prop",
+          "value": [
+            "important"
+          ]
+        },
+        {
+          "start": 81,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "red",
+            "important"
+          ]
+        },
+        {
+          "start": 104,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "      !      important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "margin",
+          "value": [
+            "10px"
+          ]
+        },
+        {
+          "start": 141,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "     !  /* test */   important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "20px"
+          ]
+        },
+        {
+          "start": 187,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! /*! test */ important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "width",
+          "value": [
+            "100px"
+          ]
+        },
+        {
+          "start": 226,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " /*! test */ ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "height",
+          "value": [
+            "100px",
+            "important"
+          ]
+        },
+        {
+          "start": 264,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              "! important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "z-index",
+          "value": [
+            "1",
+            "\"\""
+          ]
+        },
+        {
+          "start": 291,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              "/* sep */!important;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "padding",
+          "value": [
+            "1px"
+          ]
+        },
+        {
+          "start": 325,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " !IMPORTANT;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "left",
+          "value": [
+            "10"
+          ]
+        },
+        {
+          "start": 347,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ! IMPORTANT;"
+            ],
+            "beforeColon": ""
+          },
+          "important": true,
+          "prop": "right",
+          "value": [
+            "10"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,6 @@
 export function format(template: string, args: Array<string | number>) {
   return template.replace(/{(\d+)}/g, (i0, i1) => {
     const index = +i1;
-    if (isNaN(index)) {
-      return i0;
-    }
     return `${args[index]}`;
   });
 }
@@ -48,8 +45,7 @@ export namespace MessageCollection {
   export const _UNCLOSED_BLOCK_ = messageBuilder<ArgNumber.ONE>('Encounter unclosed block {0}');
   export const _INVALID_CHARSET_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @charset rule: {0}');
   export const _ABSTRACT_CLASS_ = messageBuilder<ArgNumber.ONE>('Class {0} is an abstract class');
-  export const _INVALID_IMPORT_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @import rule: {0}');
-  export const _INVALID_NAMESPACE_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @namespace rule: {0}');
-  export const _INVALID_MEDIA_AT_RULE_ = messageBuilder<ArgNumber.ONE>('Invalid @media rule: {0}');
   export const _UNEXPECTED_AT_RULE_ = messageBuilder<ArgNumber.ZERO>('Unexpected at rule');
+  export const _INVALID_APPEND_CHILDNODE = messageBuilder<ArgNumber.ONE>("Cann't append a childNode to {0} node");
+  export const _INVALID_PARENT_NODE = messageBuilder<ArgNumber.ONE>("Cann't {0} a node whose parent node is null");
 }

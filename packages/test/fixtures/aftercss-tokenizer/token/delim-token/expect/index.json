@@ -1,0 +1,86 @@
+[
+  {
+    "type": "DELIM",
+    "raw": "*",
+    "content": "*",
+    "start": 0
+  },
+  {
+    "type": "DELIM",
+    "raw": "@",
+    "content": "@",
+    "start": 2
+  },
+  {
+    "type": "DELIM",
+    "raw": "^",
+    "content": "^",
+    "start": 4
+  },
+  {
+    "type": "DELIM",
+    "raw": "$",
+    "content": "$",
+    "start": 6
+  },
+  {
+    "type": "DELIM",
+    "raw": ".",
+    "content": ".",
+    "start": 8
+  },
+  {
+    "type": "DELIM",
+    "raw": "-",
+    "content": "-",
+    "start": 10
+  },
+  {
+    "type": "DELIM",
+    "raw": "<",
+    "content": "<",
+    "start": 12
+  },
+  {
+    "type": "DELIM",
+    "raw": "#",
+    "content": "#",
+    "start": 14
+  },
+  {
+    "type": "DELIM",
+    "raw": "+",
+    "content": "+",
+    "start": 16
+  },
+  {
+    "type": "DELIM",
+    "raw": "\\",
+    "content": "\\",
+    "start": 18
+  },
+  {
+    "type": "DELIM",
+    "raw": "/",
+    "content": "/",
+    "start": 20
+  },
+  {
+    "type": "DELIM",
+    "raw": "~",
+    "content": "~",
+    "start": 22
+  },
+  {
+    "type": "DELIM",
+    "raw": "@",
+    "content": "@",
+    "start": 24
+  },
+  {
+    "type": "DELIM",
+    "raw": "|",
+    "content": "|",
+    "start": 25
+  }
+]

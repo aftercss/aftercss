@@ -1,0 +1,151 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n\n",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "COMMENT",
+      "content": "/* a { color: black } */"
+    },
+    {
+      "start": 25,
+      "type": "COMMENT",
+      "content": "/**/"
+    },
+    {
+      "start": 30,
+      "type": "COMMENT",
+      "content": "/* */"
+    },
+    {
+      "start": 36,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          "\n\t",
+          ""
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "div"
+      ],
+      "childNodes": [
+        {
+          "start": 43,
+          "type": "COMMENT",
+          "content": "/* inside */"
+        },
+        {
+          "start": 57,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        },
+        {
+          "start": 72,
+          "type": "COMMENT",
+          "content": "/* between */"
+        },
+        {
+          "start": 87,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              " ",
+              null,
+              " ",
+              null,
+              "\n\t/* end */\n"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "border-radius",
+          "value": [
+            "3px",
+            "/",
+            "7px"
+          ]
+        }
+      ]
+    },
+    {
+      "start": 125,
+      "type": "COMMENT",
+      "content": "/* b */"
+    },
+    {
+      "start": 134,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 139,
+          "type": "DECLARATION",
+          "raw": {
+            "afterColon": [
+              " ",
+              null,
+              ";"
+            ],
+            "beforeColon": ""
+          },
+          "important": false,
+          "prop": "color",
+          "value": [
+            "black"
+          ]
+        },
+        {
+          "start": 154,
+          "type": "COMMENT",
+          "content": "/* c */"
+        }
+      ]
+    }
+  ]
+}

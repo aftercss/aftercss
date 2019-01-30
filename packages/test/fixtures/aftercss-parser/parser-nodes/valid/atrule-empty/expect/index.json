@@ -1,0 +1,29 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": false,
+      "params": [
+        "\"UTF-8\""
+      ],
+      "raw": {
+        "beforeChildNodes": [],
+        "besidesParams": [
+          " ",
+          null,
+          ";"
+        ]
+      },
+      "name": "charset"
+    }
+  ]
+}

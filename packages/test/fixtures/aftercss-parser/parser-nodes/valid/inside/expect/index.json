@@ -1,0 +1,48 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "RULE",
+      "raw": {
+        "beforeChildNodes": [
+          "\n\t",
+          "\n"
+        ],
+        "beforeOpenBracket": [
+          null,
+          " "
+        ]
+      },
+      "selector": [
+        "a"
+      ],
+      "childNodes": [
+        {
+          "start": 5,
+          "type": "ATRULE",
+          "isNested": false,
+          "params": [
+            "\"a.css\""
+          ],
+          "raw": {
+            "beforeChildNodes": [],
+            "besidesParams": [
+              " ",
+              null,
+              ";"
+            ]
+          },
+          "name": "import"
+        }
+      ]
+    }
+  ]
+}

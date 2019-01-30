@@ -1,0 +1,16 @@
+[
+  {
+    "type": "UNICODE_RANGE",
+    "raw": "u+233-456",
+    "start": 2,
+    "unistart": "0x233",
+    "uniend": "0x456"
+  },
+  {
+    "type": "UNICODE_RANGE",
+    "raw": "U+2323??",
+    "start": 12,
+    "unistart": "0x232300",
+    "uniend": "0x2323FF"
+  }
+]

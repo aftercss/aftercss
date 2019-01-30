@@ -36,8 +36,6 @@ export class TokenReader {
     if (Object.prototype.toString.call(tokensOrTokenizer) === '[object Array]') {
       this.tokenList = tokensOrTokenizer as Token[];
       this.readerType = TokenReaderType.TokenList;
-      const tokens = tokensOrTokenizer as Token[];
-      this.tokenList = tokens;
       return;
     } else {
       this.readerType = TokenReaderType.Tokenizer;
@@ -68,12 +66,8 @@ export class TokenReader {
     }
   }
 
-  public getNextToken() {
-    if (this.readerType === TokenReaderType.TokenList) {
-      return this.tokenList[this.currentIndex++];
-    } else {
-      this.$currentToken = this.tokenizer.nextToken();
-      return this.$currentToken;
-    }
+  public getNextToken(): Token {
+    this.step();
+    return this.currentToken();
   }
 }

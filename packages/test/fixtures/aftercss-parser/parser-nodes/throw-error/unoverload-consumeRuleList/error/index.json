@@ -1,0 +1,5 @@
+{
+  "message": [
+    "BaseParser.consumeRuleList function should be in sub class, stack:\r\n "
+  ]
+}

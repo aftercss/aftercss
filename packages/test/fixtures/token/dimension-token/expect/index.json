@@ -1,9 +1,0 @@
-{
-  "type": "DIMENSION",
-  "raw": "2e+2rem",
-  "start": 7,
-  "numberType": "number",
-  "repr": "2e+2",
-  "unit": "rem",
-  "value": 200
-}

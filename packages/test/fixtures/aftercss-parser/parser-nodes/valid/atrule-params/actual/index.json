@@ -1,0 +1,44 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n",
+      ""
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [
+        "screen"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          ""
+        ],
+        "besidesParams": [
+          "/* near */ /* filter */ ",
+          null,
+          " /* a */ "
+        ]
+      },
+      "name": "media",
+      "childNodes": []
+    },
+    {
+      "start": 48,
+      "type": "ATRULE",
+      "isNested": false,
+      "params": [],
+      "raw": {
+        "beforeChildNodes": [],
+        "besidesParams": []
+      },
+      "name": "page"
+    }
+  ]
+}

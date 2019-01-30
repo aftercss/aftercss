@@ -1,21 +1,21 @@
 {
   "name": "@aftercss/test",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
     "test": "mocha index.js",
-    "test:clean": "aftertest clean"
+    "test:clean": "cd fixtures/aftercss-parser && aftertest clean && cd ../aftercss-tokenizer && aftertest clean &&cd ../remove-comments && aftertest clean  "
   },
   "private": true,
   "dependencies": {
-    "@aftercss/shared": "^0.1.5",
-    "@aftercss/parser": "^0.1.5",
-    "@aftercss/tokenizer": "^0.1.5",
-    "after-test": "^1.0.5"
+    "@aftercss/parser": "^0.1.6",
+    "@aftercss/shared": "^0.1.6",
+    "@aftercss/tokenizer": "^0.1.6",
+    "after-test": "^1.0.6"
   },
   "devDependencies": {
-    "after-test": "^1.0.2",
+    "after-test": "^1.0.6",
     "mocha": "^5.2.0"
   }
 }

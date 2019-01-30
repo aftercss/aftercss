@@ -1,9 +1,13 @@
 import { AfterContext, MessageCollection } from '@aftercss/shared';
+import { getLocator, Location } from 'locate-character';
 import { SourceNode } from 'source-map';
 import { TokenReader } from '../stream-token/token-reader';
 import { Token } from '../token';
 import { CSSTokenizer } from '../tokenizer/css-tokenizer';
-
+declare interface ILocator {
+  (search: string, startIndex?: number): Location;
+  (search: number): Location;
+}
 export class TokenReaderWithSourceMap extends TokenReader {
   public context: AfterContext;
 
@@ -22,16 +26,22 @@ export class TokenReaderWithSourceMap extends TokenReader {
       this.context = tokenizer.context;
     }
   }
+  /**
+   * @param index
+   */
+  public getLocation(index: number): Location {
+    return (getLocator(this.context.fileContent) as ILocator)(index);
+  }
 
-  public generateSourceMap(tokens: Token[]) {
+  public generateSourceMap(tokens: Token[], fileName: string) {
     const sourceNodes = tokens.map(token => {
-      const { line, column } = this.context.getLocation(token.start);
-      const sourceNode = new SourceNode(line, column, this.context.fileName, token.raw);
+      const { line, column } = this.getLocation(token.start);
+      const sourceNode = new SourceNode(line, column, fileName, token.raw);
       return sourceNode;
     });
-    return new SourceNode(1, 0, this.context.fileName, sourceNodes)
+    return new SourceNode(1, 0, fileName, sourceNodes)
       .toStringWithSourceMap({
-        file: this.context.fileName,
+        file: fileName,
       })
       .map.toString();
   }
