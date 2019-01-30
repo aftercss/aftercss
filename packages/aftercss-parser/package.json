@@ -1,6 +1,6 @@
 {
   "name": "@aftercss/parser",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "aftercss",
   "main": "lib/index.js",
   "files": [
@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "dependencies": {
-    "@aftercss/shared": "^0.1.5",
-    "@aftercss/tokenizer": "^0.1.5"
+    "@aftercss/shared": "^0.1.6",
+    "@aftercss/tokenizer": "^0.1.6"
   },
   "gitHead": "ce93819cbe62424cdb658d8549ff7aefd7462e8c"
 }

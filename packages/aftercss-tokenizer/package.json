@@ -1,6 +1,6 @@
 {
   "name": "@aftercss/tokenizer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "aftercss",
   "main": "lib/index.js",
   "files": [
@@ -31,9 +31,9 @@
   },
   "homepage": "https://github.com/aftercss/after-css#readme",
   "dependencies": {
-    "@aftercss/shared": "^0.1.5",
-    "source-map": "^0.7.3",
-    "locate-character": "^2.0.5"
+    "@aftercss/shared": "^0.1.6",
+    "locate-character": "^2.0.5",
+    "source-map": "^0.7.3"
   },
   "devDependencies": {
     "@types/node": "^10.12.10"
