@@ -23,7 +23,6 @@
         ],
         "besidesParams": [
           " ",
-          null,
           " "
         ]
       },
@@ -44,7 +43,6 @@
             ],
             "besidesParams": [
               " ",
-              null,
               " "
             ]
           },
@@ -59,7 +57,7 @@
                   "\n\t\t"
                 ],
                 "beforeOpenBracket": [
-                  null,
+                  "",
                   " "
                 ]
               },
@@ -73,7 +71,6 @@
                   "raw": {
                     "afterColon": [
                       " ",
-                      null,
                       ";"
                     ],
                     "beforeColon": ""
@@ -95,7 +92,7 @@
                   ""
                 ],
                 "beforeOpenBracket": [
-                  null,
+                  "",
                   " "
                 ]
               },
@@ -109,7 +106,6 @@
                   "raw": {
                     "afterColon": [
                       " ",
-                      null,
                       "\n\t\t"
                     ],
                     "beforeColon": ""
@@ -134,7 +130,7 @@
           ""
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },

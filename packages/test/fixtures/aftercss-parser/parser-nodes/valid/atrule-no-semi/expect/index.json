@@ -22,7 +22,6 @@
         ],
         "besidesParams": [
           " ",
-          null,
           " "
         ]
       },
@@ -40,7 +39,6 @@
         "beforeChildNodes": [],
         "besidesParams": [
           " ",
-          null,
           "\n"
         ]
       },

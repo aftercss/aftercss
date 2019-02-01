@@ -22,7 +22,6 @@
         ],
         "besidesParams": [
           "/* near */ /* filter */ ",
-          null,
           " /* a */ "
         ]
       },
@@ -36,7 +35,9 @@
       "params": [],
       "raw": {
         "beforeChildNodes": [],
-        "besidesParams": []
+        "besidesParams": [
+          ""
+        ]
       },
       "name": "page"
     }

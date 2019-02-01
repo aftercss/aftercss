@@ -17,7 +17,7 @@
           "\n"
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -36,7 +36,6 @@
             "beforeChildNodes": [],
             "besidesParams": [
               " ",
-              null,
               ";"
             ]
           },

@@ -26,7 +26,6 @@
         ],
         "besidesParams": [
           " ",
-          null,
           " "
         ]
       },
@@ -38,7 +37,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "\n"
             ],
             "beforeColon": ""
@@ -64,7 +62,7 @@
           ""
         ],
         "besidesParams": [
-          null,
+          "",
           " "
         ]
       },
@@ -76,7 +74,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "\n"
             ],
             "beforeColon": ""
@@ -111,7 +108,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -146,7 +142,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -181,7 +176,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""

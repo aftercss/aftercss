@@ -17,7 +17,7 @@
           " "
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -31,9 +31,7 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "/* ; */ ",
-              null,
               "  ;"
             ],
             "beforeColon": ""

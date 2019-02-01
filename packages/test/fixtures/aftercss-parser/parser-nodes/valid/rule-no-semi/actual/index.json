@@ -17,7 +17,8 @@
           ""
         ],
         "beforeOpenBracket": [
-          null
+          "",
+          ""
         ]
       },
       "selector": [
@@ -29,7 +30,8 @@
           "type": "DECLARATION",
           "raw": {
             "afterColon": [
-              null
+              "",
+              ""
             ],
             "beforeColon": ""
           },

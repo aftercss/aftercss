@@ -15,7 +15,9 @@
         "beforeChildNodes": [
           ""
         ],
-        "beforeOpenBracket": []
+        "beforeOpenBracket": [
+          ""
+        ]
       },
       "selector": [],
       "childNodes": []

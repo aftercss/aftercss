@@ -40,7 +40,7 @@
           ""
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -59,7 +59,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -81,11 +80,8 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " ",
-              null,
               " ",
-              null,
               "\n\t/* end */\n"
             ],
             "beforeColon": ""
@@ -115,7 +111,7 @@
           "\n"
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -129,7 +125,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""

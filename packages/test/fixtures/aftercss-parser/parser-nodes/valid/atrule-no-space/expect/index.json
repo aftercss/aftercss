@@ -18,7 +18,8 @@
       "raw": {
         "beforeChildNodes": [],
         "besidesParams": [
-          null
+          "",
+          ""
         ]
       },
       "name": "import"

@@ -19,7 +19,7 @@
           "\n"
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -33,7 +33,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "!important;"
             ],
             "beforeColon": ""
@@ -50,7 +49,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "  !important ;"
             ],
             "beforeColon": ""
@@ -81,7 +79,7 @@
           "\n"
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           " "
         ]
       },
@@ -95,7 +93,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -112,9 +109,7 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -132,7 +127,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "      !      important;"
             ],
             "beforeColon": ""
@@ -149,7 +143,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "     !  /* test */   important;"
             ],
             "beforeColon": ""
@@ -166,7 +159,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " ! /*! test */ important;"
             ],
             "beforeColon": ""
@@ -183,9 +175,7 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " /*! test */ ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -203,9 +193,7 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " ",
-              null,
               "! important;"
             ],
             "beforeColon": ""
@@ -223,7 +211,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               "/* sep */!important;"
             ],
             "beforeColon": ""
@@ -240,7 +227,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " !IMPORTANT;"
             ],
             "beforeColon": ""
@@ -257,7 +243,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               " ! IMPORTANT;"
             ],
             "beforeColon": ""

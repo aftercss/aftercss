@@ -18,9 +18,8 @@
           "\n"
         ],
         "beforeOpenBracket": [
-          null,
+          "",
           ",        ",
-          null,
           ", "
         ]
       },
@@ -35,7 +34,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
@@ -52,7 +50,6 @@
           "raw": {
             "afterColon": [
               " ",
-              null,
               ";"
             ],
             "beforeColon": ""
