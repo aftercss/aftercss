@@ -1,6 +1,6 @@
 {
   "name": "@aftercss/test",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,13 @@
   },
   "private": true,
   "dependencies": {
-    "@aftercss/parser": "^0.1.6",
-    "@aftercss/shared": "^0.1.6",
-    "@aftercss/tokenizer": "^0.1.6",
-    "after-test": "^1.0.6"
+    "@aftercss/parser": "^0.1.7",
+    "@aftercss/shared": "^0.1.7",
+    "@aftercss/tokenizer": "^0.1.7",
+    "after-test": "^1.0.7"
   },
   "devDependencies": {
-    "after-test": "^1.0.6",
+    "after-test": "^1.0.7",
     "mocha": "^5.2.0"
   }
 }
