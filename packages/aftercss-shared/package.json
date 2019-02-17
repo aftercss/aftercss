@@ -1,6 +1,6 @@
 {
   "name": "@aftercss/shared",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "aftercss",
   "main": "lib/index.js",
   "files": [
