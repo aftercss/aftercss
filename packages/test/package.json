@@ -4,7 +4,7 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
-    "test": "mocha index.js",
+    "test": "node -r esm ./node_modules/.bin/_mocha index.js",
     "test:clean": "cd fixtures/aftercss-parser && aftertest clean && cd ../aftercss-tokenizer && aftertest clean &&cd ../remove-comments && aftertest clean  "
   },
   "private": true,

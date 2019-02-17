@@ -114,8 +114,8 @@ export class CSSParser extends BaseParser {
         atRuleNode.isNested = true;
         if (query !== '') {
           atRuleNode.params.push(query);
-				}
-				atRuleNode.raw.besidesParams.push(toMove);
+        }
+        atRuleNode.raw.besidesParams.push(toMove);
         break;
       }
       switch (currentToken.type) {
@@ -128,8 +128,8 @@ export class CSSParser extends BaseParser {
         case TokenType.EOF:
           if (query !== '') {
             atRuleNode.params.push(query);
-					}
-					atRuleNode.raw.besidesParams.push(toMove);
+          }
+          atRuleNode.raw.besidesParams.push(toMove);
           return atRuleNode;
         default:
           if (query === '') {
