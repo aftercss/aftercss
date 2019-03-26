@@ -26,6 +26,11 @@ export class CodeParser extends BaseParser {
     this.rules = rules;
     this.name = name;
   }
+
+  public registerAtomicPlugin(){
+    
+  }
+
   public addToken(token: Token) {
     this.tokens.push(token);
   }
