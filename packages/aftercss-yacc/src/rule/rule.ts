@@ -53,4 +53,5 @@ export class OrItem extends Rule {
   public type = RuleType.OR_ITEM;
   public childRule: Rule[] = [];
 }
+
 export type ContainerRule = RootRule | OptionalRule | AndItem;

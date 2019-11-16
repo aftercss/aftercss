@@ -10,7 +10,7 @@ import {
   StringRule,
   SubRule,
 } from '../rule/rule';
-import { AtomicFunction } from './atomic';
+import * as AtomicFunction from './atomic';
 import { BaseToken, ItemToken, JoinToken, OrToken, StringToken, SubToken, Token } from './code-tokens';
 
 /**
@@ -145,7 +145,7 @@ export class CodeParser extends BaseParser {
   public matchBaseRule(rule: BaseRule): false | BaseToken {
     const start = this.current;
     const baseRuleName = rule.name;
-    const baseRuleFunc = AtomicFunction[`$${baseRuleName}`];
+    const baseRuleFunc = (AtomicFunction as any)[`$${baseRuleName}`];
     const baseRes = baseRuleFunc(this);
     if (!baseRes) {
       return false;
