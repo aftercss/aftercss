@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.0"
-  },
-  "gitHead": "ce93819cbe62424cdb658d8549ff7aefd7462e8c"
+    "@types/node": "12.12.8"
+  }
 }
