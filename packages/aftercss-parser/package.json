@@ -8,8 +8,7 @@
     "lib"
   ],
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "scripts": {
     "lint:ts": "./../../node_modules/.bin/tslint -c ./../../tslint.json -p tsconfig.json",
