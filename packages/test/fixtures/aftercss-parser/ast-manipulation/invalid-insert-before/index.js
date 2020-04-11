@@ -4,7 +4,7 @@ const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class AstReplaceFixture extends BaseFixture {
+export default class AstReplaceFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -26,10 +26,3 @@ class AstReplaceFixture extends BaseFixture {
     ast.insertBefore(new Comment('insert before'));
   }
 }
-
-module.exports = {
-  runTest() {
-    const tokenFixture = new AstReplaceFixture(__dirname);
-    tokenFixture.runTask('ast-invalid-insert-beofre');
-  },
-};

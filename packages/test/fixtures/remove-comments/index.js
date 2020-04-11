@@ -39,8 +39,6 @@ class AllTokensFixture extends BaseFixture {
 
 const alltokensFixture = new AllTokensFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    alltokensFixture.runTask('RemoveComments');
-  },
-};
+it('remove comments', async () => {
+  await alltokensFixture.runTask('RemoveComments');
+});

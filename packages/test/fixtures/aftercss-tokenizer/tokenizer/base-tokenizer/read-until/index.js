@@ -15,8 +15,6 @@ class ReadUntilFixture extends BaseFixture {
 
 const readUntilFixture = new ReadUntilFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    readUntilFixture.runTask('base-tokenizer-read-until');
-  },
-};
+it('read-unitl', async () => {
+  await readUntilFixture.runTask('base-tokenizer-read-until');
+});

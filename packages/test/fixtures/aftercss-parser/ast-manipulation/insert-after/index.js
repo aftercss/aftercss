@@ -4,7 +4,7 @@ const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class AstInsertAfterFixture extends BaseFixture {
+export default class AstInsertAfterFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -28,10 +28,3 @@ class AstInsertAfterFixture extends BaseFixture {
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'insert-after.json');
   }
 }
-
-module.exports = {
-  runTest() {
-    const tokenFixture = new AstInsertAfterFixture(__dirname);
-    tokenFixture.runTask('ast-insert-after');
-  },
-};

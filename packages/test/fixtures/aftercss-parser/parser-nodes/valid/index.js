@@ -28,16 +28,12 @@ class ParsreFixture extends BaseFixture {
     await this.writeFile('actual', res, 'index.json');
   }
 }
-
-const parserDirs = fs.readdirSync(__dirname);
-
-module.exports = {
-  runTest() {
-    parserDirs.forEach(item => {
-      if (item !== 'index.js') {
-        const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
-        tokenFixture.runTask(`${item}`);
-      }
+describe('valid', () => {
+  const parserDirs = fs.readdirSync(__dirname).filter($ => $ !== 'index.js');
+  for (const item of parserDirs) {
+    (item === 'webkit-at-rule' ? it : it)(item, async () => {
+      const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
+      await tokenFixture.runTask(`${item}`);
     });
-  },
-};
+  }
+});

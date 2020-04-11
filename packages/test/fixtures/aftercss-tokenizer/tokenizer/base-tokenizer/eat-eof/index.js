@@ -15,8 +15,6 @@ class EatEofFixture extends BaseFixture {
 
 const eatEofFixture = new EatEofFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    eatEofFixture.runTask('base-tokenizer-eat-eof');
-  },
-};
+it('base-tokenizer-eat-eof', async () => {
+  await eatEofFixture.runTask('base-tokenizer-eat-eof');
+});

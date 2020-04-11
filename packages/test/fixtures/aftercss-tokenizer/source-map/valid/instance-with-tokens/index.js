@@ -27,7 +27,7 @@ class InstanceWithTokensFixture extends BaseFixture {
         break;
       }
       res += token.raw;
-		}
+    }
     const sourcemapContent = tokenReader.generateSourceMap(tokens, 'index.css');
     await this.writeFile('actual', sourcemapContent, 'index.css.map');
     res += '/*# sourceMappingURL=index.css.map */';
@@ -37,8 +37,6 @@ class InstanceWithTokensFixture extends BaseFixture {
 
 const instanceWithTokensFixture = new InstanceWithTokensFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    instanceWithTokensFixture.runTask('sourcemap-instance-with-tokens');
-  },
-};
+it('instance with tokens', async () => {
+  await instanceWithTokensFixture.runTask('sourcemap-instance-with-tokenizer');
+});

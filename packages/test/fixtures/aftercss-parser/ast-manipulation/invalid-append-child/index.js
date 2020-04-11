@@ -3,7 +3,7 @@ const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class AstAppendChildFixture extends BaseFixture {
+export default class AstAppendChildFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -25,10 +25,3 @@ class AstAppendChildFixture extends BaseFixture {
     ast.childNodes[0].appendChildNode([new Comment('append first child'), new Comment('append second child')]);
   }
 }
-
-module.exports = {
-  runTest() {
-    const tokenFixture = new AstAppendChildFixture(__dirname);
-    tokenFixture.runTask('ast-invalid-append-child');
-  },
-};

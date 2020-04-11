@@ -74,6 +74,9 @@ export class BaseFixture {
   }
 
   public getFilelist(filePath: string) {
+    if (!fs.existsSync(filePath)) {
+      return [];
+    }
     const items = fs.readdirSync(filePath);
     const files = items.filter(item => {
       const stat = fs.lstatSync(`${filePath}/${item}`);
@@ -111,19 +114,17 @@ export class BaseFixture {
     }
   }
 
-  public makeDiff(taskName: string) {
-    it(taskName, async () => {
-      let e = null;
-      try {
-        await this.build();
-      } catch (err) {
-        e = err;
-        await this.compareError(e);
-      }
-      if (e == null) {
-        await this.compareDir();
-      }
-    });
+  public async makeDiff(taskName: string) {
+    let e = null;
+    try {
+      await this.build();
+    } catch (err) {
+      e = err;
+      await this.compareError(e);
+    }
+    if (e == null) {
+      await this.compareDir();
+    }
   }
 
   public async compareDir() {
@@ -141,12 +142,15 @@ export class BaseFixture {
       // istanbul ignore next
       await this.moveActualToExpect();
       // istanbul ignore next
-      assert(true);
+      assert.ok(true);
     }
   }
 
   public async moveActualToExpect() {
     const files = this.getFilelist(this.actualDir);
+    if (!fs.existsSync(this.expectDir)) {
+      fs.mkdirSync(this.expectDir);
+    }
     const promises = [];
     files.forEach(file => {
       promises.push(copyFileP(`${this.actualDir}/${file}`, `${this.expectDir}/${file}`));
@@ -154,7 +158,7 @@ export class BaseFixture {
     return Promise.all(promises);
   }
 
-  public runTask(taskName: string) {
-    this.makeDiff(taskName);
+  public async runTask(taskName: string) {
+    await this.makeDiff(taskName);
   }
 }

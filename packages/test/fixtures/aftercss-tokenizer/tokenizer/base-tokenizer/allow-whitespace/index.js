@@ -16,8 +16,6 @@ class AllowWhiteFixture extends BaseFixture {
 
 const allowWhiteFixturealltokensFixture = new AllowWhiteFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    allowWhiteFixturealltokensFixture.runTask('base-tokenizer-allow-whitespace');
-  },
-};
+it('base-tokenizer-allow-whitespace', async () => {
+  await allowWhiteFixturealltokensFixture.runTask('base-tokenizer-allow-whitespace');
+});

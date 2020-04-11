@@ -17,8 +17,6 @@ class ConsumeEscapedFixture extends BaseFixture {
 
 const consumeEscapedFixture = new ConsumeEscapedFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    consumeEscapedFixture.runTask('css-tokenizer-helper-consume-escaped');
-  },
-};
+it('helper escaped', async () => {
+  await consumeEscapedFixture.runTask('css-tokenizer-helper-consume-escaped');
+});

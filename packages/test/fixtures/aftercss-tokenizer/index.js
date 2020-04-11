@@ -1,15 +1,9 @@
-const alltokensTest = require('./alltokens');
-const sourcemapTest = require('./source-map');
-const tokenTest = require('./token');
-const tokenReaderTest = require('./stream-token');
-const tokenizerTest = require('./tokenizer');
-
-module.exports = {
-  runTest() {
-    alltokensTest.runTest();
-    sourcemapTest.runTest();
-    tokenTest.runTest();
-    tokenReaderTest.runTest();
-    tokenizerTest.runTest();
-  },
-};
+const fs = require('fs');
+const parserDirs = fs.readdirSync(__dirname).filter($ => $ !== 'index.js');
+describe('aftercss-tokenizer', () => {
+  for (const item of parserDirs) {
+    describe(item, () => {
+      require('./' + item);
+    });
+  }
+});

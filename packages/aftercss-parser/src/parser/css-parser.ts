@@ -76,23 +76,12 @@ export class CSSParser extends BaseParser {
    * consume an at-rule
    */
   private consumeAtRule() {
-    const name = this.currentToken().content;
-    switch (name) {
-      case 'charset':
-      case 'import':
-      case 'namespace':
-      case 'media':
-      case 'supports':
-      case 'page':
-      case 'keyframes':
-      case 'viewport':
-      case 'font-face':
-      case 'counter-style':
-      case 'font-feature-values':
-      case '-ms-viewport':
-        return this.consumeCertianAtRule(EAtRuleName[name]);
-      default:
-        throw this.error(MessageCollection._UNEXPECTED_AT_RULE_());
+    // 不在 at-rule 的支持列表怎么办？
+    const name: EAtRuleName = this.currentToken().content as EAtRuleName;
+    if (EAtRuleName[name]) {
+      return this.consumeCertianAtRule(EAtRuleName[name]);
+    } else {
+      throw this.error(MessageCollection._UNEXPECTED_AT_RULE_(`@${name} is not support`));
     }
   }
 
@@ -144,7 +133,7 @@ export class CSSParser extends BaseParser {
     atRuleNode.childNodes = ruleList.childNodes;
     atRuleNode.raw.beforeChildNodes = ruleList.beforeChildNodes;
     if (this.currentToken().type !== TokenType.RIGHT_CURLY_BRACKET) {
-      throw this.error(MessageCollection._UNCLOSED_BLOCK_('encoutering unclosed  block'));
+      throw this.error(MessageCollection._UNCLOSED_BLOCK_('encoutering unclosed block'));
     }
     this.step();
     return atRuleNode;

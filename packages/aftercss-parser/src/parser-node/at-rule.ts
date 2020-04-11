@@ -14,6 +14,7 @@ export enum EAtRuleName {
   'font-feature-values' = 'font-feature-values',
   viewport = 'viewport',
   '-ms-viewport' = '-ms-viewport',
+  '-webkit-keyframes' = '-webkit-keyframes',
 }
 
 export interface IAtRuleRaw {

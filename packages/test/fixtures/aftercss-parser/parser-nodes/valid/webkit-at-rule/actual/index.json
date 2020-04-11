@@ -1,0 +1,104 @@
+{
+  "start": 0,
+  "type": "ROOT",
+  "raw": {
+    "beforeChildNodes": [
+      "",
+      "\n"
+    ]
+  },
+  "childNodes": [
+    {
+      "start": 0,
+      "type": "ATRULE",
+      "isNested": true,
+      "params": [
+        "gb__a"
+      ],
+      "raw": {
+        "beforeChildNodes": [
+          "\n  ",
+          "\n  ",
+          "\n"
+        ],
+        "besidesParams": [
+          " ",
+          " "
+        ]
+      },
+      "name": "-webkit-keyframes",
+      "childNodes": [
+        {
+          "start": 29,
+          "type": "RULE",
+          "raw": {
+            "beforeChildNodes": [
+              "\n    ",
+              "\n  "
+            ],
+            "beforeOpenBracket": [
+              "",
+              " "
+            ]
+          },
+          "selector": [
+            "0%"
+          ],
+          "childNodes": [
+            {
+              "start": 38,
+              "type": "DECLARATION",
+              "raw": {
+                "afterColon": [
+                  " ",
+                  ";"
+                ],
+                "beforeColon": ""
+              },
+              "important": false,
+              "prop": "opacity",
+              "value": [
+                "0"
+              ]
+            }
+          ]
+        },
+        {
+          "start": 56,
+          "type": "RULE",
+          "raw": {
+            "beforeChildNodes": [
+              "\n    ",
+              "\n  "
+            ],
+            "beforeOpenBracket": [
+              "",
+              " "
+            ]
+          },
+          "selector": [
+            "50%"
+          ],
+          "childNodes": [
+            {
+              "start": 66,
+              "type": "DECLARATION",
+              "raw": {
+                "afterColon": [
+                  " ",
+                  ";"
+                ],
+                "beforeColon": ""
+              },
+              "important": false,
+              "prop": "opacity",
+              "value": [
+                "1"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

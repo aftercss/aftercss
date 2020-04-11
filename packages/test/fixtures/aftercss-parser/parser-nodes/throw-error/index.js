@@ -27,14 +27,10 @@ class ParsreFixture extends BaseFixture {
     const ast = parser.parseStyleSheet();
   }
 }
-const parserDirs = fs.readdirSync(__dirname);
-
-module.exports = {
-  runTest() {
-    parserDirs.forEach(item => {
-      if (item === 'index.js') {
-        return;
-      }
+const parserDirs = fs.readdirSync(__dirname).filter($ => $ !== 'index.js');
+describe('throw-error', () => {
+  for (const item of parserDirs) {
+    (item === 'webkit-at-rule' ? it : it)(item, async () => {
       const tokenFixture = new ParsreFixture(path.resolve(__dirname, item));
       if (item === 'unoverload-consumeRuleList') {
         tokenFixture.build = async function() {
@@ -57,7 +53,7 @@ module.exports = {
           const ast = parser.parseStyleSheet();
         };
       }
-      tokenFixture.runTask(`${item}`);
+      await tokenFixture.runTask(`${item}`);
     });
-  },
-};
+  }
+});

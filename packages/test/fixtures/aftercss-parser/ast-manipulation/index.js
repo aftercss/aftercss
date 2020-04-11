@@ -1,27 +1,14 @@
-const appendChild = require('./append-child');
-const clone = require('./clone');
-const getIndex = require('./get-index');
-const insertAfter = require('./insert-after');
-const insertBefore = require('./insert-before');
-const invalidAppendChild = require('./invalid-append-child');
-const invalidInsertAfter = require('./invalid-insert-after');
-const invalidInsertBefore = require('./invalid-insert-before');
-const invalidReplace = require('./invalid-replace');
-const remove = require('./remove');
-const replace = require('./replace');
-
-module.exports = {
-  runTest() {
-    appendChild.runTest();
-    clone.runTest();
-    getIndex.runTest();
-    insertAfter.runTest();
-    insertBefore.runTest();
-    invalidAppendChild.runTest();
-    invalidInsertAfter.runTest();
-    invalidInsertBefore.runTest();
-    invalidReplace.runTest();
-    remove.runTest();
-    replace.runTest();
-  },
-};
+const fs = require('fs');
+const path = require('path');
+describe('ast-mainipulation', () => {
+  const parserDirs = fs.readdirSync(__dirname).filter($ => $ !== 'index.js');
+  for (const item of parserDirs) {
+    (item === 'webkit-at-rule' ? it : it)(item, async () => {
+      const dirname = path.resolve(__dirname, `${item}`);
+      const indexJS = path.resolve(__dirname, `${item}/index.js`);
+      const FixtureKlass = require(indexJS).default;
+      const fixture = new FixtureKlass(dirname);
+      await fixture.runTask(item);
+    });
+  }
+});

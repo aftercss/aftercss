@@ -24,8 +24,6 @@ class InstanceWithInvalidContextFixture extends BaseFixture {
 
 const instanceWithInvalidContextFixture = new InstanceWithInvalidContextFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    instanceWithInvalidContextFixture.runTask('sourcemap-instance-with-invalid-context');
-  },
-};
+it('instance-with-invalid-context', async () => {
+  await instanceWithInvalidContextFixture.runTask('sourcemap-instance-with-invalid-context');
+});

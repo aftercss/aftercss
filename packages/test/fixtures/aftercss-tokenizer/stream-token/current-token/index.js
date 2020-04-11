@@ -19,9 +19,6 @@ class CurrentTokenFixture extends BaseFixture {
 }
 
 const currentTokenFixture = new CurrentTokenFixture(__dirname);
-
-module.exports = {
-  runTest() {
-    currentTokenFixture.runTask('token-reader-current-token');
-  },
-};
+it('token-reader-current-token', async () => {
+  await currentTokenFixture.runTask('token-reader-current-token');
+});

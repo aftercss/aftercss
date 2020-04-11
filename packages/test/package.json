@@ -12,7 +12,8 @@
     "@aftercss/parser": "^0.1.8",
     "@aftercss/shared": "^0.1.8",
     "@aftercss/tokenizer": "^0.1.8",
-    "after-test": "^1.0.8"
+    "after-test": "^1.0.8",
+    "esm": "^3.2.25"
   },
   "devDependencies": {
     "after-test": "^1.0.8",

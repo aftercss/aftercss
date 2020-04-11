@@ -33,8 +33,6 @@ class AllTokensFixture extends BaseFixture {
 
 const alltokensFixture = new AllTokensFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    alltokensFixture.runTask('AllTokens');
-  },
-};
+it('alltokens', async () => {
+  await alltokensFixture.runTask('AllTokens');
+});

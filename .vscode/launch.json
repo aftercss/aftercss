@@ -15,7 +15,7 @@
       "request": "launch",
       "name": "启动程序",
       "program": "${workspaceFolder}/packages/test/node_modules/mocha/bin/_mocha",
-      "args": ["${workspaceFolder}/packages/test/fixtures/aftercss-tokenizer/token/index.js"]
+      "args": ["-r", "esm", "${workspaceFolder}/packages/test/index.js"]
     }
   ]
 }

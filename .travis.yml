@@ -9,7 +9,6 @@ branches:
 sudo: enabled
 
 install: 
-  - npm i cnpm -g
   - npm run init
 
 node_js: 

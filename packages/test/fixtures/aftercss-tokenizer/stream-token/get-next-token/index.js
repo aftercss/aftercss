@@ -27,8 +27,6 @@ class GetNextTokenFixture extends BaseFixture {
 
 const getNextTokenFixture = new GetNextTokenFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    getNextTokenFixture.runTask('token-reader-get-next-token');
-  },
-};
+it('token-reader-get-next-token', async () => {
+  await getNextTokenFixture.runTask('token-reader-get-next-token');
+});

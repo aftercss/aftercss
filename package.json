@@ -4,7 +4,7 @@
   "description": "aftercss",
   "main": "index.js",
   "scripts": {
-    "init": "cnpm install && lerna clean --yes && lerna bootstrap",
+    "init": "npm install && lerna clean --yes && lerna bootstrap",
     "cov": "nyc mocha ./packages/test/index.js ",
     "dev": "lerna run dev --parallel",
     "build": "lerna run build",

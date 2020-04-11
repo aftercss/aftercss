@@ -3,7 +3,7 @@ const Tokenizer = require('@aftercss/tokenizer').CSSTokenizer;
 const BaseFixture = require('after-test').BaseFixture;
 const AfterContext = require('@aftercss/shared').AfterContext;
 
-class AstRemoveFixture extends BaseFixture {
+export default class AstRemoveFixture extends BaseFixture {
   async build() {
     const content = await this.readFile('src', 'index.css');
     const tokenizer = new Tokenizer(
@@ -27,10 +27,3 @@ class AstRemoveFixture extends BaseFixture {
     await this.writeFile('actual', JSON.stringify(ast, null, 2), 'remove.json');
   }
 }
-
-module.exports = {
-  runTest() {
-    const tokenFixture = new AstRemoveFixture(__dirname);
-    tokenFixture.runTask('ast-remove');
-  },
-};

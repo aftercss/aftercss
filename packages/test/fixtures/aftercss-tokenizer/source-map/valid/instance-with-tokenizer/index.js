@@ -37,8 +37,6 @@ class InstanceWithTokenizerFixture extends BaseFixture {
 
 const instanceWithTokenizerFixture = new InstanceWithTokenizerFixture(__dirname);
 
-module.exports = {
-  runTest() {
-    instanceWithTokenizerFixture.runTask('sourcemap-instance-with-tokenizer');
-  },
-};
+it('instance with tokenizer', async () => {
+  await instanceWithTokenizerFixture.runTask('sourcemap-instance-with-tokenizer');
+});
